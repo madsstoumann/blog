@@ -1,0 +1,49 @@
+{
+  "type_of": "article",
+  "id": 648114,
+  "title": "When Lighthouse Itself Causes Issues",
+  "description": "I was re-inspecting my homepage after some edits earlier today, and discovered — to my horror 😱 — tha...",
+  "readable_publish_date": "Mar 28 '21",
+  "slug": "when-lighthouse-itself-causes-issues-2k3i",
+  "path": "/madsstoumann/when-lighthouse-itself-causes-issues-2k3i",
+  "url": "https://dev.to/madsstoumann/when-lighthouse-itself-causes-issues-2k3i",
+  "comments_count": 1,
+  "public_reactions_count": 2,
+  "collection_id": null,
+  "published_timestamp": "2021-03-28T12:31:02Z",
+  "language": "en",
+  "subforem_id": null,
+  "positive_reactions_count": 2,
+  "cover_image": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fh7lbuumc5luuz63tbqnq.png",
+  "social_image": "https://media2.dev.to/dynamic/image/width=1000,height=500,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fh7lbuumc5luuz63tbqnq.png",
+  "canonical_url": "https://dev.to/madsstoumann/when-lighthouse-itself-causes-issues-2k3i",
+  "created_at": "2021-03-28T12:22:49Z",
+  "edited_at": null,
+  "crossposted_at": null,
+  "published_at": "2021-03-28T12:31:02Z",
+  "last_comment_at": "2021-03-29T05:02:20Z",
+  "reading_time_minutes": 1,
+  "tag_list": "lighthouse, security, discuss",
+  "tags": [
+    "lighthouse",
+    "security",
+    "discuss"
+  ],
+  "body_html": "<p>I was re-inspecting my homepage after some edits earlier today, and discovered — to my horror 😱 — that my perfect score was not so perfect anymore.</p>\n\n<p>The <em>Best Practices</em> were down to 93%. Why?</p>\n\n<p>After some digging, I found this post:<br>\n<a href=\"https://github.com/GoogleChrome/lighthouse/issues/11862\" target=\"_blank\" rel=\"noopener noreferrer\">Lighthouse Complaining About CSP Violation</a></p>\n\n<p>And ... it's right! If I add the <strong>unsafe-inline</strong>-entry to the <strong>styles-src</strong> of my <em>content-security-policy</em>, it's back at 100%.</p>\n\n<p>I won't do that, of course — but interesting to notice, that Lighthouse itself can cause issues!</p>\n\n",
+  "body_markdown": "I was re-inspecting my homepage after some edits earlier today, and discovered — to my horror 😱 — that my perfect score was not so perfect anymore.\n\nThe *Best Practices* were down to 93%. Why?\n\nAfter some digging, I found this post:\n[Lighthouse Complaining About CSP Violation](https://github.com/GoogleChrome/lighthouse/issues/11862)\n\nAnd ... it's right! If I add the **unsafe-inline**-entry to the **styles-src** of my *content-security-policy*, it's back at 100%.\n\n\nI won't do that, of course — but interesting to notice, that Lighthouse itself can cause issues!",
+  "user": {
+    "name": "Mads Stoumann",
+    "username": "madsstoumann",
+    "twitter_username": "madsstoumann",
+    "github_username": "madsstoumann",
+    "user_id": 515396,
+    "website_url": "https://stoumann.dk",
+    "profile_image": "https://media2.dev.to/dynamic/image/width=640,height=640,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Fuser%2Fprofile_image%2F515396%2Fbf9dcb06-ff90-4fb1-b507-c3dc21c82b85.png",
+    "profile_image_90": "https://media2.dev.to/dynamic/image/width=90,height=90,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Fuser%2Fprofile_image%2F515396%2Fbf9dcb06-ff90-4fb1-b507-c3dc21c82b85.png"
+  },
+  "flare_tag": {
+    "name": "discuss",
+    "bg_color_hex": "#71EA8B",
+    "text_color_hex": "#FFFFFF"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "type_of": "article",
+  "id": 752500,
+  "title": "Mood Selector Component",
+  "description": "Throughout this week, the “Star (rating) Wars” have run here on dev.to.  With proposals by...",
+  "readable_publish_date": "Jul 7 '21",
+  "slug": "mood-selector-jhi",
+  "path": "/madsstoumann/mood-selector-jhi",
+  "url": "https://dev.to/madsstoumann/mood-selector-jhi",
+  "comments_count": 10,
+  "public_reactions_count": 28,
+  "collection_id": null,
+  "published_timestamp": "2021-07-07T14:33:38Z",
+  "language": "en",
+  "subforem_id": null,
+  "positive_reactions_count": 28,
+  "cover_image": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F4cpm30wo3ef738ubf87a.png",
+  "social_image": "https://media2.dev.to/dynamic/image/width=1000,height=500,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F4cpm30wo3ef738ubf87a.png",
+  "canonical_url": "https://dev.to/madsstoumann/mood-selector-jhi",
+  "created_at": "2021-07-07T14:15:09Z",
+  "edited_at": "2021-07-07T16:25:56Z",
+  "crossposted_at": null,
+  "published_at": "2021-07-07T14:33:38Z",
+  "last_comment_at": "2021-07-09T07:10:24Z",
+  "reading_time_minutes": 1,
+  "tag_list": "html, css, webdev, showdev",
+  "tags": [
+    "html",
+    "css",
+    "webdev",
+    "showdev"
+  ],
+  "body_html": "<p>Throughout this week, the “Star (rating) Wars” have run here on dev.to.</p>\n\n<p>With proposals by @inhuofficial, @lapstjup, <a class=\"mentioned-user\" href=\"https://dev.to/link2twenty\">@link2twenty</a> , <a class=\"mentioned-user\" href=\"https://dev.to/afif\">@afif</a>, <a class=\"mentioned-user\" href=\"https://dev.to/siddharthshyniben\">@siddharthshyniben</a> and possisble others – dev.to has been plastered in “Star Rating” components!</p>\n\n<p>My proposal was <a href=\"https://dev.to/madsstoumann/star-rating-using-a-single-input-i0l\">a single input solution</a>, allowing for any number of stars, also half- and quarter-stars – without adding extra markup.</p>\n\n<p>All the other solutions use groups of <code>&lt;input type=\"radio\"&gt;</code>-tags, so I decided to do a component with just that, but not with <strong>stars</strong>. </p>\n\n<p>Instead, pick your mood after these dramatic days – no JavaScript required:</p>\n\n<p><iframe height=\"600\" src=\"https://codepen.io/stoumann/embed/QWvNrwq?height=600&amp;default-tab=result&amp;embed-version=2\" scrolling=\"no\" frameborder=\"no\" allowtransparency=\"true\" loading=\"lazy\" style=\"width: 100%;\">\n</iframe>\n</p>\n\n<p>Thanks for reading 😁</p>\n\n",
+  "body_markdown": "Throughout this week, the “Star (rating) Wars” have run here on dev.to.\n\nWith proposals by @inhuofficial, @lapstjup, @link2twenty , @afif, @siddharthshyniben and possisble others – dev.to has been plastered in “Star Rating” components!\n\nMy proposal was [a single input solution](https://dev.to/madsstoumann/star-rating-using-a-single-input-i0l), allowing for any number of stars, also half- and quarter-stars – without adding extra markup.\n\nAll the other solutions use groups of `<input type=\"radio\">`-tags, so I decided to do a component with just that, but not with **stars**. \n\nInstead, pick your mood after these dramatic days – no JavaScript required:\n\n{% codepen https://codepen.io/stoumann/pen/QWvNrwq %}\n\nThanks for reading 😁\n",
+  "user": {
+    "name": "Mads Stoumann",
+    "username": "madsstoumann",
+    "twitter_username": "madsstoumann",
+    "github_username": "madsstoumann",
+    "user_id": 515396,
+    "website_url": "https://stoumann.dk",
+    "profile_image": "https://media2.dev.to/dynamic/image/width=640,height=640,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Fuser%2Fprofile_image%2F515396%2Fbf9dcb06-ff90-4fb1-b507-c3dc21c82b85.png",
+    "profile_image_90": "https://media2.dev.to/dynamic/image/width=90,height=90,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Fuser%2Fprofile_image%2F515396%2Fbf9dcb06-ff90-4fb1-b507-c3dc21c82b85.png"
+  },
+  "flare_tag": {
+    "name": "showdev",
+    "bg_color_hex": "#091b47",
+    "text_color_hex": "#b2ffe1"
+  }
+}

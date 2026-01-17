@@ -1,0 +1,50 @@
+{
+  "type_of": "article",
+  "id": 829134,
+  "title": "Layered Gradient Playground",
+  "description": "A while ago, I saw this tweet by Adam Argyle. It's a clever way of layering gradients, using CSS...",
+  "readable_publish_date": "Sep 17 '21",
+  "slug": "layered-gradient-playground-102j",
+  "path": "/madsstoumann/layered-gradient-playground-102j",
+  "url": "https://dev.to/madsstoumann/layered-gradient-playground-102j",
+  "comments_count": 0,
+  "public_reactions_count": 32,
+  "collection_id": null,
+  "published_timestamp": "2021-09-17T06:43:20Z",
+  "language": "en",
+  "subforem_id": null,
+  "positive_reactions_count": 32,
+  "cover_image": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fuo8xd1wa81g143e0411f.png",
+  "social_image": "https://media2.dev.to/dynamic/image/width=1000,height=500,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fuo8xd1wa81g143e0411f.png",
+  "canonical_url": "https://dev.to/madsstoumann/layered-gradient-playground-102j",
+  "created_at": "2021-09-17T06:34:48Z",
+  "edited_at": null,
+  "crossposted_at": null,
+  "published_at": "2021-09-17T06:43:20Z",
+  "last_comment_at": "2021-09-17T06:43:20Z",
+  "reading_time_minutes": 1,
+  "tag_list": "css, codepen, webdev, showdev",
+  "tags": [
+    "css",
+    "codepen",
+    "webdev",
+    "showdev"
+  ],
+  "body_html": "<p>A while ago, I saw <a href=\"https://twitter.com/argyleink/status/1233406753892515847\" target=\"_blank\" rel=\"noopener noreferrer\">this tweet</a> by Adam Argyle. It's a clever way of layering gradients, using CSS <code>mask-image</code>. For a new project I'm working on, I want a timeline, where layered background-gradients will change the site’s “look and feel” during the day.</p>\n\n<p>To help me create all these gradients, I built a small tool, based on Adam’s idea:</p>\n\n<p><iframe height=\"600\" src=\"https://codepen.io/stoumann/embed/eYRyqXY?height=600&amp;default-tab=result&amp;embed-version=2\" scrolling=\"no\" frameborder=\"no\" allowtransparency=\"true\" loading=\"lazy\" style=\"width: 100%;\">\n</iframe>\n</p>\n\n<p>I hope it's as useful for you, as it's been for me!<br>\nThe CSS code is rendered at the bottom.</p>\n\n",
+  "body_markdown": "A while ago, I saw [this tweet](https://twitter.com/argyleink/status/1233406753892515847) by Adam Argyle. It's a clever way of layering gradients, using CSS `mask-image`. For a new project I'm working on, I want a timeline, where layered background-gradients will change the site’s “look and feel” during the day.\n\nTo help me create all these gradients, I built a small tool, based on Adam’s idea:\n\n{% codepen https://codepen.io/stoumann/pen/eYRyqXY %}\n\nI hope it's as useful for you, as it's been for me!\nThe CSS code is rendered at the bottom.",
+  "user": {
+    "name": "Mads Stoumann",
+    "username": "madsstoumann",
+    "twitter_username": "madsstoumann",
+    "github_username": "madsstoumann",
+    "user_id": 515396,
+    "website_url": "https://stoumann.dk",
+    "profile_image": "https://media2.dev.to/dynamic/image/width=640,height=640,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Fuser%2Fprofile_image%2F515396%2Fbf9dcb06-ff90-4fb1-b507-c3dc21c82b85.png",
+    "profile_image_90": "https://media2.dev.to/dynamic/image/width=90,height=90,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Fuser%2Fprofile_image%2F515396%2Fbf9dcb06-ff90-4fb1-b507-c3dc21c82b85.png"
+  },
+  "flare_tag": {
+    "name": "showdev",
+    "bg_color_hex": "#091b47",
+    "text_color_hex": "#b2ffe1"
+  }
+}

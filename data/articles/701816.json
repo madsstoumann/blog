@@ -1,0 +1,50 @@
+{
+  "type_of": "article",
+  "id": 701816,
+  "title": "Random Art Generator: Dots & Rings",
+  "description": "If you like random art, I've just released a new tool for generating random rings and dots (in &lt;sv...",
+  "readable_publish_date": "May 18 '21",
+  "slug": "random-art-generator-dots-rings-3ca3",
+  "path": "/madsstoumann/random-art-generator-dots-rings-3ca3",
+  "url": "https://dev.to/madsstoumann/random-art-generator-dots-rings-3ca3",
+  "comments_count": 2,
+  "public_reactions_count": 39,
+  "collection_id": null,
+  "published_timestamp": "2021-05-18T14:41:42Z",
+  "language": "en",
+  "subforem_id": null,
+  "positive_reactions_count": 39,
+  "cover_image": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fci1qxacirlt8d91iuv0j.png",
+  "social_image": "https://media2.dev.to/dynamic/image/width=1000,height=500,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fci1qxacirlt8d91iuv0j.png",
+  "canonical_url": "https://dev.to/madsstoumann/random-art-generator-dots-rings-3ca3",
+  "created_at": "2021-05-18T14:30:15Z",
+  "edited_at": null,
+  "crossposted_at": null,
+  "published_at": "2021-05-18T14:41:42Z",
+  "last_comment_at": "2021-05-18T15:56:50Z",
+  "reading_time_minutes": 1,
+  "tag_list": "codepen, javascript, showdev, webdev",
+  "tags": [
+    "codepen",
+    "javascript",
+    "showdev",
+    "webdev"
+  ],
+  "body_html": "<p>If you like random art, I've just released a new tool for generating random rings and dots (in <code>&lt;svg&gt;</code>).</p>\n\n<p>With the editor, you can tweak a lot of parameters (Click the “Random!”-button to get started):</p>\n\n<p><a href=\"https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fzqk33xqq9ya9l1ch4nqy.png\" class=\"article-body-image-wrapper\"><img src=\"https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fzqk33xqq9ya9l1ch4nqy.png\" alt=\"Editor\" loading=\"lazy\" width=\"630\" height=\"1268\"></a></p>\n\n<p>And render art like these examples: </p>\n\n<p><a href=\"https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fnlvfbt47s5wqh0cno0sw.png\" class=\"article-body-image-wrapper\"><img src=\"https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fnlvfbt47s5wqh0cno0sw.png\" alt=\"image1\" loading=\"lazy\" width=\"800\" height=\"800\"></a></p>\n\n<p><a href=\"https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F4do76jmyojg8a66ywbc5.png\" class=\"article-body-image-wrapper\"><img src=\"https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F4do76jmyojg8a66ywbc5.png\" alt=\"image2\" loading=\"lazy\" width=\"709\" height=\"706\"></a></p>\n\n<p><a href=\"https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fp9tdje0g3b1y9pzeayrv.png\" class=\"article-body-image-wrapper\"><img src=\"https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fp9tdje0g3b1y9pzeayrv.png\" alt=\"image3\" loading=\"lazy\" width=\"800\" height=\"802\"></a></p>\n\n<p><a href=\"https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fvp52mx2n159j7vatx2rk.png\" class=\"article-body-image-wrapper\"><img src=\"https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fvp52mx2n159j7vatx2rk.png\" alt=\"image4\" loading=\"lazy\" width=\"800\" height=\"801\"></a></p>\n\n<p>When you've made a piece you'd like to save, click on “Export\", chose a file format, then click on “Save to Image”.</p>\n\n<p>It's on Codepen (open fullscreen for best experience):</p>\n\n<p><iframe height=\"600\" src=\"https://codepen.io/stoumann/embed/dyvprJM?height=600&amp;default-tab=result&amp;embed-version=2\" scrolling=\"no\" frameborder=\"no\" allowtransparency=\"true\" loading=\"lazy\" style=\"width: 100%;\">\n</iframe>\n</p>\n\n<p>Thanks for reading!</p>\n\n",
+  "body_markdown": "If you like random art, I've just released a new tool for generating random rings and dots (in `<svg>`).\n\nWith the editor, you can tweak a lot of parameters (Click the “Random!”-button to get started):\n\n![Editor](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/zqk33xqq9ya9l1ch4nqy.png)\n\nAnd render art like these examples: \n\n![image1](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nlvfbt47s5wqh0cno0sw.png)\n\n![image2](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/4do76jmyojg8a66ywbc5.png)\n\n![image3](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/p9tdje0g3b1y9pzeayrv.png)\n \n![image4](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/vp52mx2n159j7vatx2rk.png)\n\nWhen you've made a piece you'd like to save, click on “Export\", chose a file format, then click on “Save to Image”.\n\nIt's on Codepen (open fullscreen for best experience):\n\n{% codepen https://codepen.io/stoumann/pen/dyvprJM %}\n\nThanks for reading!",
+  "user": {
+    "name": "Mads Stoumann",
+    "username": "madsstoumann",
+    "twitter_username": "madsstoumann",
+    "github_username": "madsstoumann",
+    "user_id": 515396,
+    "website_url": "https://stoumann.dk",
+    "profile_image": "https://media2.dev.to/dynamic/image/width=640,height=640,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Fuser%2Fprofile_image%2F515396%2Fbf9dcb06-ff90-4fb1-b507-c3dc21c82b85.png",
+    "profile_image_90": "https://media2.dev.to/dynamic/image/width=90,height=90,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Fuser%2Fprofile_image%2F515396%2Fbf9dcb06-ff90-4fb1-b507-c3dc21c82b85.png"
+  },
+  "flare_tag": {
+    "name": "showdev",
+    "bg_color_hex": "#091b47",
+    "text_color_hex": "#b2ffe1"
+  }
+}
