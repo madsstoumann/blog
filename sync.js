@@ -12,9 +12,18 @@ const ARTICLES_DIR = join(DATA_DIR, 'articles');
 const ARTICLES_JSON = join(DATA_DIR, 'articles.json');
 const ASSETS_DIR = join(__dirname, 'assets');
 
-const USERNAME = 'madsstoumann';
 const PER_PAGE = 30;
 const DELAY_MS = 300;
+
+// Get username from command line or environment
+function getUsername() {
+	const args = process.argv.slice(2).filter(arg => !arg.startsWith('--'));
+	if (args.length > 0) return args[0];
+	if (process.env.DEVTO_USERNAME) return process.env.DEVTO_USERNAME;
+	console.error('Usage: node sync.js <username> [--full]');
+	console.error('   or: DEVTO_USERNAME=<username> node sync.js [--full]');
+	process.exit(1);
+}
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -47,7 +56,7 @@ function extractImageUrls(article) {
 }
 
 // Generate a local filename for an image URL
-function getLocalAssetPath(url, articleId) {
+function getLocalAssetPath(url, articleId, isUserImage = false) {
 	// Create a hash of the URL to handle duplicates and special chars
 	const hash = createHash('md5').update(url).digest('hex').slice(0, 8);
 
@@ -69,7 +78,9 @@ function getLocalAssetPath(url, articleId) {
 		// Use default extension
 	}
 
-	return `assets/${articleId}/${hash}${ext}`;
+	// User images go to shared folder, article images go to article folder
+	const folder = isUserImage ? 'user' : articleId;
+	return `assets/${folder}/${hash}${ext}`;
 }
 
 // Download an image and save it locally
@@ -113,6 +124,16 @@ function replaceImageUrls(article, urlMap) {
 			modified.social_image = localPath;
 		}
 
+		// Replace in user profile images
+		if (modified.user) {
+			if (modified.user.profile_image === originalUrl) {
+				modified.user = { ...modified.user, profile_image: localPath };
+			}
+			if (modified.user.profile_image_90 === originalUrl) {
+				modified.user = { ...modified.user, profile_image_90: localPath };
+			}
+		}
+
 		// Replace in body_html
 		if (modified.body_html) {
 			modified.body_html = modified.body_html.split(originalUrl).join(localPath);
@@ -132,12 +153,18 @@ async function downloadArticleAssets(article) {
 	const urls = extractImageUrls(article);
 	const urlMap = {};
 
+	// Identify user profile image URLs
+	const userImageUrls = new Set();
+	if (article.user?.profile_image) userImageUrls.add(article.user.profile_image);
+	if (article.user?.profile_image_90) userImageUrls.add(article.user.profile_image_90);
+
 	if (urls.length === 0) return urlMap;
 
 	console.log(`  Downloading ${urls.length} asset(s)...`);
 
 	for (const url of urls) {
-		const localPath = getLocalAssetPath(url, article.id);
+		const isUserImage = userImageUrls.has(url);
+		const localPath = getLocalAssetPath(url, article.id, isUserImage);
 		const success = await downloadAsset(url, localPath);
 		if (success) {
 			urlMap[url] = localPath;
@@ -148,14 +175,14 @@ async function downloadArticleAssets(article) {
 	return urlMap;
 }
 
-async function fetchAllArticles() {
+async function fetchAllArticles(username) {
 	const articles = [];
 	let page = 1;
 
 	while (true) {
 		console.log(`Fetching page ${page}...`);
 		const response = await fetch(
-			`https://dev.to/api/articles?username=${USERNAME}&page=${page}&per_page=${PER_PAGE}`
+			`https://dev.to/api/articles?username=${username}&page=${page}&per_page=${PER_PAGE}`
 		);
 		const batch = await response.json();
 
@@ -181,12 +208,12 @@ async function loadLocalArticles() {
 	return JSON.parse(data);
 }
 
-async function sync(forceFullSync = false) {
-	console.log('Starting sync...\n');
+async function sync(username, forceFullSync = false) {
+	console.log(`Starting sync for ${username}...\n`);
 
 	await mkdir(ARTICLES_DIR, { recursive: true });
 
-	const remoteArticles = await fetchAllArticles();
+	const remoteArticles = await fetchAllArticles(username);
 	const localArticles = await loadLocalArticles();
 
 	const localMap = new Map(localArticles.map(a => [a.id, a]));
@@ -257,5 +284,6 @@ async function sync(forceFullSync = false) {
 	console.log(`  Total: ${remoteArticles.length}`);
 }
 
+const username = getUsername();
 const forceFullSync = process.argv.includes('--full');
-sync(forceFullSync).catch(console.error);
+sync(username, forceFullSync).catch(console.error);
