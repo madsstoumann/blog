@@ -2,6 +2,10 @@
 
 A static archive of dev.to articles with locally hosted assets. Uses the `<dev-to>` web component to display articles in a clean, customizable interface.
 
+## Live Demo
+
+[blog.stoumann.dk](https://blog.stoumann.dk) — archive of [dev.to/madsstoumann](https://dev.to/madsstoumann)
+
 ## Features
 
 - Syncs articles from any dev.to author
