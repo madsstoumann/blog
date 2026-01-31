@@ -1,0 +1,41 @@
+{
+  "type_of": "article",
+  "id": "wp-698",
+  "title": "To font-size, or not to font-size",
+  "description": "Article exploring different approaches to responsive typography in CSS, comparing viewport units, calc(), and traditional responsive breakpoints.",
+  "slug": "to-font-size-or-not-to-font-size",
+  "url": "https://madsstoumann.wordpress.com/2016/08/18/to-font-size-or-not-to-font-size/",
+  "path": "/to-font-size-or-not-to-font-size",
+  "canonical_url": "https://madsstoumann.wordpress.com/2016/08/18/to-font-size-or-not-to-font-size/",
+  "cover_image": null,
+  "social_image": null,
+  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p>When creating responsive web sites, there are multiple strategies for font-sizing.</p>\n<p>At the agency I work at (<a href=\"http://valtech.dk\" target=\"_blank\">Valtech</a>), we typically use <em>responsive breakpoints</em> for changing font-sizes. With responsive breakpoints, we might change the root font-size (on which other sizes are based, using em), like this:</p>\n<pre class=\"brush: css; title: ; notranslate\" title=\"\">\n@media (min-width: 640px)  { html { font-size: 13px; } }\n@media (min-width: 768px)  { html { font-size: 14px; } }\n@media (min-width: 1024px) { html { font-size: 15px; } }\n@media (min-width: 1280px) { html { font-size: 16px; } }\n@media (min-width: 1600px) { html { font-size: 17px; } }\n</pre>\n<p>Since everything is based on the root font-size (using em), elements will scale nicely, when the media-queries kick in.</p>\n<p>Another approach is using <em>viewport units</em>:</p>\n<pre class=\"brush: css; title: ; notranslate\" title=\"\">\nhtml { font-size: 2.5vw; }\n</pre>\n<p>By using viewport units for font-sizing, the text itself becomes responsive, and will grow along with the viewport width. It&#8217;s an interesting technique!</p>\n<p>However, by purely using viewport units, at small viewport widths, the fonts will become too small to read. And on large viewport widths, they&#8217;ll become too big!</p>\n<p>You can use media-queries for setting min/max font-sizes, but you can also use <strong>calc()</strong>, a CSS-function for calculating dimensions. Read <a href=\"https://www.smashingmagazine.com/2016/05/fluid-typography/\" target=\"_blank\">this excellent article</a> for inspiration!</p>\n<p>I&#8217;ve played a bit with calc() myself, you can see the result on Codepen:<br />\n<a href=\"http://codepen.io/stoumann/pen/QEqaXv\" target=\"_blank\">http://codepen.io/stoumann/pen/QEqaXv</a></p>\n<p>The essential parts are:</p>\n<pre class=\"brush: css; title: ; notranslate\" title=\"\">\n$min-font-size: 13px;\n$max-font-size: 17px;\n$min-screen: 320px;\n$max-screen: 1600px;\n\nhtml {\n  font-size: calc(#{$min-font-size} + (#{$max-font-size} - #{$min-font-size}) * (100vw - #{$min-screen}) / (#{$max-screen} - #{$min-screen}));\n}\n\n@media (max-width: $min-screen) {\n  html { font-size: $min-font-size; }\n}\n@media (min-width: $max-screen) {\n  html { font-size: $max-font-size; }\n}\n</pre>\n<p>The only downside of the calc()-technique is using px-values, instead of ems.</p>\n<p>Below is the full Codepen. I&#8217;ve used SASS and split the lines, so it&#8217;s easier to read.<br />\nToggle between &#8220;Use breakpoints&#8221; and &#8220;Use calc&#8221; to see the difference.</p>\n<p class=\"codepen\" data-height=\"420\" data-theme-id=\"0\" data-slug-hash=\"QEqaXv\" data-default-tab=\"result\" data-user=\"stoumann\">See the Pen <a href=\"http://codepen.io/stoumann/pen/QEqaXv/\">Font-size: breakpoints or calc?</a> by Mads Stoumann (<a href=\"http://codepen.io/stoumann\">@stoumann</a>) on <a href=\"http://codepen.io\">CodePen</a>.</p>\n<p><script async src=\"//assets.codepen.io/assets/embed/ei.js\"></script></p>\n<p>Happy coding!</p>",
+  "body_markdown": null,
+  "reading_time_minutes": 2,
+  "published_at": "2016-08-18T09:14:00+02:00",
+  "published_timestamp": "2016-08-18T09:14:00+02:00",
+  "created_at": "2016-08-18T09:14:00+02:00",
+  "edited_at": null,
+  "last_comment_at": null,
+  "comments_count": 0,
+  "public_reactions_count": 0,
+  "positive_reactions_count": 0,
+  "tag_list": "css3",
+  "tags": [
+    {
+      "id": "css3",
+      "name": "css3"
+    }
+  ],
+  "language": "en",
+  "source": "wordpress",
+  "source_site": "madsstoumann.wordpress.com",
+  "readable_publish_date": "Aug 18 '16",
+  "user": {
+    "name": "Mads Stoumann",
+    "username": "madsstoumann",
+    "user_id": 1,
+    "profile_image": null,
+    "profile_image_90": null
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "type_of": "article",
+  "id": "wp-242",
+  "title": "Front-End Guidelines: Meta and Apps",
+  "description": "Comprehensive reference for hidden HTML features that enhance experiences across devices.",
+  "slug": "front-end-guidelines-meta-and-apps",
+  "url": "https://madsstoumann.wordpress.com/2015/01/23/front-end-guidelines-meta-and-apps/",
+  "path": "/front-end-guidelines-meta-and-apps",
+  "canonical_url": "https://madsstoumann.wordpress.com/2015/01/23/front-end-guidelines-meta-and-apps/",
+  "cover_image": null,
+  "social_image": null,
+  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p>This document is a comprehensive list of all the hidden features you can provide in HTML.</p>",
+  "body_markdown": null,
+  "reading_time_minutes": 1,
+  "published_at": "2015-01-23T16:19:56+02:00",
+  "published_timestamp": "2015-01-23T16:19:56+02:00",
+  "created_at": "2015-01-23T16:19:56+02:00",
+  "edited_at": null,
+  "last_comment_at": null,
+  "comments_count": 2,
+  "public_reactions_count": 0,
+  "positive_reactions_count": 0,
+  "tag_list": "guidelines, meta",
+  "tags": [
+    {
+      "id": "guidelines",
+      "name": "guidelines"
+    },
+    {
+      "id": "meta",
+      "name": "meta"
+    }
+  ],
+  "language": "en",
+  "source": "wordpress",
+  "source_site": "madsstoumann.wordpress.com",
+  "readable_publish_date": "Jan 23 '15",
+  "user": {
+    "name": "Mads Stoumann",
+    "username": "madsstoumann",
+    "user_id": 1,
+    "profile_image": null,
+    "profile_image_90": null
+  }
+}

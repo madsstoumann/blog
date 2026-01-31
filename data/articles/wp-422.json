@@ -1,0 +1,53 @@
+{
+  "type_of": "article",
+  "id": "wp-422",
+  "title": "The Curse of the Click-delay!",
+  "description": "Multiple articles discuss the 300ms delay that touch-based browsers add to user click interactions.",
+  "slug": "the-curse-of-the-click-delay",
+  "url": "https://madsstoumann.wordpress.com/2015/11/11/the-curse-of-the-click-delay/",
+  "path": "/the-curse-of-the-click-delay",
+  "canonical_url": "https://madsstoumann.wordpress.com/2015/11/11/the-curse-of-the-click-delay/",
+  "cover_image": null,
+  "social_image": null,
+  "body_html": "<p><a href=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/curse.png\"><img src=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/curse.png?w=615&h=441\" alt=\"Curse of the Click-delay\" width=\"615\" height=\"441\" /></a></p>\n<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p>There are multiple articles around the Web about what has been dubbed \"The curse of the 300ms delay\".</p>\n<p>Now, go remove those annoying delays!</p>",
+  "body_markdown": null,
+  "reading_time_minutes": 1,
+  "published_at": "2015-11-11T16:45:07+02:00",
+  "published_timestamp": "2015-11-11T16:45:07+02:00",
+  "created_at": "2015-11-11T16:45:07+02:00",
+  "edited_at": null,
+  "last_comment_at": null,
+  "comments_count": 1,
+  "public_reactions_count": 0,
+  "positive_reactions_count": 0,
+  "tag_list": "css3, html5, javascript, touch",
+  "tags": [
+    {
+      "id": "css3",
+      "name": "css3"
+    },
+    {
+      "id": "html5",
+      "name": "html5"
+    },
+    {
+      "id": "javascript",
+      "name": "javascript"
+    },
+    {
+      "id": "touch",
+      "name": "touch"
+    }
+  ],
+  "language": "en",
+  "source": "wordpress",
+  "source_site": "madsstoumann.wordpress.com",
+  "readable_publish_date": "Nov 11 '15",
+  "user": {
+    "name": "Mads Stoumann",
+    "username": "madsstoumann",
+    "user_id": 1,
+    "profile_image": null,
+    "profile_image_90": null
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "type_of": "article",
+  "id": "wp-341",
+  "title": "Product variants with schemas",
+  "description": "Demonstrates how to markup product variations using Schema.org structured data.",
+  "slug": "product-variants-with-schemas",
+  "url": "https://madsstoumann.wordpress.com/2015/03/26/product-variants-with-schemas/",
+  "path": "/product-variants-with-schemas",
+  "canonical_url": "https://madsstoumann.wordpress.com/2015/03/26/product-variants-with-schemas/",
+  "cover_image": null,
+  "social_image": null,
+  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p>To create product variants with structured markup using the Product-schema and the Product Model-schema.</p>",
+  "body_markdown": null,
+  "reading_time_minutes": 1,
+  "published_at": "2015-03-26T12:14:30+02:00",
+  "published_timestamp": "2015-03-26T12:14:30+02:00",
+  "created_at": "2015-03-26T12:14:30+02:00",
+  "edited_at": null,
+  "last_comment_at": null,
+  "comments_count": 0,
+  "public_reactions_count": 0,
+  "positive_reactions_count": 0,
+  "tag_list": "html5, schema.org",
+  "tags": [
+    {
+      "id": "html5",
+      "name": "html5"
+    },
+    {
+      "id": "schema.org",
+      "name": "schema.org"
+    }
+  ],
+  "language": "en",
+  "source": "wordpress",
+  "source_site": "madsstoumann.wordpress.com",
+  "readable_publish_date": "Mar 26 '15",
+  "user": {
+    "name": "Mads Stoumann",
+    "username": "madsstoumann",
+    "user_id": 1,
+    "profile_image": null,
+    "profile_image_90": null
+  }
+}

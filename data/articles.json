@@ -1,1922 +1,2298 @@
 [
-  {
-    "id": 2975676,
-    "title": "Creating a Maintenance Page using a Cloudflare Worker",
-    "description": "Last night, an Azure outage took down several sites my company maintains. While the servers were...",
-    "cover_image": "assets/2975676/5ad5d5bf.jpg",
-    "published_timestamp": "2025-10-31T10:52:36Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/creating-a-maintenance-page-using-a-cloudflare-worker-8m6",
-    "tag_list": [
-      "javascript",
-      "security",
-      "webdev",
-      "tutorial"
-    ],
-    "public_reactions_count": 3
-  },
-  {
-    "id": 2974654,
-    "title": "Adding Security Headers on Cloudflare",
-    "description": "Four years ago, I wrote a posts about Security Headers. In that post, I mentioned how to set up...",
-    "cover_image": "assets/2974654/fcc41fe1.jpg",
-    "published_timestamp": "2025-10-30T07:54:30Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/adding-security-headers-on-cloudflare-2dag",
-    "tag_list": [
-      "security",
-      "webdev"
-    ],
-    "public_reactions_count": 6
-  },
-  {
-    "id": 2955757,
-    "title": "Weather Widgets",
-    "description": "Everyone talks about it — but no one does anything about it. What? The weather, of course! So, at...",
-    "cover_image": "assets/2955757/8e87c99c.jpg",
-    "published_timestamp": "2025-10-24T11:33:15Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/weather-widgets-4751",
-    "tag_list": [
-      "javascript",
-      "css",
-      "webdev",
-      "showdev"
-    ],
-    "public_reactions_count": 7
-  },
-  {
-    "id": 2722566,
-    "title": "Piano Chords in CSS",
-    "description": "A couple of months ago, I wrote an article about Guitar Chords in CSS, using the new typed attr()...",
-    "cover_image": "assets/2722566/e60b7894.jpg",
-    "published_timestamp": "2025-07-25T15:05:46Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/piano-chords-in-css-4jop",
-    "tag_list": [
-      "css",
-      "tutorial",
-      "webdev",
-      "showdev"
-    ],
-    "public_reactions_count": 28
-  },
-  {
-    "id": 2572592,
-    "title": "Charts in CSS",
-    "description": "Charts have been done in CSS many times before — there's even a dedicated project. So why this post?...",
-    "cover_image": "assets/2572592/c6cf3f09.jpg",
-    "published_timestamp": "2025-06-09T10:43:37Z",
-    "edited_at": "2025-06-09T11:07:16Z",
-    "url": "https://dev.to/madsstoumann/charts-in-css-1di1",
-    "tag_list": [
-      "css",
-      "tutorial",
-      "webdev",
-      "showdev"
-    ],
-    "public_reactions_count": 70
-  },
-  {
-    "id": 2465237,
-    "title": "Guitar Chords in CSS",
-    "description": "In my previous article, I looked into the new, improved attr() method in CSS. I was over the moon...",
-    "cover_image": "assets/2465237/25f92ed9.jpg",
-    "published_timestamp": "2025-05-07T09:38:23Z",
-    "edited_at": "2025-05-07T14:13:40Z",
-    "url": "https://dev.to/madsstoumann/guitar-chords-in-css-3hk8",
-    "tag_list": [
-      "css",
-      "webdev",
-      "showdev",
-      "tutorial"
-    ],
-    "public_reactions_count": 147
-  },
-  {
-    "id": 2394843,
-    "title": "Phases of the Moon in CSS",
-    "description": "You might have heard that the humble, old attr() method in CSS just got a big update. It's only in...",
-    "cover_image": "assets/2394843/00e6e259.jpg",
-    "published_timestamp": "2025-04-09T17:54:51Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/phases-of-the-moon-in-css-2lbo",
-    "tag_list": [
-      "css",
-      "webdev",
-      "tutorial",
-      "showdev"
-    ],
-    "public_reactions_count": 55
-  },
-  {
-    "id": 2383490,
-    "title": "How To Create Gauges in CSS",
-    "description": "With modern CSS we can create beautiful gauges with ease. It involves a bunch of techniques, so let's...",
-    "cover_image": "assets/2383490/89efeb32.jpg",
-    "published_timestamp": "2025-04-05T11:21:33Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/how-to-create-gauges-in-css-3581",
-    "tag_list": [
-      "css",
-      "webdev",
-      "tutorial",
-      "showdev"
-    ],
-    "public_reactions_count": 30
-  },
-  {
-    "id": 2348160,
-    "title": "Digital Clocks in CSS",
-    "description": "In my previous post, I looked into clocks and watches, mimicking classic, analog watches. Now, how...",
-    "cover_image": "assets/2348160/855a3220.jpg",
-    "published_timestamp": "2025-03-22T13:44:35Z",
-    "edited_at": "2025-03-26T18:31:24Z",
-    "url": "https://dev.to/madsstoumann/digital-clocks-in-css-3dkg",
-    "tag_list": [
-      "webdev",
-      "css",
-      "javascript",
-      "showdev"
-    ],
-    "public_reactions_count": 10
-  },
-  {
-    "id": 2263002,
-    "title": "Clocks and Watches in CSS",
-    "description": "A couple of years ago, when CSS trigonometry functions became baseline, I wrote an article about...",
-    "cover_image": "assets/2263002/f7c28d82.jpg",
-    "published_timestamp": "2025-02-25T13:46:44Z",
-    "edited_at": "2025-03-26T18:30:37Z",
-    "url": "https://dev.to/madsstoumann/clocks-and-watches-in-css-36mm",
-    "tag_list": [
-      "css",
-      "javascript",
-      "webdev",
-      "tutorial"
-    ],
-    "public_reactions_count": 104
-  },
-  {
-    "id": 2270859,
-    "title": "The Unofficial Dev.To Embed Web Component",
-    "description": "The other day, I re-discovered the dev.to API and found out that it can be used without an API key....",
-    "cover_image": "assets/2270859/cd5d2813.jpg",
-    "published_timestamp": "2025-02-11T09:38:37Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/the-unofficial-devto-embed-web-component-1hjk",
-    "tag_list": [
-      "javascript",
-      "css",
-      "webdev",
-      "showdev"
-    ],
-    "public_reactions_count": 57
-  },
-  {
-    "id": 2237641,
-    "title": "Creating a Print Preview Web Component",
-    "description": "I’m currently working on a large e-commerce project — an update to an app I coded back in 1994-1996!...",
-    "cover_image": "assets/2237641/97854e4b.jpg",
-    "published_timestamp": "2025-01-24T11:45:37Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/creating-a-print-preview-web-component-1ma5",
-    "tag_list": [
-      "javascript",
-      "webdev",
-      "webcomponents",
-      "tutorial"
-    ],
-    "public_reactions_count": 11
-  },
-  {
-    "id": 2142769,
-    "title": "Art with CSS Grid and SVG filters",
-    "description": "Have you ever explored the power of grid-auto-flow: dense? When combined with randomly generated...",
-    "cover_image": "assets/2142769/ead80a42.jpg",
-    "published_timestamp": "2024-12-07T15:55:34Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/art-with-css-grid-and-svg-filters-1ke6",
-    "tag_list": [
-      "css",
-      "javascript",
-      "webdev",
-      "showdev"
-    ],
-    "public_reactions_count": 48
-  },
-  {
-    "id": 2131155,
-    "title": "Creating a Scroll Grid",
-    "description": "The other day I noticed the similarities between Tailscale and MUBI — not the companies, of course,...",
-    "cover_image": "assets/2131155/9d671197.jpg",
-    "published_timestamp": "2024-12-02T19:43:39Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/creating-a-scroll-grid-en5",
-    "tag_list": [
-      "javascript",
-      "css",
-      "webdev",
-      "tutorial"
-    ],
-    "public_reactions_count": 6
-  },
-  {
-    "id": 2090550,
-    "title": "Can I Drive? Coding an Alcohol Tester",
-    "description": "In Denmark, where I live, we unfortunately hold a record within Europe: our kids are the heaviest...",
-    "cover_image": "assets/2090550/75aa1fdc.jpg",
-    "published_timestamp": "2024-11-10T11:27:50Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/can-i-drive-coding-an-alcohol-tester-163g",
-    "tag_list": [
-      "javascript",
-      "css",
-      "webdev",
-      "tutorial"
-    ],
-    "public_reactions_count": 4
-  },
-  {
-    "id": 2074710,
-    "title": "Designing Better Tables: Using Popovers for Extra Data",
-    "description": "When working with large data tables, displaying all available information at once can often make the...",
-    "cover_image": "assets/2074710/1ade759c.jpg",
-    "published_timestamp": "2024-11-03T16:03:08Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/designing-better-tables-using-popovers-for-extra-data-d1i",
-    "tag_list": [
-      "javascript",
-      "css",
-      "webdev",
-      "tutorial"
-    ],
-    "public_reactions_count": 50
-  },
-  {
-    "id": 2014104,
-    "title": "The Golden Ratio in CSS",
-    "description": "The golden ratio, also called the golden number, golden proportion, or even the divine proportion, is...",
-    "cover_image": "assets/2014104/f7df37ff.jpg",
-    "published_timestamp": "2024-09-25T09:37:20Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/the-golden-ratio-in-css-53d0",
-    "tag_list": [
-      "css",
-      "webdev",
-      "showdev",
-      "tutorial"
-    ],
-    "public_reactions_count": 243
-  },
-  {
-    "id": 1999038,
-    "title": "CMYK, RGB, and Building a Color Visualizer",
-    "description": "When I was a kid, I published a fanzine about comics. This was long before I had a computer—it was...",
-    "cover_image": "assets/1999038/66644803.jpg",
-    "published_timestamp": "2024-09-13T10:18:40Z",
-    "edited_at": "2024-09-14T05:44:22Z",
-    "url": "https://dev.to/madsstoumann/from-typewriters-to-pixels-a-journey-with-cmyk-rgb-and-building-a-color-visualizer-484b",
-    "tag_list": [
-      "css",
-      "javascript",
-      "webdev",
-      "tutorial"
-    ],
-    "public_reactions_count": 4
-  },
-  {
-    "id": 1997745,
-    "title": "Alien Signals — 2-in-1 Challenge",
-    "description": "This is a submission for Frontend Challenge v24.09.04, Glam Up My Markup: Space  But it's also a...",
-    "cover_image": "assets/1997745/9d413d8b.jpg",
-    "published_timestamp": "2024-09-12T07:48:01Z",
-    "edited_at": "2024-09-12T09:35:33Z",
-    "url": "https://dev.to/madsstoumann/alien-signals-3ni8",
-    "tag_list": [
-      "devchallenge",
-      "frontendchallenge",
-      "css",
-      "javascript"
-    ],
-    "public_reactions_count": 9
-  },
-  {
-    "id": 1991736,
-    "title": "The Periodic Table in CSS",
-    "description": "Like the Solar System, The Periodic Table has been done in CSS a lot of times … but it has never been...",
-    "cover_image": "assets/1991736/31a3h9z2qouvrno1qgbc.webp",
-    "published_timestamp": "2024-09-08T08:40:16Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/the-periodic-table-in-css-3lmm",
-    "tag_list": [
-      "css",
-      "webdev",
-      "showdev",
-      "tutorial"
-    ],
-    "public_reactions_count": 128
-  },
-  {
-    "id": 1869451,
-    "title": "And the Oscar Goes to … Coding a Chronology Component",
-    "description": "Earlier this year, a friend of mine shared a massive poster he had been working on for the Copenhell...",
-    "cover_image": "assets/1869451/b57e4106.jpg",
-    "published_timestamp": "2024-09-01T09:39:36Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/and-the-oscar-goes-to-coding-a-chronology-component-24hf",
-    "tag_list": [
-      "css",
-      "webdev",
-      "showdev",
-      "tutorial"
-    ],
-    "public_reactions_count": 5
-  },
-  {
-    "id": 1972652,
-    "title": "The Solar System in CSS",
-    "description": "The Solar System has been done in CSS a lot of times — just search Codepen! So why do it...",
-    "cover_image": "assets/1972652/670fac48.jpg",
-    "published_timestamp": "2024-08-25T15:43:48Z",
-    "edited_at": "2024-08-27T04:32:52Z",
-    "url": "https://dev.to/madsstoumann/the-solar-system-in-css-51bo",
-    "tag_list": [
-      "css",
-      "webdev",
-      "showdev",
-      "tutorial"
-    ],
-    "public_reactions_count": 276
-  },
-  {
-    "id": 1964961,
-    "title": "Line Numbers for <textarea> using SVG",
-    "description": "The other day I was working on a JSON Schema Generator, and wanted to display line numbers in a...",
-    "cover_image": "assets/1964961/b484426b.jpg",
-    "published_timestamp": "2024-08-19T09:34:30Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/line-numbers-for-using-svg-1216",
-    "tag_list": [
-      "javascript",
-      "webdev",
-      "showdev",
-      "css"
-    ],
-    "public_reactions_count": 36
-  },
-  {
-    "id": 1897009,
-    "title": "Build A CSS Word Search Game In ... CSS!",
-    "description": "I've heard it so many times: CSS is not a programming language — or — why do it in CSS, when you can...",
-    "cover_image": "assets/1897009/f2e9a83f.jpg",
-    "published_timestamp": "2024-06-22T12:59:57Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/build-a-css-word-search-game-in-css-10d1",
-    "tag_list": [
-      "css",
-      "html",
-      "webdev",
-      "showdev"
-    ],
-    "public_reactions_count": 24
-  },
-  {
-    "id": 1873731,
-    "title": "Sunday Fun: Re-creating a Radiohead cover",
-    "description": "The other day, I read an article about how Radiohead's graphic designer, Stanley Donwood, got...",
-    "cover_image": "assets/1873731/8b3c1187.jpg",
-    "published_timestamp": "2024-06-02T14:34:14Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/sunday-fun-re-creating-a-radiohead-cover-20ma",
-    "tag_list": [
-      "css",
-      "javascript",
-      "webdev",
-      "showdev"
-    ],
-    "public_reactions_count": 3
-  },
-  {
-    "id": 1870296,
-    "title": "A Trip To The Beach",
-    "description": "This is a submission for [Frontend Challenge...",
-    "cover_image": "assets/1870296/5615feca.jpg",
-    "published_timestamp": "2024-05-30T10:57:54Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/a-trip-to-the-beach-f9i",
-    "tag_list": [
-      "devchallenge",
-      "frontendchallenge",
-      "css",
-      "javascript"
-    ],
-    "public_reactions_count": 6
-  },
-  {
-    "id": 1869503,
-    "title": "La Luzerne",
-    "description": "This is a submission for Frontend Challenge v24.04.17, CSS Art: June.           Inspiration   \"La...",
-    "cover_image": "assets/1869503/610fc741.jpg",
-    "published_timestamp": "2024-05-29T18:55:03Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/la-luzerne-bfe",
-    "tag_list": [
-      "frontendchallenge",
-      "devchallenge",
-      "css"
-    ],
-    "public_reactions_count": 2
-  },
-  {
-    "id": 1863603,
-    "title": "Getting Creative with CSS Grid",
-    "description": "Grids don't have to be boring! You can easily spice up a classic 12x12 grid with very few lines of...",
-    "cover_image": "assets/1863603/a64ecb97.jpg",
-    "published_timestamp": "2024-05-24T06:54:41Z",
-    "edited_at": "2024-05-24T08:24:23Z",
-    "url": "https://dev.to/madsstoumann/getting-creative-with-css-grid-mco",
-    "tag_list": [
-      "css",
-      "webdev",
-      "tutorial",
-      "showdev"
-    ],
-    "public_reactions_count": 44
-  },
-  {
-    "id": 1862499,
-    "title": "Wheel of Fortune with CSS",
-    "description": "A \"Wheel of Fortune\" component just popped up in my feed. I always spin, but never win! Anyway, this...",
-    "cover_image": "assets/1862499/3bcd126d.jpg",
-    "published_timestamp": "2024-05-23T08:21:31Z",
-    "edited_at": "2024-11-13T18:18:55Z",
-    "url": "https://dev.to/madsstoumann/wheel-of-fortune-with-css-p-pi-1ne9",
-    "tag_list": [
-      "css",
-      "webdev",
-      "tutorial",
-      "javascript"
-    ],
-    "public_reactions_count": 211
-  },
-  {
-    "id": 1850141,
-    "title": "Unleashing the Hidden Power of HTML Forms",
-    "description": "HTML forms are powerful beasts, but I feel a lot of its übercool features are often...",
-    "cover_image": "assets/1850141/f952487b.jpg",
-    "published_timestamp": "2024-05-12T07:27:11Z",
-    "edited_at": "2024-05-14T14:38:20Z",
-    "url": "https://dev.to/madsstoumann/unleashing-the-hidden-power-of-html-forms-2gkl",
-    "tag_list": [
-      "html",
-      "javascript",
-      "webdev",
-      "tutorial"
-    ],
-    "public_reactions_count": 31
-  },
-  {
-    "id": 1846440,
-    "title": "Eurovision Gradients",
-    "description": "So, it's that time of the year, if you live in Europe: Eurovision! It's the world's oldest and...",
-    "cover_image": "assets/1846440/700c62d2.jpg",
-    "published_timestamp": "2024-05-08T15:20:05Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/eurovision-gradients-4fog",
-    "tag_list": [
-      "css",
-      "webdev",
-      "showdev",
-      "tutorial"
-    ],
-    "public_reactions_count": 54
-  },
-  {
-    "id": 1841223,
-    "title": "Animating Numbers",
-    "description": "This tutorial will look into creating a small web component for animating numbers — and all the...",
-    "cover_image": "assets/1841223/e8f49d63.jpg",
-    "published_timestamp": "2024-05-03T09:49:44Z",
-    "edited_at": "2024-05-04T05:58:36Z",
-    "url": "https://dev.to/madsstoumann/animating-numbers-1oc8",
-    "tag_list": [
-      "css",
-      "javascript",
-      "webdev",
-      "tutorial"
-    ],
-    "public_reactions_count": 54
-  },
-  {
-    "id": 1816674,
-    "title": "Small Tips for Styling Card Components",
-    "description": "The other day, I stumbled upon an \"About Us\"-page for an agency, I used to work for. Not only were...",
-    "cover_image": "assets/1816674/29ab24d6.jpg",
-    "published_timestamp": "2024-04-09T20:29:18Z",
-    "edited_at": "2024-04-09T20:37:37Z",
-    "url": "https://dev.to/madsstoumann/small-tips-for-styling-card-components-16hg",
-    "tag_list": [
-      "css",
-      "html",
-      "webdev",
-      "tutorial"
-    ],
-    "public_reactions_count": 12
-  },
-  {
-    "id": 1798170,
-    "title": "Fetch with AbortController",
-    "description": "This is a submission for DEV Challenge v24.03.20, One Byte Explainer: Browser API or Feature.       ...",
-    "cover_image": "assets/1798170/0f2655e1.jpg",
-    "published_timestamp": "2024-03-22T12:12:16Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/fetch-with-abortcontroller-4ph2",
-    "tag_list": [
-      "frontendchallenge",
-      "devchallenge",
-      "javascript",
-      "webdev"
-    ],
-    "public_reactions_count": 5
-  },
-  {
-    "id": 1797286,
-    "title": "Camping with HTML and CSS",
-    "description": "This is a submission for DEV Challenge v24.03.20, Glam Up My Markup: Camp Activities           What I...",
-    "cover_image": "assets/1797286/a2a3f349.jpg",
-    "published_timestamp": "2024-03-22T07:18:07Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/camping-with-html-and-css-3en3",
-    "tag_list": [
-      "frontendchallenge",
-      "devchallenge",
-      "css",
-      "javascript"
-    ],
-    "public_reactions_count": 16
-  },
-  {
-    "id": 1797046,
-    "title": "Liquorice Allsorts",
-    "description": "This is a submission for DEV Challenge v24.03.20, CSS Art: Favorite Snack.          ...",
-    "cover_image": "assets/1797046/f9127a42.jpg",
-    "published_timestamp": "2024-03-21T09:11:48Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/liquorice-allsorts-4a13",
-    "tag_list": [
-      "frontendchallenge",
-      "devchallenge",
-      "css"
-    ],
-    "public_reactions_count": 30
-  },
-  {
-    "id": 1745796,
-    "title": "Styling Checkboxes and Switches",
-    "description": "I'm probably not the only developer who's frustrated about the browser's default &lt;input...",
-    "cover_image": "assets/1745796/6696490c.jpg",
-    "published_timestamp": "2024-03-02T13:33:18Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/styling-checkboxes-and-switches-pf0",
-    "tag_list": [
-      "css",
-      "tutorial",
-      "webdev",
-      "showdev"
-    ],
-    "public_reactions_count": 134
-  },
-  {
-    "id": 1743520,
-    "title": "A First Look at Apples New Switch Control",
-    "description": "Apple have just released Safari Technology Preview 17.4, which introduces a new addition to...",
-    "cover_image": "assets/1743520/61be092e.jpg",
-    "published_timestamp": "2024-01-28T10:06:26Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/a-first-look-at-apples-new-switch-control-3pnd",
-    "tag_list": [
-      "css",
-      "webdev",
-      "tutorial",
-      "showdev"
-    ],
-    "public_reactions_count": 7
-  },
-  {
-    "id": 1742918,
-    "title": "A Guide to Styling Tables",
-    "description": "I've recently noticed a small paradox: Many years ago – before CSS grid — we used &lt;table&gt;s to...",
-    "cover_image": "assets/1742918/0710f0c4.jpg",
-    "published_timestamp": "2024-01-28T08:25:33Z",
-    "edited_at": "2024-02-01T07:03:06Z",
-    "url": "https://dev.to/madsstoumann/a-guide-to-styling-tables-28d2",
-    "tag_list": [
-      "css",
-      "webdev",
-      "tutorial",
-      "showdev"
-    ],
-    "public_reactions_count": 197
-  },
-  {
-    "id": 1582422,
-    "title": "Clocks & Countdowns: Timing in CSS and JavaScript",
-    "description": "The other day I needed a digital clock-component, so I quickly composed a simple...",
-    "cover_image": "assets/1582422/4fe7b453.jpg",
-    "published_timestamp": "2023-09-01T12:04:30Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/clocks-countdowns-timing-in-css-and-javascript-554n",
-    "tag_list": [
-      "javascript",
-      "css",
-      "webdev",
-      "showdev"
-    ],
-    "public_reactions_count": 133
-  },
-  {
-    "id": 1566563,
-    "title": "Syntax-Highlight CSS with Semantic HTML — and get Dark Mode for free",
-    "description": "When we syntax highlight CSS-code, we typically use a JavaScript library, that turns the CSS into a...",
-    "cover_image": "assets/1566563/02c8f17f.jpg",
-    "published_timestamp": "2023-08-12T15:16:54Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/syntax-highlight-css-with-semantic-html-and-get-dark-mode-for-free-4mim",
-    "tag_list": [
-      "css",
-      "html",
-      "webdev",
-      "showdev"
-    ],
-    "public_reactions_count": 11
-  },
-  {
-    "id": 1544660,
-    "title": "Circle-Packing with Javascript and SVG — the Kusama Way",
-    "description": "I love the works of Japanese artist Yayoi Kusama, and have — for a long time — wanted to make an...",
-    "cover_image": "assets/1544660/7f7c7d9e.jpg",
-    "published_timestamp": "2023-07-22T05:00:10Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/circle-packing-with-javascript-and-svg-the-kusama-way-b59",
-    "tag_list": [
-      "javascript",
-      "css",
-      "webdev",
-      "showdev"
-    ],
-    "public_reactions_count": 17
-  },
-  {
-    "id": 1536117,
-    "title": "The Moon in 10241 Dots — Re-creating a 1969 Masterpiece",
-    "description": "In 1969, German artist Max Ernst created a beautiful painting in celebration of the...",
-    "cover_image": "assets/1536117/ba88c170.jpg",
-    "published_timestamp": "2023-07-18T14:48:57Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/the-moon-in-10241-dots-re-creating-a-1969-masterpiece-35e2",
-    "tag_list": [
-      "css",
-      "javascript",
-      "webdev",
-      "showdev"
-    ],
-    "public_reactions_count": 35
-  },
-  {
-    "id": 1531999,
-    "title": "In the Footsteps of Poul Gernes — Making an Interactive Art Poster",
-    "description": "Poul Gernes was a very colorful danish artist, furniture designer, and founder of an art school. He...",
-    "cover_image": "assets/1531999/8e95ddd2.jpg",
-    "published_timestamp": "2023-07-10T17:19:12Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/in-the-footsteps-of-poul-gernes-making-an-interactive-art-poster-5580",
-    "tag_list": [
-      "css",
-      "webdev",
-      "showdev",
-      "javascript"
-    ],
-    "public_reactions_count": 14
-  },
-  {
-    "id": 1526706,
-    "title": "Re-creating a Japanese Fireworks Catalog from 1883 in CSS",
-    "description": "The other day I received a newsletter from the author Robin Sloan, containing samples of some...",
-    "cover_image": "assets/1526706/e28ebcce.jpg",
-    "published_timestamp": "2023-07-05T07:08:21Z",
-    "edited_at": "2023-07-06T07:27:44Z",
-    "url": "https://dev.to/madsstoumann/re-creating-a-japanese-fireworks-catalog-from-1883-in-css-83j",
-    "tag_list": [
-      "css",
-      "codepen",
-      "webdev",
-      "showdev"
-    ],
-    "public_reactions_count": 159
-  },
-  {
-    "id": 1502868,
-    "title": "Color Compare Range Slider",
-    "description": "For this week's Codepen Challenge, I did a Color Compare Range Slider. It's using an &lt;input...",
-    "cover_image": "assets/1502868/eec503ba.jpg",
-    "published_timestamp": "2023-06-13T09:15:40Z",
-    "edited_at": "2023-06-13T14:02:19Z",
-    "url": "https://dev.to/madsstoumann/color-compare-range-slider-3o1k",
-    "tag_list": [
-      "javascript",
-      "css",
-      "webdev",
-      "showdev"
-    ],
-    "public_reactions_count": 9
-  },
-  {
-    "id": 1500673,
-    "title": "Using a Single Input for one-time-code",
-    "description": "The other night I had a bit of fun trying to create a single-input one-time-code:    one-time-code is...",
-    "cover_image": "assets/1500673/147b8f2a.jpg",
-    "published_timestamp": "2023-06-12T08:05:01Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/using-a-single-input-for-one-time-code-352l",
-    "tag_list": [
-      "css",
-      "javascript",
-      "webdev",
-      "showdev"
-    ],
-    "public_reactions_count": 224
-  },
-  {
-    "id": 1477188,
-    "title": "Tetris Testimonial Quotes",
-    "description": "Had a bit of fun last night with this week's Codepen Challenge.  I had no ideas for the topic —...",
-    "cover_image": "assets/1477188/edc4eb14.jpg",
-    "published_timestamp": "2023-05-23T06:03:57Z",
-    "edited_at": "2023-05-23T18:32:36Z",
-    "url": "https://dev.to/madsstoumann/tetris-testimonial-quotes-55i5",
-    "tag_list": [
-      "codepen",
-      "css",
-      "showdev"
-    ],
-    "public_reactions_count": 30
-  },
-  {
-    "id": 1466162,
-    "title": "Mobile-to-Desktop Menu in 2 Lines of CSS",
-    "description": "As a frontend developer, I've created numerous menus over the years. These menus have typically been...",
-    "cover_image": "assets/1466162/242dc4e1.jpg",
-    "published_timestamp": "2023-05-13T08:38:27Z",
-    "edited_at": "2023-05-13T11:56:32Z",
-    "url": "https://dev.to/madsstoumann/mobile-to-desktop-menu-in-2-lines-of-css-4ikn",
-    "tag_list": [
-      "webdev",
-      "css",
-      "tutorial",
-      "javascript"
-    ],
-    "public_reactions_count": 97
-  },
-  {
-    "id": 1460043,
-    "title": "Configurable CSS Components",
-    "description": "The CSS attr() function is getting updated to support any property.   This enables the creation of...",
-    "cover_image": "assets/1460043/413014f4.jpg",
-    "published_timestamp": "2023-05-07T07:54:19Z",
-    "edited_at": "2023-05-07T08:02:48Z",
-    "url": "https://dev.to/madsstoumann/configurable-css-components-32gn",
-    "tag_list": [
-      "css",
-      "showdev",
-      "webdev"
-    ],
-    "public_reactions_count": 11
-  },
-  {
-    "id": 1452126,
-    "title": "Dark Mode in 3 Lines of CSS and Other Adventures",
-    "description": "Dark Mode is a design trend where the color scheme of a website is changed to a dark background with...",
-    "cover_image": "assets/1452126/6654da5f.jpg",
-    "published_timestamp": "2023-04-29T12:25:08Z",
-    "edited_at": "2023-05-06T12:10:39Z",
-    "url": "https://dev.to/madsstoumann/dark-mode-in-3-lines-of-css-and-other-adventures-1ljj",
-    "tag_list": [
-      "css",
-      "webdev",
-      "tutorial",
-      "javascript"
-    ],
-    "public_reactions_count": 470
-  },
-  {
-    "id": 1202724,
-    "title": "Extending Emmet and VS Code — and discovering 415 CSS properties",
-    "description": "I use Emmet everyday. You might too, without even knowing — it's built-in to VS Code! When you type...",
-    "cover_image": "assets/1202724/05031080.jpg",
-    "published_timestamp": "2022-10-07T09:14:12Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/extending-emmet-and-vs-code-and-discovering-415-css-properties-1dfo",
-    "tag_list": [
-      "javascript",
-      "webdev",
-      "showdev",
-      "css"
-    ],
-    "public_reactions_count": 10
-  },
-  {
-    "id": 1194837,
-    "title": "Recreating Apple's Color Picker Icon",
-    "description": "I'm currently working on a colorpicker, where a user can select a predefined theme-color:    While...",
-    "cover_image": "assets/1194837/d93f3ca9.jpg",
-    "published_timestamp": "2022-09-16T09:01:14Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/recreating-apples-color-picker-icon-20aa",
-    "tag_list": [
-      "css",
-      "design",
-      "webdev",
-      "showdev"
-    ],
-    "public_reactions_count": 25
-  },
-  {
-    "id": 1190247,
-    "title": "Build a CSS Transition Tool for your editors",
-    "description": "I love building small tools to help editors and marketeers create more engaging content.  Typically,...",
-    "cover_image": "assets/1190247/cc007389.jpg",
-    "published_timestamp": "2022-09-12T07:48:59Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/build-a-css-transition-tool-for-your-editors-4emh",
-    "tag_list": [
-      "css",
-      "javascript",
-      "webdev",
-      "tutorial"
-    ],
-    "public_reactions_count": 13
-  },
-  {
-    "id": 1185936,
-    "title": "SVG, Geometry — and a dash of JavaScript",
-    "description": "I'm currently reading Science Illustration — A History of Visual Knowledge from the 15th Century to...",
-    "cover_image": "assets/1185936/042ab248.jpg",
-    "published_timestamp": "2022-09-06T19:00:17Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/svg-geometry-and-a-dash-of-javascript-3f9l",
-    "tag_list": [
-      "svg",
-      "javascript",
-      "showdev",
-      "webdev"
-    ],
-    "public_reactions_count": 46
-  },
-  {
-    "id": 1165782,
-    "title": "Build a Multi-Language Countdown Component",
-    "description": "Some years ago, I built a countdown component with support for multiple languages. Editors had to...",
-    "cover_image": "assets/1165782/7ef432ad.jpg",
-    "published_timestamp": "2022-08-14T05:12:45Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/build-a-multi-language-countdown-component-260j",
-    "tag_list": [
-      "javascript",
-      "webdev",
-      "tutorial",
-      "css"
-    ],
-    "public_reactions_count": 13
-  },
-  {
-    "id": 1158601,
-    "title": "Creating a Word Wheel in CSS",
-    "description": "Summer Holidays are meant to be relaxing, so I typically read a lot of books. This year, one of the...",
-    "cover_image": "assets/1158601/023c1454.jpg",
-    "published_timestamp": "2022-08-03T19:24:00Z",
-    "edited_at": "2022-08-04T06:12:36Z",
-    "url": "https://dev.to/madsstoumann/word-wheel-in-css-426n",
-    "tag_list": [
-      "css",
-      "javascript",
-      "showdev",
-      "webdev"
-    ],
-    "public_reactions_count": 32
-  },
-  {
-    "id": 1150105,
-    "title": "Masking and coloring product images using CSS and SVG",
-    "description": "If you have a product that's available in several colors, it can be cumbersome and expensive to take...",
-    "cover_image": "assets/1150105/7f313ad6.jpg",
-    "published_timestamp": "2022-07-24T16:45:50Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/masking-and-coloring-product-images-using-css-and-svg-2eil",
-    "tag_list": [
-      "css",
-      "svg",
-      "tutorial",
-      "webdev"
-    ],
-    "public_reactions_count": 47
-  },
-  {
-    "id": 1135131,
-    "title": "Creating SVG Icons from JSON",
-    "description": "This week, a colleague and I developed a couple of plugins for ContentStack. A theme-picker:    ......",
-    "cover_image": "assets/1135131/1c90c1db.jpg",
-    "published_timestamp": "2022-07-08T11:33:02Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/creating-svg-icons-from-json-100a",
-    "tag_list": [
-      "javascript",
-      "svg",
-      "design",
-      "webdev"
-    ],
-    "public_reactions_count": 42
-  },
-  {
-    "id": 1132179,
-    "title": "Creating a Grid Visualizer",
-    "description": "If you're working with a grid-system, chances are, you're using some kind of grid visualizer – maybe...",
-    "cover_image": "assets/1132179/9c28d183.jpg",
-    "published_timestamp": "2022-07-05T08:09:21Z",
-    "edited_at": "2022-07-07T05:23:44Z",
-    "url": "https://dev.to/madsstoumann/creating-a-grid-visualizer-3di0",
-    "tag_list": [
-      "css",
-      "design",
-      "javascript",
-      "webdev"
-    ],
-    "public_reactions_count": 11
-  },
-  {
-    "id": 1122061,
-    "title": "How to embed YouTube and Vimeo the light way",
-    "description": "You've probably embedded YouTube and Vimeo-videos dozens of times, using the standard...",
-    "cover_image": "assets/1122061/f959ec30.jpg",
-    "published_timestamp": "2022-06-25T09:56:49Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/how-to-embed-youtube-and-vimeo-the-light-way-2pek",
-    "tag_list": [
-      "html",
-      "javascript",
-      "webdev",
-      "tutorial"
-    ],
-    "public_reactions_count": 35
-  },
-  {
-    "id": 1122033,
-    "title": "Re-creating Apple’s Dark Mode Icon",
-    "description": "A couple of weeks ago, while fiddling around with my iPhone's Control Center, I noticed a new icon:...",
-    "cover_image": "assets/1122033/757ec835.jpg",
-    "published_timestamp": "2022-06-23T06:06:36Z",
-    "edited_at": "2022-06-23T11:21:00Z",
-    "url": "https://dev.to/madsstoumann/re-creating-apples-dark-mode-icon-199j",
-    "tag_list": [
-      "svg",
-      "design",
-      "css",
-      "javascript"
-    ],
-    "public_reactions_count": 25
-  },
-  {
-    "id": 959007,
-    "title": "Showing \"time ago\" in a Social Feed using Intl.RelativeTimeFormat",
-    "description": "I'm currently implementing a Social Feed for a client, and had some issues with vulnerabilities in...",
-    "cover_image": "assets/959007/46dbb5fe.jpg",
-    "published_timestamp": "2022-01-18T09:19:36Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/showing-time-ago-in-a-social-feed-using-intlrelativetimeformat-5ceo",
-    "tag_list": [
-      "javascript",
-      "webdev",
-      "showdev",
-      "tutorial"
-    ],
-    "public_reactions_count": 33
-  },
-  {
-    "id": 929897,
-    "title": "Play Blur onblur",
-    "description": "Yesterday, a colleague asked me what we should do onfocusout on a task, we're working on. I told him...",
-    "cover_image": "assets/929897/ce3fee48.jpg",
-    "published_timestamp": "2021-12-18T13:59:44Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/play-blur-onblur-4f8",
-    "tag_list": [
-      "html",
-      "javascript",
-      "webdev",
-      "showdev"
-    ],
-    "public_reactions_count": 9
-  },
-  {
-    "id": 917199,
-    "title": "Learning from the Masters of Design",
-    "description": "I recently bought two huge books on the history of graphic design from Taschen – here's volume...",
-    "cover_image": "assets/917199/d8fba06a.jpg",
-    "published_timestamp": "2021-12-04T17:12:48Z",
-    "edited_at": "2021-12-05T12:36:13Z",
-    "url": "https://dev.to/madsstoumann/learning-from-the-masters-design-35pg",
-    "tag_list": [
-      "html",
-      "css",
-      "design",
-      "webdev"
-    ],
-    "public_reactions_count": 26
-  },
-  {
-    "id": 770148,
-    "title": "Creating Global Components: A Checklist With Examples",
-    "description": "When working with components that need to work “across borders”, supporting multiple languages and...",
-    "cover_image": "assets/770148/8d7a1c29.jpg",
-    "published_timestamp": "2021-11-11T13:12:24Z",
-    "edited_at": "2021-11-11T19:26:09Z",
-    "url": "https://dev.to/madsstoumann/creating-global-components-a-checklist-with-examples-2n4g",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "webdev"
-    ],
-    "public_reactions_count": 60
-  },
-  {
-    "id": 879411,
-    "title": "Introducing the EyeDropper API",
-    "description": "The EyeDropper API has landed in Chrome 95. This API opens up a lot of possiblities. A user can...",
-    "cover_image": "assets/879411/38350966.jpg",
-    "published_timestamp": "2021-10-28T07:42:07Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/introducing-the-eyedropper-api-14d7",
-    "tag_list": [
-      "codepen",
-      "css",
-      "javascript",
-      "webdev"
-    ],
-    "public_reactions_count": 7
-  },
-  {
-    "id": 858401,
-    "title": "Validating Markup: Write Your Own Snippet",
-    "description": "I always validate my markup. Why? There are several reasons, the main ones being:   If the markup is...",
-    "cover_image": "assets/858401/aca33bb2.jpg",
-    "published_timestamp": "2021-10-10T17:36:24Z",
-    "edited_at": "2021-10-11T04:59:59Z",
-    "url": "https://dev.to/madsstoumann/validating-markup-write-your-own-snippet-2p8d",
-    "tag_list": [
-      "html",
-      "webdev",
-      "codequality",
-      "javascript"
-    ],
-    "public_reactions_count": 44
-  },
-  {
-    "id": 842066,
-    "title": "Build a CSS Ruler",
-    "description": "I'm currently working on a project, where an editor can easily edit breakpoints, using a group of...",
-    "cover_image": "assets/842066/3a90154e.jpg",
-    "published_timestamp": "2021-09-27T10:37:59Z",
-    "edited_at": "2021-09-27T11:12:59Z",
-    "url": "https://dev.to/madsstoumann/build-a-css-ruler-2opn",
-    "tag_list": [
-      "css",
-      "html",
-      "javascript",
-      "webdev"
-    ],
-    "public_reactions_count": 88
-  },
-  {
-    "id": 829134,
-    "title": "Layered Gradient Playground",
-    "description": "A while ago, I saw this tweet by Adam Argyle. It's a clever way of layering gradients, using CSS...",
-    "cover_image": "assets/829134/e6572b0b.jpg",
-    "published_timestamp": "2021-09-17T06:43:20Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/layered-gradient-playground-102j",
-    "tag_list": [
-      "css",
-      "codepen",
-      "webdev",
-      "showdev"
-    ],
-    "public_reactions_count": 32
-  },
-  {
-    "id": 811340,
-    "title": "KAOSS! Fun with Web Audio",
-    "description": "I used to carry my “Korg Kaossilator” around with me. For those of you who don't know what that is –...",
-    "cover_image": "assets/811340/ec6616b3.jpg",
-    "published_timestamp": "2021-09-02T15:06:47Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/kaoss-fun-with-web-audio-3gb9",
-    "tag_list": [
-      "javascript",
-      "css",
-      "webdev",
-      "html"
-    ],
-    "public_reactions_count": 187
-  },
-  {
-    "id": 804923,
-    "title": "Nested border-radius Playground",
-    "description": "When nesting elements with a border-radius, I found this formula, which I implemented in the Codepen...",
-    "cover_image": "assets/804923/e01d8644.jpg",
-    "published_timestamp": "2021-08-27T07:01:44Z",
-    "edited_at": "2021-08-27T09:03:54Z",
-    "url": "https://dev.to/madsstoumann/nested-border-radius-playground-kcl",
-    "tag_list": [
-      "css",
-      "webdev",
-      "showdev",
-      "discuss"
-    ],
-    "public_reactions_count": 33
-  },
-  {
-    "id": 800474,
-    "title": "A simple Color-Picker using CSS5 color-contrast() and color-mix()",
-    "description": "Safari is often blamed for being “the new IE of web-browsers”. That's not fair, because Safari has...",
-    "cover_image": "assets/800474/4e0606f6.jpg",
-    "published_timestamp": "2021-08-23T15:46:30Z",
-    "edited_at": "2021-08-25T06:53:32Z",
-    "url": "https://dev.to/madsstoumann/a-simple-color-picker-using-css5-color-contrast-and-color-mix-384p",
-    "tag_list": [
-      "css",
-      "html",
-      "codepen",
-      "webdev"
-    ],
-    "public_reactions_count": 26
-  },
-  {
-    "id": 784934,
-    "title": "The Frontend Agency",
-    "description": "After 7 years working as a Technical Director for Valtech, I've decided to go freelance … again (I...",
-    "cover_image": "assets/784934/79e480d7.jpg",
-    "published_timestamp": "2021-08-09T06:54:07Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/the-frontend-agency-3pfa",
-    "tag_list": [
-      "webdev",
-      "showdev",
-      "javascript",
-      "css"
-    ],
-    "public_reactions_count": 152
-  },
-  {
-    "id": 741580,
-    "title": "Building A Minimal AutoSuggest",
-    "description": "It took the Web a lot of years to introduce the &lt;datalist&gt;-tag, essential in creating one of...",
-    "cover_image": "assets/741580/d2627391.jpg",
-    "published_timestamp": "2021-08-07T06:42:43Z",
-    "edited_at": "2021-08-07T06:46:09Z",
-    "url": "https://dev.to/madsstoumann/building-a-minimal-autosuggest-4big",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "webdev"
-    ],
-    "public_reactions_count": 243
-  },
-  {
-    "id": 759226,
-    "title": "Building a Reaction Component",
-    "description": "We're all familiar with dev.to's “Reaction Component” (although I'm still not sure, what the unicorn...",
-    "cover_image": "assets/759226/ac4fb228.jpg",
-    "published_timestamp": "2021-07-17T08:24:00Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/building-a-reaction-component-2noe",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "webdev"
-    ],
-    "public_reactions_count": 137
-  },
-  {
-    "id": 754012,
-    "title": "Comics, Graphic Design — and the Power of JavaScript",
-    "description": "In January 2007, I was asked to do the impossible: Layout, letter and produce a boxset with seven...",
-    "cover_image": "assets/754012/0c4b658d.jpg",
-    "published_timestamp": "2021-07-09T16:54:34Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/comics-graphic-design-and-the-power-of-javascript-2kap",
-    "tag_list": [
-      "javascript",
-      "design",
-      "comics",
-      "scripting"
-    ],
-    "public_reactions_count": 34
-  },
-  {
-    "id": 752500,
-    "title": "Mood Selector Component",
-    "description": "Throughout this week, the “Star (rating) Wars” have run here on dev.to.  With proposals by...",
-    "cover_image": "assets/752500/ae4fa7ae.jpg",
-    "published_timestamp": "2021-07-07T14:33:38Z",
-    "edited_at": "2021-07-07T16:25:56Z",
-    "url": "https://dev.to/madsstoumann/mood-selector-jhi",
-    "tag_list": [
-      "html",
-      "css",
-      "webdev",
-      "showdev"
-    ],
-    "public_reactions_count": 28
-  },
-  {
-    "id": 746721,
-    "title": "Star-Rating Using A Single Input",
-    "description": "Yesterday I read InhuOfficial's post about star-rating, using a group of &lt;input...",
-    "cover_image": "assets/746721/768730e2.jpg",
-    "published_timestamp": "2021-07-03T10:56:03Z",
-    "edited_at": "2021-07-07T12:39:56Z",
-    "url": "https://dev.to/madsstoumann/star-rating-using-a-single-input-i0l",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "webdev"
-    ],
-    "public_reactions_count": 174
-  },
-  {
-    "id": 728708,
-    "title": "Updating A 25-Year-Old Website",
-    "description": "As frontend developers, we always want to use the latest and the greatest. A lot of the time however,...",
-    "cover_image": "assets/728708/1ad63a80.jpg",
-    "published_timestamp": "2021-06-19T09:38:42Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/updating-a-25-year-old-website-42jm",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "webdev"
-    ],
-    "public_reactions_count": 788
-  },
-  {
-    "id": 728693,
-    "title": "A Quick Guide To CSS Logical Properties",
-    "description": "This is a post about CSS Logical Properties, with basic and advanced usage examples. If you think you...",
-    "cover_image": "assets/728693/695d4111.jpg",
-    "published_timestamp": "2021-06-16T13:57:47Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/a-quick-guide-to-css-logical-properties-2fce",
-    "tag_list": [
-      "html",
-      "css",
-      "webdev"
-    ],
-    "public_reactions_count": 27
-  },
-  {
-    "id": 709018,
-    "title": "Container Queries: Another Polyfill",
-    "description": "I love container queries — I have been waiting for them for years.  But, alas, until all browsers hav...",
-    "cover_image": "assets/709018/d02ca7d5.jpg",
-    "published_timestamp": "2021-05-26T11:50:27Z",
-    "edited_at": "2021-05-28T07:24:45Z",
-    "url": "https://dev.to/madsstoumann/container-queries-another-polyfill-2488",
-    "tag_list": [
-      "javascript",
-      "css",
-      "showdev",
-      "webdev"
-    ],
-    "public_reactions_count": 27
-  },
-  {
-    "id": 706998,
-    "title": "Deconstructing Art: Learning From Constraints",
-    "description": "Artists have always worked with a lot of constraints.   Today, we can make any color we want chemical...",
-    "cover_image": "assets/706998/9745d6f6.jpg",
-    "published_timestamp": "2021-05-24T13:38:54Z",
-    "edited_at": "2021-05-24T13:58:35Z",
-    "url": "https://dev.to/madsstoumann/deconstructing-art-learning-from-constraints-p7m",
-    "tag_list": [
-      "javascript",
-      "showdev",
-      "design",
-      "webdev"
-    ],
-    "public_reactions_count": 21
-  },
-  {
-    "id": 701816,
-    "title": "Random Art Generator: Dots & Rings",
-    "description": "If you like random art, I've just released a new tool for generating random rings and dots (in &lt;sv...",
-    "cover_image": "assets/701816/ff69a117.jpg",
-    "published_timestamp": "2021-05-18T14:41:42Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/random-art-generator-dots-rings-3ca3",
-    "tag_list": [
-      "codepen",
-      "javascript",
-      "showdev",
-      "webdev"
-    ],
-    "public_reactions_count": 39
-  },
-  {
-    "id": 634596,
-    "title": "How To Fill Out A Form With Your Voice",
-    "description": "One of my friends is a dermatologist. He has a very busy schedule, seeing up to 60 patients a day. In...",
-    "cover_image": "assets/634596/eac22d35.jpg",
-    "published_timestamp": "2021-05-16T14:45:24Z",
-    "edited_at": "2021-05-16T14:50:25Z",
-    "url": "https://dev.to/madsstoumann/how-to-fill-out-a-form-with-your-voice-3k6d",
-    "tag_list": [
-      "codepen",
-      "javascript",
-      "webdev",
-      "showdev"
-    ],
-    "public_reactions_count": 31
-  },
-  {
-    "id": 679903,
-    "title": "Color Stripes",
-    "description": "Experimenting with tones and stripes from Josef Albert's book “Interaction of Color”.   The first 7 c...",
-    "cover_image": "assets/679903/62da85b5.jpg",
-    "published_timestamp": "2021-04-27T09:05:07Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/color-stripes-4fpa",
-    "tag_list": [
-      "css",
-      "codepen",
-      "showdev"
-    ],
-    "public_reactions_count": 5
-  },
-  {
-    "id": 672378,
-    "title": "How to Build a Color Wheel with Tints & Shades",
-    "description": "I've built a handful of color pickers through the years, so when I in this book stumbled upon a color...",
-    "cover_image": "assets/672378/b5cab4ce.jpg",
-    "published_timestamp": "2021-04-23T13:43:17Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/how-to-build-a-color-wheel-with-tints-shades-nfj",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "webdev"
-    ],
-    "public_reactions_count": 32
-  },
-  {
-    "id": 671379,
-    "title": "Why “dark mode” is more energy-efficient: How to calculate image energy-cost",
-    "description": "When I read Tom Greenfords execellent book Sustainable Web Design, there was one fact that stuck with...",
-    "cover_image": "assets/671379/19d0cf0e.jpg",
-    "published_timestamp": "2021-04-19T11:42:37Z",
-    "edited_at": "2021-04-19T15:17:55Z",
-    "url": "https://dev.to/madsstoumann/why-dark-mode-is-more-energy-efficent-how-to-calculate-image-energy-cost-45pp",
-    "tag_list": [
-      "html",
-      "javascript",
-      "webdev",
-      "performance"
-    ],
-    "public_reactions_count": 181
-  },
-  {
-    "id": 664154,
-    "title": "SVG Circle Pattern Generator",
-    "description": "The other day – trying to empty my head and relax a bit – I stared at the colorful rug next to my cha...",
-    "cover_image": "assets/664154/2b321d30.jpg",
-    "published_timestamp": "2021-04-16T08:32:07Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/svg-circle-pattern-generator-2g6g",
-    "tag_list": [
-      "svg",
-      "design",
-      "javascript",
-      "webdev"
-    ],
-    "public_reactions_count": 16
-  },
-  {
-    "id": 568446,
-    "title": "data-attributes vs. BEM",
-    "description": "I used to be a comicbook-letterer, so \"BEM\" always looked wrong to me. It's either \"BAM!\" — or \"BOOM!...",
-    "cover_image": "assets/568446/a91949bd.jpg",
-    "published_timestamp": "2021-04-11T14:02:35Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/data-attributes-vs-bem-2k6n",
-    "tag_list": [
-      "css",
-      "html",
-      "discuss",
-      "codepen"
-    ],
-    "public_reactions_count": 10
-  },
-  {
-    "id": 653154,
-    "title": "Lockdown Fun: Your Age In Binary",
-    "description": "Today I gave my son a piece of paper with this cryptic message: 00001100.   “This is you”, I told him...",
-    "cover_image": "assets/653154/2a72ef2d.jpg",
-    "published_timestamp": "2021-04-02T14:32:10Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/lockdown-fun-your-age-in-binary-2f3k",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "webdev"
-    ],
-    "public_reactions_count": 69
-  },
-  {
-    "id": 648114,
-    "title": "When Lighthouse Itself Causes Issues",
-    "description": "I was re-inspecting my homepage after some edits earlier today, and discovered — to my horror 😱 — tha...",
-    "cover_image": "assets/648114/042002eb.jpg",
-    "published_timestamp": "2021-03-28T12:31:02Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/when-lighthouse-itself-causes-issues-2k3i",
-    "tag_list": [
-      "lighthouse",
-      "security",
-      "discuss"
-    ],
-    "public_reactions_count": 2
-  },
-  {
-    "id": 597730,
-    "title": "Responsive images: How they work – and how to use them with “Art Direction” and “Dark Mode”",
-    "description": "To create a fast and sustainable website, the top priority is to minimize the amount of assets, mainl...",
-    "cover_image": "assets/597730/eec05ee5.jpg",
-    "published_timestamp": "2021-03-27T14:56:43Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/responsive-images-how-they-work-and-how-to-use-them-with-art-direction-and-dark-mode-2119",
-    "tag_list": [
-      "html",
-      "css",
-      "webdev",
-      "codepen"
-    ],
-    "public_reactions_count": 37
-  },
-  {
-    "id": 634399,
-    "title": "Colors are Math: How they match — and how to build a Color Picker",
-    "description": "Why do some color-combinations look better than others? Spoiler: it involves math.  The other day, I...",
-    "cover_image": "assets/634399/87449d30.jpg",
-    "published_timestamp": "2021-03-20T16:33:18Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/colors-are-math-how-they-match-and-how-to-build-a-color-picker-4ei8",
-    "tag_list": [
-      "css",
-      "javascript",
-      "design",
-      "webdev"
-    ],
-    "public_reactions_count": 206
-  },
-  {
-    "id": 612806,
-    "title": "Creating a fun, fast, secure and sustainable website",
-    "description": "In the last couple of months, I've been writing (some would say preaching!) about security, performan...",
-    "cover_image": "assets/612806/db5be236.jpg",
-    "published_timestamp": "2021-03-13T16:05:08Z",
-    "edited_at": "2021-03-14T07:48:29Z",
-    "url": "https://dev.to/madsstoumann/creating-a-fun-fast-secure-and-sustainable-website-50nk",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "security"
-    ],
-    "public_reactions_count": 282
-  },
-  {
-    "id": 568411,
-    "title": "Sharing with the Navigator Share API",
-    "description": "Four years ago, I read the article Does Anyone Use Social Sharing Buttons on Mobile?  The result was...",
-    "cover_image": "assets/568411/49659223.jpg",
-    "published_timestamp": "2021-03-10T13:35:40Z",
-    "edited_at": "2021-03-10T13:37:34Z",
-    "url": "https://dev.to/madsstoumann/sharing-with-the-navigator-share-api-109b",
-    "tag_list": [
-      "html",
-      "javascript",
-      "css",
-      "codepen"
-    ],
-    "public_reactions_count": 16
-  },
-  {
-    "id": 623487,
-    "title": "Flashlight Website",
-    "description": "In “How To Avoid a Climate Disaster”, Bill Gates writes about kids, who're doing their homework by ca...",
-    "cover_image": "assets/623487/0742aa32.jpg",
-    "published_timestamp": "2021-03-03T06:22:13Z",
-    "edited_at": "2021-03-03T14:16:53Z",
-    "url": "https://dev.to/madsstoumann/flashlight-website-2dp4",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "codepen"
-    ],
-    "public_reactions_count": 7
-  },
-  {
-    "id": 584037,
-    "title": "Accessible Modal With Or Without JavaScript",
-    "description": "At my workplace, we recently discussed the various options we have in our toolbox to create modals wi...",
-    "cover_image": "assets/584037/0fb0ae96.jpg",
-    "published_timestamp": "2021-03-01T09:09:27Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/accessible-modal-with-or-without-javascript-3g1d",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "a11y"
-    ],
-    "public_reactions_count": 16
-  },
-  {
-    "id": 610806,
-    "title": "Table Designer",
-    "description": "I've been working on a Generic Table Designer-tool on and off for almost a year. It's not something I...",
-    "cover_image": "assets/610806/0dd1356f.jpg",
-    "published_timestamp": "2021-02-22T06:36:05Z",
-    "edited_at": "2021-02-22T06:38:24Z",
-    "url": "https://dev.to/madsstoumann/table-designer-1588",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "codepen"
-    ],
-    "public_reactions_count": 24
-  },
-  {
-    "id": 606234,
-    "title": "Web Typography Checklist",
-    "description": "All websites need typography, but before picking a typeface for a website, there are a lot of things...",
-    "cover_image": "assets/606234/917b6bc9.jpg",
-    "published_timestamp": "2021-02-17T18:00:46Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/web-typography-checklist-52a2",
-    "tag_list": [
-      "html",
-      "css",
-      "typography",
-      "design"
-    ],
-    "public_reactions_count": 9
-  },
-  {
-    "id": 597452,
-    "title": "Making Sustainable Websites",
-    "description": "We've all heard about the Paris-agreement. We've all seen Greta Thunberg, fighting for climate-change...",
-    "cover_image": "assets/597452/25ef469a.jpg",
-    "published_timestamp": "2021-02-10T12:20:04Z",
-    "edited_at": "2021-02-10T15:39:32Z",
-    "url": "https://dev.to/madsstoumann/making-sustainable-websites-hd3",
-    "tag_list": [
-      "css",
-      "javascript",
-      "sustainability",
-      "discuss"
-    ],
-    "public_reactions_count": 24
-  },
-  {
-    "id": 592772,
-    "title": "Lockdown Fun: Pascal's Triangle",
-    "description": "About 7 or 8 years ago, there was a teachers-strike in Denmark, and I had to teach my daughter's clas...",
-    "cover_image": "assets/592772/f9054239.jpg",
-    "published_timestamp": "2021-02-05T08:40:34Z",
-    "edited_at": "2021-02-05T08:42:43Z",
-    "url": "https://dev.to/madsstoumann/lockdown-fun-pascal-s-triangle-3dk1",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "codepen"
-    ],
-    "public_reactions_count": 28
-  },
-  {
-    "id": 592005,
-    "title": "Accessible, Resizable Table-Columns",
-    "description": "I love using the &lt;input type=\"range\"&gt;. It's an interactive control with touch-support, and you...",
-    "cover_image": "assets/592005/718a9ec0.jpg",
-    "published_timestamp": "2021-02-04T13:55:20Z",
-    "edited_at": "2021-02-05T13:16:19Z",
-    "url": "https://dev.to/madsstoumann/accessible-resizable-table-columns-5eof",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "a11y"
-    ],
-    "public_reactions_count": 41
-  },
-  {
-    "id": 568401,
-    "title": "Frontend Security: Security Headers",
-    "description": "My previous articles about frontend security focused on script integrity and the Content Security Pol...",
-    "cover_image": "assets/568401/e0544d02.jpg",
-    "published_timestamp": "2021-01-27T11:05:18Z",
-    "edited_at": "2021-02-05T09:12:02Z",
-    "url": "https://dev.to/madsstoumann/frontend-security-security-headers-517p",
-    "tag_list": [
-      "html",
-      "javascript",
-      "security"
-    ],
-    "public_reactions_count": 225
-  },
-  {
-    "id": 568396,
-    "title": "Frontend Security: Content Security Policy",
-    "description": "In my previous article on security, I wrote about npm audit and script integrity. Next up is Content...",
-    "cover_image": "assets/568396/9f8e60d7.jpg",
-    "published_timestamp": "2021-01-25T07:43:42Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/frontend-security-content-security-policy-17dl",
-    "tag_list": [
-      "html",
-      "javascript",
-      "security"
-    ],
-    "public_reactions_count": 100
-  },
-  {
-    "id": 575731,
-    "title": "Accessible Image Compare — One Line of JavaScript",
-    "description": "Sometimes it's funny to revisit old ideas and  components, you did a long time ago!  I once did an \"I...",
-    "cover_image": "assets/575731/9359c208.jpg",
-    "published_timestamp": "2021-01-19T20:33:44Z",
-    "edited_at": "2021-02-04T20:56:30Z",
-    "url": "https://dev.to/madsstoumann/accessible-image-compare-one-line-of-javascript-3gn4",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "codepen"
-    ],
-    "public_reactions_count": 38
-  },
-  {
-    "id": 574042,
-    "title": "Staying Alive: The Screen Wake Lock API",
-    "description": "Friday night I was cooking a delicious vegetarian bolognese — but was annoyed that my iPhone kept dim...",
-    "cover_image": "assets/574042/1953e71a.jpg",
-    "published_timestamp": "2021-01-17T16:01:20Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/staying-alive-the-screen-wake-lock-api-31fh",
-    "tag_list": [
-      "html",
-      "javascript",
-      "css",
-      "api"
-    ],
-    "public_reactions_count": 24
-  },
-  {
-    "id": 568391,
-    "title": "Frontend Security: npm-audit and Script integrity",
-    "description": "A couple of years ago, thousands of websites globally were hijacked by code, which made computers run...",
-    "cover_image": "assets/568391/2e0d5d43.jpg",
-    "published_timestamp": "2021-01-14T05:51:08Z",
-    "edited_at": "2021-01-14T08:01:29Z",
-    "url": "https://dev.to/madsstoumann/frontend-security-npm-audit-and-script-integrity-kl3",
-    "tag_list": [
-      "html",
-      "javascript",
-      "security"
-    ],
-    "public_reactions_count": 93
-  },
-  {
-    "id": 567256,
-    "title": "Polygon to clip-path & SVG",
-    "description": "I've made a new clip-path-tool, which makes it easier to create equal-sided polygons, from 3-sided tr...",
-    "cover_image": "assets/567256/d4e3b053.jpg",
-    "published_timestamp": "2021-01-09T21:13:06Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/polygon-to-clip-path-svg-1om3",
-    "tag_list": [
-      "css",
-      "design",
-      "codepen",
-      "javascript"
-    ],
-    "public_reactions_count": 14
-  },
-  {
-    "id": 563276,
-    "title": "How Google tracks with the ping-attribute",
-    "description": "Have you heard about the ping-attribute? It's an attribute on the &lt;a&gt;nchor-tag, that most peopl...",
-    "cover_image": "assets/563276/fc54720f.jpg",
-    "published_timestamp": "2021-01-07T13:04:12Z",
-    "edited_at": "2021-01-07T19:14:55Z",
-    "url": "https://dev.to/madsstoumann/google-tracking-and-the-ping-attribute-41d5",
-    "tag_list": [
-      "html",
-      "analytics",
-      "discuss"
-    ],
-    "public_reactions_count": 16
-  },
-  {
-    "id": 560207,
-    "title": "275 bytes BMI Calculator",
-    "description": "You don't always need a large frontend framework for interactive components.   As an example, I've ma...",
-    "cover_image": "assets/560207/d6f5fc85.jpg",
-    "published_timestamp": "2021-01-04T06:28:23Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/275-bytes-bmi-calculator-1253",
-    "tag_list": [
-      "html",
-      "javascript",
-      "css",
-      "codepen"
-    ],
-    "public_reactions_count": 24
-  },
-  {
-    "id": 546651,
-    "title": "Accessible Circular Sliders",
-    "description": "Just a few years ago, it was almost impossible to create range sliders without a lot of JavaScript. T...",
-    "cover_image": "assets/546651/9b1d1d0b.jpg",
-    "published_timestamp": "2021-01-02T16:45:39Z",
-    "edited_at": "2021-02-04T20:56:13Z",
-    "url": "https://dev.to/madsstoumann/accessible-circular-sliders-11p",
-    "tag_list": [
-      "css",
-      "javascript",
-      "a11y",
-      "codepen"
-    ],
-    "public_reactions_count": 86
-  },
-  {
-    "id": 555414,
-    "title": "Is The Latest Always The Greatest?",
-    "description": "I don’t know how many times I’ve created an accordion in the last 20 years. My first accordions used...",
-    "cover_image": "assets/555414/3e855283.jpg",
-    "published_timestamp": "2020-12-31T11:16:19Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/is-the-latest-always-the-greatest-jok",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "discuss"
-    ],
-    "public_reactions_count": 1
-  },
-  {
-    "id": 555399,
-    "title": "Fetch-22",
-    "description": "Browsers have supported fetch() for years now (except Internet Explorer), but I still see many develo...",
-    "cover_image": "assets/555399/9b50a17b.jpg",
-    "published_timestamp": "2020-12-29T11:51:24Z",
-    "edited_at": "2020-12-29T12:08:29Z",
-    "url": "https://dev.to/madsstoumann/fetch-22-41mg",
-    "tag_list": [
-      "javascript",
-      "html",
-      "codepen"
-    ],
-    "public_reactions_count": 12
-  },
-  {
-    "id": 550589,
-    "title": "Creating A Button Library",
-    "description": "All websites need &lt;button&gt;s. With CSS Custom Properties it's easier than ever to maintain compl...",
-    "cover_image": "assets/550589/4922dfd9.jpg",
-    "published_timestamp": "2020-12-23T08:42:52Z",
-    "edited_at": "2020-12-23T12:13:31Z",
-    "url": "https://dev.to/madsstoumann/creating-a-button-library-4lb4",
-    "tag_list": [
-      "css",
-      "html",
-      "codepen"
-    ],
-    "public_reactions_count": 12
-  },
-  {
-    "id": 549439,
-    "title": "Full Circle",
-    "description": "Earlier this year, I helped a colleague setting up a solution, I'd worked on two years ago.  It was a...",
-    "cover_image": "assets/549439/af53e95d.jpg",
-    "published_timestamp": "2020-12-22T07:58:34Z",
-    "edited_at": "2020-12-22T08:21:12Z",
-    "url": "https://dev.to/madsstoumann/full-circle-3c98",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "performance"
-    ],
-    "public_reactions_count": 7
-  },
-  {
-    "id": 546368,
-    "title": "Into The Halftone-Verse",
-    "description": "About a month ago, I finally watched “Spider-Man: Into The Spider-Verse” with my son (who had seen it...",
-    "cover_image": "assets/546368/a532d27f.jpg",
-    "published_timestamp": "2020-12-19T07:34:49Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/into-the-halftone-verse-1ckl",
-    "tag_list": [
-      "css",
-      "codepen",
-      "comics",
-      "cmyk"
-    ],
-    "public_reactions_count": 10
-  },
-  {
-    "id": 546109,
-    "title": "Implementing Icons",
-    "description": "Icons have played an important role since the birth of the Graphical User Interface (GUI). They can e...",
-    "cover_image": "assets/546109/43b5356e.jpg",
-    "published_timestamp": "2020-12-18T10:00:24Z",
-    "edited_at": "2021-01-01T15:33:56Z",
-    "url": "https://dev.to/madsstoumann/implementing-icons-5875",
-    "tag_list": [
-      "fundamentals",
-      "css",
-      "svg",
-      "codepen"
-    ],
-    "public_reactions_count": 11
-  },
-  {
-    "id": 544006,
-    "title": "Accessible Color Pickers",
-    "description": "Most of the Color Pickers I've seen and used, haven't been accessible. They've been touch-friendly, b...",
-    "cover_image": "assets/544006/cover.png",
-    "published_timestamp": "2020-12-16T08:09:22Z",
-    "edited_at": "2021-02-04T20:55:52Z",
-    "url": "https://dev.to/madsstoumann/accessible-color-pickers-5e9p",
-    "tag_list": [
-      "css",
-      "a11y",
-      "javascript",
-      "codepen"
-    ],
-    "public_reactions_count": 23
-  },
-  {
-    "id": 517453,
-    "title": "An insignificant browser-bug?",
-    "description": "Almost 3 years ago, I reported a browser-bug to the Chrome-team:  https://bugs.chromium.org/p/chromiu...",
-    "cover_image": "assets/517453/cover.png",
-    "published_timestamp": "2020-11-17T16:51:04Z",
-    "edited_at": "2020-11-17T17:18:54Z",
-    "url": "https://dev.to/madsstoumann/an-insignificant-browser-bug-4bk8",
-    "tag_list": [
-      "css",
-      "chrome",
-      "bug",
-      "typography"
-    ],
-    "public_reactions_count": 4
-  },
-  {
-    "id": 516190,
-    "title": "Populate a drop-down with function-names from external module",
-    "description": "The use-case for this is probably very limited, but I found it useful, when I had to add a drop-down...",
-    "cover_image": "assets/516190/cover.png",
-    "published_timestamp": "2020-11-16T11:35:04Z",
-    "edited_at": null,
-    "url": "https://dev.to/madsstoumann/populate-a-drop-down-with-function-names-from-external-module-5o",
-    "tag_list": [
-      "javascript",
-      "html",
-      "module"
-    ],
-    "public_reactions_count": 1
-  }
+	{
+		"id": 2975676,
+		"title": "Creating a Maintenance Page using a Cloudflare Worker",
+		"description": "Last night, an Azure outage took down several sites my company maintains. While the servers were...",
+		"cover_image": "assets/2975676/5ad5d5bf.jpg",
+		"published_timestamp": "2025-10-31T10:52:36Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/creating-a-maintenance-page-using-a-cloudflare-worker-8m6",
+		"tag_list": [
+			"javascript",
+			"security",
+			"webdev",
+			"tutorial"
+		],
+		"public_reactions_count": 3
+	},
+	{
+		"id": 2974654,
+		"title": "Adding Security Headers on Cloudflare",
+		"description": "Four years ago, I wrote a posts about Security Headers. In that post, I mentioned how to set up...",
+		"cover_image": "assets/2974654/fcc41fe1.jpg",
+		"published_timestamp": "2025-10-30T07:54:30Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/adding-security-headers-on-cloudflare-2dag",
+		"tag_list": [
+			"security",
+			"webdev"
+		],
+		"public_reactions_count": 6
+	},
+	{
+		"id": 2955757,
+		"title": "Weather Widgets",
+		"description": "Everyone talks about it — but no one does anything about it. What? The weather, of course! So, at...",
+		"cover_image": "assets/2955757/8e87c99c.jpg",
+		"published_timestamp": "2025-10-24T11:33:15Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/weather-widgets-4751",
+		"tag_list": [
+			"javascript",
+			"css",
+			"webdev",
+			"showdev"
+		],
+		"public_reactions_count": 7
+	},
+	{
+		"id": 2722566,
+		"title": "Piano Chords in CSS",
+		"description": "A couple of months ago, I wrote an article about Guitar Chords in CSS, using the new typed attr()...",
+		"cover_image": "assets/2722566/e60b7894.jpg",
+		"published_timestamp": "2025-07-25T15:05:46Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/piano-chords-in-css-4jop",
+		"tag_list": [
+			"css",
+			"tutorial",
+			"webdev",
+			"showdev"
+		],
+		"public_reactions_count": 28
+	},
+	{
+		"id": 2572592,
+		"title": "Charts in CSS",
+		"description": "Charts have been done in CSS many times before — there's even a dedicated project. So why this post?...",
+		"cover_image": "assets/2572592/c6cf3f09.jpg",
+		"published_timestamp": "2025-06-09T10:43:37Z",
+		"edited_at": "2025-06-09T11:07:16Z",
+		"url": "https://dev.to/madsstoumann/charts-in-css-1di1",
+		"tag_list": [
+			"css",
+			"tutorial",
+			"webdev",
+			"showdev"
+		],
+		"public_reactions_count": 70
+	},
+	{
+		"id": 2465237,
+		"title": "Guitar Chords in CSS",
+		"description": "In my previous article, I looked into the new, improved attr() method in CSS. I was over the moon...",
+		"cover_image": "assets/2465237/25f92ed9.jpg",
+		"published_timestamp": "2025-05-07T09:38:23Z",
+		"edited_at": "2025-05-07T14:13:40Z",
+		"url": "https://dev.to/madsstoumann/guitar-chords-in-css-3hk8",
+		"tag_list": [
+			"css",
+			"webdev",
+			"showdev",
+			"tutorial"
+		],
+		"public_reactions_count": 147
+	},
+	{
+		"id": 2394843,
+		"title": "Phases of the Moon in CSS",
+		"description": "You might have heard that the humble, old attr() method in CSS just got a big update. It's only in...",
+		"cover_image": "assets/2394843/00e6e259.jpg",
+		"published_timestamp": "2025-04-09T17:54:51Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/phases-of-the-moon-in-css-2lbo",
+		"tag_list": [
+			"css",
+			"webdev",
+			"tutorial",
+			"showdev"
+		],
+		"public_reactions_count": 55
+	},
+	{
+		"id": 2383490,
+		"title": "How To Create Gauges in CSS",
+		"description": "With modern CSS we can create beautiful gauges with ease. It involves a bunch of techniques, so let's...",
+		"cover_image": "assets/2383490/89efeb32.jpg",
+		"published_timestamp": "2025-04-05T11:21:33Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/how-to-create-gauges-in-css-3581",
+		"tag_list": [
+			"css",
+			"webdev",
+			"tutorial",
+			"showdev"
+		],
+		"public_reactions_count": 30
+	},
+	{
+		"id": 2348160,
+		"title": "Digital Clocks in CSS",
+		"description": "In my previous post, I looked into clocks and watches, mimicking classic, analog watches. Now, how...",
+		"cover_image": "assets/2348160/855a3220.jpg",
+		"published_timestamp": "2025-03-22T13:44:35Z",
+		"edited_at": "2025-03-26T18:31:24Z",
+		"url": "https://dev.to/madsstoumann/digital-clocks-in-css-3dkg",
+		"tag_list": [
+			"webdev",
+			"css",
+			"javascript",
+			"showdev"
+		],
+		"public_reactions_count": 10
+	},
+	{
+		"id": 2263002,
+		"title": "Clocks and Watches in CSS",
+		"description": "A couple of years ago, when CSS trigonometry functions became baseline, I wrote an article about...",
+		"cover_image": "assets/2263002/f7c28d82.jpg",
+		"published_timestamp": "2025-02-25T13:46:44Z",
+		"edited_at": "2025-03-26T18:30:37Z",
+		"url": "https://dev.to/madsstoumann/clocks-and-watches-in-css-36mm",
+		"tag_list": [
+			"css",
+			"javascript",
+			"webdev",
+			"tutorial"
+		],
+		"public_reactions_count": 104
+	},
+	{
+		"id": 2270859,
+		"title": "The Unofficial Dev.To Embed Web Component",
+		"description": "The other day, I re-discovered the dev.to API and found out that it can be used without an API key....",
+		"cover_image": "assets/2270859/cd5d2813.jpg",
+		"published_timestamp": "2025-02-11T09:38:37Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/the-unofficial-devto-embed-web-component-1hjk",
+		"tag_list": [
+			"javascript",
+			"css",
+			"webdev",
+			"showdev"
+		],
+		"public_reactions_count": 57
+	},
+	{
+		"id": 2237641,
+		"title": "Creating a Print Preview Web Component",
+		"description": "I’m currently working on a large e-commerce project — an update to an app I coded back in 1994-1996!...",
+		"cover_image": "assets/2237641/97854e4b.jpg",
+		"published_timestamp": "2025-01-24T11:45:37Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/creating-a-print-preview-web-component-1ma5",
+		"tag_list": [
+			"javascript",
+			"webdev",
+			"webcomponents",
+			"tutorial"
+		],
+		"public_reactions_count": 11
+	},
+	{
+		"id": 2142769,
+		"title": "Art with CSS Grid and SVG filters",
+		"description": "Have you ever explored the power of grid-auto-flow: dense? When combined with randomly generated...",
+		"cover_image": "assets/2142769/ead80a42.jpg",
+		"published_timestamp": "2024-12-07T15:55:34Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/art-with-css-grid-and-svg-filters-1ke6",
+		"tag_list": [
+			"css",
+			"javascript",
+			"webdev",
+			"showdev"
+		],
+		"public_reactions_count": 48
+	},
+	{
+		"id": 2131155,
+		"title": "Creating a Scroll Grid",
+		"description": "The other day I noticed the similarities between Tailscale and MUBI — not the companies, of course,...",
+		"cover_image": "assets/2131155/9d671197.jpg",
+		"published_timestamp": "2024-12-02T19:43:39Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/creating-a-scroll-grid-en5",
+		"tag_list": [
+			"javascript",
+			"css",
+			"webdev",
+			"tutorial"
+		],
+		"public_reactions_count": 6
+	},
+	{
+		"id": 2090550,
+		"title": "Can I Drive? Coding an Alcohol Tester",
+		"description": "In Denmark, where I live, we unfortunately hold a record within Europe: our kids are the heaviest...",
+		"cover_image": "assets/2090550/75aa1fdc.jpg",
+		"published_timestamp": "2024-11-10T11:27:50Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/can-i-drive-coding-an-alcohol-tester-163g",
+		"tag_list": [
+			"javascript",
+			"css",
+			"webdev",
+			"tutorial"
+		],
+		"public_reactions_count": 4
+	},
+	{
+		"id": 2074710,
+		"title": "Designing Better Tables: Using Popovers for Extra Data",
+		"description": "When working with large data tables, displaying all available information at once can often make the...",
+		"cover_image": "assets/2074710/1ade759c.jpg",
+		"published_timestamp": "2024-11-03T16:03:08Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/designing-better-tables-using-popovers-for-extra-data-d1i",
+		"tag_list": [
+			"javascript",
+			"css",
+			"webdev",
+			"tutorial"
+		],
+		"public_reactions_count": 50
+	},
+	{
+		"id": 2014104,
+		"title": "The Golden Ratio in CSS",
+		"description": "The golden ratio, also called the golden number, golden proportion, or even the divine proportion, is...",
+		"cover_image": "assets/2014104/f7df37ff.jpg",
+		"published_timestamp": "2024-09-25T09:37:20Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/the-golden-ratio-in-css-53d0",
+		"tag_list": [
+			"css",
+			"webdev",
+			"showdev",
+			"tutorial"
+		],
+		"public_reactions_count": 243
+	},
+	{
+		"id": 1999038,
+		"title": "CMYK, RGB, and Building a Color Visualizer",
+		"description": "When I was a kid, I published a fanzine about comics. This was long before I had a computer—it was...",
+		"cover_image": "assets/1999038/66644803.jpg",
+		"published_timestamp": "2024-09-13T10:18:40Z",
+		"edited_at": "2024-09-14T05:44:22Z",
+		"url": "https://dev.to/madsstoumann/from-typewriters-to-pixels-a-journey-with-cmyk-rgb-and-building-a-color-visualizer-484b",
+		"tag_list": [
+			"css",
+			"javascript",
+			"webdev",
+			"tutorial"
+		],
+		"public_reactions_count": 4
+	},
+	{
+		"id": 1997745,
+		"title": "Alien Signals — 2-in-1 Challenge",
+		"description": "This is a submission for Frontend Challenge v24.09.04, Glam Up My Markup: Space  But it's also a...",
+		"cover_image": "assets/1997745/9d413d8b.jpg",
+		"published_timestamp": "2024-09-12T07:48:01Z",
+		"edited_at": "2024-09-12T09:35:33Z",
+		"url": "https://dev.to/madsstoumann/alien-signals-3ni8",
+		"tag_list": [
+			"devchallenge",
+			"frontendchallenge",
+			"css",
+			"javascript"
+		],
+		"public_reactions_count": 9
+	},
+	{
+		"id": 1991736,
+		"title": "The Periodic Table in CSS",
+		"description": "Like the Solar System, The Periodic Table has been done in CSS a lot of times … but it has never been...",
+		"cover_image": "assets/1991736/31a3h9z2qouvrno1qgbc.webp",
+		"published_timestamp": "2024-09-08T08:40:16Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/the-periodic-table-in-css-3lmm",
+		"tag_list": [
+			"css",
+			"webdev",
+			"showdev",
+			"tutorial"
+		],
+		"public_reactions_count": 128
+	},
+	{
+		"id": 1869451,
+		"title": "And the Oscar Goes to … Coding a Chronology Component",
+		"description": "Earlier this year, a friend of mine shared a massive poster he had been working on for the Copenhell...",
+		"cover_image": "assets/1869451/b57e4106.jpg",
+		"published_timestamp": "2024-09-01T09:39:36Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/and-the-oscar-goes-to-coding-a-chronology-component-24hf",
+		"tag_list": [
+			"css",
+			"webdev",
+			"showdev",
+			"tutorial"
+		],
+		"public_reactions_count": 5
+	},
+	{
+		"id": 1972652,
+		"title": "The Solar System in CSS",
+		"description": "The Solar System has been done in CSS a lot of times — just search Codepen! So why do it...",
+		"cover_image": "assets/1972652/670fac48.jpg",
+		"published_timestamp": "2024-08-25T15:43:48Z",
+		"edited_at": "2024-08-27T04:32:52Z",
+		"url": "https://dev.to/madsstoumann/the-solar-system-in-css-51bo",
+		"tag_list": [
+			"css",
+			"webdev",
+			"showdev",
+			"tutorial"
+		],
+		"public_reactions_count": 276
+	},
+	{
+		"id": 1964961,
+		"title": "Line Numbers for <textarea> using SVG",
+		"description": "The other day I was working on a JSON Schema Generator, and wanted to display line numbers in a...",
+		"cover_image": "assets/1964961/b484426b.jpg",
+		"published_timestamp": "2024-08-19T09:34:30Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/line-numbers-for-using-svg-1216",
+		"tag_list": [
+			"javascript",
+			"webdev",
+			"showdev",
+			"css"
+		],
+		"public_reactions_count": 36
+	},
+	{
+		"id": 1897009,
+		"title": "Build A CSS Word Search Game In ... CSS!",
+		"description": "I've heard it so many times: CSS is not a programming language — or — why do it in CSS, when you can...",
+		"cover_image": "assets/1897009/f2e9a83f.jpg",
+		"published_timestamp": "2024-06-22T12:59:57Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/build-a-css-word-search-game-in-css-10d1",
+		"tag_list": [
+			"css",
+			"html",
+			"webdev",
+			"showdev"
+		],
+		"public_reactions_count": 24
+	},
+	{
+		"id": 1873731,
+		"title": "Sunday Fun: Re-creating a Radiohead cover",
+		"description": "The other day, I read an article about how Radiohead's graphic designer, Stanley Donwood, got...",
+		"cover_image": "assets/1873731/8b3c1187.jpg",
+		"published_timestamp": "2024-06-02T14:34:14Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/sunday-fun-re-creating-a-radiohead-cover-20ma",
+		"tag_list": [
+			"css",
+			"javascript",
+			"webdev",
+			"showdev"
+		],
+		"public_reactions_count": 3
+	},
+	{
+		"id": 1870296,
+		"title": "A Trip To The Beach",
+		"description": "This is a submission for [Frontend Challenge...",
+		"cover_image": "assets/1870296/5615feca.jpg",
+		"published_timestamp": "2024-05-30T10:57:54Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/a-trip-to-the-beach-f9i",
+		"tag_list": [
+			"devchallenge",
+			"frontendchallenge",
+			"css",
+			"javascript"
+		],
+		"public_reactions_count": 6
+	},
+	{
+		"id": 1869503,
+		"title": "La Luzerne",
+		"description": "This is a submission for Frontend Challenge v24.04.17, CSS Art: June.           Inspiration   \"La...",
+		"cover_image": "assets/1869503/610fc741.jpg",
+		"published_timestamp": "2024-05-29T18:55:03Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/la-luzerne-bfe",
+		"tag_list": [
+			"frontendchallenge",
+			"devchallenge",
+			"css"
+		],
+		"public_reactions_count": 2
+	},
+	{
+		"id": 1863603,
+		"title": "Getting Creative with CSS Grid",
+		"description": "Grids don't have to be boring! You can easily spice up a classic 12x12 grid with very few lines of...",
+		"cover_image": "assets/1863603/a64ecb97.jpg",
+		"published_timestamp": "2024-05-24T06:54:41Z",
+		"edited_at": "2024-05-24T08:24:23Z",
+		"url": "https://dev.to/madsstoumann/getting-creative-with-css-grid-mco",
+		"tag_list": [
+			"css",
+			"webdev",
+			"tutorial",
+			"showdev"
+		],
+		"public_reactions_count": 44
+	},
+	{
+		"id": 1862499,
+		"title": "Wheel of Fortune with CSS",
+		"description": "A \"Wheel of Fortune\" component just popped up in my feed. I always spin, but never win! Anyway, this...",
+		"cover_image": "assets/1862499/3bcd126d.jpg",
+		"published_timestamp": "2024-05-23T08:21:31Z",
+		"edited_at": "2024-11-13T18:18:55Z",
+		"url": "https://dev.to/madsstoumann/wheel-of-fortune-with-css-p-pi-1ne9",
+		"tag_list": [
+			"css",
+			"webdev",
+			"tutorial",
+			"javascript"
+		],
+		"public_reactions_count": 211
+	},
+	{
+		"id": 1850141,
+		"title": "Unleashing the Hidden Power of HTML Forms",
+		"description": "HTML forms are powerful beasts, but I feel a lot of its übercool features are often...",
+		"cover_image": "assets/1850141/f952487b.jpg",
+		"published_timestamp": "2024-05-12T07:27:11Z",
+		"edited_at": "2024-05-14T14:38:20Z",
+		"url": "https://dev.to/madsstoumann/unleashing-the-hidden-power-of-html-forms-2gkl",
+		"tag_list": [
+			"html",
+			"javascript",
+			"webdev",
+			"tutorial"
+		],
+		"public_reactions_count": 31
+	},
+	{
+		"id": 1846440,
+		"title": "Eurovision Gradients",
+		"description": "So, it's that time of the year, if you live in Europe: Eurovision! It's the world's oldest and...",
+		"cover_image": "assets/1846440/700c62d2.jpg",
+		"published_timestamp": "2024-05-08T15:20:05Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/eurovision-gradients-4fog",
+		"tag_list": [
+			"css",
+			"webdev",
+			"showdev",
+			"tutorial"
+		],
+		"public_reactions_count": 54
+	},
+	{
+		"id": 1841223,
+		"title": "Animating Numbers",
+		"description": "This tutorial will look into creating a small web component for animating numbers — and all the...",
+		"cover_image": "assets/1841223/e8f49d63.jpg",
+		"published_timestamp": "2024-05-03T09:49:44Z",
+		"edited_at": "2024-05-04T05:58:36Z",
+		"url": "https://dev.to/madsstoumann/animating-numbers-1oc8",
+		"tag_list": [
+			"css",
+			"javascript",
+			"webdev",
+			"tutorial"
+		],
+		"public_reactions_count": 54
+	},
+	{
+		"id": 1816674,
+		"title": "Small Tips for Styling Card Components",
+		"description": "The other day, I stumbled upon an \"About Us\"-page for an agency, I used to work for. Not only were...",
+		"cover_image": "assets/1816674/29ab24d6.jpg",
+		"published_timestamp": "2024-04-09T20:29:18Z",
+		"edited_at": "2024-04-09T20:37:37Z",
+		"url": "https://dev.to/madsstoumann/small-tips-for-styling-card-components-16hg",
+		"tag_list": [
+			"css",
+			"html",
+			"webdev",
+			"tutorial"
+		],
+		"public_reactions_count": 12
+	},
+	{
+		"id": 1798170,
+		"title": "Fetch with AbortController",
+		"description": "This is a submission for DEV Challenge v24.03.20, One Byte Explainer: Browser API or Feature.       ...",
+		"cover_image": "assets/1798170/0f2655e1.jpg",
+		"published_timestamp": "2024-03-22T12:12:16Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/fetch-with-abortcontroller-4ph2",
+		"tag_list": [
+			"frontendchallenge",
+			"devchallenge",
+			"javascript",
+			"webdev"
+		],
+		"public_reactions_count": 5
+	},
+	{
+		"id": 1797286,
+		"title": "Camping with HTML and CSS",
+		"description": "This is a submission for DEV Challenge v24.03.20, Glam Up My Markup: Camp Activities           What I...",
+		"cover_image": "assets/1797286/a2a3f349.jpg",
+		"published_timestamp": "2024-03-22T07:18:07Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/camping-with-html-and-css-3en3",
+		"tag_list": [
+			"frontendchallenge",
+			"devchallenge",
+			"css",
+			"javascript"
+		],
+		"public_reactions_count": 16
+	},
+	{
+		"id": 1797046,
+		"title": "Liquorice Allsorts",
+		"description": "This is a submission for DEV Challenge v24.03.20, CSS Art: Favorite Snack.          ...",
+		"cover_image": "assets/1797046/f9127a42.jpg",
+		"published_timestamp": "2024-03-21T09:11:48Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/liquorice-allsorts-4a13",
+		"tag_list": [
+			"frontendchallenge",
+			"devchallenge",
+			"css"
+		],
+		"public_reactions_count": 30
+	},
+	{
+		"id": 1745796,
+		"title": "Styling Checkboxes and Switches",
+		"description": "I'm probably not the only developer who's frustrated about the browser's default &lt;input...",
+		"cover_image": "assets/1745796/6696490c.jpg",
+		"published_timestamp": "2024-03-02T13:33:18Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/styling-checkboxes-and-switches-pf0",
+		"tag_list": [
+			"css",
+			"tutorial",
+			"webdev",
+			"showdev"
+		],
+		"public_reactions_count": 134
+	},
+	{
+		"id": 1743520,
+		"title": "A First Look at Apples New Switch Control",
+		"description": "Apple have just released Safari Technology Preview 17.4, which introduces a new addition to...",
+		"cover_image": "assets/1743520/61be092e.jpg",
+		"published_timestamp": "2024-01-28T10:06:26Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/a-first-look-at-apples-new-switch-control-3pnd",
+		"tag_list": [
+			"css",
+			"webdev",
+			"tutorial",
+			"showdev"
+		],
+		"public_reactions_count": 7
+	},
+	{
+		"id": 1742918,
+		"title": "A Guide to Styling Tables",
+		"description": "I've recently noticed a small paradox: Many years ago – before CSS grid — we used &lt;table&gt;s to...",
+		"cover_image": "assets/1742918/0710f0c4.jpg",
+		"published_timestamp": "2024-01-28T08:25:33Z",
+		"edited_at": "2024-02-01T07:03:06Z",
+		"url": "https://dev.to/madsstoumann/a-guide-to-styling-tables-28d2",
+		"tag_list": [
+			"css",
+			"webdev",
+			"tutorial",
+			"showdev"
+		],
+		"public_reactions_count": 197
+	},
+	{
+		"id": 1582422,
+		"title": "Clocks & Countdowns: Timing in CSS and JavaScript",
+		"description": "The other day I needed a digital clock-component, so I quickly composed a simple...",
+		"cover_image": "assets/1582422/4fe7b453.jpg",
+		"published_timestamp": "2023-09-01T12:04:30Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/clocks-countdowns-timing-in-css-and-javascript-554n",
+		"tag_list": [
+			"javascript",
+			"css",
+			"webdev",
+			"showdev"
+		],
+		"public_reactions_count": 133
+	},
+	{
+		"id": 1566563,
+		"title": "Syntax-Highlight CSS with Semantic HTML — and get Dark Mode for free",
+		"description": "When we syntax highlight CSS-code, we typically use a JavaScript library, that turns the CSS into a...",
+		"cover_image": "assets/1566563/02c8f17f.jpg",
+		"published_timestamp": "2023-08-12T15:16:54Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/syntax-highlight-css-with-semantic-html-and-get-dark-mode-for-free-4mim",
+		"tag_list": [
+			"css",
+			"html",
+			"webdev",
+			"showdev"
+		],
+		"public_reactions_count": 11
+	},
+	{
+		"id": 1544660,
+		"title": "Circle-Packing with Javascript and SVG — the Kusama Way",
+		"description": "I love the works of Japanese artist Yayoi Kusama, and have — for a long time — wanted to make an...",
+		"cover_image": "assets/1544660/7f7c7d9e.jpg",
+		"published_timestamp": "2023-07-22T05:00:10Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/circle-packing-with-javascript-and-svg-the-kusama-way-b59",
+		"tag_list": [
+			"javascript",
+			"css",
+			"webdev",
+			"showdev"
+		],
+		"public_reactions_count": 17
+	},
+	{
+		"id": 1536117,
+		"title": "The Moon in 10241 Dots — Re-creating a 1969 Masterpiece",
+		"description": "In 1969, German artist Max Ernst created a beautiful painting in celebration of the...",
+		"cover_image": "assets/1536117/ba88c170.jpg",
+		"published_timestamp": "2023-07-18T14:48:57Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/the-moon-in-10241-dots-re-creating-a-1969-masterpiece-35e2",
+		"tag_list": [
+			"css",
+			"javascript",
+			"webdev",
+			"showdev"
+		],
+		"public_reactions_count": 35
+	},
+	{
+		"id": 1531999,
+		"title": "In the Footsteps of Poul Gernes — Making an Interactive Art Poster",
+		"description": "Poul Gernes was a very colorful danish artist, furniture designer, and founder of an art school. He...",
+		"cover_image": "assets/1531999/8e95ddd2.jpg",
+		"published_timestamp": "2023-07-10T17:19:12Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/in-the-footsteps-of-poul-gernes-making-an-interactive-art-poster-5580",
+		"tag_list": [
+			"css",
+			"webdev",
+			"showdev",
+			"javascript"
+		],
+		"public_reactions_count": 14
+	},
+	{
+		"id": 1526706,
+		"title": "Re-creating a Japanese Fireworks Catalog from 1883 in CSS",
+		"description": "The other day I received a newsletter from the author Robin Sloan, containing samples of some...",
+		"cover_image": "assets/1526706/e28ebcce.jpg",
+		"published_timestamp": "2023-07-05T07:08:21Z",
+		"edited_at": "2023-07-06T07:27:44Z",
+		"url": "https://dev.to/madsstoumann/re-creating-a-japanese-fireworks-catalog-from-1883-in-css-83j",
+		"tag_list": [
+			"css",
+			"codepen",
+			"webdev",
+			"showdev"
+		],
+		"public_reactions_count": 159
+	},
+	{
+		"id": 1502868,
+		"title": "Color Compare Range Slider",
+		"description": "For this week's Codepen Challenge, I did a Color Compare Range Slider. It's using an &lt;input...",
+		"cover_image": "assets/1502868/eec503ba.jpg",
+		"published_timestamp": "2023-06-13T09:15:40Z",
+		"edited_at": "2023-06-13T14:02:19Z",
+		"url": "https://dev.to/madsstoumann/color-compare-range-slider-3o1k",
+		"tag_list": [
+			"javascript",
+			"css",
+			"webdev",
+			"showdev"
+		],
+		"public_reactions_count": 9
+	},
+	{
+		"id": 1500673,
+		"title": "Using a Single Input for one-time-code",
+		"description": "The other night I had a bit of fun trying to create a single-input one-time-code:    one-time-code is...",
+		"cover_image": "assets/1500673/147b8f2a.jpg",
+		"published_timestamp": "2023-06-12T08:05:01Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/using-a-single-input-for-one-time-code-352l",
+		"tag_list": [
+			"css",
+			"javascript",
+			"webdev",
+			"showdev"
+		],
+		"public_reactions_count": 224
+	},
+	{
+		"id": 1477188,
+		"title": "Tetris Testimonial Quotes",
+		"description": "Had a bit of fun last night with this week's Codepen Challenge.  I had no ideas for the topic —...",
+		"cover_image": "assets/1477188/edc4eb14.jpg",
+		"published_timestamp": "2023-05-23T06:03:57Z",
+		"edited_at": "2023-05-23T18:32:36Z",
+		"url": "https://dev.to/madsstoumann/tetris-testimonial-quotes-55i5",
+		"tag_list": [
+			"codepen",
+			"css",
+			"showdev"
+		],
+		"public_reactions_count": 30
+	},
+	{
+		"id": 1466162,
+		"title": "Mobile-to-Desktop Menu in 2 Lines of CSS",
+		"description": "As a frontend developer, I've created numerous menus over the years. These menus have typically been...",
+		"cover_image": "assets/1466162/242dc4e1.jpg",
+		"published_timestamp": "2023-05-13T08:38:27Z",
+		"edited_at": "2023-05-13T11:56:32Z",
+		"url": "https://dev.to/madsstoumann/mobile-to-desktop-menu-in-2-lines-of-css-4ikn",
+		"tag_list": [
+			"webdev",
+			"css",
+			"tutorial",
+			"javascript"
+		],
+		"public_reactions_count": 97
+	},
+	{
+		"id": 1460043,
+		"title": "Configurable CSS Components",
+		"description": "The CSS attr() function is getting updated to support any property.   This enables the creation of...",
+		"cover_image": "assets/1460043/413014f4.jpg",
+		"published_timestamp": "2023-05-07T07:54:19Z",
+		"edited_at": "2023-05-07T08:02:48Z",
+		"url": "https://dev.to/madsstoumann/configurable-css-components-32gn",
+		"tag_list": [
+			"css",
+			"showdev",
+			"webdev"
+		],
+		"public_reactions_count": 11
+	},
+	{
+		"id": 1452126,
+		"title": "Dark Mode in 3 Lines of CSS and Other Adventures",
+		"description": "Dark Mode is a design trend where the color scheme of a website is changed to a dark background with...",
+		"cover_image": "assets/1452126/6654da5f.jpg",
+		"published_timestamp": "2023-04-29T12:25:08Z",
+		"edited_at": "2023-05-06T12:10:39Z",
+		"url": "https://dev.to/madsstoumann/dark-mode-in-3-lines-of-css-and-other-adventures-1ljj",
+		"tag_list": [
+			"css",
+			"webdev",
+			"tutorial",
+			"javascript"
+		],
+		"public_reactions_count": 470
+	},
+	{
+		"id": 1202724,
+		"title": "Extending Emmet and VS Code — and discovering 415 CSS properties",
+		"description": "I use Emmet everyday. You might too, without even knowing — it's built-in to VS Code! When you type...",
+		"cover_image": "assets/1202724/05031080.jpg",
+		"published_timestamp": "2022-10-07T09:14:12Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/extending-emmet-and-vs-code-and-discovering-415-css-properties-1dfo",
+		"tag_list": [
+			"javascript",
+			"webdev",
+			"showdev",
+			"css"
+		],
+		"public_reactions_count": 10
+	},
+	{
+		"id": 1194837,
+		"title": "Recreating Apple's Color Picker Icon",
+		"description": "I'm currently working on a colorpicker, where a user can select a predefined theme-color:    While...",
+		"cover_image": "assets/1194837/d93f3ca9.jpg",
+		"published_timestamp": "2022-09-16T09:01:14Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/recreating-apples-color-picker-icon-20aa",
+		"tag_list": [
+			"css",
+			"design",
+			"webdev",
+			"showdev"
+		],
+		"public_reactions_count": 25
+	},
+	{
+		"id": 1190247,
+		"title": "Build a CSS Transition Tool for your editors",
+		"description": "I love building small tools to help editors and marketeers create more engaging content.  Typically,...",
+		"cover_image": "assets/1190247/cc007389.jpg",
+		"published_timestamp": "2022-09-12T07:48:59Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/build-a-css-transition-tool-for-your-editors-4emh",
+		"tag_list": [
+			"css",
+			"javascript",
+			"webdev",
+			"tutorial"
+		],
+		"public_reactions_count": 13
+	},
+	{
+		"id": 1185936,
+		"title": "SVG, Geometry — and a dash of JavaScript",
+		"description": "I'm currently reading Science Illustration — A History of Visual Knowledge from the 15th Century to...",
+		"cover_image": "assets/1185936/042ab248.jpg",
+		"published_timestamp": "2022-09-06T19:00:17Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/svg-geometry-and-a-dash-of-javascript-3f9l",
+		"tag_list": [
+			"svg",
+			"javascript",
+			"showdev",
+			"webdev"
+		],
+		"public_reactions_count": 46
+	},
+	{
+		"id": 1165782,
+		"title": "Build a Multi-Language Countdown Component",
+		"description": "Some years ago, I built a countdown component with support for multiple languages. Editors had to...",
+		"cover_image": "assets/1165782/7ef432ad.jpg",
+		"published_timestamp": "2022-08-14T05:12:45Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/build-a-multi-language-countdown-component-260j",
+		"tag_list": [
+			"javascript",
+			"webdev",
+			"tutorial",
+			"css"
+		],
+		"public_reactions_count": 13
+	},
+	{
+		"id": 1158601,
+		"title": "Creating a Word Wheel in CSS",
+		"description": "Summer Holidays are meant to be relaxing, so I typically read a lot of books. This year, one of the...",
+		"cover_image": "assets/1158601/023c1454.jpg",
+		"published_timestamp": "2022-08-03T19:24:00Z",
+		"edited_at": "2022-08-04T06:12:36Z",
+		"url": "https://dev.to/madsstoumann/word-wheel-in-css-426n",
+		"tag_list": [
+			"css",
+			"javascript",
+			"showdev",
+			"webdev"
+		],
+		"public_reactions_count": 32
+	},
+	{
+		"id": 1150105,
+		"title": "Masking and coloring product images using CSS and SVG",
+		"description": "If you have a product that's available in several colors, it can be cumbersome and expensive to take...",
+		"cover_image": "assets/1150105/7f313ad6.jpg",
+		"published_timestamp": "2022-07-24T16:45:50Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/masking-and-coloring-product-images-using-css-and-svg-2eil",
+		"tag_list": [
+			"css",
+			"svg",
+			"tutorial",
+			"webdev"
+		],
+		"public_reactions_count": 47
+	},
+	{
+		"id": 1135131,
+		"title": "Creating SVG Icons from JSON",
+		"description": "This week, a colleague and I developed a couple of plugins for ContentStack. A theme-picker:    ......",
+		"cover_image": "assets/1135131/1c90c1db.jpg",
+		"published_timestamp": "2022-07-08T11:33:02Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/creating-svg-icons-from-json-100a",
+		"tag_list": [
+			"javascript",
+			"svg",
+			"design",
+			"webdev"
+		],
+		"public_reactions_count": 42
+	},
+	{
+		"id": 1132179,
+		"title": "Creating a Grid Visualizer",
+		"description": "If you're working with a grid-system, chances are, you're using some kind of grid visualizer – maybe...",
+		"cover_image": "assets/1132179/9c28d183.jpg",
+		"published_timestamp": "2022-07-05T08:09:21Z",
+		"edited_at": "2022-07-07T05:23:44Z",
+		"url": "https://dev.to/madsstoumann/creating-a-grid-visualizer-3di0",
+		"tag_list": [
+			"css",
+			"design",
+			"javascript",
+			"webdev"
+		],
+		"public_reactions_count": 11
+	},
+	{
+		"id": 1122061,
+		"title": "How to embed YouTube and Vimeo the light way",
+		"description": "You've probably embedded YouTube and Vimeo-videos dozens of times, using the standard...",
+		"cover_image": "assets/1122061/f959ec30.jpg",
+		"published_timestamp": "2022-06-25T09:56:49Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/how-to-embed-youtube-and-vimeo-the-light-way-2pek",
+		"tag_list": [
+			"html",
+			"javascript",
+			"webdev",
+			"tutorial"
+		],
+		"public_reactions_count": 35
+	},
+	{
+		"id": 1122033,
+		"title": "Re-creating Apple’s Dark Mode Icon",
+		"description": "A couple of weeks ago, while fiddling around with my iPhone's Control Center, I noticed a new icon:...",
+		"cover_image": "assets/1122033/757ec835.jpg",
+		"published_timestamp": "2022-06-23T06:06:36Z",
+		"edited_at": "2022-06-23T11:21:00Z",
+		"url": "https://dev.to/madsstoumann/re-creating-apples-dark-mode-icon-199j",
+		"tag_list": [
+			"svg",
+			"design",
+			"css",
+			"javascript"
+		],
+		"public_reactions_count": 25
+	},
+	{
+		"id": 959007,
+		"title": "Showing \"time ago\" in a Social Feed using Intl.RelativeTimeFormat",
+		"description": "I'm currently implementing a Social Feed for a client, and had some issues with vulnerabilities in...",
+		"cover_image": "assets/959007/46dbb5fe.jpg",
+		"published_timestamp": "2022-01-18T09:19:36Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/showing-time-ago-in-a-social-feed-using-intlrelativetimeformat-5ceo",
+		"tag_list": [
+			"javascript",
+			"webdev",
+			"showdev",
+			"tutorial"
+		],
+		"public_reactions_count": 33
+	},
+	{
+		"id": 929897,
+		"title": "Play Blur onblur",
+		"description": "Yesterday, a colleague asked me what we should do onfocusout on a task, we're working on. I told him...",
+		"cover_image": "assets/929897/ce3fee48.jpg",
+		"published_timestamp": "2021-12-18T13:59:44Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/play-blur-onblur-4f8",
+		"tag_list": [
+			"html",
+			"javascript",
+			"webdev",
+			"showdev"
+		],
+		"public_reactions_count": 9
+	},
+	{
+		"id": 917199,
+		"title": "Learning from the Masters of Design",
+		"description": "I recently bought two huge books on the history of graphic design from Taschen – here's volume...",
+		"cover_image": "assets/917199/d8fba06a.jpg",
+		"published_timestamp": "2021-12-04T17:12:48Z",
+		"edited_at": "2021-12-05T12:36:13Z",
+		"url": "https://dev.to/madsstoumann/learning-from-the-masters-design-35pg",
+		"tag_list": [
+			"html",
+			"css",
+			"design",
+			"webdev"
+		],
+		"public_reactions_count": 26
+	},
+	{
+		"id": 770148,
+		"title": "Creating Global Components: A Checklist With Examples",
+		"description": "When working with components that need to work “across borders”, supporting multiple languages and...",
+		"cover_image": "assets/770148/8d7a1c29.jpg",
+		"published_timestamp": "2021-11-11T13:12:24Z",
+		"edited_at": "2021-11-11T19:26:09Z",
+		"url": "https://dev.to/madsstoumann/creating-global-components-a-checklist-with-examples-2n4g",
+		"tag_list": [
+			"html",
+			"css",
+			"javascript",
+			"webdev"
+		],
+		"public_reactions_count": 60
+	},
+	{
+		"id": 879411,
+		"title": "Introducing the EyeDropper API",
+		"description": "The EyeDropper API has landed in Chrome 95. This API opens up a lot of possiblities. A user can...",
+		"cover_image": "assets/879411/38350966.jpg",
+		"published_timestamp": "2021-10-28T07:42:07Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/introducing-the-eyedropper-api-14d7",
+		"tag_list": [
+			"codepen",
+			"css",
+			"javascript",
+			"webdev"
+		],
+		"public_reactions_count": 7
+	},
+	{
+		"id": 858401,
+		"title": "Validating Markup: Write Your Own Snippet",
+		"description": "I always validate my markup. Why? There are several reasons, the main ones being:   If the markup is...",
+		"cover_image": "assets/858401/aca33bb2.jpg",
+		"published_timestamp": "2021-10-10T17:36:24Z",
+		"edited_at": "2021-10-11T04:59:59Z",
+		"url": "https://dev.to/madsstoumann/validating-markup-write-your-own-snippet-2p8d",
+		"tag_list": [
+			"html",
+			"webdev",
+			"codequality",
+			"javascript"
+		],
+		"public_reactions_count": 44
+	},
+	{
+		"id": 842066,
+		"title": "Build a CSS Ruler",
+		"description": "I'm currently working on a project, where an editor can easily edit breakpoints, using a group of...",
+		"cover_image": "assets/842066/3a90154e.jpg",
+		"published_timestamp": "2021-09-27T10:37:59Z",
+		"edited_at": "2021-09-27T11:12:59Z",
+		"url": "https://dev.to/madsstoumann/build-a-css-ruler-2opn",
+		"tag_list": [
+			"css",
+			"html",
+			"javascript",
+			"webdev"
+		],
+		"public_reactions_count": 88
+	},
+	{
+		"id": 829134,
+		"title": "Layered Gradient Playground",
+		"description": "A while ago, I saw this tweet by Adam Argyle. It's a clever way of layering gradients, using CSS...",
+		"cover_image": "assets/829134/e6572b0b.jpg",
+		"published_timestamp": "2021-09-17T06:43:20Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/layered-gradient-playground-102j",
+		"tag_list": [
+			"css",
+			"codepen",
+			"webdev",
+			"showdev"
+		],
+		"public_reactions_count": 32
+	},
+	{
+		"id": 811340,
+		"title": "KAOSS! Fun with Web Audio",
+		"description": "I used to carry my “Korg Kaossilator” around with me. For those of you who don't know what that is –...",
+		"cover_image": "assets/811340/ec6616b3.jpg",
+		"published_timestamp": "2021-09-02T15:06:47Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/kaoss-fun-with-web-audio-3gb9",
+		"tag_list": [
+			"javascript",
+			"css",
+			"webdev",
+			"html"
+		],
+		"public_reactions_count": 187
+	},
+	{
+		"id": 804923,
+		"title": "Nested border-radius Playground",
+		"description": "When nesting elements with a border-radius, I found this formula, which I implemented in the Codepen...",
+		"cover_image": "assets/804923/e01d8644.jpg",
+		"published_timestamp": "2021-08-27T07:01:44Z",
+		"edited_at": "2021-08-27T09:03:54Z",
+		"url": "https://dev.to/madsstoumann/nested-border-radius-playground-kcl",
+		"tag_list": [
+			"css",
+			"webdev",
+			"showdev",
+			"discuss"
+		],
+		"public_reactions_count": 33
+	},
+	{
+		"id": 800474,
+		"title": "A simple Color-Picker using CSS5 color-contrast() and color-mix()",
+		"description": "Safari is often blamed for being “the new IE of web-browsers”. That's not fair, because Safari has...",
+		"cover_image": "assets/800474/4e0606f6.jpg",
+		"published_timestamp": "2021-08-23T15:46:30Z",
+		"edited_at": "2021-08-25T06:53:32Z",
+		"url": "https://dev.to/madsstoumann/a-simple-color-picker-using-css5-color-contrast-and-color-mix-384p",
+		"tag_list": [
+			"css",
+			"html",
+			"codepen",
+			"webdev"
+		],
+		"public_reactions_count": 26
+	},
+	{
+		"id": 784934,
+		"title": "The Frontend Agency",
+		"description": "After 7 years working as a Technical Director for Valtech, I've decided to go freelance … again (I...",
+		"cover_image": "assets/784934/79e480d7.jpg",
+		"published_timestamp": "2021-08-09T06:54:07Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/the-frontend-agency-3pfa",
+		"tag_list": [
+			"webdev",
+			"showdev",
+			"javascript",
+			"css"
+		],
+		"public_reactions_count": 152
+	},
+	{
+		"id": 741580,
+		"title": "Building A Minimal AutoSuggest",
+		"description": "It took the Web a lot of years to introduce the &lt;datalist&gt;-tag, essential in creating one of...",
+		"cover_image": "assets/741580/d2627391.jpg",
+		"published_timestamp": "2021-08-07T06:42:43Z",
+		"edited_at": "2021-08-07T06:46:09Z",
+		"url": "https://dev.to/madsstoumann/building-a-minimal-autosuggest-4big",
+		"tag_list": [
+			"html",
+			"css",
+			"javascript",
+			"webdev"
+		],
+		"public_reactions_count": 243
+	},
+	{
+		"id": 759226,
+		"title": "Building a Reaction Component",
+		"description": "We're all familiar with dev.to's “Reaction Component” (although I'm still not sure, what the unicorn...",
+		"cover_image": "assets/759226/ac4fb228.jpg",
+		"published_timestamp": "2021-07-17T08:24:00Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/building-a-reaction-component-2noe",
+		"tag_list": [
+			"html",
+			"css",
+			"javascript",
+			"webdev"
+		],
+		"public_reactions_count": 137
+	},
+	{
+		"id": 754012,
+		"title": "Comics, Graphic Design — and the Power of JavaScript",
+		"description": "In January 2007, I was asked to do the impossible: Layout, letter and produce a boxset with seven...",
+		"cover_image": "assets/754012/0c4b658d.jpg",
+		"published_timestamp": "2021-07-09T16:54:34Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/comics-graphic-design-and-the-power-of-javascript-2kap",
+		"tag_list": [
+			"javascript",
+			"design",
+			"comics",
+			"scripting"
+		],
+		"public_reactions_count": 34
+	},
+	{
+		"id": 752500,
+		"title": "Mood Selector Component",
+		"description": "Throughout this week, the “Star (rating) Wars” have run here on dev.to.  With proposals by...",
+		"cover_image": "assets/752500/ae4fa7ae.jpg",
+		"published_timestamp": "2021-07-07T14:33:38Z",
+		"edited_at": "2021-07-07T16:25:56Z",
+		"url": "https://dev.to/madsstoumann/mood-selector-jhi",
+		"tag_list": [
+			"html",
+			"css",
+			"webdev",
+			"showdev"
+		],
+		"public_reactions_count": 28
+	},
+	{
+		"id": 746721,
+		"title": "Star-Rating Using A Single Input",
+		"description": "Yesterday I read InhuOfficial's post about star-rating, using a group of &lt;input...",
+		"cover_image": "assets/746721/768730e2.jpg",
+		"published_timestamp": "2021-07-03T10:56:03Z",
+		"edited_at": "2021-07-07T12:39:56Z",
+		"url": "https://dev.to/madsstoumann/star-rating-using-a-single-input-i0l",
+		"tag_list": [
+			"html",
+			"css",
+			"javascript",
+			"webdev"
+		],
+		"public_reactions_count": 174
+	},
+	{
+		"id": 728708,
+		"title": "Updating A 25-Year-Old Website",
+		"description": "As frontend developers, we always want to use the latest and the greatest. A lot of the time however,...",
+		"cover_image": "assets/728708/1ad63a80.jpg",
+		"published_timestamp": "2021-06-19T09:38:42Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/updating-a-25-year-old-website-42jm",
+		"tag_list": [
+			"html",
+			"css",
+			"javascript",
+			"webdev"
+		],
+		"public_reactions_count": 788
+	},
+	{
+		"id": 728693,
+		"title": "A Quick Guide To CSS Logical Properties",
+		"description": "This is a post about CSS Logical Properties, with basic and advanced usage examples. If you think you...",
+		"cover_image": "assets/728693/695d4111.jpg",
+		"published_timestamp": "2021-06-16T13:57:47Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/a-quick-guide-to-css-logical-properties-2fce",
+		"tag_list": [
+			"html",
+			"css",
+			"webdev"
+		],
+		"public_reactions_count": 27
+	},
+	{
+		"id": 709018,
+		"title": "Container Queries: Another Polyfill",
+		"description": "I love container queries — I have been waiting for them for years.  But, alas, until all browsers hav...",
+		"cover_image": "assets/709018/d02ca7d5.jpg",
+		"published_timestamp": "2021-05-26T11:50:27Z",
+		"edited_at": "2021-05-28T07:24:45Z",
+		"url": "https://dev.to/madsstoumann/container-queries-another-polyfill-2488",
+		"tag_list": [
+			"javascript",
+			"css",
+			"showdev",
+			"webdev"
+		],
+		"public_reactions_count": 27
+	},
+	{
+		"id": 706998,
+		"title": "Deconstructing Art: Learning From Constraints",
+		"description": "Artists have always worked with a lot of constraints.   Today, we can make any color we want chemical...",
+		"cover_image": "assets/706998/9745d6f6.jpg",
+		"published_timestamp": "2021-05-24T13:38:54Z",
+		"edited_at": "2021-05-24T13:58:35Z",
+		"url": "https://dev.to/madsstoumann/deconstructing-art-learning-from-constraints-p7m",
+		"tag_list": [
+			"javascript",
+			"showdev",
+			"design",
+			"webdev"
+		],
+		"public_reactions_count": 21
+	},
+	{
+		"id": 701816,
+		"title": "Random Art Generator: Dots & Rings",
+		"description": "If you like random art, I've just released a new tool for generating random rings and dots (in &lt;sv...",
+		"cover_image": "assets/701816/ff69a117.jpg",
+		"published_timestamp": "2021-05-18T14:41:42Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/random-art-generator-dots-rings-3ca3",
+		"tag_list": [
+			"codepen",
+			"javascript",
+			"showdev",
+			"webdev"
+		],
+		"public_reactions_count": 39
+	},
+	{
+		"id": 634596,
+		"title": "How To Fill Out A Form With Your Voice",
+		"description": "One of my friends is a dermatologist. He has a very busy schedule, seeing up to 60 patients a day. In...",
+		"cover_image": "assets/634596/eac22d35.jpg",
+		"published_timestamp": "2021-05-16T14:45:24Z",
+		"edited_at": "2021-05-16T14:50:25Z",
+		"url": "https://dev.to/madsstoumann/how-to-fill-out-a-form-with-your-voice-3k6d",
+		"tag_list": [
+			"codepen",
+			"javascript",
+			"webdev",
+			"showdev"
+		],
+		"public_reactions_count": 31
+	},
+	{
+		"id": 679903,
+		"title": "Color Stripes",
+		"description": "Experimenting with tones and stripes from Josef Albert's book “Interaction of Color”.   The first 7 c...",
+		"cover_image": "assets/679903/62da85b5.jpg",
+		"published_timestamp": "2021-04-27T09:05:07Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/color-stripes-4fpa",
+		"tag_list": [
+			"css",
+			"codepen",
+			"showdev"
+		],
+		"public_reactions_count": 5
+	},
+	{
+		"id": 672378,
+		"title": "How to Build a Color Wheel with Tints & Shades",
+		"description": "I've built a handful of color pickers through the years, so when I in this book stumbled upon a color...",
+		"cover_image": "assets/672378/b5cab4ce.jpg",
+		"published_timestamp": "2021-04-23T13:43:17Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/how-to-build-a-color-wheel-with-tints-shades-nfj",
+		"tag_list": [
+			"html",
+			"css",
+			"javascript",
+			"webdev"
+		],
+		"public_reactions_count": 32
+	},
+	{
+		"id": 671379,
+		"title": "Why “dark mode” is more energy-efficient: How to calculate image energy-cost",
+		"description": "When I read Tom Greenfords execellent book Sustainable Web Design, there was one fact that stuck with...",
+		"cover_image": "assets/671379/19d0cf0e.jpg",
+		"published_timestamp": "2021-04-19T11:42:37Z",
+		"edited_at": "2021-04-19T15:17:55Z",
+		"url": "https://dev.to/madsstoumann/why-dark-mode-is-more-energy-efficent-how-to-calculate-image-energy-cost-45pp",
+		"tag_list": [
+			"html",
+			"javascript",
+			"webdev",
+			"performance"
+		],
+		"public_reactions_count": 181
+	},
+	{
+		"id": 664154,
+		"title": "SVG Circle Pattern Generator",
+		"description": "The other day – trying to empty my head and relax a bit – I stared at the colorful rug next to my cha...",
+		"cover_image": "assets/664154/2b321d30.jpg",
+		"published_timestamp": "2021-04-16T08:32:07Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/svg-circle-pattern-generator-2g6g",
+		"tag_list": [
+			"svg",
+			"design",
+			"javascript",
+			"webdev"
+		],
+		"public_reactions_count": 16
+	},
+	{
+		"id": 568446,
+		"title": "data-attributes vs. BEM",
+		"description": "I used to be a comicbook-letterer, so \"BEM\" always looked wrong to me. It's either \"BAM!\" — or \"BOOM!...",
+		"cover_image": "assets/568446/a91949bd.jpg",
+		"published_timestamp": "2021-04-11T14:02:35Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/data-attributes-vs-bem-2k6n",
+		"tag_list": [
+			"css",
+			"html",
+			"discuss",
+			"codepen"
+		],
+		"public_reactions_count": 10
+	},
+	{
+		"id": 653154,
+		"title": "Lockdown Fun: Your Age In Binary",
+		"description": "Today I gave my son a piece of paper with this cryptic message: 00001100.   “This is you”, I told him...",
+		"cover_image": "assets/653154/2a72ef2d.jpg",
+		"published_timestamp": "2021-04-02T14:32:10Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/lockdown-fun-your-age-in-binary-2f3k",
+		"tag_list": [
+			"html",
+			"css",
+			"javascript",
+			"webdev"
+		],
+		"public_reactions_count": 69
+	},
+	{
+		"id": 648114,
+		"title": "When Lighthouse Itself Causes Issues",
+		"description": "I was re-inspecting my homepage after some edits earlier today, and discovered — to my horror 😱 — tha...",
+		"cover_image": "assets/648114/042002eb.jpg",
+		"published_timestamp": "2021-03-28T12:31:02Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/when-lighthouse-itself-causes-issues-2k3i",
+		"tag_list": [
+			"lighthouse",
+			"security",
+			"discuss"
+		],
+		"public_reactions_count": 2
+	},
+	{
+		"id": 597730,
+		"title": "Responsive images: How they work – and how to use them with “Art Direction” and “Dark Mode”",
+		"description": "To create a fast and sustainable website, the top priority is to minimize the amount of assets, mainl...",
+		"cover_image": "assets/597730/eec05ee5.jpg",
+		"published_timestamp": "2021-03-27T14:56:43Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/responsive-images-how-they-work-and-how-to-use-them-with-art-direction-and-dark-mode-2119",
+		"tag_list": [
+			"html",
+			"css",
+			"webdev",
+			"codepen"
+		],
+		"public_reactions_count": 37
+	},
+	{
+		"id": 634399,
+		"title": "Colors are Math: How they match — and how to build a Color Picker",
+		"description": "Why do some color-combinations look better than others? Spoiler: it involves math.  The other day, I...",
+		"cover_image": "assets/634399/87449d30.jpg",
+		"published_timestamp": "2021-03-20T16:33:18Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/colors-are-math-how-they-match-and-how-to-build-a-color-picker-4ei8",
+		"tag_list": [
+			"css",
+			"javascript",
+			"design",
+			"webdev"
+		],
+		"public_reactions_count": 206
+	},
+	{
+		"id": 612806,
+		"title": "Creating a fun, fast, secure and sustainable website",
+		"description": "In the last couple of months, I've been writing (some would say preaching!) about security, performan...",
+		"cover_image": "assets/612806/db5be236.jpg",
+		"published_timestamp": "2021-03-13T16:05:08Z",
+		"edited_at": "2021-03-14T07:48:29Z",
+		"url": "https://dev.to/madsstoumann/creating-a-fun-fast-secure-and-sustainable-website-50nk",
+		"tag_list": [
+			"html",
+			"css",
+			"javascript",
+			"security"
+		],
+		"public_reactions_count": 282
+	},
+	{
+		"id": 568411,
+		"title": "Sharing with the Navigator Share API",
+		"description": "Four years ago, I read the article Does Anyone Use Social Sharing Buttons on Mobile?  The result was...",
+		"cover_image": "assets/568411/49659223.jpg",
+		"published_timestamp": "2021-03-10T13:35:40Z",
+		"edited_at": "2021-03-10T13:37:34Z",
+		"url": "https://dev.to/madsstoumann/sharing-with-the-navigator-share-api-109b",
+		"tag_list": [
+			"html",
+			"javascript",
+			"css",
+			"codepen"
+		],
+		"public_reactions_count": 16
+	},
+	{
+		"id": 623487,
+		"title": "Flashlight Website",
+		"description": "In “How To Avoid a Climate Disaster”, Bill Gates writes about kids, who're doing their homework by ca...",
+		"cover_image": "assets/623487/0742aa32.jpg",
+		"published_timestamp": "2021-03-03T06:22:13Z",
+		"edited_at": "2021-03-03T14:16:53Z",
+		"url": "https://dev.to/madsstoumann/flashlight-website-2dp4",
+		"tag_list": [
+			"html",
+			"css",
+			"javascript",
+			"codepen"
+		],
+		"public_reactions_count": 7
+	},
+	{
+		"id": 584037,
+		"title": "Accessible Modal With Or Without JavaScript",
+		"description": "At my workplace, we recently discussed the various options we have in our toolbox to create modals wi...",
+		"cover_image": "assets/584037/0fb0ae96.jpg",
+		"published_timestamp": "2021-03-01T09:09:27Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/accessible-modal-with-or-without-javascript-3g1d",
+		"tag_list": [
+			"html",
+			"css",
+			"javascript",
+			"a11y"
+		],
+		"public_reactions_count": 16
+	},
+	{
+		"id": 610806,
+		"title": "Table Designer",
+		"description": "I've been working on a Generic Table Designer-tool on and off for almost a year. It's not something I...",
+		"cover_image": "assets/610806/0dd1356f.jpg",
+		"published_timestamp": "2021-02-22T06:36:05Z",
+		"edited_at": "2021-02-22T06:38:24Z",
+		"url": "https://dev.to/madsstoumann/table-designer-1588",
+		"tag_list": [
+			"html",
+			"css",
+			"javascript",
+			"codepen"
+		],
+		"public_reactions_count": 24
+	},
+	{
+		"id": 606234,
+		"title": "Web Typography Checklist",
+		"description": "All websites need typography, but before picking a typeface for a website, there are a lot of things...",
+		"cover_image": "assets/606234/917b6bc9.jpg",
+		"published_timestamp": "2021-02-17T18:00:46Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/web-typography-checklist-52a2",
+		"tag_list": [
+			"html",
+			"css",
+			"typography",
+			"design"
+		],
+		"public_reactions_count": 9
+	},
+	{
+		"id": 597452,
+		"title": "Making Sustainable Websites",
+		"description": "We've all heard about the Paris-agreement. We've all seen Greta Thunberg, fighting for climate-change...",
+		"cover_image": "assets/597452/25ef469a.jpg",
+		"published_timestamp": "2021-02-10T12:20:04Z",
+		"edited_at": "2021-02-10T15:39:32Z",
+		"url": "https://dev.to/madsstoumann/making-sustainable-websites-hd3",
+		"tag_list": [
+			"css",
+			"javascript",
+			"sustainability",
+			"discuss"
+		],
+		"public_reactions_count": 24
+	},
+	{
+		"id": 592772,
+		"title": "Lockdown Fun: Pascal's Triangle",
+		"description": "About 7 or 8 years ago, there was a teachers-strike in Denmark, and I had to teach my daughter's clas...",
+		"cover_image": "assets/592772/f9054239.jpg",
+		"published_timestamp": "2021-02-05T08:40:34Z",
+		"edited_at": "2021-02-05T08:42:43Z",
+		"url": "https://dev.to/madsstoumann/lockdown-fun-pascal-s-triangle-3dk1",
+		"tag_list": [
+			"html",
+			"css",
+			"javascript",
+			"codepen"
+		],
+		"public_reactions_count": 28
+	},
+	{
+		"id": 592005,
+		"title": "Accessible, Resizable Table-Columns",
+		"description": "I love using the &lt;input type=\"range\"&gt;. It's an interactive control with touch-support, and you...",
+		"cover_image": "assets/592005/718a9ec0.jpg",
+		"published_timestamp": "2021-02-04T13:55:20Z",
+		"edited_at": "2021-02-05T13:16:19Z",
+		"url": "https://dev.to/madsstoumann/accessible-resizable-table-columns-5eof",
+		"tag_list": [
+			"html",
+			"css",
+			"javascript",
+			"a11y"
+		],
+		"public_reactions_count": 41
+	},
+	{
+		"id": 568401,
+		"title": "Frontend Security: Security Headers",
+		"description": "My previous articles about frontend security focused on script integrity and the Content Security Pol...",
+		"cover_image": "assets/568401/e0544d02.jpg",
+		"published_timestamp": "2021-01-27T11:05:18Z",
+		"edited_at": "2021-02-05T09:12:02Z",
+		"url": "https://dev.to/madsstoumann/frontend-security-security-headers-517p",
+		"tag_list": [
+			"html",
+			"javascript",
+			"security"
+		],
+		"public_reactions_count": 225
+	},
+	{
+		"id": 568396,
+		"title": "Frontend Security: Content Security Policy",
+		"description": "In my previous article on security, I wrote about npm audit and script integrity. Next up is Content...",
+		"cover_image": "assets/568396/9f8e60d7.jpg",
+		"published_timestamp": "2021-01-25T07:43:42Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/frontend-security-content-security-policy-17dl",
+		"tag_list": [
+			"html",
+			"javascript",
+			"security"
+		],
+		"public_reactions_count": 100
+	},
+	{
+		"id": 575731,
+		"title": "Accessible Image Compare — One Line of JavaScript",
+		"description": "Sometimes it's funny to revisit old ideas and  components, you did a long time ago!  I once did an \"I...",
+		"cover_image": "assets/575731/9359c208.jpg",
+		"published_timestamp": "2021-01-19T20:33:44Z",
+		"edited_at": "2021-02-04T20:56:30Z",
+		"url": "https://dev.to/madsstoumann/accessible-image-compare-one-line-of-javascript-3gn4",
+		"tag_list": [
+			"html",
+			"css",
+			"javascript",
+			"codepen"
+		],
+		"public_reactions_count": 38
+	},
+	{
+		"id": 574042,
+		"title": "Staying Alive: The Screen Wake Lock API",
+		"description": "Friday night I was cooking a delicious vegetarian bolognese — but was annoyed that my iPhone kept dim...",
+		"cover_image": "assets/574042/1953e71a.jpg",
+		"published_timestamp": "2021-01-17T16:01:20Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/staying-alive-the-screen-wake-lock-api-31fh",
+		"tag_list": [
+			"html",
+			"javascript",
+			"css",
+			"api"
+		],
+		"public_reactions_count": 24
+	},
+	{
+		"id": 568391,
+		"title": "Frontend Security: npm-audit and Script integrity",
+		"description": "A couple of years ago, thousands of websites globally were hijacked by code, which made computers run...",
+		"cover_image": "assets/568391/2e0d5d43.jpg",
+		"published_timestamp": "2021-01-14T05:51:08Z",
+		"edited_at": "2021-01-14T08:01:29Z",
+		"url": "https://dev.to/madsstoumann/frontend-security-npm-audit-and-script-integrity-kl3",
+		"tag_list": [
+			"html",
+			"javascript",
+			"security"
+		],
+		"public_reactions_count": 93
+	},
+	{
+		"id": 567256,
+		"title": "Polygon to clip-path & SVG",
+		"description": "I've made a new clip-path-tool, which makes it easier to create equal-sided polygons, from 3-sided tr...",
+		"cover_image": "assets/567256/d4e3b053.jpg",
+		"published_timestamp": "2021-01-09T21:13:06Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/polygon-to-clip-path-svg-1om3",
+		"tag_list": [
+			"css",
+			"design",
+			"codepen",
+			"javascript"
+		],
+		"public_reactions_count": 14
+	},
+	{
+		"id": 563276,
+		"title": "How Google tracks with the ping-attribute",
+		"description": "Have you heard about the ping-attribute? It's an attribute on the &lt;a&gt;nchor-tag, that most peopl...",
+		"cover_image": "assets/563276/fc54720f.jpg",
+		"published_timestamp": "2021-01-07T13:04:12Z",
+		"edited_at": "2021-01-07T19:14:55Z",
+		"url": "https://dev.to/madsstoumann/google-tracking-and-the-ping-attribute-41d5",
+		"tag_list": [
+			"html",
+			"analytics",
+			"discuss"
+		],
+		"public_reactions_count": 16
+	},
+	{
+		"id": 560207,
+		"title": "275 bytes BMI Calculator",
+		"description": "You don't always need a large frontend framework for interactive components.   As an example, I've ma...",
+		"cover_image": "assets/560207/d6f5fc85.jpg",
+		"published_timestamp": "2021-01-04T06:28:23Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/275-bytes-bmi-calculator-1253",
+		"tag_list": [
+			"html",
+			"javascript",
+			"css",
+			"codepen"
+		],
+		"public_reactions_count": 24
+	},
+	{
+		"id": 546651,
+		"title": "Accessible Circular Sliders",
+		"description": "Just a few years ago, it was almost impossible to create range sliders without a lot of JavaScript. T...",
+		"cover_image": "assets/546651/9b1d1d0b.jpg",
+		"published_timestamp": "2021-01-02T16:45:39Z",
+		"edited_at": "2021-02-04T20:56:13Z",
+		"url": "https://dev.to/madsstoumann/accessible-circular-sliders-11p",
+		"tag_list": [
+			"css",
+			"javascript",
+			"a11y",
+			"codepen"
+		],
+		"public_reactions_count": 86
+	},
+	{
+		"id": 555414,
+		"title": "Is The Latest Always The Greatest?",
+		"description": "I don’t know how many times I’ve created an accordion in the last 20 years. My first accordions used...",
+		"cover_image": "assets/555414/3e855283.jpg",
+		"published_timestamp": "2020-12-31T11:16:19Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/is-the-latest-always-the-greatest-jok",
+		"tag_list": [
+			"html",
+			"css",
+			"javascript",
+			"discuss"
+		],
+		"public_reactions_count": 1
+	},
+	{
+		"id": 555399,
+		"title": "Fetch-22",
+		"description": "Browsers have supported fetch() for years now (except Internet Explorer), but I still see many develo...",
+		"cover_image": "assets/555399/9b50a17b.jpg",
+		"published_timestamp": "2020-12-29T11:51:24Z",
+		"edited_at": "2020-12-29T12:08:29Z",
+		"url": "https://dev.to/madsstoumann/fetch-22-41mg",
+		"tag_list": [
+			"javascript",
+			"html",
+			"codepen"
+		],
+		"public_reactions_count": 12
+	},
+	{
+		"id": 550589,
+		"title": "Creating A Button Library",
+		"description": "All websites need &lt;button&gt;s. With CSS Custom Properties it's easier than ever to maintain compl...",
+		"cover_image": "assets/550589/4922dfd9.jpg",
+		"published_timestamp": "2020-12-23T08:42:52Z",
+		"edited_at": "2020-12-23T12:13:31Z",
+		"url": "https://dev.to/madsstoumann/creating-a-button-library-4lb4",
+		"tag_list": [
+			"css",
+			"html",
+			"codepen"
+		],
+		"public_reactions_count": 12
+	},
+	{
+		"id": 549439,
+		"title": "Full Circle",
+		"description": "Earlier this year, I helped a colleague setting up a solution, I'd worked on two years ago.  It was a...",
+		"cover_image": "assets/549439/af53e95d.jpg",
+		"published_timestamp": "2020-12-22T07:58:34Z",
+		"edited_at": "2020-12-22T08:21:12Z",
+		"url": "https://dev.to/madsstoumann/full-circle-3c98",
+		"tag_list": [
+			"html",
+			"css",
+			"javascript",
+			"performance"
+		],
+		"public_reactions_count": 7
+	},
+	{
+		"id": 546368,
+		"title": "Into The Halftone-Verse",
+		"description": "About a month ago, I finally watched “Spider-Man: Into The Spider-Verse” with my son (who had seen it...",
+		"cover_image": "assets/546368/a532d27f.jpg",
+		"published_timestamp": "2020-12-19T07:34:49Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/into-the-halftone-verse-1ckl",
+		"tag_list": [
+			"css",
+			"codepen",
+			"comics",
+			"cmyk"
+		],
+		"public_reactions_count": 10
+	},
+	{
+		"id": 546109,
+		"title": "Implementing Icons",
+		"description": "Icons have played an important role since the birth of the Graphical User Interface (GUI). They can e...",
+		"cover_image": "assets/546109/43b5356e.jpg",
+		"published_timestamp": "2020-12-18T10:00:24Z",
+		"edited_at": "2021-01-01T15:33:56Z",
+		"url": "https://dev.to/madsstoumann/implementing-icons-5875",
+		"tag_list": [
+			"fundamentals",
+			"css",
+			"svg",
+			"codepen"
+		],
+		"public_reactions_count": 11
+	},
+	{
+		"id": 544006,
+		"title": "Accessible Color Pickers",
+		"description": "Most of the Color Pickers I've seen and used, haven't been accessible. They've been touch-friendly, b...",
+		"cover_image": "assets/544006/cover.png",
+		"published_timestamp": "2020-12-16T08:09:22Z",
+		"edited_at": "2021-02-04T20:55:52Z",
+		"url": "https://dev.to/madsstoumann/accessible-color-pickers-5e9p",
+		"tag_list": [
+			"css",
+			"a11y",
+			"javascript",
+			"codepen"
+		],
+		"public_reactions_count": 23
+	},
+	{
+		"id": 517453,
+		"title": "An insignificant browser-bug?",
+		"description": "Almost 3 years ago, I reported a browser-bug to the Chrome-team:  https://bugs.chromium.org/p/chromiu...",
+		"cover_image": "assets/517453/cover.png",
+		"published_timestamp": "2020-11-17T16:51:04Z",
+		"edited_at": "2020-11-17T17:18:54Z",
+		"url": "https://dev.to/madsstoumann/an-insignificant-browser-bug-4bk8",
+		"tag_list": [
+			"css",
+			"chrome",
+			"bug",
+			"typography"
+		],
+		"public_reactions_count": 4
+	},
+	{
+		"id": 516190,
+		"title": "Populate a drop-down with function-names from external module",
+		"description": "The use-case for this is probably very limited, but I found it useful, when I had to add a drop-down...",
+		"cover_image": "assets/516190/cover.png",
+		"published_timestamp": "2020-11-16T11:35:04Z",
+		"edited_at": null,
+		"url": "https://dev.to/madsstoumann/populate-a-drop-down-with-function-names-from-external-module-5o",
+		"tag_list": [
+			"javascript",
+			"html",
+			"module"
+		],
+		"public_reactions_count": 1
+	},
+	{
+		"id": "wp-698",
+		"title": "To font-size, or not to font-size",
+		"description": "Article exploring different approaches to responsive typography in CSS, comparing viewport units, calc(), and traditional responsive breakpoints.",
+		"cover_image": null,
+		"published_timestamp": "2016-08-18T09:14:00+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2016/08/18/to-font-size-or-not-to-font-size/",
+		"tag_list": [
+			"css3"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-688",
+		"title": "You spin me round (like a record)",
+		"description": "CSS animation tutorial creating a spinning vinyl record effect using keyframe animations and CSS transforms.",
+		"cover_image": null,
+		"published_timestamp": "2016-07-08T16:31:56+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2016/07/08/you-spin-me-round-like-a-record/",
+		"tag_list": [
+			"css3"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-657",
+		"title": "SVG, pair of dice",
+		"description": "Tutorial on creating interactive SVG dice with JavaScript-controlled animations and pseudo-3D effects using CSS gradients.",
+		"cover_image": null,
+		"published_timestamp": "2016-07-08T11:35:27+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2016/07/08/svg-pair-of-dice/",
+		"tag_list": [
+			"javascript",
+			"svg"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-566",
+		"title": "Front-End Detective",
+		"description": "Sometimes stuff breaks. On the web, something that was working perfectly yesterday, might suddenly not work today.",
+		"cover_image": "https://madsstoumann.wordpress.com/wp-content/uploads/2016/06/shutterstock_345441746.png",
+		"published_timestamp": "2016-06-30T21:26:50+02:00",
+		"edited_at": "2016-07-08T06:31:54+02:00",
+		"url": "https://madsstoumann.wordpress.com/2016/06/30/front-end-detective/",
+		"tag_list": [
+			"css3",
+			"html5",
+			"svg"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-554",
+		"title": "Thinking in modules",
+		"description": "The author discusses challenges with inheriting code from other developers and proposes a modular approach to sharing frontend code.",
+		"cover_image": null,
+		"published_timestamp": "2016-04-28T12:29:39+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2016/04/28/thinking-in-modules-2/",
+		"tag_list": [
+			"css3",
+			"html5"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-525",
+		"title": "Click-Delay Revisited",
+		"description": "Author explores avoiding the 300ms touch-device click-delay using CSS touch-action: manipulation.",
+		"cover_image": null,
+		"published_timestamp": "2016-04-18T11:45:18+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2016/04/18/click-delay-revisited/",
+		"tag_list": [
+			"css3"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-508",
+		"title": "Loop performance",
+		"description": "An examination of JavaScript loop performance across different syntaxes and methods.",
+		"cover_image": null,
+		"published_timestamp": "2016-01-03T13:21:41+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2016/01/03/loop-performance/",
+		"tag_list": [
+			"javascript"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-475",
+		"title": "Radial Progress Indicators",
+		"description": "A tutorial on creating space-efficient radial progress indicators using SVG.",
+		"cover_image": null,
+		"published_timestamp": "2015-12-30T15:57:35+02:00",
+		"edited_at": "2015-12-30T15:58:20+02:00",
+		"url": "https://madsstoumann.wordpress.com/2015/12/30/radial-progress-indicators/",
+		"tag_list": [
+			"css3",
+			"html5",
+			"javascript",
+			"svg"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-458",
+		"title": "Crisp SVG Icons",
+		"description": "The author discusses transitioning from icon-fonts to SVG icons.",
+		"cover_image": null,
+		"published_timestamp": "2015-11-26T14:22:40+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2015/11/26/crisp-svg-icons/",
+		"tag_list": [
+			"css3",
+			"guidelines",
+			"svg"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-460",
+		"title": "Avoiding endless scroll",
+		"description": "The article introduces HTML5's datalist element as a solution for dropdown menus on mobile devices.",
+		"cover_image": null,
+		"published_timestamp": "2015-11-18T15:35:42+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2015/11/18/avoiding-endless-scroll/",
+		"tag_list": [
+			"html5",
+			"schema.org"
+		],
+		"public_reactions_count": 1,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-422",
+		"title": "The Curse of the Click-delay!",
+		"description": "Multiple articles discuss the 300ms delay that touch-based browsers add to user click interactions.",
+		"cover_image": null,
+		"published_timestamp": "2015-11-11T16:45:07+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2015/11/11/the-curse-of-the-click-delay/",
+		"tag_list": [
+			"css3",
+			"html5",
+			"javascript",
+			"touch"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-392",
+		"title": "Tracking Facebook interactions in Google Tag Manager",
+		"description": "Guide for tracking Facebook interactions including Like, Unlike, and Comments in Universal Analytics through Google Tag Manager.",
+		"cover_image": null,
+		"published_timestamp": "2015-11-05T10:38:07+02:00",
+		"edited_at": "2015-11-05T10:41:03+02:00",
+		"url": "https://madsstoumann.wordpress.com/2015/11/05/tracking-facebook-interactions-in-google-tag-manager/",
+		"tag_list": [
+			"facebook",
+			"google-tag-manager",
+			"google-universal-analytics"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-357",
+		"title": "Welcome to Polygonia",
+		"description": "The author describes updating an old jQuery polygon plugin to Vanilla JavaScript with new features including SVG output.",
+		"cover_image": null,
+		"published_timestamp": "2015-04-18T17:33:08+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2015/04/18/welcome-to-polygonia/",
+		"tag_list": [
+			"css3",
+			"html5",
+			"javascript"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-341",
+		"title": "Product variants with schemas",
+		"description": "Demonstrates how to markup product variations using Schema.org structured data.",
+		"cover_image": null,
+		"published_timestamp": "2015-03-26T12:14:30+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2015/03/26/product-variants-with-schemas/",
+		"tag_list": [
+			"html5",
+			"schema.org"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-326",
+		"title": "Free tool for creating Structured Data / Schemas",
+		"description": "Describes creating a free tool that editors can use to write content enriched with structured data.",
+		"cover_image": null,
+		"published_timestamp": "2015-03-08T21:14:09+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2015/03/08/free-tool-for-creating-structured-data-schemas/",
+		"tag_list": [
+			"html5",
+			"javascript",
+			"schema.org"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-323",
+		"title": "Tracking Forms & User Behaviour",
+		"description": "Article exploring how to track form submissions and user behavior using HTML5 validation with Google Tag Manager.",
+		"cover_image": null,
+		"published_timestamp": "2015-02-25T22:07:43+02:00",
+		"edited_at": "2015-02-25T22:11:32+02:00",
+		"url": "https://madsstoumann.wordpress.com/2015/02/25/tracking-forms-user-behaviour-2/",
+		"tag_list": [
+			"google-tag-manager",
+			"google-universal-analytics",
+			"html5",
+			"javascript"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-304",
+		"title": "Front-End Guidelines: HTML5, SEO and Schemas",
+		"description": "Guidelines for front-end development covering HTML validation, minification, semantic markup, and schema implementation.",
+		"cover_image": null,
+		"published_timestamp": "2015-01-23T17:51:38+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2015/01/23/front-end-guidelines-html5-seo-and-schemas/",
+		"tag_list": [
+			"guidelines",
+			"html5",
+			"schema.org"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-242",
+		"title": "Front-End Guidelines: Meta and Apps",
+		"description": "Comprehensive reference for hidden HTML features that enhance experiences across devices.",
+		"cover_image": null,
+		"published_timestamp": "2015-01-23T16:19:56+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2015/01/23/front-end-guidelines-meta-and-apps/",
+		"tag_list": [
+			"guidelines",
+			"meta"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-269",
+		"title": "Front-End Guidelines: CSS",
+		"description": "Guidelines for CSS development covering conventions, naming, module-based approaches, responsiveness, and specificity.",
+		"cover_image": null,
+		"published_timestamp": "2015-01-23T15:44:27+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2015/01/23/front-end-guidelines-css/",
+		"tag_list": [
+			"css3",
+			"guidelines"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-292",
+		"title": "Front-End Guidelines: JavaScript",
+		"description": "Guidelines for JavaScript development covering conventions, variables, functions, coercion, and events.",
+		"cover_image": null,
+		"published_timestamp": "2015-01-23T15:42:15+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2015/01/23/front-end-guidelines-javascript-2/",
+		"tag_list": [
+			"guidelines",
+			"javascript",
+			"google-closure"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-51",
+		"title": "Google Tag Manager: Getting started",
+		"description": "Introduction to Google Tag Manager for managing scripts and tracking on websites.",
+		"cover_image": null,
+		"published_timestamp": "2014-08-07T16:04:49+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2014/08/07/google-tag-manager-getting-started/",
+		"tag_list": [
+			"google-tag-manager",
+			"google-universal-analytics",
+			"html5",
+			"javascript"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-104",
+		"title": "Performance: Optimizing existing content",
+		"description": "Guide on optimizing existing web content through minification, gzip compression, and proper header configuration.",
+		"cover_image": null,
+		"published_timestamp": "2014-08-03T13:47:18+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2014/08/03/performance-optimizing-existing-content/",
+		"tag_list": [
+			"css3",
+			"html5",
+			"javascript"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-101",
+		"title": ":target the dialog!",
+		"description": "A CSS technique leveraging the :target pseudo-selector for dialog and popup implementations.",
+		"cover_image": null,
+		"published_timestamp": "2014-07-29T09:40:12+02:00",
+		"edited_at": "2014-08-03T14:03:47+02:00",
+		"url": "https://madsstoumann.wordpress.com/2014/07/29/target-the-dialog-and-minify-2/",
+		"tag_list": [
+			"css3",
+			"html5"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-9",
+		"title": "Better search-results with schemas",
+		"description": "Learn how Schema.org helps search engines display richer, more informative results through structured markup.",
+		"cover_image": null,
+		"published_timestamp": "2014-07-21T11:19:35+02:00",
+		"edited_at": "2014-08-03T14:05:23+02:00",
+		"url": "https://madsstoumann.wordpress.com/2014/07/21/better-search-results-with-schemas/",
+		"tag_list": [
+			"css3",
+			"html5",
+			"javascript",
+			"schema.org",
+			"rich-snippets",
+			"schemas"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	}
 ]

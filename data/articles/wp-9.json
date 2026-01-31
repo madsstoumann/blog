@@ -1,0 +1,61 @@
+{
+  "type_of": "article",
+  "id": "wp-9",
+  "title": "Better search-results with schemas",
+  "description": "Learn how Schema.org helps search engines display richer, more informative results through structured markup.",
+  "slug": "better-search-results-with-schemas",
+  "url": "https://madsstoumann.wordpress.com/2014/07/21/better-search-results-with-schemas/",
+  "path": "/better-search-results-with-schemas",
+  "canonical_url": "https://madsstoumann.wordpress.com/2014/07/21/better-search-results-with-schemas/",
+  "cover_image": null,
+  "social_image": null,
+  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p>A decade ago the author created an e-commerce solution using Schema.org's Product schema.</p>",
+  "body_markdown": null,
+  "reading_time_minutes": 1,
+  "published_at": "2014-07-21T11:19:35+02:00",
+  "published_timestamp": "2014-07-21T11:19:35+02:00",
+  "created_at": "2014-07-21T11:19:35+02:00",
+  "edited_at": "2014-08-03T14:05:23+02:00",
+  "last_comment_at": null,
+  "comments_count": 1,
+  "public_reactions_count": 0,
+  "positive_reactions_count": 0,
+  "tag_list": "css3, html5, javascript, schema.org, rich-snippets, schemas",
+  "tags": [
+    {
+      "id": "css3",
+      "name": "css3"
+    },
+    {
+      "id": "html5",
+      "name": "html5"
+    },
+    {
+      "id": "javascript",
+      "name": "javascript"
+    },
+    {
+      "id": "schema.org",
+      "name": "schema.org"
+    },
+    {
+      "id": "rich-snippets",
+      "name": "rich-snippets"
+    },
+    {
+      "id": "schemas",
+      "name": "schemas"
+    }
+  ],
+  "language": "en",
+  "source": "wordpress",
+  "source_site": "madsstoumann.wordpress.com",
+  "readable_publish_date": "Jul 21 '14",
+  "user": {
+    "name": "Mads Stoumann",
+    "username": "madsstoumann",
+    "user_id": 1,
+    "profile_image": null,
+    "profile_image_90": null
+  }
+}

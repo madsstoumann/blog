@@ -1,0 +1,41 @@
+{
+  "type_of": "article",
+  "id": "wp-508",
+  "title": "Loop performance",
+  "description": "An examination of JavaScript loop performance across different syntaxes and methods.",
+  "slug": "loop-performance",
+  "url": "https://madsstoumann.wordpress.com/2016/01/03/loop-performance/",
+  "path": "/loop-performance",
+  "canonical_url": "https://madsstoumann.wordpress.com/2016/01/03/loop-performance/",
+  "cover_image": null,
+  "social_image": null,
+  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p>What is the fastest way to iterate over an array in JavaScript?</p>\n<p><a href=\"https://madsstoumann.wordpress.com/wp-content/uploads/2016/01/looptest.png\"><img src=\"https://madsstoumann.wordpress.com/wp-content/uploads/2016/01/looptest.png?w=615&h=499\" alt=\"LoopTest\" width=\"615\" height=\"499\" /></a></p>\n<p>Happy coding!</p>",
+  "body_markdown": null,
+  "reading_time_minutes": 1,
+  "published_at": "2016-01-03T13:21:41+02:00",
+  "published_timestamp": "2016-01-03T13:21:41+02:00",
+  "created_at": "2016-01-03T13:21:41+02:00",
+  "edited_at": null,
+  "last_comment_at": null,
+  "comments_count": 0,
+  "public_reactions_count": 0,
+  "positive_reactions_count": 0,
+  "tag_list": "javascript",
+  "tags": [
+    {
+      "id": "javascript",
+      "name": "javascript"
+    }
+  ],
+  "language": "en",
+  "source": "wordpress",
+  "source_site": "madsstoumann.wordpress.com",
+  "readable_publish_date": "Jan 3 '16",
+  "user": {
+    "name": "Mads Stoumann",
+    "username": "madsstoumann",
+    "user_id": 1,
+    "profile_image": null,
+    "profile_image_90": null
+  }
+}

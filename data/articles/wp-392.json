@@ -1,0 +1,49 @@
+{
+  "type_of": "article",
+  "id": "wp-392",
+  "title": "Tracking Facebook interactions in Google Tag Manager",
+  "description": "Guide for tracking Facebook interactions including Like, Unlike, and Comments in Universal Analytics through Google Tag Manager.",
+  "slug": "tracking-facebook-interactions-in-google-tag-manager",
+  "url": "https://madsstoumann.wordpress.com/2015/11/05/tracking-facebook-interactions-in-google-tag-manager/",
+  "path": "/tracking-facebook-interactions-in-google-tag-manager",
+  "canonical_url": "https://madsstoumann.wordpress.com/2015/11/05/tracking-facebook-interactions-in-google-tag-manager/",
+  "cover_image": null,
+  "social_image": null,
+  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p><img src=\"https://upload.wikimedia.org/wikipedia/commons/1/13/Facebook_like_thumb.png\" alt=\"\" width=\"335\" height=\"287\" /></p>\n<p>To track Facebook interactions like Like, Un-Like and Comments in Universal Analytics via Google Tag Manager.</p>\n<p>Happy tracking.</p>",
+  "body_markdown": null,
+  "reading_time_minutes": 1,
+  "published_at": "2015-11-05T10:38:07+02:00",
+  "published_timestamp": "2015-11-05T10:38:07+02:00",
+  "created_at": "2015-11-05T10:38:07+02:00",
+  "edited_at": "2015-11-05T10:41:03+02:00",
+  "last_comment_at": null,
+  "comments_count": 2,
+  "public_reactions_count": 0,
+  "positive_reactions_count": 0,
+  "tag_list": "facebook, google-tag-manager, google-universal-analytics",
+  "tags": [
+    {
+      "id": "facebook",
+      "name": "facebook"
+    },
+    {
+      "id": "google-tag-manager",
+      "name": "google-tag-manager"
+    },
+    {
+      "id": "google-universal-analytics",
+      "name": "google-universal-analytics"
+    }
+  ],
+  "language": "en",
+  "source": "wordpress",
+  "source_site": "madsstoumann.wordpress.com",
+  "readable_publish_date": "Nov 5 '15",
+  "user": {
+    "name": "Mads Stoumann",
+    "username": "madsstoumann",
+    "user_id": 1,
+    "profile_image": null,
+    "profile_image_90": null
+  }
+}

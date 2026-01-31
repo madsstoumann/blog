@@ -1,0 +1,53 @@
+{
+  "type_of": "article",
+  "id": "wp-51",
+  "title": "Google Tag Manager: Getting started",
+  "description": "Introduction to Google Tag Manager for managing scripts and tracking on websites.",
+  "slug": "google-tag-manager-getting-started",
+  "url": "https://madsstoumann.wordpress.com/2014/08/07/google-tag-manager-getting-started/",
+  "path": "/google-tag-manager-getting-started",
+  "canonical_url": "https://madsstoumann.wordpress.com/2014/08/07/google-tag-manager-getting-started/",
+  "cover_image": null,
+  "social_image": null,
+  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p>Digital marketing agencies want scripts loaded early to ensure parsing before page rendering.</p>",
+  "body_markdown": null,
+  "reading_time_minutes": 1,
+  "published_at": "2014-08-07T16:04:49+02:00",
+  "published_timestamp": "2014-08-07T16:04:49+02:00",
+  "created_at": "2014-08-07T16:04:49+02:00",
+  "edited_at": null,
+  "last_comment_at": null,
+  "comments_count": 0,
+  "public_reactions_count": 0,
+  "positive_reactions_count": 0,
+  "tag_list": "google-tag-manager, google-universal-analytics, html5, javascript",
+  "tags": [
+    {
+      "id": "google-tag-manager",
+      "name": "google-tag-manager"
+    },
+    {
+      "id": "google-universal-analytics",
+      "name": "google-universal-analytics"
+    },
+    {
+      "id": "html5",
+      "name": "html5"
+    },
+    {
+      "id": "javascript",
+      "name": "javascript"
+    }
+  ],
+  "language": "en",
+  "source": "wordpress",
+  "source_site": "madsstoumann.wordpress.com",
+  "readable_publish_date": "Aug 7 '14",
+  "user": {
+    "name": "Mads Stoumann",
+    "username": "madsstoumann",
+    "user_id": 1,
+    "profile_image": null,
+    "profile_image_90": null
+  }
+}
