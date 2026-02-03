@@ -2,16 +2,16 @@
   "type_of": "article",
   "id": "wp-104",
   "title": "Performance: Optimizing existing content",
-  "description": "Guide on optimizing existing web content through minification, gzip compression, and proper header configuration.",
+  "description": "This post is about optimizing existing content for better performance. As an example, I&#8217;ll use the Demo UI for LogiFront 2.0, available at demo.logifront.com. Note: The demo is not a working app",
   "slug": "performance-optimizing-existing-content",
   "url": "https://madsstoumann.wordpress.com/2014/08/03/performance-optimizing-existing-content/",
   "path": "/performance-optimizing-existing-content",
   "canonical_url": "https://madsstoumann.wordpress.com/2014/08/03/performance-optimizing-existing-content/",
-  "cover_image": null,
-  "social_image": null,
-  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p>This post is about optimizing existing content for better performance.</p>",
+  "body_html": "<p>This post is about <em>optimizing existing content for better performance</em>.<br />\nAs an example, I&#8217;ll use the Demo UI for LogiFront 2.0, available at <a href=\"http://demo.logifront.com\" target=\"_blank\">demo.logifront.com</a>.</p>\n<p><strong>Note:</strong> The demo is <strong>not</strong> a working app, just HTML and CSS for demo-purposes.</p>\n<p>The initial size of the index.html-file is <strong>175kb</strong>. This isn&#8217;t so bad, since the file contains the html for all the various dialogs and templates that is used in the complete app &mdash; but we can do better!</p>\n<h3>Minifying</h3>\n<p>First, I minified the html using <a href=\"http://www.willpeavy.com/minifier/\" target=\"_blank\">HTML Minifier</a>.<br />\nThis reduced the size to <strong>70kb!</strong></p>\n<p>In the regular, un-minified version of index.html, the amount of DOM-nodes is <strong>4254</strong>.</p>\n<p>Now, let&#8217;s count*) the amount of DOM-nodes in the minified version:<br />\n<strong>2463!</strong><br />\nThat&#8217;s <strong>1791 </strong>less DOM-nodes to parse.<br />\nWhy is that?<br />\nBecause all line-breaks create empty text-nodes, and because HTML Minifier removes comment-tags.</p>\n<h3>Gzipping</h3>\n<p>Gzip is the web-equivalent of zip, rar or stuffIt. It can either be dynamic (see your web-server documentation) or static/manual.<br />\nIn this example, since the html for the main app won&#8217;t change that much, let&#8217;s use static/manual gzip, so the server won&#8217;t waste processing time gzipping the file, every time a user request it.</p>\n<p>I used <a href=\"http://www.7-zip.org/\" target=\"_blank\">7-Zip</a> to gzip the file (now <strong>index.html.gz</strong>) to <strong>9.8kb</strong>!<br />\nThat&#8217;s less than 6% of the original file-size.</p>\n<h3>Content Headers</h3>\n<p>A web-server or Content Delivery Network (CDN) won&#8217;t know that the gzipped file is actually a html-file. I use Amazon S3 CDN;<br />\nHere&#8217;s how to &#8220;tell&#8221; S3 what the file is:</p>\n<p>1. Rename the file from &#8220;index.html.gz&#8221; to &#8220;index.html&#8221;.<br />\n2. Change the Content-Type-header, and add a Content-Encoding-header:</p>\n<pre class=\"brush: jscript; title: ; notranslate\" title=\"\">\r\nContent-Type : text/html\r\nContent-Encoding: gzip\r\n</pre>\n<p>The &#8220;Content-Type&#8221; tells the browser it&#8217;s an html-file, although it&#8217;s actually a gzip-file.<br />\nThe &#8220;Content-Encoding&#8221; tells the browser that the file is encoded with gzip.</p>\n<p>We can also tell S3 to use Cache-Control by adding this header:</p>\n<pre class=\"brush: jscript; title: ; notranslate\" title=\"\">\r\nCache-Control: max-age=31536000\r\n</pre>\n<h3>Other types</h3>\n<p>This method can also be used for other file-types: CSS, JavaScript, SVG, Fonts etc., with small modifications:</p>\n<h5>CSS</h5>\n<pre class=\"brush: jscript; title: ; notranslate\" title=\"\">\r\nContent-Type : text/css\r\n</pre>\n<h5>JavaScript</h5>\n<pre class=\"brush: jscript; title: ; notranslate\" title=\"\">\r\nContent-Type : application/x-javascript\r\n</pre>\n<h5>EOT, TTF &amp; WOFF</h5>\n<pre class=\"brush: jscript; title: ; notranslate\" title=\"\">\r\nContent-Type : application/octet-stream\r\n</pre>\n<h5>SVG</h5>\n<pre class=\"brush: jscript; title: ; notranslate\" title=\"\">\r\nContent-Type : image/svg+xml\r\n</pre>\n<p>Is you&#8217;re using a CSS-pre-processor like SASS or LESS, set it to output the CSS as <em>Compressed</em>.<br />\nOtherwise, use a dedicated minifier like <a href=\"http://cssminifier.com/\" target=\"_blank\">cssminifier.com</a>.</p>\n<p>For JavaScript, I use <a href=\"http://closure-compiler.appspot.com/\" target=\"_blank\">Google Closure (Advanced)</a> &mdash; but most pre-processors have a minifier-option for JavaScript as well.</p>\n<h3>Result</h3>\n<p>So, without changing a single line of code, we ended up with this:<br />\n1. HTML went from 175kb to 9.8kb.<br />\n2. CSS-files went from 67kb (combined) to 14.7kb (combined).<br />\n3. Font-files went from 105kb (combined) to 40kb (combined).</p>\n<p>The total amount of kilobytes went from <strong>347kb</strong> to <strong>64.5kb</strong> = <strong>18.62%</strong> of the original size, more than <strong>5 times faster</strong> to download &mdash; and with <strong>1791</strong> fewer nodes to parse.</p>\n<h3>Who should do this?</h3>\n<p>So &mdash; who should complete these performance-tasks? It doesn&#8217;t have to be a front- or backend-developer, since these changes don&#8217;t require any programming skills. Maybe, as Ilya Grigorik suggests in his new book, <a href=\"http://shop.oreilly.com/product/0636920028048.do\" target=\"_blank\">High Performance Browser Networking</a>, it&#8217;s time to add a new member to the web-team:<br />\n<em>The performance engineer</em>.</p>\n<p>A performance engineer could/should:</p>\n<ol>\n<li>Work closely with both front- and backend-developers, analyzing load-times, reviewing load-waterfalls, reviewing a site with both ySlow and Page Speed.</li>\n<li>Optimize the web-server: remove unnecessary headers, setting up cache-control, content-headers, gzip etc.</li>\n<li>Optimize network-performance &mdash; start by reading <a href=\"http://shop.oreilly.com/product/0636920028048.do\" target=\"_blank\">High Performance Browser Networking</a>.</li>\n</ol>\n<p><strong>*) </strong>I used a snippet for counting the DOM-nodes.<br />\nIf you haven&#8217;t used snippets before, read <a href=\"http://www.briangrinstead.com/blog/devtools-snippets\" target=\"_blank\">this article</a>.</p>\n<pre class=\"brush: jscript; title: ; notranslate\" title=\"\">\r\nNode.prototype.countChildNodes = function() {\r\n  return this.hasChildNodes()\r\n    ? Array.prototype.slice.apply(this.childNodes).map(function(el) {\r\n        return 1 + el.countChildNodes();\r\n      }).reduce(function(previousValue, currentValue, index, array){\r\n        return previousValue + currentValue;\r\n      })\r\n    : 0;\r\n};\r\ndocument.countChildNodes();\r\n</pre>\n<p>Run the snippet with CTRL+ENTER.</p>\n",
   "body_markdown": null,
-  "reading_time_minutes": 1,
+  "cover_image": "assets/generic_cover.jpg",
+  "social_image": "assets/generic_cover.jpg",
+  "reading_time_minutes": 4,
   "published_at": "2014-08-03T13:47:18+02:00",
   "published_timestamp": "2014-08-03T13:47:18+02:00",
   "created_at": "2014-08-03T13:47:18+02:00",
@@ -22,28 +22,19 @@
   "positive_reactions_count": 0,
   "tag_list": "css3, html5, javascript",
   "tags": [
-    {
-      "id": "css3",
-      "name": "css3"
-    },
-    {
-      "id": "html5",
-      "name": "html5"
-    },
-    {
-      "id": "javascript",
-      "name": "javascript"
-    }
+    "css3",
+    "html5",
+    "javascript"
   ],
   "language": "en",
   "source": "wordpress",
   "source_site": "madsstoumann.wordpress.com",
-  "readable_publish_date": "Aug 3 '14",
+  "readable_publish_date": "Aug 3 ' 14",
   "user": {
     "name": "Mads Stoumann",
     "username": "madsstoumann",
-    "user_id": 1,
-    "profile_image": null,
-    "profile_image_90": null
+    "user_id": 9869553,
+    "profile_image": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G",
+    "profile_image_90": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G"
   }
 }

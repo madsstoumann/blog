@@ -1,17 +1,17 @@
 {
   "type_of": "article",
   "id": "wp-323",
-  "title": "Tracking Forms & User Behaviour",
-  "description": "Article exploring how to track form submissions and user behavior using HTML5 validation with Google Tag Manager.",
+  "title": "Tracking Forms &amp; User Behaviour",
+  "description": "Tracking valid form-submissions is pretty easy with Google Tag Manager — it&#8217;s Form-Submit-listener has a &#8220;Check Validation&#8221;-setting: Only fire tags if the form will successfully subm",
   "slug": "tracking-forms-user-behaviour-2",
   "url": "https://madsstoumann.wordpress.com/2015/02/25/tracking-forms-user-behaviour-2/",
   "path": "/tracking-forms-user-behaviour-2",
   "canonical_url": "https://madsstoumann.wordpress.com/2015/02/25/tracking-forms-user-behaviour-2/",
-  "cover_image": null,
-  "social_image": null,
-  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p>Tracking valid form-submissions with Google Tag Manager and HTML5's built-in form-validation.</p>",
+  "body_html": "<p>Tracking valid form-submissions is pretty easy with Google Tag Manager — it&#8217;s Form-Submit-listener has a &#8220;Check Validation&#8221;-setting:</p>\n<blockquote><p>Only fire tags if the form will successfully submit. If unselected, fire tags whenever a user tries to submit the form.</p></blockquote>\n<p>Unfortunately, this will not work with back-end validated forms, unless the back-end provides information to Google Tag Managers <em>dataLayer</em> upon successful submission.</p>\n<p>This is not very generic, and often requires extra back-end work per form — so let&#8217;s look at other ways to solve this problem in a more user-friendly and generic way.</p>\n<p>In this blog-post, we&#8217;ll look into <strong>HTML5&#8217;s built-in form-validation</strong>.<br />\nWe&#8217;ll start with a basic sign-up form (<a title=\"Basic form example\" href=\"http://www.stoumann.dk/examples/gtmform/basic.html\" target=\"_blank\">Online example here</a>).:</p>\n<p><img src=\"assets/wp-323/1c450928.png\" alt=\"Basic form example\" /></p>\n<p>In order to trigger the browser&#8217;s built-in, and thus client-side, form-validation — we need to add some HTML5-attributes to our form&#8217;s inputs:</p>\n<p><strong>required</strong><br />\nThis boolean attribute tells the browser that the input-field is required. Some browsers will also match the input&#8217;s type upon validating, ie.: &#8220;date&#8221;, &#8220;email&#8221;, &#8220;number&#8221;, &#8220;text&#8221; etc.</p>\n<p><strong>title</strong><br />\nThe <em>title</em>-attribute provides a tooltip for the input, but it will <em>also</em> be added to some browsers&#8217; validation-message if the input is empty or incorrect.</p>\n<p><strong>pattern</strong><br />\nThe <em>pattern</em>-attribute acts as a <em>regular expression</em>-template for the given input, ie:</p>\n<pre class=\"brush: xml; title: ; notranslate\" title=\"\">\r\n&lt;input type=&quot;tel&quot; pattern=&quot;\\d{8}&quot; /&gt;\r\n</pre>\n<p>— will match 8 digits.</p>\n<p>Mission (almost) accomplished!</p>\n<p>But HTML5 has more to offer us. By adding the <em>placeholder</em>-attribute, we can easily show the user how the value is supposed to look like.</p>\n<p>And by adding the <em>title</em>-attribute to the input&#8217;s label for further information — and beef it up with a little CSS, the odds of the user submitting an incorrect filled-out form are low.</p>\n<h2>CSS Pseudo-classes</h2>\n<p>HTML5&#8217;s form validation also provides a range of CSS-pseudo-classes:</p>\n<ul>\n<li>valid</li>\n<li>invalid</li>\n<li>required</li>\n<li>optional</li>\n<li>in-range</li>\n<li>out-of-range</li>\n<li>read-only</li>\n<li>read-write</li>\n</ul>\n<p>—Mixed with SVG background-images (for those wonderful retina-displays!) and an <em>autofocus</em>-attribute for the first input, the form now looks like this (<a title=\"HTML5 form example\" href=\"http://www.stoumann.dk/examples/gtmform/h5form.html\" target=\"_blank\">Online example here</a>).:</p>\n<p><img src=\"assets/wp-323/d5907dff.png\" alt=\"Html5 form\" /></p>\n<p>—and that is <em>without</em> any JavaScript, just pure HTML5 and CSS3!</p>\n<p>By checking the &#8220;Check Validation&#8221;-setting in Google Tag Manager, the form submit-event will now only be fired if the form passes the browser&#8217;s built-in validation.</p>\n<h2>Tracking user behavior</h2>\n<p>By hacking into the browsers built-in validation through JavaScript, we can track the users&#8217; behavior and thus gain insights into the form&#8217;s usability.<br />\nMaybe the required password-strucure is too complex? Or something else?</p>\n<p>By temporarily by-passing the browsers built-in validation, we will check the <em>validity</em>-object for <em>valid</em>; we&#8217;ll ignore empty inputs (<em>valueMissing</em>), but only track inputs that are incorrectly filled out.</p>\n<p>Those values will be added to a custom event in Google Tag Manager (excerpt):</p>\n<pre class=\"brush: jscript; title: ; notranslate\" title=\"\">\r\nfor (i = l; i--;) {\r\n  oField = oForm.elements[i];\r\n  if (oField.nodeName !== &quot;INPUT&quot; &amp;&amp; oField.nodeName !== &quot;TEXTAREA&quot; &amp;&amp; oField.nodeName !== &quot;SELECT&quot;) continue;\r\n  if (typeof oField.willValidate !== &quot;undefined&quot;) oField.checkValidity();\r\n\r\n  if (!oField.validity.valid) {\r\n    // Do not track empty input-fields\r\n    if (!oField.validity.valueMissing) {\r\n      oEvent = \r\n      {\r\n        &quot;event&quot;: &quot;setEvent&quot;,\r\n        &quot;eventAction&quot;: &quot;formValidationError&quot;,\r\n        &quot;eventCategory&quot;: oForm.name + &quot;_&quot; + (oField.name || oField.id),\r\n        &quot;eventLabel&quot;:  oField.value\r\n      };\r\n      window.dataLayer.push(oEvent);\r\n    }\r\n    break;\r\n  } \r\n}\r\n</pre>\n<p>—Now, going to Google Tag Manager&#8217;s &#8220;Behavior &gt; Events&#8221;-section, under &#8220;formValidationError&#8221;, we can look up our form and see precisely which inputs cause problems for the users!</p>\n<h2>Final example</h2>\n<p>The final example, including the tracking script is <a title=\"HTML5 form example\" href=\"http://www.stoumann.dk/examples/gtmform/index.html\" target=\"_blank\">available here</a> (view source/inspect to see the HTML, CSS and JavaScript).</p>\n<h2>Legacy browsers</h2>\n<p>It&#8217;s only the so-called <em>evergreen</em>-browsers that supports HTML5 forms and it&#8217;s CSS pseudo-classes. The forms above will work in IE9 and below, but the validation and styling will be gone.</p>\n<p>However, our focus was on enhancing existing (back-end-validated) forms — and by doing these small changes, the user-experience will be significantly better for at least 70% of the users.</p>\n<p>But all is not lost for legacy browsers. The <a href=\"http:///github.com/ryanseddon/H5F\" target=\"_blank\">H5F-project </a>provides HTML5 form-validation for older browsers — but without behavior-tracking (this would require a customized, re-written version of the H5F-script).</p>\n<p>Finally, one could also imagine a script that would add HTML5-validation to existing forms automatically, with a few customizations per client.</p>\n",
   "body_markdown": null,
-  "reading_time_minutes": 1,
+  "cover_image": "assets/generic_cover.jpg",
+  "social_image": "assets/generic_cover.jpg",
+  "reading_time_minutes": 4,
   "published_at": "2015-02-25T22:07:43+02:00",
   "published_timestamp": "2015-02-25T22:07:43+02:00",
   "created_at": "2015-02-25T22:07:43+02:00",
@@ -22,32 +22,20 @@
   "positive_reactions_count": 0,
   "tag_list": "google-tag-manager, google-universal-analytics, html5, javascript",
   "tags": [
-    {
-      "id": "google-tag-manager",
-      "name": "google-tag-manager"
-    },
-    {
-      "id": "google-universal-analytics",
-      "name": "google-universal-analytics"
-    },
-    {
-      "id": "html5",
-      "name": "html5"
-    },
-    {
-      "id": "javascript",
-      "name": "javascript"
-    }
+    "google-tag-manager",
+    "google-universal-analytics",
+    "html5",
+    "javascript"
   ],
   "language": "en",
   "source": "wordpress",
   "source_site": "madsstoumann.wordpress.com",
-  "readable_publish_date": "Feb 25 '15",
+  "readable_publish_date": "Feb 25 ' 15",
   "user": {
     "name": "Mads Stoumann",
     "username": "madsstoumann",
-    "user_id": 1,
-    "profile_image": null,
-    "profile_image_90": null
+    "user_id": 9869553,
+    "profile_image": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G",
+    "profile_image_90": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G"
   }
 }

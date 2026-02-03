@@ -2,16 +2,16 @@
   "type_of": "article",
   "id": "wp-460",
   "title": "Avoiding endless scroll",
-  "description": "The article introduces HTML5's datalist element as a solution for dropdown menus on mobile devices.",
+  "description": "Have you ever tried to pick your country from a drop-down on a mobile phone? It&#8217;s either endless &#8220;wheeling&#8221; or scrolling. It&#8217;s painful. Especially if you live in Zimbabwe! And ",
   "slug": "avoiding-endless-scroll",
   "url": "https://madsstoumann.wordpress.com/2015/11/18/avoiding-endless-scroll/",
   "path": "/avoiding-endless-scroll",
   "canonical_url": "https://madsstoumann.wordpress.com/2015/11/18/avoiding-endless-scroll/",
-  "cover_image": null,
-  "social_image": null,
-  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p>Have you ever tried to pick your country from a drop-down on a mobile phone?</p>\n<p><a href=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/datalist.png\"><img src=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/datalist.png?w=297&h=147\" alt=\"datalist\" width=\"297\" height=\"147\" /></a></p>\n<p>HTML5 introduced a new element, the &lt;datalist&gt;, which is a nice, fast and JavaScript-free autosuggest.</p>\n<p>Happy coding!</p>",
+  "body_html": "<p>Have you ever tried to pick your country from a drop-down on a mobile phone?<br />\nIt&#8217;s either endless &#8220;wheeling&#8221; or scrolling. It&#8217;s painful.<br />\nEspecially if you live in Zimbabwe!<br />\nAnd when you finally reach your country, you&#8217;re too exhausted to click it.</p>\n<p>HTML5 introduced a new element, the &lt;datalist&gt;, which, unfortunately, is not used that many places — yet!</p>\n<p>It&#8217;s basically a list:</p>\n<pre class=\"brush: xml; title: ; notranslate\" title=\"\">\r\n&lt;datalist id=&quot;country-select-datalist&quot;&gt;\r\n  &lt;option&gt;Armenia&lt;/option&gt;\r\n  &lt;option&gt;Bahrain&lt;/option&gt;\r\n  ...\r\n&lt;/datalist&gt;\r\n</pre>\n<p>That&#8217;s associated with an &lt;input&gt;-field:</p>\n<pre class=\"brush: xml; title: ; notranslate\" title=\"\">\r\n&lt;input type=&quot;text&quot; list=&quot;country-select-datalist&quot;&gt;\r\n</pre>\n<p>The result is this:</p>\n<p><a href=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/datalist.png\"><img loading=\"lazy\" data-attachment-id=\"467\" data-permalink=\"https://madsstoumann.wordpress.com/2015/11/18/avoiding-endless-scroll/datalist/\" data-orig-file=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/datalist.png\" data-orig-size=\"297,147\" data-comments-opened=\"1\" data-image-meta=\"{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}\" data-image-title=\"datalist\" data-image-description=\"\" data-image-caption=\"\" data-medium-file=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/datalist.png?w=297\" data-large-file=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/datalist.png?w=297\" class=\"alignnone size-full wp-image-467\" src=\"assets/wp-460/b0bcff01.png\" alt=\"datalist\" width=\"297\" height=\"147\" srcset=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/datalist.png 297w, https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/datalist.png?w=150&amp;h=74 150w\" sizes=\"(max-width: 297px) 100vw, 297px\" /></a></p>\n<p>All browsers — except Safari — supports &lt;datalist&gt;. Even Internet Explorer 10!<br />\nIt&#8217;s a nice, fast and JavaScript-free autosuggest.</p>\n<p>For Safari, there are plenty of polyfills to make datalist work, among them Lea Verous <a href=\"http://leaverou.github.io/awesomplete/\" target=\"_blank\">Awesomplete</a>, which is very easy to work with.</p>\n<p>If you&#8217;re using the structure above (there are other options as well), all you have to do, is add the class &#8220;awesomplete&#8221; to the &lt;input&gt;-field:</p>\n<pre class=\"brush: xml; title: ; notranslate\" title=\"\">\r\n&lt;input type=&quot;text&quot; list=&quot;country-select-datalist&quot; class=&quot;awesomplete&quot;&gt;\r\n</pre>\n<p>The result is slightly different:</p>\n<p><a href=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/awesomplete.png\"><img loading=\"lazy\" data-attachment-id=\"466\" data-permalink=\"https://madsstoumann.wordpress.com/2015/11/18/avoiding-endless-scroll/awesomplete/\" data-orig-file=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/awesomplete.png\" data-orig-size=\"303,125\" data-comments-opened=\"1\" data-image-meta=\"{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}\" data-image-title=\"awesomplete\" data-image-description=\"\" data-image-caption=\"\" data-medium-file=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/awesomplete.png?w=300\" data-large-file=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/awesomplete.png?w=303\" class=\"alignnone size-full wp-image-466\" src=\"assets/wp-460/62d478c4.png\" alt=\"awesomplete\" width=\"303\" height=\"125\" srcset=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/awesomplete.png 303w, https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/awesomplete.png?w=150&amp;h=62 150w, https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/awesomplete.png?w=300&amp;h=124 300w\" sizes=\"(max-width: 303px) 100vw, 303px\" /></a></p>\n<p>For structured markup, you can add the <em>ListItem</em>-schema:</p>\n<pre class=\"brush: xml; title: ; notranslate\" title=\"\">\r\n&lt;datalist id=&quot;country-select-datalist&quot; itemscope=&quot;&quot; itemtype=&quot;http://schema.org/ListItem&quot;&gt;\r\n  &lt;option itemprop=&quot;name&quot;&gt;Armenia&lt;/option&gt;\r\n  &lt;option itemprop=&quot;name&quot;&gt;Bahrain&lt;/option&gt;\r\n ...\r\n&lt;/datalist&gt;\r\n</pre>\n<p>Happy coding!</p>\n",
   "body_markdown": null,
-  "reading_time_minutes": 1,
+  "cover_image": "assets/generic_cover.jpg",
+  "social_image": "assets/generic_cover.jpg",
+  "reading_time_minutes": 2,
   "published_at": "2015-11-18T15:35:42+02:00",
   "published_timestamp": "2015-11-18T15:35:42+02:00",
   "created_at": "2015-11-18T15:35:42+02:00",
@@ -22,24 +22,18 @@
   "positive_reactions_count": 1,
   "tag_list": "html5, schema.org",
   "tags": [
-    {
-      "id": "html5",
-      "name": "html5"
-    },
-    {
-      "id": "schema.org",
-      "name": "schema.org"
-    }
+    "html5",
+    "schema.org"
   ],
   "language": "en",
   "source": "wordpress",
   "source_site": "madsstoumann.wordpress.com",
-  "readable_publish_date": "Nov 18 '15",
+  "readable_publish_date": "Nov 18 ' 15",
   "user": {
     "name": "Mads Stoumann",
     "username": "madsstoumann",
-    "user_id": 1,
-    "profile_image": null,
-    "profile_image_90": null
+    "user_id": 9869553,
+    "profile_image": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G",
+    "profile_image_90": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G"
   }
 }

@@ -2,16 +2,16 @@
   "type_of": "article",
   "id": "wp-357",
   "title": "Welcome to Polygonia",
-  "description": "The author describes updating an old jQuery polygon plugin to Vanilla JavaScript with new features including SVG output.",
+  "description": "Four years ago, for a brief period of time, I went to the dark side. Yes, I&#8217;m not proud to admit it, but I actually wrote a jQuery-plugin: jPolygon! These days I only write Vanilla JS &#8212; I ",
   "slug": "welcome-to-polygonia",
   "url": "https://madsstoumann.wordpress.com/2015/04/18/welcome-to-polygonia/",
   "path": "/welcome-to-polygonia",
   "canonical_url": "https://madsstoumann.wordpress.com/2015/04/18/welcome-to-polygonia/",
-  "cover_image": null,
-  "social_image": null,
-  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p>Four years ago, I wrote a jQuery-plugin: jPolygon! These days I write Vanilla JS.</p>\n<p><img src=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/04/screenshot.jpg?w=615&h=557\" alt=\"screenshot\" width=\"615\" height=\"557\" /></p>\n<p>So, go ahead and create some polygons!</p>",
+  "body_html": "<p>Four years ago, for a brief period of time, I went to <em>the dark side</em>.<br />\nYes, I&#8217;m not proud to admit it, but I actually wrote a <em>jQuery-plugin: jPolygon!</em><br />\nThese days <del>I <em>only</em> write Vanilla JS</del> &#8212; I write whatever I&#8217;m told to write!</p>\n<p>Anyway, the old jQuery-plugin has been updated to Vanilla JS. A bunch of new features have been added &#8212; and, most important: I&#8217;ve added the ability to save and view the output as SVG.</p>\n<p><img loading=\"lazy\" src=\"assets/wp-357/3515af1d.jpg\" alt=\"screenshot\" width=\"615\" height=\"557\" /></p>\n<p>As the plugin/app utilizes a bunch of new(er) HTML5-elements, such as:</p>\n<pre class=\"brush: xml; title: ; notranslate\" title=\"\">\r\n&lt;input type=&quot;range&quot;&gt;\r\n&lt;input type=&quot;color&quot;&gt;\r\n&lt;input type=&quot;number&quot;&gt;\r\n&lt;details&gt;&lt;summary&gt;Fold-Out Stuff&lt;/summary&gt;&lt;/details&gt;\r\n</pre>\n<p>&#8212;I recommend using Google Chrome.</p>\n<p>Kudos must go to my good &#8216;ol friend, Torben, who helped with the math behind the original function for calculating points in a polygon: a beautiful, 10-line function that does all the hard work.</p>\n<p>So, go ahead and create some polygons!<br />\nIf you need &#8220;tactical elements&#8221;, such as a splash like <em>&#8220;Save 10%&#8221;</em>, it looks <em>so much better</em> with SVG than, say PNG, on a retina-display.</p>\n<p>If you <em>do want a PNG</em>, however, there&#8217;s also a big green button, &#8220;Generate PNG&#8221;, just for that.</p>\n<p><a title=\"Polygonia\" href=\"http://www.stoumann.dk/examples/polygon/\" target=\"_blank\">Click here to see a live demo!</a></p>\n<p>To view, edit or fumble with the code, go to the <a href=\"http://github.com/madsstoumann/vanilla/tree/master/polygonia\" target=\"_blank\">Github-page</a>.</p>\n",
   "body_markdown": null,
-  "reading_time_minutes": 1,
+  "cover_image": "assets/generic_cover.jpg",
+  "social_image": "assets/generic_cover.jpg",
+  "reading_time_minutes": 2,
   "published_at": "2015-04-18T17:33:08+02:00",
   "published_timestamp": "2015-04-18T17:33:08+02:00",
   "created_at": "2015-04-18T17:33:08+02:00",
@@ -22,28 +22,19 @@
   "positive_reactions_count": 0,
   "tag_list": "css3, html5, javascript",
   "tags": [
-    {
-      "id": "css3",
-      "name": "css3"
-    },
-    {
-      "id": "html5",
-      "name": "html5"
-    },
-    {
-      "id": "javascript",
-      "name": "javascript"
-    }
+    "css3",
+    "html5",
+    "javascript"
   ],
   "language": "en",
   "source": "wordpress",
   "source_site": "madsstoumann.wordpress.com",
-  "readable_publish_date": "Apr 18 '15",
+  "readable_publish_date": "Apr 18 ' 15",
   "user": {
     "name": "Mads Stoumann",
     "username": "madsstoumann",
-    "user_id": 1,
-    "profile_image": null,
-    "profile_image_90": null
+    "user_id": 9869553,
+    "profile_image": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G",
+    "profile_image_90": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G"
   }
 }

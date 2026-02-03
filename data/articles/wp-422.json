@@ -2,16 +2,16 @@
   "type_of": "article",
   "id": "wp-422",
   "title": "The Curse of the Click-delay!",
-  "description": "Multiple articles discuss the 300ms delay that touch-based browsers add to user click interactions.",
+  "description": "There are multiple articles around the Web about what has been dubbed &#8220;The curse of the 300ms delay&#8221;. It&#8217;s a delay, the touch-based browser adds to a user-click-interaction. When you",
   "slug": "the-curse-of-the-click-delay",
   "url": "https://madsstoumann.wordpress.com/2015/11/11/the-curse-of-the-click-delay/",
   "path": "/the-curse-of-the-click-delay",
   "canonical_url": "https://madsstoumann.wordpress.com/2015/11/11/the-curse-of-the-click-delay/",
-  "cover_image": null,
-  "social_image": null,
-  "body_html": "<p><a href=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/curse.png\"><img src=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/curse.png?w=615&h=441\" alt=\"Curse of the Click-delay\" width=\"615\" height=\"441\" /></a></p>\n<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p>There are multiple articles around the Web about what has been dubbed \"The curse of the 300ms delay\".</p>\n<p>Now, go remove those annoying delays!</p>",
+  "cover_image": "assets/generic_cover.jpg",
+  "social_image": "assets/generic_cover.jpg",
+  "body_html": "<p>There are multiple articles around the Web about what has been dubbed <a href=\"http://blog.ionic.io/hybrid-apps-and-the-curse-of-the-300ms-delay/\" target=\"_blank\">&#8220;The curse of the 300ms delay&#8221;</a>. It&#8217;s a delay, the touch-based browser adds to a user-click-interaction.</p>\n<p>When you&#8217;re clicking on an element in a browser, this is what&#8217;s happening:</p>\n<blockquote><p>1. The user touches the display, the browser fires off touchstart<br />\n2. The user stops touching the display, the browser fires off touchend<br />\n3. The browser waits 300ms to see if the user taps again<br />\n4. If the user didn’t tap again, the browser fires off click</p></blockquote>\n<p>For most use-cases this is OK &#8211; in the example below, a checkbox has been styled like a switch &#8211; using only HTML and CSS:</p>\n<div class=\"embed-codepen\"><iframe title=\"Switch 1 - No JavaScript\" id=\"cp_embed_rOqWQx\" src=\"https://codepen.io/stoumann/embed/preview/rOqWQx?default-tabs=css%2Cresult&amp;height=300&amp;host=https%3A%2F%2Fcodepen.io&amp;slug-hash=rOqWQx\" scrolling=\"no\" frameborder=\"0\" height=\"300\" allowtransparency=\"true\" allowfullscreen=\"true\" allowpaymentrequest=\"true\" class=\"cp_embed_iframe\" style=\"width: 100%; overflow: hidden;\"></iframe></div>\n<p><strong>You should test this on a touch-device</strong>.</p>\n<p>You&#8217;ll notice the grey box around the switch and the label while clicking.<br />\nLuckily, this can be disabled with:</p>\n<pre class=\"brush: css; title: ; notranslate\" title=\"\">\r\n-webkit-tap-highlight-color: rgba(0, 0, 0, 0);\r\n</pre>\n<p>The callout/context-menu can be disabled with:</p>\n<pre class=\"brush: css; title: ; notranslate\" title=\"\">\r\n-webkit-touch-callout: none;\r\n</pre>\n<p>But the 300ms delay is still there. And when you&#8217;re aware of it — it seems <em>even longer</em> than 300ms!</p>\n<p>There are a number of scripts that can remove the delay and fire the events immediately, the most popular being <a href=\"https://github.com/ftlabs/fastclick\" target=\"_blank\">fastClick</a> and <a href=\"https://github.com/munkychop/swiftclick\" target=\"_blank\">swiftClick</a>.</p>\n<p>While these are complex scripts that take a long list of scenarios into account, for my use &mdash; the checkbox-hack &mdash; a much simpler solution can be used:</p>\n<pre class=\"brush: jscript; title: ; notranslate\" title=\"\">\r\n/**\r\n*\tfastcheck.js\r\n*\tFast checkbox/radio-button-check for touch-devices, removing the 300ms delay\r\n*\t(c)\tCopyright 2015 Mads Stoumann\r\n*/\r\n(function () {\r\n&quot;use strict&quot;;\r\nif(&quot;onorientationchange&quot; in window &amp;&amp; &quot;ontouchstart&quot; in window) {\r\n\tdocument.body.addEventListener(&quot;touchstart&quot;, function(e) {\r\n\t  \tvar \r\n\t  \toTarget = e.target,\r\n\t  \tsTarget = oTarget.nodeName.toLowerCase();\r\n\t\tif (sTarget === &quot;label&quot;) window.__activeElement = oTarget;\r\n\t}, false);\r\n\t\r\n\tdocument.body.addEventListener(&quot;touchend&quot;, function(e) {\r\n\t  \tvar \r\n\t  \toInput,\r\n\t  \toTarget, \r\n\t  \toTouch = e.changedTouches[0];\r\n    \toTarget = document.elementFromPoint(oTouch.clientX, oTouch.clientY);\r\n\t\r\n\t\tif (oTarget === window.__activeElement) oInput = document.querySelector(&quot;#&quot; + oTarget.getAttribute(&quot;for&quot;));\r\n\t\tif (oInput) {\r\n\t\t\tif (oInput[&quot;type&quot;] === &quot;checkbox&quot;) {\r\n\t\t\t\toInput.checked = !oInput.checked;\r\n\t\t\t}\r\n\t\t\telse if (oInput[&quot;type&quot;] === &quot;radio&quot;) {\r\n\t\t\t\t/* If a radio-button should be unselectable, add attribute: data-unselect=&quot;true&quot; */\r\n\t\t\t\toInput.getAttribute(&quot;data-unselect&quot;) ? oInput.checked = !oInput.checked : oInput.checked = true;\r\n\t\t\t}\r\n\t\t\te.stopPropagation();\r\n\t\t\te.preventDefault();\r\n\t\t}\r\n\t}, false);\r\n}\r\n})();\r\n</pre>\n<p>The final result can be seen here (if you&#8217;re using a desktop-browser, it will be identical to the first example!):</p>\n<div class=\"embed-codepen\"><iframe title=\"Switch 2 - Custom JavaScript\" id=\"cp_embed_QjZvLx\" src=\"https://codepen.io/stoumann/embed/preview/QjZvLx?default-tabs=css%2Cresult&amp;height=300&amp;host=https%3A%2F%2Fcodepen.io&amp;slug-hash=QjZvLx\" scrolling=\"no\" frameborder=\"0\" height=\"300\" allowtransparency=\"true\" allowfullscreen=\"true\" allowpaymentrequest=\"true\" class=\"cp_embed_iframe\" style=\"width: 100%; overflow: hidden;\"></iframe></div>\n<p>The gzipped and <a href=\"http://closure-compiler.appspot.com/home\" target=\"_blank\">closure-compressed</a> version is <strong>345 bytes</strong>.</p>\n<p>The script &#8220;captures&#8221; the clicked element on <em>touchstart</em>, and compares that to the element captured on <em>touchend</em>.</p>\n<p>If the element is a label-element and it&#8217;s associated input is either a radio-button or a checkbox, that element is clicked immediately.<br />\nThe normal click-event is then cancelled.</p>\n<h2>Callback Functions</h2>\n<p>I usually assign events/functions via a &#8220;data-fn&#8221;-attribute:</p>\n<pre class=\"brush: xml; title: ; notranslate\" title=\"\">\r\n&lt;label for=&quot;switch_2&quot; data-fn=&quot;myTestFunc&quot; data-pr=&quot;My custom parameter&quot;&gt;\r\n</pre>\n<p>There&#8217;s also a &#8220;data-tp&#8221;, which defaults to &#8220;click&#8221;.<br />\nMultiple functions (and parameters) are split by &#8220;+&#8221;, multiple parameters within a function are split on &#8220;|&#8221;.</p>\n<p>If you want to run additional functionality when clicking on a label/checkbox/radio, you can use this slightly longer script (<strong>537 bytes gzipped and compressed</strong>) and the method described above:</p>\n<pre class=\"brush: jscript; title: ; notranslate\" title=\"\">\r\n/**\r\n*\tfastcheck_fn.js\r\n*\tFast checkbox/radio-button-check for touch-devices, removing the 300ms delay\r\n*\tExecutes functions in data-fn attributes\r\n*\t(c)\tCopyright 2015 Mads Stoumann\r\n*/\r\n(function (bRunFunc) { \r\n&quot;use strict&quot;;\r\nif(&quot;onorientationchange&quot; in window &amp;&amp; &quot;ontouchstart&quot; in window) {\r\n\tdocument.body.addEventListener(&quot;touchstart&quot;, function(e) {\r\n\t  \tvar \r\n\t  \toTarget = e.target,\r\n\t  \tsTarget = oTarget.nodeName.toLowerCase();\r\n\t\tif (sTarget === &quot;label&quot;) window.__activeElement = oTarget;\r\n\t}, false);\r\n\t\r\n\tdocument.body.addEventListener(&quot;touchend&quot;, function(e) {\r\n\t  \tvar \r\n\t  \toInput,\r\n\t  \toTarget, \r\n\t  \toTouch = e.changedTouches[0];\r\n    \toTarget = document.elementFromPoint(oTouch.clientX, oTouch.clientY);\r\n\t\r\n\t\tif (oTarget === window.__activeElement) oInput = document.querySelector(&quot;#&quot; + oTarget.getAttribute(&quot;for&quot;));\r\n\t\tif (oInput) {\r\n\t\t\tif (oInput[&quot;type&quot;] === &quot;checkbox&quot;) {\r\n\t\t\t\toInput.checked = !oInput.checked;\r\n\t\t\t}\r\n\t\t\telse if (oInput[&quot;type&quot;] === &quot;radio&quot;) {\r\n\t\t\t\t/* If a radio-button should be unselectable, add attribute: data-unselect=&quot;true&quot; */\r\n\t\t\t\toInput.getAttribute(&quot;data-unselect&quot;) ? oInput.checked = !oInput.checked : oInput.checked = true;\r\n\t\t\t}\r\n\t\t\te.stopPropagation();\r\n\t\t\te.preventDefault();\r\n\t\t\tif (bRunFunc) getFunc(oTarget), getFunc(oInput);\r\n\t\t}\r\n\t}, false);\r\n\t\r\n\tvar getFunc = function(oElm) {\r\n\t\tvar\r\n\t\taFunc,\r\n\t\taFuncPar,\r\n\t\taParam,\r\n\t\ti,\r\n\t\toFunc,\r\n\t\tsFunc = (oElm &amp;&amp; oElm.getAttribute(&quot;data-fn&quot;)),\r\n\t\tsFuncPar;\r\n\t\t\r\n\t\tif (sFunc &amp;&amp; !oElm.getAttribute(&quot;data-tp&quot;)) {\r\n            aFunc = sFunc.split(&quot;+&quot;);\r\n            sFuncPar = oElm.getAttribute(&quot;data-pr&quot;);\r\n            aFuncPar = sFuncPar ? sFuncPar.split(&quot;+&quot;) : [];\r\n\r\n            for (i = 0; i &lt; aFunc.length; i++) {\r\n                aParam = aFuncPar[i] ? aFuncPar[i].split(&quot;|&quot;) : [];\r\n                aParam.push(oElm);\r\n                oFunc = getScope(aFunc[i]);\r\n                aParam.unshift(oElm);\r\n                oFunc.apply(oElm, aParam);\r\n            }\r\n        }\r\n\t};\r\n\t\r\n\tvar getScope = function (sFunc) {\r\n\t\tvar\r\n\t\taFunc = sFunc.split(&quot;.&quot;),\r\n\t\ti,\r\n\t\toFunc = window[aFunc[0]],\r\n\t\tnLen = aFunc.length;\r\n\t\r\n\t\tif (nLen) for (i = 1; i &lt; nLen; i++) oFunc = oFunc[aFunc[i]];\r\n\t\tif (typeof oFunc === &quot;function&quot;) return oFunc;\r\n\t};\r\n}\r\n})(true);\r\n</pre>\n<p><strong>Disclaimer (!):</strong> All the code above have only been tested on Codepen.io, not in a production-environment.<br />\nNow, go remove those annoying delays!</p>\n",
   "body_markdown": null,
-  "reading_time_minutes": 1,
+  "reading_time_minutes": 5,
   "published_at": "2015-11-11T16:45:07+02:00",
   "published_timestamp": "2015-11-11T16:45:07+02:00",
   "created_at": "2015-11-11T16:45:07+02:00",
@@ -22,32 +22,20 @@
   "positive_reactions_count": 0,
   "tag_list": "css3, html5, javascript, touch",
   "tags": [
-    {
-      "id": "css3",
-      "name": "css3"
-    },
-    {
-      "id": "html5",
-      "name": "html5"
-    },
-    {
-      "id": "javascript",
-      "name": "javascript"
-    },
-    {
-      "id": "touch",
-      "name": "touch"
-    }
+    "css3",
+    "html5",
+    "javascript",
+    "touch"
   ],
   "language": "en",
   "source": "wordpress",
   "source_site": "madsstoumann.wordpress.com",
-  "readable_publish_date": "Nov 11 '15",
+  "readable_publish_date": "Nov 11 ' 15",
   "user": {
     "name": "Mads Stoumann",
     "username": "madsstoumann",
-    "user_id": 1,
-    "profile_image": null,
-    "profile_image_90": null
+    "user_id": 9869553,
+    "profile_image": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G",
+    "profile_image_90": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G"
   }
 }

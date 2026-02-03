@@ -2,14 +2,14 @@
   "type_of": "article",
   "id": "wp-566",
   "title": "Front-End Detective",
-  "description": "Sometimes stuff breaks. On the web, something that was working perfectly yesterday, might suddenly not work today.",
+  "description": "Sometimes stuff breaks. On the web, something that was working perfectly yesterday, might suddenly not work today. “Why?” — might a client ask — “do we have to pay for fixing something we already paid",
   "slug": "front-end-detective",
   "url": "https://madsstoumann.wordpress.com/2016/06/30/front-end-detective/",
   "path": "/front-end-detective",
   "canonical_url": "https://madsstoumann.wordpress.com/2016/06/30/front-end-detective/",
-  "cover_image": "https://madsstoumann.wordpress.com/wp-content/uploads/2016/06/shutterstock_345441746.png",
-  "social_image": "https://madsstoumann.wordpress.com/wp-content/uploads/2016/06/shutterstock_345441746.png",
-  "body_html": "<p><img src=\"https://madsstoumann.wordpress.com/wp-content/uploads/2016/06/shutterstock_345441746.png?w=200\" alt=\"Front-End Detective\" width=\"200\" /></p>\n<p>Sometimes stuff breaks. On the web, something that was working perfectly yesterday, might suddenly not work today. \"Why?\" — might a client ask — \"do we have to pay for fixing something we already paid for.\"</p>\n<p>I can understand this frustration, and want to illustrate why it is so, by conveying two recent cases, I had to debug and solve.</p>\n<h2>Case number 1</h2>\n<p>A while ago, I created a Pen on Codepen with responsive SVG's:</p>\n<div class=\"embed-codepen\"><iframe title=\"Tactical Elements\" id=\"cp_embed_qbQqZX\" src=\"https://codepen.io/stoumann/embed/preview/qbQqZX?default-tabs=html%2Cresult&amp;height=300&amp;host=https%3A%2F%2Fcodepen.io&amp;slug-hash=qbQqZX\" scrolling=\"no\" frameborder=\"0\" height=\"300\" allowtransparency=\"true\" allowfullscreen=\"true\" allowpaymentrequest=\"true\" class=\"cp_embed_iframe\" style=\"width: 100%; overflow: hidden;\"></iframe></div>\n<p>As usual, I tested in all evergreen browsers, and it looked good.<br />\nThen, to my horror, a couple of weeks ago, I opened the Pen in Safari.<br />\nOnly <em>one</em> of the SVG's were displayed, the rest — vanished!</p>\n<p>It took a while to figure out that Safari 9.0.3+ has a bug rendering SVG's if you're using a <strong>drop-shadow</strong> filter. It will, hopefully, soon be fixed.</p>\n<p>If you're reading this post on Safari 9.0.3+ you'll see only one SVG as well.<br />\nIf you <em>want</em> to see the rest, click on the SCSS-tab and delete this line:</p>\n<pre class=\"brush: css; title: ; notranslate\" title=\"\">\n@include prefixed(filter, drop-shadow($shadow));\n</pre>\n<h2>Case number 2</h2>\n<p>The second case were much harder to debug. A couple of days before a big presentation, I wanted to double-check all the pages, I was going to demo.<br />\nTo my horror, several pages <strong>crashed</strong> Safari.</p>\n<p>Yes.<br />\nCrashed!</p>\n<p>By investigating and comparing, I found out, that all the pages that were crashing, were using a technique known as <em>SVG Sprites</em>:</p>\n<pre class=\"brush: xml; title: ; notranslate\" title=\"\">\n&lt;svg&gt;&lt;use xlink:href=\"svg/social.svg#icon-apple\"&gt;&lt;/use&gt;&lt;/svg&gt;\n</pre>\n<p>However, after further debugging, I could conclude that the crashing was a combination of the CSS on the page <strong>and</strong> the SVG sprites.</p>\n<p>Slowly, by trying out all the versions of the stylesheet for the pages I had, I found a two-week old version that didn't crash Safari! By comparing this with the current version, commenting potential lines out, I finally ended up with the culprit:</p>\n<pre class=\"brush: css; title: ; notranslate\" title=\"\">\n::-webkit-scrollbar-thumb:window-inactive {\n  background: #fefefe;\n}\n</pre>\n<p>It doesn't make any sense at all, does it? How can the styling of a scrollbar crash Safari on pages with SVG &lt;use&gt; – and not only that, the affected pages don't even <em>use</em> the scrollbar.</p>\n<p>But it can — and to prove it, I've created a \"crash page\", you can try out in Safari on either your Mac, iPhone or iPad (version 9.0.3+).</p>\n<p><a href=\"http://www.stoumann.dk/examples/safaricrash.html\" target=\"_blank\">Crash Safari here!</a></p>\n<p>Here's the simple code behind:</p>\n<pre class=\"brush: xml; title: ; notranslate\" title=\"\">\n&lt;!DOCTYPE html&gt;\n&lt;html lang=\"en\" class=\"blocks\"&gt;\n&lt;head&gt;\n\t&lt;title&gt;Crash Safari&lt;/title&gt;\n\t&lt;meta charset=\"UTF-8\"&gt;\n\t&lt;meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no\"&gt;\n\t&lt;style&gt;\n\t::-webkit-scrollbar-thumb:window-inactive {\n     \tbackground: #fefefe; \n\t}\n\t&lt;/style&gt;\n&lt;/head&gt;\n&lt;body&gt;\n\t&lt;a href=\"#apple\" itemprop=\"url\" title=\"Apple\"&gt;\n\t\t&lt;svg&gt;&lt;use xlink:href=\"svg/social.svg#icon-apple\"&gt;&lt;/use&gt;&lt;/svg&gt;\n\t&lt;/a&gt;\n&lt;/body&gt;\n&lt;/html&gt;\n</pre>\n<p>So — in conclusion — things that worked perfectly yesterday, might not work tomorrow, and that's (also) a part of the life of a front-end developer to debug and figure out!</p>\n<p>Happy coding.</p>",
+  "cover_image": "assets/generic_cover.jpg",
+  "social_image": "assets/generic_cover.jpg",
+  "body_html": "<p>Sometimes stuff breaks. On the web, something that was working perfectly yesterday, might suddenly not work today. “Why?” — might a client ask — “do we have to pay for fixing something we already paid for.”</p>\n<p>I can understand this frustration, and want to illustrate why it is so, by conveying two recent cases, I had to debug and solve.</p>\n<h2>Case number 1</h2>\n<p>A while ago, I created a Pen on Codepen with responsive SVG&#8217;s:</p>\n<div class=\"embed-codepen\"><iframe title=\"Tactical Elements\" id=\"cp_embed_qbQqZX\" src=\"https://codepen.io/stoumann/embed/preview/qbQqZX?default-tabs=html%2Cresult&amp;height=300&amp;host=https%3A%2F%2Fcodepen.io&amp;slug-hash=qbQqZX\" scrolling=\"no\" frameborder=\"0\" height=\"300\" allowtransparency=\"true\" allowfullscreen=\"true\" allowpaymentrequest=\"true\" class=\"cp_embed_iframe\" style=\"width: 100%; overflow: hidden;\"></iframe></div>\n<p>As usual, I tested in all evergreen browsers, and it looked good.<br />\nThen, to my horror, a couple of weeks ago, I opened the Pen in Safari.<br />\nOnly <em>one</em> of the SVG&#8217;s were displayed, the rest — vanished!</p>\n<p>It took a while to figure out that Safari 9.0.3+ has a bug rendering SVG&#8217;s if you&#8217;re using a <strong>drop-shadow</strong> filter. It will, hopefully, soon be fixed.</p>\n<p>If you&#8217;re reading this post on Safari 9.0.3+ you&#8217;ll see only one SVG as well.<br />\nIf you <em>want</em> to see the rest, click on the SCSS-tab and delete this line:</p>\n<pre class=\"brush: css; title: ; notranslate\" title=\"\">\r\n@include prefixed(filter, drop-shadow($shadow));\r\n</pre>\n<h2>Case number 2</h2>\n<p>The second case were much harder to debug. A couple of days before a big presentation, I wanted to double-check all the pages, I was going to demo.<br />\nTo my horror, several pages <strong>crashed</strong> Safari.</p>\n<p>Yes.<br />\nCrashed!</p>\n<p>By investigating and comparing, I found out, that all the pages that were crashing, were using a technique known as <em>SVG Sprites</em>:</p>\n<pre class=\"brush: xml; title: ; notranslate\" title=\"\">\r\n&lt;svg&gt;&lt;use xlink:href=&quot;svg/social.svg#icon-apple&quot;&gt;&lt;/use&gt;&lt;/svg&gt;\r\n</pre>\n<p>However, after further debugging, I could conclude that the crashing was a combination of the CSS on the page <strong>and</strong> the SVG sprites.</p>\n<p>Slowly, by trying out all the versions of the stylesheet for the pages I had, I found a two-week old version that didn&#8217;t crash Safari! By comparing this with the current version, commenting potential lines out, I finally ended up with the culprit:</p>\n<pre class=\"brush: css; title: ; notranslate\" title=\"\">\r\n::-webkit-scrollbar-thumb:window-inactive {\r\n  background: #fefefe;\r\n}\r\n</pre>\n<p>It doesn&#8217;t make any sense at all, does it? How can the styling of a scrollbar crash Safari on pages with SVG &lt;use&gt; &#8211; and not only that, the affected pages don&#8217;t even <em>use</em> the scrollbar.</p>\n<p>But it can — and to prove it, I&#8217;ve created a &#8220;crash page&#8221;, you can try out in Safari on either your Mac, iPhone or iPad (version 9.0.3+).</p>\n<p><a href=\"http://www.stoumann.dk/examples/safaricrash.html\" target=\"_blank\">Crash Safari here!</a></p>\n<p>Here&#8217;s the simple code behind:</p>\n<pre class=\"brush: xml; title: ; notranslate\" title=\"\">\r\n&lt;!DOCTYPE html&gt;\r\n&lt;html lang=&quot;en&quot; class=&quot;blocks&quot;&gt;\r\n&lt;head&gt;\r\n\t&lt;title&gt;Crash Safari&lt;/title&gt;\r\n\t&lt;meta charset=&quot;UTF-8&quot;&gt;\r\n\t&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no&quot;&gt;\r\n\t&lt;style&gt;\r\n\t::-webkit-scrollbar-thumb:window-inactive {\r\n     \tbackground: #fefefe; \r\n\t}\r\n\t&lt;/style&gt;\r\n&lt;/head&gt;\r\n&lt;body&gt;\r\n\t&lt;a href=&quot;#apple&quot; itemprop=&quot;url&quot; title=&quot;Apple&quot;&gt;\r\n\t\t&lt;svg&gt;&lt;use xlink:href=&quot;svg/social.svg#icon-apple&quot;&gt;&lt;/use&gt;&lt;/svg&gt;\r\n\t&lt;/a&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n</pre>\n<p>So — in conclusion — things that worked perfectly yesterday, might not work tomorrow, and that&#8217;s (also) a part of the life of a front-end developer to debug and figure out!</p>\n<p>Happy coding.</p>\n",
   "body_markdown": null,
   "reading_time_minutes": 3,
   "published_at": "2016-06-30T21:26:50+02:00",
@@ -22,28 +22,19 @@
   "positive_reactions_count": 0,
   "tag_list": "css3, html5, svg",
   "tags": [
-    {
-      "id": "css3",
-      "name": "css3"
-    },
-    {
-      "id": "html5",
-      "name": "html5"
-    },
-    {
-      "id": "svg",
-      "name": "svg"
-    }
+    "css3",
+    "html5",
+    "svg"
   ],
   "language": "en",
   "source": "wordpress",
   "source_site": "madsstoumann.wordpress.com",
-  "readable_publish_date": "Jun 30 '16",
+  "readable_publish_date": "Jun 30 ' 16",
   "user": {
     "name": "Mads Stoumann",
     "username": "madsstoumann",
-    "user_id": 1,
-    "profile_image": null,
-    "profile_image_90": null
+    "user_id": 9869553,
+    "profile_image": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G",
+    "profile_image_90": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G"
   }
 }

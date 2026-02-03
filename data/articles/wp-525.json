@@ -2,15 +2,15 @@
   "type_of": "article",
   "id": "wp-525",
   "title": "Click-Delay Revisited",
-  "description": "Author explores avoiding the 300ms touch-device click-delay using CSS touch-action: manipulation.",
+  "description": "A while ago, I wrote a blog-post called The Curse Of The Click-Delay, on how to avoid the 300 ms click-delay on touch-devices, using a small JavaScript. Since then, iOS has been updated with a new CSS",
   "slug": "click-delay-revisited",
   "url": "https://madsstoumann.wordpress.com/2016/04/18/click-delay-revisited/",
   "path": "/click-delay-revisited",
   "canonical_url": "https://madsstoumann.wordpress.com/2016/04/18/click-delay-revisited/",
-  "cover_image": null,
-  "social_image": null,
-  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p>A while ago, I wrote a blog-post called <a href=\"https://madsstoumann.wordpress.com/2015/11/11/the-curse-of-the-click-delay/\" target=\"_blank\">The Curse Of The Click-Delay</a>, on how to avoid the 300 ms click-delay on touch-devices, using a small JavaScript.</p>\n<p>Since then, iOS has been updated with a new CSS-property:</p>\n<pre class=\"brush: css; title: ; notranslate\" title=\"\">\ntouch-action: manipulation;\n</pre>\n<p>— and <em>that property</em>, along with some other settings, removes the delay without using JavaScript!</p>\n<p>Happy coding!</p>",
+  "body_html": "<p>A while ago, I wrote a blog-post called <a href=\"https://madsstoumann.wordpress.com/2015/11/11/the-curse-of-the-click-delay/\" target=\"_blank\">The Curse Of The Click-Delay</a>, on how to avoid the 300 ms click-delay on touch-devices, using a small JavaScript.</p>\n<p>Since then, iOS has been updated with a new CSS-property:</p>\n<pre class=\"brush: css; title: ; notranslate\" title=\"\">\r\ntouch-action: manipulation;\r\n</pre>\n<p>&mdash; and <em>that property</em>, along with some other settings, removes the delay without using JavaScript!</p>\n<p>First, in the &lt;head&gt;-section, add either this:</p>\n<pre class=\"brush: xml; title: ; notranslate\" title=\"\">\r\n&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot;&gt;\r\n</pre>\n<p>&mdash; OR this:</p>\n<pre class=\"brush: xml; title: ; notranslate\" title=\"\">\r\n&lt;meta name=&quot;viewport&quot; content=&quot;user-scalable=no&quot;&gt;\r\n</pre>\n<p>You&#8217;re free to add more settings to these meta-values, like:</p>\n<pre class=\"brush: xml; title: ; notranslate\" title=\"\">\r\n&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no&quot;&gt;\r\n</pre>\n<p>My updated CSS:</p>\n<pre class=\"brush: css; title: ; notranslate\" title=\"\">\r\nhtml {\r\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\r\n}\r\n\r\nbody {\r\n  -webkit-touch-callout: none;\r\n}\r\n\r\n/* Elements with no delay, ie. button, label etc. */\r\n\r\nbutton, label {\r\n  touch-action: manipulation;\r\n}\r\n</pre>\n<p>Happy coding!</p>\n",
   "body_markdown": null,
+  "cover_image": "assets/generic_cover.jpg",
+  "social_image": "assets/generic_cover.jpg",
   "reading_time_minutes": 1,
   "published_at": "2016-04-18T11:45:18+02:00",
   "published_timestamp": "2016-04-18T11:45:18+02:00",
@@ -22,20 +22,17 @@
   "positive_reactions_count": 0,
   "tag_list": "css3",
   "tags": [
-    {
-      "id": "css3",
-      "name": "css3"
-    }
+    "css3"
   ],
   "language": "en",
   "source": "wordpress",
   "source_site": "madsstoumann.wordpress.com",
-  "readable_publish_date": "Apr 18 '16",
+  "readable_publish_date": "Apr 18 ' 16",
   "user": {
     "name": "Mads Stoumann",
     "username": "madsstoumann",
-    "user_id": 1,
-    "profile_image": null,
-    "profile_image_90": null
+    "user_id": 9869553,
+    "profile_image": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G",
+    "profile_image_90": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G"
   }
 }

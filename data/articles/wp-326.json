@@ -2,16 +2,16 @@
   "type_of": "article",
   "id": "wp-326",
   "title": "Free tool for creating Structured Data / Schemas",
-  "description": "Describes creating a free tool that editors can use to write content enriched with structured data.",
+  "description": "A month ago, my good colleague SEO-mir (real name: Tihomir!), asked me if I knew of a tool, editors could use to write content, enriched with structured data. I didn&#8217;t, unfortunately. But I quic",
   "slug": "free-tool-for-creating-structured-data-schemas",
   "url": "https://madsstoumann.wordpress.com/2015/03/08/free-tool-for-creating-structured-data-schemas/",
   "path": "/free-tool-for-creating-structured-data-schemas",
   "canonical_url": "https://madsstoumann.wordpress.com/2015/03/08/free-tool-for-creating-structured-data-schemas/",
-  "cover_image": null,
-  "social_image": null,
-  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p>A month ago, my good colleague SEO-mir asked me if I knew of a tool, editors could use to write content, enriched with structured data.</p>\n<p>So — go ahead — create some structured markup!</p>",
+  "body_html": "<p>A month ago, my good colleague SEO-mir (real name: Tihomir!), asked me if I knew of a tool, editors could use to write content, enriched with structured data. I didn&#8217;t, unfortunately. But I quickly made a wishlist for such a tool:</p>\n<ul>\n<li>Should be able to run as a <em>bookmarklet</em> — ie. as an overlay to any existing CMS-solution.</li>\n<li>Should be easy to extend with <em>new schemas</em>, as new schemas are constantly created and/or changed.</li>\n<li>The content creator / editor should be able to <em>select the output format</em> (tags) for any schema property.</li>\n<li>The interface designer should be able to <em>set required fields</em>, field order etc. for any schema.</li>\n</ul>\n<p>Now, a month later, I&#8217;m able to set a check-mark for all the requirements on my original wishlist:<br />\n<a href=\"http://www.stoumann.dk/examples/editor/\" rel=\"nofollow\">http://www.stoumann.dk/examples/editor/</a></p>\n<div data-shortcode=\"caption\" id=\"attachment_334\" style=\"width: 393px\" class=\"wp-caption alignnone\"><a href=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/02/editor1.png\"><img aria-describedby=\"caption-attachment-334\" loading=\"lazy\" data-attachment-id=\"334\" data-permalink=\"https://madsstoumann.wordpress.com/2015/03/08/free-tool-for-creating-structured-data-schemas/editor-2/\" data-orig-file=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/02/editor1.png\" data-orig-size=\"383,630\" data-comments-opened=\"1\" data-image-meta=\"{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}\" data-image-title=\"Structured Markup Editor\" data-image-description=\"\" data-image-caption=\"&lt;p&gt;Structured Markup Editor&lt;/p&gt;\n\" data-medium-file=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/02/editor1.png?w=182\" data-large-file=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/02/editor1.png?w=383\" class=\"size-full wp-image-334\" src=\"assets/wp-326/eb46e9cf.png\" alt=\"Structured Markup Editor\" width=\"383\" height=\"630\" srcset=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/02/editor1.png 383w, https://madsstoumann.wordpress.com/wp-content/uploads/2015/02/editor1.png?w=91&amp;h=150 91w, https://madsstoumann.wordpress.com/wp-content/uploads/2015/02/editor1.png?w=182&amp;h=300 182w\" sizes=\"(max-width: 383px) 100vw, 383px\" /></a><p id=\"caption-attachment-334\" class=\"wp-caption-text\">Structured Markup Editor</p></div>\n<p>There are still a lot on my <em>to-do-lis</em>t —  new ideas, such as:</p>\n<ul>\n<li>JSON-LD export</li>\n<li>TinyMCE-plugin</li>\n<li>Advanced mode</li>\n</ul>\n<p>— but the basic editor is there.</p>\n<p>A content editor can pick among some of the most popular schemas:</p>\n<p><em>Article<br />\nBook<br />\nDownload<br />\nEvent<br />\nLocalBusiness<br />\nOrganization<br />\nPerson<br />\nProduct<br />\nQuestion<br />\nRecipe<br />\nReview<br />\nVideo</em></p>\n<p>— Fill out the selected form, click on &#8220;Generate Schema&#8221;, and follow the on-screen guide.</p>\n<p>The bookmarklet is also in place (click the Info-link from the tool), but will only work with &#8220;http&#8221;-connections, as my own domain doesn&#8217;t support SSL.</p>\n<p>I&#8217;m working on a solution, where the editor will be on a domain that supports both connection types.</p>\n<p>So — go ahead — create some structured markup! Now you don&#8217;t have an excuse!</p>\n<p>I&#8217;d very much like to hear from you if you have suggestions / feedback.</p>\n",
   "body_markdown": null,
-  "reading_time_minutes": 1,
+  "cover_image": "assets/generic_cover.jpg",
+  "social_image": "assets/generic_cover.jpg",
+  "reading_time_minutes": 2,
   "published_at": "2015-03-08T21:14:09+02:00",
   "published_timestamp": "2015-03-08T21:14:09+02:00",
   "created_at": "2015-03-08T21:14:09+02:00",
@@ -22,28 +22,19 @@
   "positive_reactions_count": 0,
   "tag_list": "html5, javascript, schema.org",
   "tags": [
-    {
-      "id": "html5",
-      "name": "html5"
-    },
-    {
-      "id": "javascript",
-      "name": "javascript"
-    },
-    {
-      "id": "schema.org",
-      "name": "schema.org"
-    }
+    "html5",
+    "javascript",
+    "schema.org"
   ],
   "language": "en",
   "source": "wordpress",
   "source_site": "madsstoumann.wordpress.com",
-  "readable_publish_date": "Mar 8 '15",
+  "readable_publish_date": "Mar 8 ' 15",
   "user": {
     "name": "Mads Stoumann",
     "username": "madsstoumann",
-    "user_id": 1,
-    "profile_image": null,
-    "profile_image_90": null
+    "user_id": 9869553,
+    "profile_image": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G",
+    "profile_image_90": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G"
   }
 }

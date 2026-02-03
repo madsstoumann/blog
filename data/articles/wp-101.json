@@ -2,15 +2,15 @@
   "type_of": "article",
   "id": "wp-101",
   "title": ":target the dialog!",
-  "description": "A CSS technique leveraging the :target pseudo-selector for dialog and popup implementations.",
+  "description": "Here&#8217;s a small CSS-hack I came up with while working with the UI for LogiFront 2.0: Use the CSS :target pseudo-selector for dialogs/popups, until the &lt;dialog&gt;-tag has better browser-suppor",
   "slug": "target-the-dialog-and-minify-2",
   "url": "https://madsstoumann.wordpress.com/2014/07/29/target-the-dialog-and-minify-2/",
   "path": "/target-the-dialog-and-minify-2",
   "canonical_url": "https://madsstoumann.wordpress.com/2014/07/29/target-the-dialog-and-minify-2/",
-  "cover_image": null,
-  "social_image": null,
-  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p>Use the CSS :target pseudo-selector for dialogs/popups.</p>",
+  "body_html": "<p>Here&#8217;s a small <abbr title=\"Cascading Style Sheet\">CSS</abbr>-hack I came up with while working with the UI for <a href=\"http://demo.logifront.com/minify.html\" target=\"_blank\">LogiFront 2.0</a>:</p>\n<p>Use the CSS <strong>:target</strong> pseudo-selector for dialogs/popups, until the &lt;dialog&gt;-tag has better browser-support.</p>\n<p>Here&#8217;s the idea, simplified:</p>\n<pre class=\"brush: xml; title: ; notranslate\" title=\"\">\r\n&lt;a href=&quot;#myDialog&quot;&gt;Open dialog&lt;/a&gt;\r\n\r\n&lt;dialog id=&quot;myDialog&quot;&gt;\r\n  &lt;h2&gt;Hello world!&lt;/h2&gt;\r\n  &lt;a href=&quot;#&quot;&gt;Close dialog&lt;/a&gt;\r\n&lt;/dialog&gt;\r\n\r\n</pre>\n<p>And the CSS:</p>\n<pre class=\"brush: css; title: ; notranslate\" title=\"\">\r\ndialog {display: none;}\r\ndialog:target {display: block;}\r\n</pre>\n<h3>LogiFront 2.0 UI</h3>\n<p>Go to <a href=\"http://demo.logifront.com/minify.html\" target=\"_blank\">demo.logifront.com</a> to view extended examples.<br />\nAll the links at the left sidebar (&#8220;Controls&#8221;) are using dialog/target.<br />\nLogiFront is an online tool for building apps and forms &#8211; <a href=\"http://www.youtube.com/watch?v=vJMvLUxJw4s\" target=\"_blank\">watch the introduction video here!</a></p>\n",
   "body_markdown": null,
+  "cover_image": "assets/generic_cover.jpg",
+  "social_image": "assets/generic_cover.jpg",
   "reading_time_minutes": 1,
   "published_at": "2014-07-29T09:40:12+02:00",
   "published_timestamp": "2014-07-29T09:40:12+02:00",
@@ -22,24 +22,18 @@
   "positive_reactions_count": 0,
   "tag_list": "css3, html5",
   "tags": [
-    {
-      "id": "css3",
-      "name": "css3"
-    },
-    {
-      "id": "html5",
-      "name": "html5"
-    }
+    "css3",
+    "html5"
   ],
   "language": "en",
   "source": "wordpress",
   "source_site": "madsstoumann.wordpress.com",
-  "readable_publish_date": "Jul 29 '14",
+  "readable_publish_date": "Jul 29 ' 14",
   "user": {
     "name": "Mads Stoumann",
     "username": "madsstoumann",
-    "user_id": 1,
-    "profile_image": null,
-    "profile_image_90": null
+    "user_id": 9869553,
+    "profile_image": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G",
+    "profile_image_90": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G"
   }
 }

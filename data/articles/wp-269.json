@@ -2,16 +2,16 @@
   "type_of": "article",
   "id": "wp-269",
   "title": "Front-End Guidelines: CSS",
-  "description": "Guidelines for CSS development covering conventions, naming, module-based approaches, responsiveness, and specificity.",
+  "description": "This is a series of guidelines written for my team. As they are work-in-progress, feel free to comment and make suggestions! General conventions Validating, minifying and annotating CSS Use CSSLint fo",
   "slug": "front-end-guidelines-css",
   "url": "https://madsstoumann.wordpress.com/2015/01/23/front-end-guidelines-css/",
   "path": "/front-end-guidelines-css",
   "canonical_url": "https://madsstoumann.wordpress.com/2015/01/23/front-end-guidelines-css/",
-  "cover_image": null,
-  "social_image": null,
-  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p>This is a series of guidelines written for my team covering CSS conventions.</p>",
+  "body_html": "<p><em>This is a series of guidelines written for my team.<br />\nAs they are work-in-progress, feel free to comment and make suggestions!</em></p>\n<h2>General conventions</h2>\n<h3>Validating, minifying and annotating CSS</h3>\n<ul>\n<li>Use <a href=\"http://csslint.net/\" target=\"_blank\">CSSLint</a> for validating your CSS. Also available as a plugin for multiple text-editors, such as Sublime Text and Brackets. The Visual Studio extension <a href=\"https://visualstudiogallery.msdn.microsoft.com/a921b98e-9430-4be2-bf53-1169e12bdb50\" target=\"_blank\">CSSCop</a> brings CSS Lint support to Visual Studio.</li>\n<li>Use <a href=\"http://cssminifier.com/\" target=\"_blank\">CSS Minifier</a> for minifying your CSS, if not built-in to your editor.</li>\n<li>Use /* COMMENTS HERE */-syntax to document your CSS. For larger modules, use a description-syntax like this:\n<pre class=\"brush: css; title: ; notranslate\" title=\"\">\r\n\r\n﻿/*  DOCUMENT INFORMATION\r\n- Document  : Name - Further description of stylesheet here\r\n- Version   : 1.0.0\r\n- Client    : Client / project-name\r\n- Authors   : List of contributors\r\n- Date edit : Last day of edit, with optional comments\r\n*/\r\n</pre>\n</li>\n</ul>\n<h3>Indentation and readability</h3>\n<ul>\n<li>Use tabs or spaces (either 2 or 4 spaces) for indentation. Not both. One or the other.</li>\n<li>Apply a line-break (as well as indentation, depending on nesting-level) after curly brackets, both opening and closing:\n<pre class=\"brush: css; title: ; notranslate\" title=\"\">\r\n.myClass {\r\n    color: red;\r\n}\r\n</pre>\n</li>\n</ul>\n<h2>Naming conventions</h2>\n<p>Site-level blocks should be names with tag-description, ie:</p>\n<p>form-search<br />\nnav-breadcrumb</p>\n<p><strong>For root-level elements:</strong><br />\nheader-root<br />\nmain-root<br />\nfooter-root</p>\n<p><strong>Module-level and Pagetype-level blocks should be named accordingly:</strong><br />\nproduct-detail<br />\nproduct-filter<br />\nproduct-search-result<br />\netc.</p>\n<h2>Module-based approach &mdash; Avoiding too many levels</h2>\n<p>Too many nested levels affects performance, as browsers read CSS right-to-left.<br />\nA module-based approach will initially contain a lot of unused classes, but they will be <em>much appreciated</em> later. </p>\n<p><strong>Take this html-snippet:</strong></p>\n<pre class=\"brush: xml; title: ; notranslate\" title=\"\">\r\n&lt;section class=&quot;my-module&quot;&gt;\r\n  &lt;h1 class=&quot;my-module-header&quot;&gt;\r\n    Header\r\n  &lt;/h1&gt;\r\n  &lt;aside class=&quot;my-module-aside&quot;&gt;\r\n    &lt;h2 class=&quot;my-module-aside-header&quot;&gt;\r\n      Header 2\r\n    &lt;/h2&gt;\r\n  &lt;/aside&gt;\r\n&lt;/section&gt;\r\n</pre>\n<p>In regular CSS, it&#8217;s <em>a lot</em> of classes, but you only need to add those you&#8217;re actually going to use.</p>\n<p>The module-based approach is even easier, when using a preprocessor like Sass or Less:</p>\n<pre class=\"brush: css; title: ; notranslate\" title=\"\">\r\n.my-module {\r\n  font: small sans-serif;\r\n  &amp;-header {\r\n    font-size: large;\r\n  }\r\n  &amp;-aside {\r\n    background-color: green;\r\n    &amp;-header {\r\n      font-size: normal;\r\n    }\r\n  }\r\n}\r\n</pre>\n<p>&mdash;Which will output:</p>\n<pre class=\"brush: css; title: ; notranslate\" title=\"\">\r\n.my-module { ... }\r\n.my-module-header { ... }\r\n.my-module-aside { ... }\r\n.my-module-aside-header { ... }\r\n</pre>\n<h2>Responsiveness</h2>\n<p>If coding for <em>evergreen browsers</em>, all element widths-, margins- and paddings should be defined in percentages, or some other relative unit (see below).<br />\nOnly the root font-size should, along with breakpoints for mobile devices, be defined in pixels. </p>\n<p><strong>Relative units</strong><br />\n<strong>em</strong> &#8211; relative font-size. If element font-size is 16px, then 1 em is 16px, and .75em is 12px.<br />\n<strong>rem</strong> &#8211; root em. Set html/body to a specific font-size, and root em will always refer to this.<br />\n<strong>vw</strong> &#8211; viewport-width. 1 vw is 1% of the viewport width.<br />\n<strong>vh</strong> &#8211; viewport-height. 1 vh is 1% of the viewport height.<br />\n<strong>vmin</strong> &#8211; 1 vmin is 1vw or 1vh, whatever is smallest<br />\n<strong>vmax</strong> &#8211; 1 vmax is 1vw or 1vh, whatever is largest</p>\n<p>If element-widths are based on the viewport-width or a percentage, they will resize without the use for media-queries, and thus avoiding writing multiple CSS-rules for all viewport-widths.<br />\nAll these units works in IE9+ &#8211; for IE8, just use a fallback font-size in either ems or pixels.</p>\n<h3>Mobile first &mdash;min-width instead of max-width</h3>\n<p>Use a <em>Lowest common denominator</em>-approach, which in most cases will be mobile devices and older browsers.<br />\nDesign for these devices first, and gradually step up using media-queries with min-width.</p>\n<p><em>Example:</em></p>\n<pre class=\"brush: css; title: ; notranslate\" title=\"\">\r\n$breakpoint-tablet: 768px;\r\n$breakpoint-desktop: 1024px;\r\n$breakpoint-large-desktop: 1280px;\r\n\r\n@media (min-width: $breakpoint-tablet) {\r\n...\r\n}\r\n</pre>\n<p>&mdash;Extend it with <a href=\"http://davidwalsh.name/write-media-queries-sass\" target=\"_blank\">this great technique:</a></p>\n<pre class=\"brush: css; title: ; notranslate\" title=\"\"> \r\n@mixin tablet {\r\n  @media (min-width: $breakpoint-tablet) {\r\n    @content;\r\n  }\r\n}\r\n\r\n@mixin desktop {\r\n  @media (min-width: $breakpoint-desktop) {\r\n    @content;\r\n  }\r\n}\r\n</pre>\n<p>&mdash;and use it like here:</p>\n<pre class=\"brush: css; title: ; notranslate\" title=\"\">\r\np {\r\n  font-size: 1em;\r\n\r\n  @include tablet {\r\n    font-size: 1.3em;\r\n  }\r\n\r\n  @include desktop {\r\n    font-size: 1.6em;\r\n  }\r\n}\r\n</pre>\n<h2>Specificity</h2>\n<p>CSS-rules are weighed after the following matrix:</p>\n<table>\n<tbody>\n<tr>\n<td>Inline-styles* <em>style=&#8221;color:red;&#8221;</em></td>\n<td>1,0,0,0</td>\n</tr>\n<tr>\n<td>ID Selector <em>#myElement</em></td>\n<td>0,1,0,0</td>\n</tr>\n<tr>\n<td>Class Selector <em>.myClass</em></td>\n<td>0,0,1,0</td>\n</tr>\n<tr>\n<td>Element Selector <em>input</em></td>\n<td>0,0,0,1</td>\n</tr>\n</tbody>\n</table>\n<p><em>*) ALWAYS AVOID inline styles!</em></p>\n<p>&mdash; so a CSS-rule like this:</p>\n<pre class=\"brush: css; title: ; notranslate\" title=\"\">\r\nbody &gt; div &gt; table thead tr th {\r\n  color: red;\r\n}\r\n</pre>\n<p>&mdash;Will have a weight of <em>0,0,0,6</em>, which is a lower specificity than a regular class-selector:</p>\n<pre class=\"brush: css; title: ; notranslate\" title=\"\">\r\n.my-table-header {\r\n  color: red;\r\n}\r\n</pre>\n<p>&mdash;Which will have a weight of <em>0,0,1,0</em>.</p>\n<h3>Specificity Hack</h3>\n<p>For these scenarios where <em>nothing works</em> (or requires too many changes), there&#8217;s a specificity-hack. Just group the selector with itself, as many times it takes.<br />\nThis appoach is, of course, not recommended &mdash; but might come in handy as a last resort:</p>\n<pre class=\"brush: css; title: ; notranslate\" title=\"\">\r\n  .my-class.my-class\r\n  \r\n  /* Or even */\r\n  .my-class.my-class.my-class.my-class\r\n</pre>\n<h2>CSS Combing</h2>\n<p>The browser renders the page faster, if CSS-rules containing <em>block-level-formatting</em> are listed first &#8211; that is: </p>\n<p><strong>display, position, width, height, margin</strong> etc.</p>\n<p><em>Decorative rules</em>, such as <strong>background, color</strong> etc. should be listed last.</p>\n<p>Apparently, listing all CSS-rules in the various declarations in the same order throughout the stylesheet should improve performance as well.<br />\nFor this, a free tool like <a href=\"http://csscomb.com\" target=\"_blank\">csscomb.com</a>, can be used.</p>\n",
   "body_markdown": null,
-  "reading_time_minutes": 1,
+  "cover_image": "assets/generic_cover.jpg",
+  "social_image": "assets/generic_cover.jpg",
+  "reading_time_minutes": 5,
   "published_at": "2015-01-23T15:44:27+02:00",
   "published_timestamp": "2015-01-23T15:44:27+02:00",
   "created_at": "2015-01-23T15:44:27+02:00",
@@ -22,24 +22,18 @@
   "positive_reactions_count": 0,
   "tag_list": "css3, guidelines",
   "tags": [
-    {
-      "id": "css3",
-      "name": "css3"
-    },
-    {
-      "id": "guidelines",
-      "name": "guidelines"
-    }
+    "css3",
+    "guidelines"
   ],
   "language": "en",
   "source": "wordpress",
   "source_site": "madsstoumann.wordpress.com",
-  "readable_publish_date": "Jan 23 '15",
+  "readable_publish_date": "Jan 23 ' 15",
   "user": {
     "name": "Mads Stoumann",
     "username": "madsstoumann",
-    "user_id": 1,
-    "profile_image": null,
-    "profile_image_90": null
+    "user_id": 9869553,
+    "profile_image": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G",
+    "profile_image_90": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G"
   }
 }

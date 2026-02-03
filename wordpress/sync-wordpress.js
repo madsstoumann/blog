@@ -164,6 +164,42 @@ async function fetchAllPosts() {
 	return posts;
 }
 
+// Remove "By Mads Stoumann" byline and extract first image as cover
+function cleanupContent(html) {
+	let content = html;
+	let extractedImage = null;
+
+	// Remove byline: standalone paragraph like <p>By <a...>Mads Stoumann</a></p>
+	content = content.replace(/^(\s*<p>By\s+(?:<a[^>]*>)?Mads Stoumann(?:<\/a>)?\s*<\/p>\n?)/i, '');
+
+	// Remove byline: inline at start of a paragraph like <p>By <a...>Mads Stoumann</a><br />\n
+	content = content.replace(/^(\s*<p>)By\s+(?:<a[^>]*>)?Mads Stoumann(?:<\/a>)?\s*<br\s*\/?>\n?/i, '$1');
+
+	// If byline wasn't at the very start, it may follow a first image paragraph
+	// Check for image-then-byline pattern
+	const imgThenByline = /^(\s*<p>(?:<a[^>]*>)?<img[^>]+\/?>(?:<\/a>)?<\/p>\n?)(\s*<p>By\s+(?:<a[^>]*>)?Mads Stoumann(?:<\/a>)?\s*<\/p>\n?)/i;
+	const match = content.match(imgThenByline);
+	if (match) {
+		// Remove the byline paragraph that follows the image
+		content = content.replace(match[2], '');
+	}
+
+	// Extract first image from an image-only paragraph (for cover_image)
+	const firstImgParagraph = /^(\s*<p>(?:<a[^>]*>)?\s*<img[^>]+src=["']([^"']+)["'][^>]*\/?>(?:<\/a>)?\s*<\/p>\n?)/i;
+	const imgMatch = content.match(firstImgParagraph);
+	if (imgMatch) {
+		extractedImage = imgMatch[2];
+		content = content.replace(imgMatch[1], '');
+	}
+
+	return { content, extractedImage };
+}
+
+// Remove "By Mads Stoumann" prefix from description
+function cleanupDescription(description) {
+	return description.replace(/^By\s+Mads Stoumann\s*/i, '');
+}
+
 // Convert WordPress post to dev.to-like format
 function convertToArticleFormat(post, urlMap) {
 	const articleId = `${WP_ID_PREFIX}${post.ID}`;
@@ -177,6 +213,13 @@ function convertToArticleFormat(post, urlMap) {
 	// Replace image URLs in content
 	let bodyHtml = post.content || '';
 	bodyHtml = replaceImageUrls(bodyHtml, urlMap);
+
+	// Clean up byline and extract first image
+	const cleaned = cleanupContent(bodyHtml);
+	bodyHtml = cleaned.content;
+	if (!coverImage && cleaned.extractedImage) {
+		coverImage = cleaned.extractedImage;
+	}
 
 	// Extract tags from categories and tags
 	const tagList = [];
@@ -206,13 +249,13 @@ function convertToArticleFormat(post, urlMap) {
 		type_of: 'article',
 		id: articleId,
 		title: post.title,
-		description: post.excerpt ? post.excerpt.replace(/<[^>]*>/g, '').trim().slice(0, 200) : '',
+		description: post.excerpt ? cleanupDescription(post.excerpt.replace(/<[^>]*>/g, '').trim()).slice(0, 200) : '',
 		slug: post.slug,
 		url: post.URL,
 		path: `/${post.slug}`,
 		canonical_url: post.URL,
-		cover_image: coverImage,
-		social_image: coverImage,
+		cover_image: coverImage || undefined,
+		social_image: coverImage || undefined,
 		body_html: bodyHtml,
 		body_markdown: null, // WordPress doesn't provide markdown
 		reading_time_minutes: Math.ceil((post.content?.split(/\s+/).length || 0) / 200),
@@ -225,7 +268,7 @@ function convertToArticleFormat(post, urlMap) {
 		public_reactions_count: post.like_count || 0,
 		positive_reactions_count: post.like_count || 0,
 		tag_list: tagList.join(', '),
-		tags: tagList.map(tag => ({ id: tag, name: tag })),
+		tags: tagList,
 		language: 'en',
 		source: 'wordpress',
 		source_site: WORDPRESS_SITE,
@@ -250,7 +293,7 @@ function createMetadataEntry(article) {
 		published_timestamp: article.published_timestamp,
 		edited_at: article.edited_at,
 		url: article.url,
-		tag_list: article.tags.map(t => t.name),
+		tag_list: article.tags,
 		public_reactions_count: article.public_reactions_count,
 		source: 'wordpress'
 	};

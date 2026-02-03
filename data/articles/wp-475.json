@@ -2,16 +2,16 @@
   "type_of": "article",
   "id": "wp-475",
   "title": "Radial Progress Indicators",
-  "description": "A tutorial on creating space-efficient radial progress indicators using SVG.",
+  "description": "I like radial progress indicators. They save a lot of space and can communicate really complex scenarios very well. A client recently asked me to create a radial progress indicator with multiple value",
   "slug": "radial-progress-indicators",
   "url": "https://madsstoumann.wordpress.com/2015/12/30/radial-progress-indicators/",
   "path": "/radial-progress-indicators",
   "canonical_url": "https://madsstoumann.wordpress.com/2015/12/30/radial-progress-indicators/",
-  "cover_image": null,
-  "social_image": null,
-  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p>I like radial progress indicators. They save a lot of space and can communicate really complex scenarios very well.</p>\n<p><a href=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/radial.png\"><img src=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/radial.png?w=215&h=215\" alt=\"radial\" width=\"215\" height=\"215\" /></a></p>\n<p>Happy coding — and Happy New Year!</p>",
+  "body_html": "<p>I like radial progress indicators. They save a lot of space and can communicate really complex scenarios very well.</p>\n<p>A client recently asked me to create a radial progress indicator with multiple values, like this:</p>\n<p><a href=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/radial.png\"><img loading=\"lazy\" data-attachment-id=\"477\" data-permalink=\"https://madsstoumann.wordpress.com/2015/12/30/radial-progress-indicators/radial/\" data-orig-file=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/radial.png\" data-orig-size=\"215,215\" data-comments-opened=\"1\" data-image-meta=\"{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}\" data-image-title=\"radial\" data-image-description=\"\" data-image-caption=\"\" data-medium-file=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/radial.png?w=215\" data-large-file=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/radial.png?w=215\" class=\"alignnone size-full wp-image-477\" src=\"assets/wp-475/3e987cf7.png\" alt=\"radial\" width=\"215\" height=\"215\" srcset=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/radial.png 215w, https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/radial.png?w=150&amp;h=150 150w\" sizes=\"(max-width: 215px) 100vw, 215px\" /></a></p>\n<p>These are the times of SVG, and with SVG&#8217;s &lt;circle&gt;-element, it&#8217;s pretty easy:</p>\n<pre class=\"brush: xml; title: ; notranslate\" title=\"\">\r\n&lt;circle r=&quot;90&quot; cx=&quot;100&quot; cy=&quot;100&quot;&gt;&lt;/circle&gt;\r\n</pre>\n<p>To create the progress, however, is a bit more tricky UNLESS you use the wonderful &#8220;stroke-dasharray&#8221;-hack!</p>\n<p>It&#8217;s basically a dashed line to stroke the circle with &mdash; but we&#8217;ll make one single dash the length we need, and the distance to the next dash the circumference of the circle, so we won&#8217;t ever see it. Pretty clever.</p>\n<p>In order to create the radial progress indicator shown in the image above, we need more &#8220;layers&#8221; of dashes:</p>\n<h2>SVG markup</h2>\n<pre class=\"brush: xml; title: ; notranslate\" title=\"\">\r\n&lt;div class=&quot;radial-progress-wrapper&quot; id=&quot;radial1&quot; itemscope itemtype=&quot;http://schema.org/ActionStatusType&quot;&gt;\r\n  &lt;svg class=&quot;radial-progress&quot; version=&quot;1.1&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;\r\n    &lt;circle r=&quot;90&quot; cx=&quot;100&quot; cy=&quot;100&quot;&gt;&lt;/circle&gt;\r\n    &lt;circle r=&quot;90&quot; cx=&quot;100&quot; cy=&quot;100&quot; class=&quot;radial-progress-1&quot; style=&quot;stroke-dasharray: 565.487px; stroke-dashoffset: 166.105px;&quot;&gt;&lt;/circle&gt;\r\n    &lt;circle r=&quot;90&quot; cx=&quot;100&quot; cy=&quot;100&quot; class=&quot;radial-progress-2&quot; style=&quot;stroke-dasharray: 565.487px; stroke-dashoffset: 194.379px;&quot;&gt;&lt;/circle&gt;\r\n    &lt;circle r=&quot;90&quot; cx=&quot;100&quot; cy=&quot;100&quot; class=&quot;radial-progress-3&quot; style=&quot;stroke-dasharray: 565.487px; stroke-dashoffset: 364.025px;&quot;&gt;&lt;/circle&gt;\r\n  &lt;/svg&gt;\r\n  &lt;div class=&quot;radial-progress-inner&quot;&gt;\r\n    &lt;meta itemprop=&quot;name&quot; content=&quot;Progress&quot; /&gt;\r\n    &lt;h1 class=&quot;radial-progress-header&quot; itemprop=&quot;description&quot;&gt;&lt;span class=&quot;radial-progress-percent&quot;&gt;73.63&lt;/span&gt;%&lt;/h1&gt;\r\n  &lt;/div&gt;\r\n&lt;/div&gt;\r\n</pre>\n<p>&mdash; the CSS will be rendered from this mixin:</p>\n<h2>Mixin</h2>\n<pre class=\"brush: css; title: ; notranslate\" title=\"\">\r\n@mixin radial-progress($size, $strokewidth, $color-bg, $strokes...) {\r\n    width: $size;\r\n    height: $size;\r\n    @include prefixed(transform, rotate(270deg));\r\n    stroke: $color-bg;\r\n    stroke-width: $strokewidth;\r\n\t\r\n\t&amp; &gt; circle { \r\n\t\tfill: transparent;\r\n\t}\r\n\t\r\n\t@each $stroke in $strokes {\r\n    $i: index($strokes, $stroke);\r\n\t    &amp;-#{$i} { \r\n\t\t\tstroke: $stroke;\r\n\t    }\r\n\t}\r\n\r\n\t&amp;-inner {\r\n\t\t@include prefixed(transform, translate(-50%, -50%));\r\n\t\tposition: absolute;\r\n\t\tleft: 50%;\r\n\t\ttop: 50%;\r\n\t}\r\n\t&amp;-wrapper {\r\n\t\tdisplay: inline-block;\r\n\t\tposition: relative;\r\n\t}\r\n}\r\n</pre>\n<p>Now, let&#8217;s create a <em>class</em> using the mixin, with size, stroke and an array of colors:</p>\n<pre class=\"brush: css; title: ; notranslate\" title=\"\">\r\n.radial-progress {\r\n\t@include radial-progress(200px, 1rem, #dedede, lighten(#ad87c4, 10), #ad87c4, #826296, #501a71 );\r\n}\r\n</pre>\n<p>The result can be seen in the follwing pen:</p>\n<div class=\"embed-codepen\"><iframe title=\"Radial progress 1\" id=\"cp_embed_LpMEZB\" src=\"https://codepen.io/stoumann/embed/preview/LpMEZB?default-tabs=css%2Cresult&amp;height=300&amp;host=https%3A%2F%2Fcodepen.io&amp;slug-hash=LpMEZB\" scrolling=\"no\" frameborder=\"0\" height=\"300\" allowtransparency=\"true\" allowfullscreen=\"true\" allowpaymentrequest=\"true\" class=\"cp_embed_iframe\" style=\"width: 100%; overflow: hidden;\"></iframe></div>\n<p>Now, to be fair, a little JavaScript is needed to actually calculate the lengths of the dashes, but let&#8217;s wait with that, because wouldn&#8217;t it be nice if the progress was <em>animated</em>:</p>\n<div class=\"embed-codepen\"><iframe title=\"Radial progress 2\" id=\"cp_embed_yYrzjX\" src=\"https://codepen.io/stoumann/embed/preview/yYrzjX?default-tabs=css%2Cresult&amp;height=300&amp;host=https%3A%2F%2Fcodepen.io&amp;slug-hash=yYrzjX\" scrolling=\"no\" frameborder=\"0\" height=\"300\" allowtransparency=\"true\" allowfullscreen=\"true\" allowpaymentrequest=\"true\" class=\"cp_embed_iframe\" style=\"width: 100%; overflow: hidden;\"></iframe></div>\n<p>For the animation, I use <em>requestAnimationFrame</em>, calculate the different lengths using a series of calculations, invilving:</p>\n<pre class=\"brush: jscript; title: ; notranslate\" title=\"\">\r\n(nRadius * Math.PI) * 2 // Circumference\r\nnRadius - ((nRadius / 100) * value)\r\netc.\r\n</pre>\n<p>The complete function looks like this:</p>\n<pre class=\"brush: jscript; title: ; notranslate\" title=\"\">\r\n*\tradial.js\r\n*\tAnimated Radial Progress-indicator\r\n*\t(c)\tCopyright 2015 Mads Stoumann\r\n*/\r\nfunction radial(aCircles, oTextCounter) {\r\n\tvar\r\n\taSum = [],\r\n\ti,\r\n\tnCurVal,\r\n\tnLen = aCircles.length,\r\n\tnRadius = (90 * Math.PI) * 2,\r\n\tnStep,\r\n\tnVal = 0;\r\n\t\r\n\tfor (i = 0; i &lt; nLen; i++) {\r\n\t\taCircles[i].style.strokeDashoffset = nRadius;\r\n\t\taCircles[i].style.strokeDasharray = nRadius;\r\n\t\tnVal += aCircles[i].getAttribute(&quot;data-val&quot;)-0;\r\n\t\taSum.push(nRadius - ((nRadius / 100) * nVal));\r\n\t}\r\n\t\r\n\taSum.reverse();\r\n\tnStep = ((nRadius - ((nRadius / 100) * nVal)) / (100-nVal));\r\n\t\r\n\tfunction _animate() {\r\n\t\tnCurVal = oTextCounter.innerHTML-0;\r\n\t\tif (nCurVal &lt; nVal) {\r\n\t\t\tnCurVal++;\r\n\t\t\tfor (i = nLen; i--;) {\r\n\t\t\t\tif (aSum[i] &lt;= (nRadius - (nCurVal * nStep) + nStep)) {\r\n\t\t\t\t\taCircles[i].style.strokeDashoffset = nRadius - (nCurVal * nStep); \r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t\toTextCounter.innerHTML = nCurVal;\r\n\t\t\twindow.requestAnimationFrame(_animate);\r\n\t\t} \r\n\t}\r\n\twindow.requestAnimationFrame(_animate);\r\n}\r\n</pre>\n<p>The result can be seen in this Pen:</p>\n<div class=\"embed-codepen\"><iframe title=\"Radial Progress 3\" id=\"cp_embed_GpLYgP\" src=\"https://codepen.io/stoumann/embed/preview/GpLYgP?default-tabs=html%2Cresult&amp;height=300&amp;host=https%3A%2F%2Fcodepen.io&amp;slug-hash=GpLYgP\" scrolling=\"no\" frameborder=\"0\" height=\"300\" allowtransparency=\"true\" allowfullscreen=\"true\" allowpaymentrequest=\"true\" class=\"cp_embed_iframe\" style=\"width: 100%; overflow: hidden;\"></iframe></div>\n<p>Happy coding &mdash; and Happy New Year!</p>\n",
   "body_markdown": null,
-  "reading_time_minutes": 1,
+  "cover_image": "assets/generic_cover.jpg",
+  "social_image": "assets/generic_cover.jpg",
+  "reading_time_minutes": 4,
   "published_at": "2015-12-30T15:57:35+02:00",
   "published_timestamp": "2015-12-30T15:57:35+02:00",
   "created_at": "2015-12-30T15:57:35+02:00",
@@ -22,32 +22,20 @@
   "positive_reactions_count": 0,
   "tag_list": "css3, html5, javascript, svg",
   "tags": [
-    {
-      "id": "css3",
-      "name": "css3"
-    },
-    {
-      "id": "html5",
-      "name": "html5"
-    },
-    {
-      "id": "javascript",
-      "name": "javascript"
-    },
-    {
-      "id": "svg",
-      "name": "svg"
-    }
+    "css3",
+    "html5",
+    "javascript",
+    "svg"
   ],
   "language": "en",
   "source": "wordpress",
   "source_site": "madsstoumann.wordpress.com",
-  "readable_publish_date": "Dec 30 '15",
+  "readable_publish_date": "Dec 30 ' 15",
   "user": {
     "name": "Mads Stoumann",
     "username": "madsstoumann",
-    "user_id": 1,
-    "profile_image": null,
-    "profile_image_90": null
+    "user_id": 9869553,
+    "profile_image": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G",
+    "profile_image_90": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G"
   }
 }

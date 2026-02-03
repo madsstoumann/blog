@@ -2,16 +2,16 @@
   "type_of": "article",
   "id": "wp-508",
   "title": "Loop performance",
-  "description": "An examination of JavaScript loop performance across different syntaxes and methods.",
+  "description": "What is the fastest way to iterate over an array in JavaScript? In the book &#8220;High Performance JavaScript&#8221; from 2010, Nicholas Zakas has a section on Loop Performance, where the four loop-t",
   "slug": "loop-performance",
   "url": "https://madsstoumann.wordpress.com/2016/01/03/loop-performance/",
   "path": "/loop-performance",
   "canonical_url": "https://madsstoumann.wordpress.com/2016/01/03/loop-performance/",
-  "cover_image": null,
-  "social_image": null,
-  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p>What is the fastest way to iterate over an array in JavaScript?</p>\n<p><a href=\"https://madsstoumann.wordpress.com/wp-content/uploads/2016/01/looptest.png\"><img src=\"https://madsstoumann.wordpress.com/wp-content/uploads/2016/01/looptest.png?w=615&h=499\" alt=\"LoopTest\" width=\"615\" height=\"499\" /></a></p>\n<p>Happy coding!</p>",
+  "body_html": "<p>What is the fastest way to iterate over an array in JavaScript?<br />\nIn the book &#8220;High Performance JavaScript&#8221; from 2010, Nicholas Zakas has a section on <em>Loop Performance</em>, where the four loop-types in JavaScript are compared.<br />\nAccording to Zakas, just two factors contribute to loop performance:</p>\n<ul>\n<li>Work done per iteration</li>\n<li>Number of iterations</li>\n</ul>\n<p>He then shows a typical array-processing loop:</p>\n<pre class=\"brush: jscript; title: ; notranslate\" title=\"\">\r\nfor (var i=0; i &lt; items.length; i++){\r\n  process(items[i]);\r\n}\r\n</pre>\n<p>The JavaScript engine need to perform these 6 tasks for every loop:</p>\n<ol>\n<li>One property lookup (items.length)</li>\n<li>One comparison (i &lt; items.length)</li>\n<li>One comparison to see whether the control condition evaluates to &#8220;true&#8221; (i &lt; items.length)</li>\n<li>One increment operation (i++)</li>\n<li>One array lookup (items[i])</li>\n<li>One function call (process(items[i])</li>\n</ol>\n<p>To avoid looking up the length for each iteration, it can be stored as a variable:</p>\n<pre class=\"brush: jscript; title: ; notranslate\" title=\"\">\r\nfor (var i=0, len=items.length; i &lt; len; i++)\r\netc.\r\n</pre>\n<p>And to further avoid unnecessary work for the JavaScript engine, we can hoist the variables to the beginning of the function, use a negative iterator for <em>both</em> iteration and condition (0 is false, so the loop ends when i&#8211; equals 0):</p>\n<pre class=\"brush: jscript; title: ; notranslate\" title=\"\">\r\nvar i, len = items.length;\r\nfor (i = len; i--;) \r\netc\r\n</pre>\n<p>Or even:</p>\n<pre class=\"brush: jscript; title: ; notranslate\" title=\"\">\r\nvar i = items.length;\r\nfor (; i--;) \r\netc\r\n</pre>\n<p>For the <em>while-loop</em> it&#8217;s even more simple and readable:</p>\n<pre class=\"brush: jscript; title: ; notranslate\" title=\"\">\r\nvar i = items.length;\r\nwhile(i--) { ...\r\netc.\r\n</pre>\n<p>The &#8220;todo-list&#8221; for the JavaScript-engine has now been reduced from 6 items to 3:</p>\n<ol>\n<li>One comparison / decrement operation (i&#8211;). This is <em>both</em> iteration and condition (0 is false)</li>\n<li>One array lookup</li>\n<li>One function call</li>\n</ol>\n<p>While I personally really like this syntax and while this syntax logically should be <em>way</em> faster than a &#8220;regular&#8221; for-loop, recent performance studies indicate the opposite.</p>\n<p><strong>Why is that?</strong><br />\nBecause browsers have optimized their engines for the most common loop-type, even though it&#8217;s &#8220;more work&#8221;. That&#8217;s my best guess.</p>\n<p>I&#8217;ve created a test-case on jsPerf: <a href=\"http://jsperf.com/for-or-while/23\" target=\"_blank\">For or while</a>, and the results were completely unexpected:</p>\n<p><a href=\"https://madsstoumann.wordpress.com/wp-content/uploads/2016/01/looptest.png\" rel=\"attachment wp-att-512\"><img loading=\"lazy\" data-attachment-id=\"512\" data-permalink=\"https://madsstoumann.wordpress.com/2016/01/03/loop-performance/looptest/\" data-orig-file=\"https://madsstoumann.wordpress.com/wp-content/uploads/2016/01/looptest.png\" data-orig-size=\"958,777\" data-comments-opened=\"1\" data-image-meta=\"{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}\" data-image-title=\"LoopTest\" data-image-description=\"\" data-image-caption=\"\" data-medium-file=\"https://madsstoumann.wordpress.com/wp-content/uploads/2016/01/looptest.png?w=300\" data-large-file=\"https://madsstoumann.wordpress.com/wp-content/uploads/2016/01/looptest.png?w=958\" class=\"alignnone size-full wp-image-512\" src=\"assets/wp-508/a909765b.png\" alt=\"LoopTest\" width=\"615\" height=\"499\" srcset=\"https://madsstoumann.wordpress.com/wp-content/uploads/2016/01/looptest.png?w=615&amp;h=499 615w, https://madsstoumann.wordpress.com/wp-content/uploads/2016/01/looptest.png?w=150&amp;h=122 150w, https://madsstoumann.wordpress.com/wp-content/uploads/2016/01/looptest.png?w=300&amp;h=243 300w, https://madsstoumann.wordpress.com/wp-content/uploads/2016/01/looptest.png?w=768&amp;h=623 768w, https://madsstoumann.wordpress.com/wp-content/uploads/2016/01/looptest.png 958w\" sizes=\"(max-width: 615px) 100vw, 615px\" /></a></p>\n<p>In Chrome, Edge, Firefox <em>and</em> mobile Safari, the classic for-loop with unhoisted variables is the fastest.</p>\n<p>The ES5 Array-methods like &#8220;forEach&#8221;, &#8220;reduce&#8221;, &#8220;map&#8221; etc. are in general <em>much slower</em> than a classic for-loop. </p>\n<p>That&#8217;s been mentioned before, I read it on <a href=\"http://bonsaiden.github.io/JavaScript-Garden/#array.general\" target=\"_blank\">JavaScript Garden</a> some time ago:</p>\n<blockquote><p>For the best performance, it is recommended to always use the plain for loop and cache the length property.</p></blockquote>\n<p>While the &#8220;and cache the length property&#8221;-part isn&#8217;t entirely true anymore, the main statement is.</p>\n<p>On the other hand, the ES5 Array-methods provide better readability &mdash; and if you&#8217;re into <em>functional programming</em>, these methods are for you.</p>\n<p>In his <a href=\"http://benhollis.net/blog/2009/12/13/investigating-javascript-array-iteration-performance/\" target=\"_blank\">blog-post</a> on the same topic, Ben Hollis concludes &mdash; and so will I:</p>\n<blockquote><p>It’s worth noting that, as usual, this sort of performance information only matters if you’re actually seeing performance problems.</p></blockquote>\n<p>Happy coding!</p>\n",
   "body_markdown": null,
-  "reading_time_minutes": 1,
+  "cover_image": "assets/generic_cover.jpg",
+  "social_image": "assets/generic_cover.jpg",
+  "reading_time_minutes": 3,
   "published_at": "2016-01-03T13:21:41+02:00",
   "published_timestamp": "2016-01-03T13:21:41+02:00",
   "created_at": "2016-01-03T13:21:41+02:00",
@@ -22,20 +22,17 @@
   "positive_reactions_count": 0,
   "tag_list": "javascript",
   "tags": [
-    {
-      "id": "javascript",
-      "name": "javascript"
-    }
+    "javascript"
   ],
   "language": "en",
   "source": "wordpress",
   "source_site": "madsstoumann.wordpress.com",
-  "readable_publish_date": "Jan 3 '16",
+  "readable_publish_date": "Jan 3 ' 16",
   "user": {
     "name": "Mads Stoumann",
     "username": "madsstoumann",
-    "user_id": 1,
-    "profile_image": null,
-    "profile_image_90": null
+    "user_id": 9869553,
+    "profile_image": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G",
+    "profile_image_90": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G"
   }
 }

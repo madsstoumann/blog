@@ -2,16 +2,16 @@
   "type_of": "article",
   "id": "wp-341",
   "title": "Product variants with schemas",
-  "description": "Demonstrates how to markup product variations using Schema.org structured data.",
+  "description": "To create product variants with structured markup — for instance a phone available in different colors — you&#8217;ll need to use the Product-schema and the Product Model-schema. In this blog-post I&#",
   "slug": "product-variants-with-schemas",
   "url": "https://madsstoumann.wordpress.com/2015/03/26/product-variants-with-schemas/",
   "path": "/product-variants-with-schemas",
   "canonical_url": "https://madsstoumann.wordpress.com/2015/03/26/product-variants-with-schemas/",
-  "cover_image": null,
-  "social_image": null,
-  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p>To create product variants with structured markup using the Product-schema and the Product Model-schema.</p>",
+  "body_html": "<p>To create product <em>variants</em> with structured markup — for instance a phone available in different colors — you&#8217;ll need to use the <a href=\"http://schema.org/Product\" target=\"_blank\">Product-schema</a> <em>and</em> the <a href=\"http://schema.org/ProductModel\" target=\"_blank\">Product Model</a>-schema.</p>\n<p>In this blog-post I&#8217;ll mark up an <em>iPhone 6 16GB</em> with 3 different variants: <em>gold</em>, <em>silver</em> and <em>spacegray</em>.</p>\n<p>As an added bonus, I&#8217;m gonna toggle between the 3 variants <strong>without JavaScript</strong>, using the wonderful <a href=\"http://css-tricks.com/the-checkbox-hack/\" target=\"_blank\">checkbox hack</a>!</p>\n<p><a href=\"http://www.stoumann.dk/examples/variants/\" target=\"_blank\"><strong>A working demo of all this is available here</strong></a>.<br />\nOpen it in a new tab, and read on &hellip;</p>\n<p>The basic product-markup, including the data all product-variants have in common: <em>name, description, condition, breadcrumbs</em> and <em>price</em>:</p>\n<pre class=\"brush: xml; title: ; notranslate\" title=\"\">\r\n&lt;article itemscope itemtype=&quot;http://schema.org/Product&quot; class=&quot;product&quot;&gt;\r\n  &lt;section class=&quot;product-info&quot;&gt;\r\n    &lt;h1 itemprop=&quot;name&quot;&gt;iPhone 6 - 16GB&lt;/h1&gt;\r\n    &lt;p itemprop=&quot;description&quot;&gt;\r\n      ...\r\n    &lt;/p&gt;\r\n    &lt;meta itemprop=&quot;itemCondition&quot; content=&quot;NewCondition&quot; /&gt;\r\n    &lt;div itemprop=&quot;offers&quot; itemscope itemtype=&quot;http://schema.org/Offer&quot;&gt;\r\n      &lt;meta itemprop=&quot;category&quot; content=&quot;Apple &gt; iPhone &gt; iPhone 6&quot; /&gt;\r\n      &lt;span itemprop=&quot;price&quot;&gt;5799,00&lt;/span&gt;\r\n      &lt;span itemprop=&quot;priceCurrency&quot;&gt;DKK&lt;/span&gt;\r\n    &lt;/div&gt;\r\n    &lt;span itemprop=&quot;image&quot; itemscope itemtype=&quot;http://schema.org/ImageObject&quot;&gt;\r\n      &lt;meta itemprop=&quot;contentUrl&quot; content=&quot;iphone6-gold-select-2014.png&quot; /&gt;\r\n    &lt;/span&gt;\r\n  &lt;/section&gt;\r\n  ...\r\n</pre>\n<p>And now for the variants. Each variant is wrapped in a <em>figure</em>-tag, that will hold the <em>product variant</em>-image as well as a caption and some hidden data:</p>\n<pre class=\"brush: xml; title: ; notranslate\" title=\"\">\r\n&lt;figure itemscope itemtype=&quot;http://schema.org/ProductModel&quot; itemid=&quot;#gold&quot;&gt;\r\n  &lt;img src=&quot;iphone6-gold-select-2014.png&quot; class=&quot;product-image&quot; /&gt;\r\n  &lt;figcaption&gt;\r\n    &lt;span itemprop=&quot;offers&quot; itemscope itemtype=&quot;http://schema.org/Offer&quot; class=&quot;product-offer&quot;&gt;\r\n      &lt;meta itemprop=&quot;availability&quot; content=&quot;InStock&quot; /&gt;\r\n      &lt;button class=&quot;product-buy-button&quot;&gt;Buy this phone now&lt;/button&gt;\r\n    &lt;/span&gt;\r\n    &lt;link itemprop=&quot;additionalType&quot; href=&quot;/&quot; /&gt;\r\n    &lt;meta itemprop=&quot;name&quot; content=&quot;iPhone 6 - 16GB - Gold&quot; /&gt;\r\n    &lt;meta itemprop=&quot;gtin13&quot; content=&quot;12345678901&quot; /&gt;\r\n  &lt;/figcaption&gt;\r\n&lt;/figure&gt;\r\n</pre>\n<p>Each variant has an <em>itemid</em>, which we&#8217;ll use later to target the variant directly &mdash; as well as a unique <em>gtin</em>-number, a <em>variant-name</em> and an Offer.<br />\nAll these attributes can be unique per variant. </p>\n<p>Here&#8217;s a variant that&#8217;s currently sold out:</p>\n<pre class=\"brush: xml; title: ; notranslate\" title=\"\">\r\n&lt;figure itemscope itemtype=&quot;http://schema.org/ProductModel&quot; itemid=&quot;#silver&quot;&gt;\r\n  &lt;img src=&quot;iphone6-silver-select-2014.png&quot; class=&quot;product-image&quot; /&gt;\r\n  &lt;figcaption&gt;\r\n    &lt;span itemprop=&quot;offers&quot; itemscope itemtype=&quot;http://schema.org/Offer&quot; class=&quot;product-offer&quot;&gt;\r\n      &lt;meta itemprop=&quot;availability&quot; content=&quot;OutOfStock&quot; /&gt;\r\n      &lt;span class=&quot;product-sold-out&quot;&gt;Out of Stock. Will be back in stock on April 5th.&lt;/span&gt;\r\n    &lt;/span&gt;\r\n    &lt;link itemprop=&quot;additionalType&quot; href=&quot;/&quot; /&gt;\r\n    &lt;meta itemprop=&quot;name&quot; content=&quot;iPhone 6 - 16GB - Silver&quot; /&gt;\r\n    &lt;meta itemprop=&quot;gtin13&quot; content=&quot;12345678902&quot; /&gt;\r\n  &lt;/figcaption&gt;\r\n&lt;/figure&gt;\r\n</pre>\n<p>And now for the promised checkbox-hack! Add this before the product variants-wrapper:</p>\n<pre class=\"brush: xml; title: ; notranslate\" title=\"\">\r\n&lt;aside class=&quot;product-variant&quot;&gt;\r\n  &lt;h2&gt;Choose a finish:&lt;/h2&gt;\r\n  &lt;input type=&quot;radio&quot; name=&quot;img-select-grp&quot; id=&quot;gold&quot; value=&quot;12345678901&quot; checked /&gt;&lt;label for=&quot;gold&quot; class=&quot;gold&quot;&gt;Gold&lt;/label&gt;\r\n  &lt;input type=&quot;radio&quot; name=&quot;img-select-grp&quot; id=&quot;silver&quot; value=&quot;12345678902&quot; /&gt;&lt;label for=&quot;silver&quot; class=&quot;silver&quot;&gt;Silver&lt;/label&gt;\r\n  &lt;input type=&quot;radio&quot; name=&quot;img-select-grp&quot; id=&quot;spacegray&quot; value=&quot;12345678903&quot; /&gt;&lt;label for=&quot;spacegray&quot; class=&quot;gray&quot;&gt;Gray&lt;/label&gt;\r\n  ...\r\n</pre>\n<p>The radiobutton will select the given variant, and using <em>:checked</em> in the CSS, we&#8217;ll show and hide the various variants.</p>\n<p><a href=\"http://www.stoumann.dk/examples/variants/\" target=\"_blank\">Go see the demo</a>, and try to paste it&#8217;s source to <a href=\"http://developers.google.com/structured-data/testing-tool/\" target=\"_blank\">Google&#8217;s Structured Data Testing Tool</a>.</p>\n<h2>Go directly to a variant</h2>\n<p>To directly link to a specific variant, based on the schemas <em>itemid</em> and the <em>id</em> of the selected variant/radiobutton, use a small piece of JavaScript (modify it and embed it in the load-event of your page):</p>\n<pre class=\"brush: jscript; title: ; notranslate\" title=\"\">\r\n&lt;script&gt;\r\n  var oSel = document.getElementById(location.hash.slice(1)); \r\n  if (oSel) oSel.checked = true;\r\n&lt;/script&gt;\r\n</pre>\n<p><em>Example:</em><br />\n<a href=\"http://www.stoumann.dk/examples/variants/#silver\" target=\"_blank\">Go to the silver-variant directly</a>.</p>\n<p>I&#8217;ll soon update my <a href=\"http://www.stoumann.dk/examples/editor/\" target=\"_blank\">Structured Markup Editor</a> to also handle product-variants.</p>\n",
   "body_markdown": null,
-  "reading_time_minutes": 1,
+  "cover_image": "assets/generic_cover.jpg",
+  "social_image": "assets/generic_cover.jpg",
+  "reading_time_minutes": 3,
   "published_at": "2015-03-26T12:14:30+02:00",
   "published_timestamp": "2015-03-26T12:14:30+02:00",
   "created_at": "2015-03-26T12:14:30+02:00",
@@ -22,24 +22,18 @@
   "positive_reactions_count": 0,
   "tag_list": "html5, schema.org",
   "tags": [
-    {
-      "id": "html5",
-      "name": "html5"
-    },
-    {
-      "id": "schema.org",
-      "name": "schema.org"
-    }
+    "html5",
+    "schema.org"
   ],
   "language": "en",
   "source": "wordpress",
   "source_site": "madsstoumann.wordpress.com",
-  "readable_publish_date": "Mar 26 '15",
+  "readable_publish_date": "Mar 26 ' 15",
   "user": {
     "name": "Mads Stoumann",
     "username": "madsstoumann",
-    "user_id": 1,
-    "profile_image": null,
-    "profile_image_90": null
+    "user_id": 9869553,
+    "profile_image": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G",
+    "profile_image_90": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G"
   }
 }

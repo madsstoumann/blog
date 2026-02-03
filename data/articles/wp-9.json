@@ -2,16 +2,16 @@
   "type_of": "article",
   "id": "wp-9",
   "title": "Better search-results with schemas",
-  "description": "Learn how Schema.org helps search engines display richer, more informative results through structured markup.",
+  "description": "A couple of years ago I created a small e-commerce solution, with a data-model based on Schema.org’s “Product”-schema. A lot has happened since then. So, what is Schema.org? Schema.org was created in ",
   "slug": "better-search-results-with-schemas",
   "url": "https://madsstoumann.wordpress.com/2014/07/21/better-search-results-with-schemas/",
   "path": "/better-search-results-with-schemas",
   "canonical_url": "https://madsstoumann.wordpress.com/2014/07/21/better-search-results-with-schemas/",
-  "cover_image": null,
-  "social_image": null,
-  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p>A decade ago the author created an e-commerce solution using Schema.org's Product schema.</p>",
+  "body_html": "<p>A couple of years ago I created a small e-commerce solution, with a data-model based on Schema.org’s “Product”-schema.<br />\nA <em>lot </em>has happened since then.</p>\n<h3>So, what is Schema.org?</h3>\n<p>Schema.org was created in 2011 by Google, Microsoft and Yahoo, in order to create a standard for all the various microdata-formats that existed at the time: Microformats, FOAF, OpenSyc, hCard etc.</p>\n<blockquote><p>Search engines including Bing, Google, Yahoo! and Yandex rely on this markup to improve the display of search results, making it easier for people to find the right Web pages</p></blockquote>\n<p>Schema-based markup basically enriches the html, providing search-engines with more detailed information about for instance a person, a product, a recipe or an event.</p>\n<p>When a search-engine displays this enriched markup,  it&#8217;s called <em>rich snippets</em>.</p>\n<h3>Schemas</h3>\n<p>Visit <a href=\"http://schema.org/docs/schemas.html\">schema.org/docs/schemas.html</a> for a complete list of schemas. New schemas are added often, and the existing schemas extended, so re-visit the site from time to time.</p>\n<p>As an example, I&#8217;m going to markup a commercial product (e-commerce) using the following schemas:</p>\n<p><a href=\"http://schema.org/Product\">Product</a><br />\n<a href=\"http://schema.org/ImageObject\">ImageObject</a><br />\n<a href=\"http://schema.org/AggregateRating\">AggregateRating</a><br />\n<a href=\"http://schema.org/Offer\">Offer</a><br />\n<a href=\"http://schema.org/itemCondition\">itemCondition</a><br />\n<a href=\"http://schema.org/Rating\">Rating</a><br />\n<a href=\"http://schema.org/Review\">Review</a></p>\n<p>The Product-schema alone is rather big, so I&#8217;m going to use only subsets of the various schema&#8217;s features.</p>\n<table>\n<caption>Model</caption>\n<tbody>\n<tr>\n<td>name</td>\n<td>Product name (should also be the title of the page as well as og:title*)</td>\n</tr>\n<tr>\n<td>description</td>\n<td>Product description</td>\n</tr>\n<tr>\n<td>productID</td>\n<td>A unique product-identifier</td>\n</tr>\n<tr>\n<td>itemCondition</td>\n<td>Possible values:<br />\nDamagedCondition<br />\nNewCondition<br />\nRefurbishedCondition<br />\nUsedCondition\n</td>\n</tr>\n<tr>\n<td>other</td>\n<td>color, depth, height, width, weight</td>\n</tr>\n<tr>\n<td>image</td>\n<td>ImageObject (should also be og:image*):<br />\ncontentUrl<br />\nname<br />\ncopyrightHolder<br />\ncopyrightYear<br />\nrepresentativeOfPage</td>\n</tr>\n<tr>\n<td>aggregateRating</td>\n<td>Review/rating overview:<br />\nratingValue<br />\nreviewCount</td>\n</tr>\n<tr>\n<td>offer</td>\n<td>price<br />\navailability</td>\n</tr>\n<tr>\n<td>review</td>\n<td>\nname<br />\nauthor<br />\ndescription<br />\ndatePublished<br />\nreviewRating (Rating schema)<br />\nratingValue\n</td>\n</tr>\n</tbody>\n</table>\n<p>*) Open Graph meta properties: More on <a href=\"http://ogp.me\">ogp.me</a>.</p>\n<p>There are <em>many more itemprops</em> in the schemas, go and have a look at the documentation. For instance, in order to limit your product to a specific gender or age-group, use the <a href=\"http://schema.org/PeopleAudience\">PeopleAudience-schema</a>.</p>\n<h3>Example Markup</h3>\n<p>The tags can be whatever you want, as long as they are semantically correct!<br />\nThe important thing here are the <strong>itemtype</strong>, <strong>itemscope</strong> and <strong>itemprop</strong>-attributes.</p>\n<pre class=\"brush: xml; title: ; notranslate\" title=\"\">\r\n&lt;article itemscope itemtype=&quot;http://schema.org/Product&quot;&gt;\r\n  &lt;h1 itemprop=&quot;name&quot;&gt;Captain America #425&lt;/h1&gt;\r\n  \r\n  &lt;figure itemprop=&quot;image&quot; itemscope itemtype=&quot;http://schema.org/ImageObject&quot;&gt;\r\n    &lt;img src=&quot;425.jpg&quot; itemprop=&quot;contentUrl&quot; alt=&quot;Captain America #425&quot; /&gt;\r\n    &lt;meta itemprop=&quot;thumbnail&quot; content=&quot;425.jpg&quot; /&gt;\r\n    &lt;figcaption&gt;\r\n      &lt;span itemprop=&quot;name&quot;&gt;Captain America #425&lt;/span&gt;\r\n      &lt;span itemprop=&quot;copyrightHolder&quot;&gt;Marvel Comics&lt;/span&gt;\r\n      &lt;span itemprop=&quot;copyrightYear&quot;&gt;1994&lt;/span&gt;\r\n      &lt;meta itemprop=&quot;representativeOfPage&quot; content=&quot;true&quot;&gt;\r\n    &lt;/figcaption&gt;\r\n  &lt;/figure&gt;\r\n  \r\n  &lt;div itemprop=&quot;aggregateRating&quot; itemscope itemtype=&quot;http://schema.org/AggregateRating&quot;&gt;\r\n   Rated &lt;span itemprop=&quot;ratingValue&quot;&gt;3&lt;/span&gt;/5\r\n   based on &lt;span itemprop=&quot;reviewCount&quot;&gt;11&lt;/span&gt; customer reviews\r\n  &lt;/div&gt;\r\n\r\n  &lt;div itemprop=&quot;offers&quot; itemscope itemtype=&quot;http://schema.org/Offer&quot;&gt;\r\n    &lt;span itemprop=&quot;price&quot;&gt;$1.99&lt;/span&gt;\r\n    &lt;link itemprop=&quot;availability&quot; href=&quot;http://schema.org/InStock&quot; /&gt;In stock\r\n  &lt;/div&gt;\r\n  \r\n  &lt;span itemprop=&quot;itemCondition&quot; content=&quot;NewCondition&quot;&gt;New&lt;/span&gt;\r\n    \r\n  &lt;strong&gt;Product description:&lt;/strong&gt;\r\n  &lt;span itemprop=&quot;description&quot;&gt;\r\n    ...\r\n  &lt;/span&gt;\r\n\r\n  &lt;h2&gt;Customer reviews:&lt;/h2&gt;\r\n  &lt;div itemprop=&quot;review&quot; itemscope itemtype=&quot;http://schema.org/Review&quot;&gt;\r\n    &lt;span itemprop=&quot;name&quot;&gt;It all starts here!&lt;/span&gt; -\r\n    by &lt;span itemprop=&quot;author&quot;&gt;Avid reader&lt;/span&gt;,\r\n    &lt;meta itemprop=&quot;datePublished&quot; content=&quot;2011-04-01&quot;&gt;April 1, 2011\r\n    &lt;div itemprop=&quot;reviewRating&quot; itemscope itemtype=&quot;http://schema.org/Rating&quot;&gt;\r\n      &lt;span itemprop=&quot;ratingValue&quot;&gt;5&lt;/span&gt;\r\n    &lt;/div&gt;\r\n    &lt;span itemprop=&quot;description&quot;&gt;\r\n      ...\r\n    &lt;/span&gt;\r\n  &lt;/div&gt;\r\n&lt;/article&gt;\r\n</pre>\n<h3>Google search-result output</h3>\n<p><img loading=\"lazy\" src=\"assets/wp-9/8d69a389.jpg\" alt=\"schema\" width=\"549\" height=\"117\" /><br />\nPretty nifty, huh? Google might even display a thumbnail-image next to the result.</p>\n<h3>Tools &amp; Testing</h3>\n<p>To verify the markup for your rich snippets, both Google and Microsoft provide online tools:</p>\n<p><a href=\"http://www.google.com/webmasters/tools/richsnippets\">Google Rich Snippets Tool</a><br />\n<a href=\"http://www.bing.com/toolbox/markup-validator\">Bing Validator</a></p>\n<p>Bing&#8217;s Validator is in beta and rather limited compared to Googles.</p>\n<p>The above example is available here: <a href=\"http://www.stoumann.dk/examples/schema/index.html\">stoumann.dk/examples/schema/</a></p>\n<p><a href=\"http://www.google.com/webmasters/tools/richsnippets?q=http%3A%2F%2Fwww.stoumann.dk%2Fexamples%2Fschema%2Findex.html\">Click here</a> to view all the data, Googles Rich Snippets Tool can extract from the example markup.</p>\n<h3>Styling the output</h3>\n<p><strong>Bonus-info.</strong> You can use the itemprop-attributes directly for styling &mdash; no need to add additional classes:</p>\n<pre class=\"brush: css; title: ; notranslate\" title=\"\">\r\n[itemprop=&quot;availability&quot;] { \r\n  color: green; \r\n}\r\n\r\n/* Insert a copyright symbol */\r\n[itemprop=&quot;copyrightHolder&quot;]:before { \r\n  content: &quot;&#092;&#048;0a9&#092;&#048;020&quot;; \r\n}\r\n\r\n[itemprop=&quot;price&quot;] { \r\n  color: maroon; \r\n}\r\netc.\r\n</pre>\n<p>Happy coding!</p>\n",
   "body_markdown": null,
-  "reading_time_minutes": 1,
+  "cover_image": "assets/generic_cover.jpg",
+  "social_image": "assets/generic_cover.jpg",
+  "reading_time_minutes": 4,
   "published_at": "2014-07-21T11:19:35+02:00",
   "published_timestamp": "2014-07-21T11:19:35+02:00",
   "created_at": "2014-07-21T11:19:35+02:00",
@@ -22,40 +22,22 @@
   "positive_reactions_count": 0,
   "tag_list": "css3, html5, javascript, schema.org, rich-snippets, schemas",
   "tags": [
-    {
-      "id": "css3",
-      "name": "css3"
-    },
-    {
-      "id": "html5",
-      "name": "html5"
-    },
-    {
-      "id": "javascript",
-      "name": "javascript"
-    },
-    {
-      "id": "schema.org",
-      "name": "schema.org"
-    },
-    {
-      "id": "rich-snippets",
-      "name": "rich-snippets"
-    },
-    {
-      "id": "schemas",
-      "name": "schemas"
-    }
+    "css3",
+    "html5",
+    "javascript",
+    "schema.org",
+    "rich-snippets",
+    "schemas"
   ],
   "language": "en",
   "source": "wordpress",
   "source_site": "madsstoumann.wordpress.com",
-  "readable_publish_date": "Jul 21 '14",
+  "readable_publish_date": "Jul 21 ' 14",
   "user": {
     "name": "Mads Stoumann",
     "username": "madsstoumann",
-    "user_id": 1,
-    "profile_image": null,
-    "profile_image_90": null
+    "user_id": 9869553,
+    "profile_image": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G",
+    "profile_image_90": "https://1.gravatar.com/avatar/aaf3a0f078105d79d3e696d871bb763f3cbb3a5300ae4fd652e24f1b1261fc3a?s=96&d=identicon&r=G"
   }
 }
