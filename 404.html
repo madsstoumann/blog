@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<script>
+		// GitHub Pages SPA fallback: encode path into query string and redirect to /
+		const path = location.pathname;
+		if (path && path !== '/') {
+			sessionStorage.setItem('redirect', path);
+			location.replace('/');
+		}
+	</script>
+</head>
+<body></body>
+</html>

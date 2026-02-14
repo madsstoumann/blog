@@ -1,0 +1,45 @@
+{
+  "type_of": "article",
+  "id": "wp-554",
+  "title": "Thinking in modules",
+  "description": "The author discusses challenges with inheriting code from other developers and proposes a modular approach to sharing frontend code.",
+  "slug": "thinking-in-modules-2",
+  "url": "https://madsstoumann.wordpress.com/2016/04/28/thinking-in-modules-2/",
+  "path": "/thinking-in-modules-2",
+  "canonical_url": "https://madsstoumann.wordpress.com/2016/04/28/thinking-in-modules-2/",
+  "cover_image": null,
+  "social_image": null,
+  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p><a href=\"https://madsstoumann.wordpress.com/wp-content/uploads/2016/04/accordion.png\"><img src=\"https://madsstoumann.wordpress.com/wp-content/uploads/2016/04/accordion.png?w=615&h=246\" alt=\"accordion\" width=\"615\" height=\"246\" /></a></p>\n<p>I think, inheriting code from other developers, can be a struggle. There, I said it!<br />\nThat's because not two developers think alike — everyone has his or hers way of doing things.</p>\n<p>Having said that, here's my personal take on how to tackle code-share between (front-end-) developers:</p>\n<p><strong>Think in modules.</strong></p>\n<p>No matter what you create on a site, being it an article, an accordion-, spot- or a video-block, think of it as an individual module, with it's own version number and \"module-like\" structure.</p>\n<p>Happy coding!</p>",
+  "body_markdown": null,
+  "reading_time_minutes": 1,
+  "published_at": "2016-04-28T12:29:39+02:00",
+  "published_timestamp": "2016-04-28T12:29:39+02:00",
+  "created_at": "2016-04-28T12:29:39+02:00",
+  "edited_at": null,
+  "last_comment_at": null,
+  "comments_count": 0,
+  "public_reactions_count": 0,
+  "positive_reactions_count": 0,
+  "tag_list": "css3, html5",
+  "tags": [
+    {
+      "id": "css3",
+      "name": "css3"
+    },
+    {
+      "id": "html5",
+      "name": "html5"
+    }
+  ],
+  "language": "en",
+  "source": "wordpress",
+  "source_site": "madsstoumann.wordpress.com",
+  "readable_publish_date": "Apr 28 '16",
+  "user": {
+    "name": "Mads Stoumann",
+    "username": "madsstoumann",
+    "user_id": 1,
+    "profile_image": null,
+    "profile_image_90": null
+  }
+}

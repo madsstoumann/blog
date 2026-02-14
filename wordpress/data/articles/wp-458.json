@@ -1,0 +1,49 @@
+{
+  "type_of": "article",
+  "id": "wp-458",
+  "title": "Crisp SVG Icons",
+  "description": "The author discusses transitioning from icon-fonts to SVG icons.",
+  "slug": "crisp-svg-icons",
+  "url": "https://madsstoumann.wordpress.com/2015/11/26/crisp-svg-icons/",
+  "path": "/crisp-svg-icons",
+  "canonical_url": "https://madsstoumann.wordpress.com/2015/11/26/crisp-svg-icons/",
+  "cover_image": null,
+  "social_image": null,
+  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p><a href=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/icons.png\"><img src=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/icons.png?w=425&h=268\" alt=\"icons\" width=\"425\" height=\"268\" /></a></p>\n<p>I've been using icon-fonts for many years. But on my newest project, I ditched them, and went for SVG-icons.</p>\n<p>Happy coding!</p>",
+  "body_markdown": null,
+  "reading_time_minutes": 1,
+  "published_at": "2015-11-26T14:22:40+02:00",
+  "published_timestamp": "2015-11-26T14:22:40+02:00",
+  "created_at": "2015-11-26T14:22:40+02:00",
+  "edited_at": null,
+  "last_comment_at": null,
+  "comments_count": 0,
+  "public_reactions_count": 0,
+  "positive_reactions_count": 0,
+  "tag_list": "css3, guidelines, svg",
+  "tags": [
+    {
+      "id": "css3",
+      "name": "css3"
+    },
+    {
+      "id": "guidelines",
+      "name": "guidelines"
+    },
+    {
+      "id": "svg",
+      "name": "svg"
+    }
+  ],
+  "language": "en",
+  "source": "wordpress",
+  "source_site": "madsstoumann.wordpress.com",
+  "readable_publish_date": "Nov 26 '15",
+  "user": {
+    "name": "Mads Stoumann",
+    "username": "madsstoumann",
+    "user_id": 1,
+    "profile_image": null,
+    "profile_image_90": null
+  }
+}

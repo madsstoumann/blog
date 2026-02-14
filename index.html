@@ -3,8 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Mads Stoumann’s blog about web development, CSS, JavaScript, and frontend technologies">
-	<title>Mads Stoumann’s Blog</title>
+	<meta name="description" content="Mads Stoumann's blog about web development, CSS, JavaScript, and frontend technologies">
+	<base href="/">
+	<title>Mads Stoumann's Blog</title>
 	<style>
 		body {
 			background: canvas;
@@ -13,6 +14,14 @@
 			margin: 0;
 		}
 	</style>
+	<script>
+		// Restore slug path from 404.html redirect
+		const redirectPath = sessionStorage.getItem('redirect');
+		if (redirectPath) {
+			sessionStorage.removeItem('redirect');
+			history.replaceState(null, '', redirectPath);
+		}
+	</script>
 </head>
 <body>
 	<dev-to
@@ -20,7 +29,7 @@
 		baseurl="./data"
 		theme="classic"
 		itemsperpage="10">
-		<h1 slot="headline">Mads Stoumann’s Blog</h1>
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
   	<p slot="description">Articles about CSS, JavaScript, and web development.</p>
 	</dev-to>
 	<script type="module">

@@ -1,0 +1,402 @@
+[
+	{
+		"id": "wp-698",
+		"title": "To font-size, or not to font-size",
+		"description": "Article exploring different approaches to responsive typography in CSS, comparing viewport units, calc(), and traditional responsive breakpoints.",
+		"cover_image": null,
+		"published_timestamp": "2016-08-18T09:14:00+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2016/08/18/to-font-size-or-not-to-font-size/",
+		"slug": "to-font-size-or-not-to-font-size",
+		"tag_list": [
+			"css3"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-688",
+		"title": "You spin me round (like a record)",
+		"description": "CSS animation tutorial creating a spinning vinyl record effect using keyframe animations and CSS transforms.",
+		"cover_image": null,
+		"published_timestamp": "2016-07-08T16:31:56+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2016/07/08/you-spin-me-round-like-a-record/",
+		"slug": "you-spin-me-round-like-a-record",
+		"tag_list": [
+			"css3"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-657",
+		"title": "SVG, pair of dice",
+		"description": "Tutorial on creating interactive SVG dice with JavaScript-controlled animations and pseudo-3D effects using CSS gradients.",
+		"cover_image": null,
+		"published_timestamp": "2016-07-08T11:35:27+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2016/07/08/svg-pair-of-dice/",
+		"slug": "svg-pair-of-dice",
+		"tag_list": [
+			"javascript",
+			"svg"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-566",
+		"title": "Front-End Detective",
+		"description": "Sometimes stuff breaks. On the web, something that was working perfectly yesterday, might suddenly not work today.",
+		"cover_image": "https://madsstoumann.wordpress.com/wp-content/uploads/2016/06/shutterstock_345441746.png",
+		"published_timestamp": "2016-06-30T21:26:50+02:00",
+		"edited_at": "2016-07-08T06:31:54+02:00",
+		"url": "https://madsstoumann.wordpress.com/2016/06/30/front-end-detective/",
+		"slug": "front-end-detective",
+		"tag_list": [
+			"css3",
+			"html5",
+			"svg"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-554",
+		"title": "Thinking in modules",
+		"description": "The author discusses challenges with inheriting code from other developers and proposes a modular approach to sharing frontend code.",
+		"cover_image": null,
+		"published_timestamp": "2016-04-28T12:29:39+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2016/04/28/thinking-in-modules-2/",
+		"slug": "thinking-in-modules-2",
+		"tag_list": [
+			"css3",
+			"html5"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-525",
+		"title": "Click-Delay Revisited",
+		"description": "Author explores avoiding the 300ms touch-device click-delay using CSS touch-action: manipulation.",
+		"cover_image": null,
+		"published_timestamp": "2016-04-18T11:45:18+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2016/04/18/click-delay-revisited/",
+		"slug": "click-delay-revisited",
+		"tag_list": [
+			"css3"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-508",
+		"title": "Loop performance",
+		"description": "An examination of JavaScript loop performance across different syntaxes and methods.",
+		"cover_image": null,
+		"published_timestamp": "2016-01-03T13:21:41+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2016/01/03/loop-performance/",
+		"slug": "loop-performance",
+		"tag_list": [
+			"javascript"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-475",
+		"title": "Radial Progress Indicators",
+		"description": "A tutorial on creating space-efficient radial progress indicators using SVG.",
+		"cover_image": null,
+		"published_timestamp": "2015-12-30T15:57:35+02:00",
+		"edited_at": "2015-12-30T15:58:20+02:00",
+		"url": "https://madsstoumann.wordpress.com/2015/12/30/radial-progress-indicators/",
+		"slug": "radial-progress-indicators",
+		"tag_list": [
+			"css3",
+			"html5",
+			"javascript",
+			"svg"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-458",
+		"title": "Crisp SVG Icons",
+		"description": "The author discusses transitioning from icon-fonts to SVG icons.",
+		"cover_image": null,
+		"published_timestamp": "2015-11-26T14:22:40+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2015/11/26/crisp-svg-icons/",
+		"slug": "crisp-svg-icons",
+		"tag_list": [
+			"css3",
+			"guidelines",
+			"svg"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-460",
+		"title": "Avoiding endless scroll",
+		"description": "The article introduces HTML5's datalist element as a solution for dropdown menus on mobile devices.",
+		"cover_image": null,
+		"published_timestamp": "2015-11-18T15:35:42+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2015/11/18/avoiding-endless-scroll/",
+		"slug": "avoiding-endless-scroll",
+		"tag_list": [
+			"html5",
+			"schema.org"
+		],
+		"public_reactions_count": 1,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-422",
+		"title": "The Curse of the Click-delay!",
+		"description": "Multiple articles discuss the 300ms delay that touch-based browsers add to user click interactions.",
+		"cover_image": null,
+		"published_timestamp": "2015-11-11T16:45:07+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2015/11/11/the-curse-of-the-click-delay/",
+		"slug": "the-curse-of-the-click-delay",
+		"tag_list": [
+			"css3",
+			"html5",
+			"javascript",
+			"touch"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-392",
+		"title": "Tracking Facebook interactions in Google Tag Manager",
+		"description": "Guide for tracking Facebook interactions including Like, Unlike, and Comments in Universal Analytics through Google Tag Manager.",
+		"cover_image": null,
+		"published_timestamp": "2015-11-05T10:38:07+02:00",
+		"edited_at": "2015-11-05T10:41:03+02:00",
+		"url": "https://madsstoumann.wordpress.com/2015/11/05/tracking-facebook-interactions-in-google-tag-manager/",
+		"slug": "tracking-facebook-interactions-in-google-tag-manager",
+		"tag_list": [
+			"facebook",
+			"google-tag-manager",
+			"google-universal-analytics"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-357",
+		"title": "Welcome to Polygonia",
+		"description": "The author describes updating an old jQuery polygon plugin to Vanilla JavaScript with new features including SVG output.",
+		"cover_image": null,
+		"published_timestamp": "2015-04-18T17:33:08+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2015/04/18/welcome-to-polygonia/",
+		"slug": "welcome-to-polygonia",
+		"tag_list": [
+			"css3",
+			"html5",
+			"javascript"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-341",
+		"title": "Product variants with schemas",
+		"description": "Demonstrates how to markup product variations using Schema.org structured data.",
+		"cover_image": null,
+		"published_timestamp": "2015-03-26T12:14:30+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2015/03/26/product-variants-with-schemas/",
+		"slug": "product-variants-with-schemas",
+		"tag_list": [
+			"html5",
+			"schema.org"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-326",
+		"title": "Free tool for creating Structured Data / Schemas",
+		"description": "Describes creating a free tool that editors can use to write content enriched with structured data.",
+		"cover_image": null,
+		"published_timestamp": "2015-03-08T21:14:09+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2015/03/08/free-tool-for-creating-structured-data-schemas/",
+		"slug": "free-tool-for-creating-structured-data-schemas",
+		"tag_list": [
+			"html5",
+			"javascript",
+			"schema.org"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-323",
+		"title": "Tracking Forms & User Behaviour",
+		"description": "Article exploring how to track form submissions and user behavior using HTML5 validation with Google Tag Manager.",
+		"cover_image": null,
+		"published_timestamp": "2015-02-25T22:07:43+02:00",
+		"edited_at": "2015-02-25T22:11:32+02:00",
+		"url": "https://madsstoumann.wordpress.com/2015/02/25/tracking-forms-user-behaviour-2/",
+		"slug": "tracking-forms-user-behaviour-2",
+		"tag_list": [
+			"google-tag-manager",
+			"google-universal-analytics",
+			"html5",
+			"javascript"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-304",
+		"title": "Front-End Guidelines: HTML5, SEO and Schemas",
+		"description": "Guidelines for front-end development covering HTML validation, minification, semantic markup, and schema implementation.",
+		"cover_image": null,
+		"published_timestamp": "2015-01-23T17:51:38+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2015/01/23/front-end-guidelines-html5-seo-and-schemas/",
+		"slug": "front-end-guidelines-html5-seo-and-schemas",
+		"tag_list": [
+			"guidelines",
+			"html5",
+			"schema.org"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-242",
+		"title": "Front-End Guidelines: Meta and Apps",
+		"description": "Comprehensive reference for hidden HTML features that enhance experiences across devices.",
+		"cover_image": null,
+		"published_timestamp": "2015-01-23T16:19:56+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2015/01/23/front-end-guidelines-meta-and-apps/",
+		"slug": "front-end-guidelines-meta-and-apps",
+		"tag_list": [
+			"guidelines",
+			"meta"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-269",
+		"title": "Front-End Guidelines: CSS",
+		"description": "Guidelines for CSS development covering conventions, naming, module-based approaches, responsiveness, and specificity.",
+		"cover_image": null,
+		"published_timestamp": "2015-01-23T15:44:27+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2015/01/23/front-end-guidelines-css/",
+		"slug": "front-end-guidelines-css",
+		"tag_list": [
+			"css3",
+			"guidelines"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-292",
+		"title": "Front-End Guidelines: JavaScript",
+		"description": "Guidelines for JavaScript development covering conventions, variables, functions, coercion, and events.",
+		"cover_image": null,
+		"published_timestamp": "2015-01-23T15:42:15+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2015/01/23/front-end-guidelines-javascript-2/",
+		"slug": "front-end-guidelines-javascript-2",
+		"tag_list": [
+			"guidelines",
+			"javascript",
+			"google-closure"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-51",
+		"title": "Google Tag Manager: Getting started",
+		"description": "Introduction to Google Tag Manager for managing scripts and tracking on websites.",
+		"cover_image": null,
+		"published_timestamp": "2014-08-07T16:04:49+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2014/08/07/google-tag-manager-getting-started/",
+		"slug": "google-tag-manager-getting-started",
+		"tag_list": [
+			"google-tag-manager",
+			"google-universal-analytics",
+			"html5",
+			"javascript"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-104",
+		"title": "Performance: Optimizing existing content",
+		"description": "Guide on optimizing existing web content through minification, gzip compression, and proper header configuration.",
+		"cover_image": null,
+		"published_timestamp": "2014-08-03T13:47:18+02:00",
+		"edited_at": null,
+		"url": "https://madsstoumann.wordpress.com/2014/08/03/performance-optimizing-existing-content/",
+		"slug": "performance-optimizing-existing-content",
+		"tag_list": [
+			"css3",
+			"html5",
+			"javascript"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-101",
+		"title": ":target the dialog!",
+		"description": "A CSS technique leveraging the :target pseudo-selector for dialog and popup implementations.",
+		"cover_image": null,
+		"published_timestamp": "2014-07-29T09:40:12+02:00",
+		"edited_at": "2014-08-03T14:03:47+02:00",
+		"url": "https://madsstoumann.wordpress.com/2014/07/29/target-the-dialog-and-minify-2/",
+		"slug": "target-the-dialog-and-minify-2",
+		"tag_list": [
+			"css3",
+			"html5"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	},
+	{
+		"id": "wp-9",
+		"title": "Better search-results with schemas",
+		"description": "Learn how Schema.org helps search engines display richer, more informative results through structured markup.",
+		"cover_image": null,
+		"published_timestamp": "2014-07-21T11:19:35+02:00",
+		"edited_at": "2014-08-03T14:05:23+02:00",
+		"url": "https://madsstoumann.wordpress.com/2014/07/21/better-search-results-with-schemas/",
+		"slug": "better-search-results-with-schemas",
+		"tag_list": [
+			"css3",
+			"html5",
+			"javascript",
+			"schema.org",
+			"rich-snippets",
+			"schemas"
+		],
+		"public_reactions_count": 0,
+		"source": "wordpress"
+	}
+]

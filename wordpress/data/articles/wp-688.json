@@ -1,0 +1,41 @@
+{
+  "type_of": "article",
+  "id": "wp-688",
+  "title": "You spin me round (like a record)",
+  "description": "CSS animation tutorial creating a spinning vinyl record effect using keyframe animations and CSS transforms.",
+  "slug": "you-spin-me-round-like-a-record",
+  "url": "https://madsstoumann.wordpress.com/2016/07/08/you-spin-me-round-like-a-record/",
+  "path": "/you-spin-me-round-like-a-record",
+  "canonical_url": "https://madsstoumann.wordpress.com/2016/07/08/you-spin-me-round-like-a-record/",
+  "cover_image": null,
+  "social_image": null,
+  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p>I have a large collection of vinyl records, and music is an important part of my life. Hence my experiment today, which is to (re-) create a spinning vinyl record using only CSS.</p>\n<p>I&#8217;ve created various effects in the past, using Flash, canvas and SVG &mdash; but I wanted to see what could be accomplished with just CSS. And it looks pretty neat!</p>\n<p>I can&#8217;t really see a use-case for it, except a (very different!) icon for a music-player.</p>\n<p>Hope you like it.</p>\n<div class=\"embed-codepen\"><iframe title=\"Pure CSS Record (Vinyl)\" id=\"cp_embed_GqKyLK\" src=\"https://codepen.io/stoumann/embed/preview/GqKyLK?default-tabs=css%2Cresult&amp;height=300&amp;host=https%3A%2F%2Fcodepen.io&amp;slug-hash=GqKyLK\" scrolling=\"no\" frameborder=\"0\" height=\"300\" allowtransparency=\"true\" allowfullscreen=\"true\" allowpaymentrequest=\"true\" class=\"cp_embed_iframe\" style=\"width: 100%; overflow: hidden;\"></iframe></div>\n<p>Happy coding!</p>",
+  "body_markdown": null,
+  "reading_time_minutes": 1,
+  "published_at": "2016-07-08T16:31:56+02:00",
+  "published_timestamp": "2016-07-08T16:31:56+02:00",
+  "created_at": "2016-07-08T16:31:56+02:00",
+  "edited_at": null,
+  "last_comment_at": null,
+  "comments_count": 0,
+  "public_reactions_count": 0,
+  "positive_reactions_count": 0,
+  "tag_list": "css3",
+  "tags": [
+    {
+      "id": "css3",
+      "name": "css3"
+    }
+  ],
+  "language": "en",
+  "source": "wordpress",
+  "source_site": "madsstoumann.wordpress.com",
+  "readable_publish_date": "Jul 8 '16",
+  "user": {
+    "name": "Mads Stoumann",
+    "username": "madsstoumann",
+    "user_id": 1,
+    "profile_image": null,
+    "profile_image_90": null
+  }
+}

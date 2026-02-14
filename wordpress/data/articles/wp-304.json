@@ -1,0 +1,49 @@
+{
+  "type_of": "article",
+  "id": "wp-304",
+  "title": "Front-End Guidelines: HTML5, SEO and Schemas",
+  "description": "Guidelines for front-end development covering HTML validation, minification, semantic markup, and schema implementation.",
+  "slug": "front-end-guidelines-html5-seo-and-schemas",
+  "url": "https://madsstoumann.wordpress.com/2015/01/23/front-end-guidelines-html5-seo-and-schemas/",
+  "path": "/front-end-guidelines-html5-seo-and-schemas",
+  "canonical_url": "https://madsstoumann.wordpress.com/2015/01/23/front-end-guidelines-html5-seo-and-schemas/",
+  "cover_image": null,
+  "social_image": null,
+  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p>This is a series of guidelines written for my team covering HTML5, SEO and Schemas.</p>",
+  "body_markdown": null,
+  "reading_time_minutes": 1,
+  "published_at": "2015-01-23T17:51:38+02:00",
+  "published_timestamp": "2015-01-23T17:51:38+02:00",
+  "created_at": "2015-01-23T17:51:38+02:00",
+  "edited_at": null,
+  "last_comment_at": null,
+  "comments_count": 1,
+  "public_reactions_count": 0,
+  "positive_reactions_count": 0,
+  "tag_list": "guidelines, html5, schema.org",
+  "tags": [
+    {
+      "id": "guidelines",
+      "name": "guidelines"
+    },
+    {
+      "id": "html5",
+      "name": "html5"
+    },
+    {
+      "id": "schema.org",
+      "name": "schema.org"
+    }
+  ],
+  "language": "en",
+  "source": "wordpress",
+  "source_site": "madsstoumann.wordpress.com",
+  "readable_publish_date": "Jan 23 '15",
+  "user": {
+    "name": "Mads Stoumann",
+    "username": "madsstoumann",
+    "user_id": 1,
+    "profile_image": null,
+    "profile_image_90": null
+  }
+}

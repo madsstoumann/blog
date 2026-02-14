@@ -267,12 +267,12 @@ async function sync(username, forceFullSync = false) {
 	// Save articles list (metadata only) with local cover_image paths
 	const metadata = remoteArticles.map(({
 		id, title, description, cover_image, published_timestamp,
-		edited_at, url, tag_list, public_reactions_count
+		edited_at, url, slug, tag_list, public_reactions_count
 	}) => ({
 		id, title, description,
 		cover_image: coverImageMap.get(id) || cover_image,
 		published_timestamp,
-		edited_at, url, tag_list, public_reactions_count
+		edited_at, url, slug, tag_list, public_reactions_count
 	}));
 
 	await writeFile(ARTICLES_JSON, JSON.stringify(metadata, null, 2));

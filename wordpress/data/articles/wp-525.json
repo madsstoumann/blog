@@ -1,0 +1,41 @@
+{
+  "type_of": "article",
+  "id": "wp-525",
+  "title": "Click-Delay Revisited",
+  "description": "Author explores avoiding the 300ms touch-device click-delay using CSS touch-action: manipulation.",
+  "slug": "click-delay-revisited",
+  "url": "https://madsstoumann.wordpress.com/2016/04/18/click-delay-revisited/",
+  "path": "/click-delay-revisited",
+  "canonical_url": "https://madsstoumann.wordpress.com/2016/04/18/click-delay-revisited/",
+  "cover_image": null,
+  "social_image": null,
+  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p>A while ago, I wrote a blog-post called <a href=\"https://madsstoumann.wordpress.com/2015/11/11/the-curse-of-the-click-delay/\" target=\"_blank\">The Curse Of The Click-Delay</a>, on how to avoid the 300 ms click-delay on touch-devices, using a small JavaScript.</p>\n<p>Since then, iOS has been updated with a new CSS-property:</p>\n<pre class=\"brush: css; title: ; notranslate\" title=\"\">\ntouch-action: manipulation;\n</pre>\n<p>— and <em>that property</em>, along with some other settings, removes the delay without using JavaScript!</p>\n<p>Happy coding!</p>",
+  "body_markdown": null,
+  "reading_time_minutes": 1,
+  "published_at": "2016-04-18T11:45:18+02:00",
+  "published_timestamp": "2016-04-18T11:45:18+02:00",
+  "created_at": "2016-04-18T11:45:18+02:00",
+  "edited_at": null,
+  "last_comment_at": null,
+  "comments_count": 0,
+  "public_reactions_count": 0,
+  "positive_reactions_count": 0,
+  "tag_list": "css3",
+  "tags": [
+    {
+      "id": "css3",
+      "name": "css3"
+    }
+  ],
+  "language": "en",
+  "source": "wordpress",
+  "source_site": "madsstoumann.wordpress.com",
+  "readable_publish_date": "Apr 18 '16",
+  "user": {
+    "name": "Mads Stoumann",
+    "username": "madsstoumann",
+    "user_id": 1,
+    "profile_image": null,
+    "profile_image_90": null
+  }
+}

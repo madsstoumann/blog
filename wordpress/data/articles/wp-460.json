@@ -1,0 +1,45 @@
+{
+  "type_of": "article",
+  "id": "wp-460",
+  "title": "Avoiding endless scroll",
+  "description": "The article introduces HTML5's datalist element as a solution for dropdown menus on mobile devices.",
+  "slug": "avoiding-endless-scroll",
+  "url": "https://madsstoumann.wordpress.com/2015/11/18/avoiding-endless-scroll/",
+  "path": "/avoiding-endless-scroll",
+  "canonical_url": "https://madsstoumann.wordpress.com/2015/11/18/avoiding-endless-scroll/",
+  "cover_image": null,
+  "social_image": null,
+  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p>Have you ever tried to pick your country from a drop-down on a mobile phone?</p>\n<p><a href=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/datalist.png\"><img src=\"https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/datalist.png?w=297&h=147\" alt=\"datalist\" width=\"297\" height=\"147\" /></a></p>\n<p>HTML5 introduced a new element, the &lt;datalist&gt;, which is a nice, fast and JavaScript-free autosuggest.</p>\n<p>Happy coding!</p>",
+  "body_markdown": null,
+  "reading_time_minutes": 1,
+  "published_at": "2015-11-18T15:35:42+02:00",
+  "published_timestamp": "2015-11-18T15:35:42+02:00",
+  "created_at": "2015-11-18T15:35:42+02:00",
+  "edited_at": null,
+  "last_comment_at": null,
+  "comments_count": 0,
+  "public_reactions_count": 1,
+  "positive_reactions_count": 1,
+  "tag_list": "html5, schema.org",
+  "tags": [
+    {
+      "id": "html5",
+      "name": "html5"
+    },
+    {
+      "id": "schema.org",
+      "name": "schema.org"
+    }
+  ],
+  "language": "en",
+  "source": "wordpress",
+  "source_site": "madsstoumann.wordpress.com",
+  "readable_publish_date": "Nov 18 '15",
+  "user": {
+    "name": "Mads Stoumann",
+    "username": "madsstoumann",
+    "user_id": 1,
+    "profile_image": null,
+    "profile_image_90": null
+  }
+}

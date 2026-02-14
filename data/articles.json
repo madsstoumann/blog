@@ -1,5 +1,17 @@
 [
   {
+    "id": 3248930,
+    "title": "Re-creating a Pantone Color Deck in CSS",
+    "description": "If you’ve ever held a Pantone fan deck — the kind graphic designers used to carry around like a...",
+    "cover_image": "assets/3248930/7ec5909c.jpg",
+    "published_timestamp": "2026-02-11T13:05:10Z",
+    "edited_at": null,
+    "url": "https://dev.to/madsstoumann/re-creating-a-pantone-color-deck-in-css-3108",
+    "slug": "re-creating-a-pantone-color-deck-in-css",
+    "tag_list": "html, css, tutorial, webdev",
+    "public_reactions_count": 26
+  },
+  {
     "id": 2975676,
     "title": "Creating a Maintenance Page using a Cloudflare Worker",
     "description": "Last night, an Azure outage took down several sites my company maintains. While the servers were...",
@@ -7,12 +19,8 @@
     "published_timestamp": "2025-10-31T10:52:36Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/creating-a-maintenance-page-using-a-cloudflare-worker-8m6",
-    "tag_list": [
-      "javascript",
-      "security",
-      "webdev",
-      "tutorial"
-    ],
+    "slug": "creating-a-maintenance-page-using-a-cloudflare-worker",
+    "tag_list": "javascript, security, webdev, tutorial",
     "public_reactions_count": 3
   },
   {
@@ -23,10 +31,8 @@
     "published_timestamp": "2025-10-30T07:54:30Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/adding-security-headers-on-cloudflare-2dag",
-    "tag_list": [
-      "security",
-      "webdev"
-    ],
+    "slug": "adding-security-headers-on-cloudflare",
+    "tag_list": "security, webdev",
     "public_reactions_count": 6
   },
   {
@@ -37,12 +43,8 @@
     "published_timestamp": "2025-10-24T11:33:15Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/weather-widgets-4751",
-    "tag_list": [
-      "javascript",
-      "css",
-      "webdev",
-      "showdev"
-    ],
+    "slug": "weather-widgets",
+    "tag_list": "javascript, css, webdev, showdev",
     "public_reactions_count": 7
   },
   {
@@ -53,12 +55,8 @@
     "published_timestamp": "2025-07-25T15:05:46Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/piano-chords-in-css-4jop",
-    "tag_list": [
-      "css",
-      "tutorial",
-      "webdev",
-      "showdev"
-    ],
+    "slug": "piano-chords-in-css",
+    "tag_list": "css, tutorial, webdev, showdev",
     "public_reactions_count": 28
   },
   {
@@ -69,12 +67,8 @@
     "published_timestamp": "2025-06-09T10:43:37Z",
     "edited_at": "2025-06-09T11:07:16Z",
     "url": "https://dev.to/madsstoumann/charts-in-css-1di1",
-    "tag_list": [
-      "css",
-      "tutorial",
-      "webdev",
-      "showdev"
-    ],
+    "slug": "charts-in-css",
+    "tag_list": "css, tutorial, webdev, showdev",
     "public_reactions_count": 70
   },
   {
@@ -85,12 +79,8 @@
     "published_timestamp": "2025-05-07T09:38:23Z",
     "edited_at": "2025-05-07T14:13:40Z",
     "url": "https://dev.to/madsstoumann/guitar-chords-in-css-3hk8",
-    "tag_list": [
-      "css",
-      "webdev",
-      "showdev",
-      "tutorial"
-    ],
+    "slug": "guitar-chords-in-css",
+    "tag_list": "css, webdev, showdev, tutorial",
     "public_reactions_count": 147
   },
   {
@@ -101,12 +91,8 @@
     "published_timestamp": "2025-04-09T17:54:51Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/phases-of-the-moon-in-css-2lbo",
-    "tag_list": [
-      "css",
-      "webdev",
-      "tutorial",
-      "showdev"
-    ],
+    "slug": "phases-of-the-moon-in-css",
+    "tag_list": "css, webdev, tutorial, showdev",
     "public_reactions_count": 55
   },
   {
@@ -117,12 +103,8 @@
     "published_timestamp": "2025-04-05T11:21:33Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/how-to-create-gauges-in-css-3581",
-    "tag_list": [
-      "css",
-      "webdev",
-      "tutorial",
-      "showdev"
-    ],
+    "slug": "how-to-create-gauges-in-css",
+    "tag_list": "css, webdev, tutorial, showdev",
     "public_reactions_count": 30
   },
   {
@@ -133,12 +115,8 @@
     "published_timestamp": "2025-03-22T13:44:35Z",
     "edited_at": "2025-03-26T18:31:24Z",
     "url": "https://dev.to/madsstoumann/digital-clocks-in-css-3dkg",
-    "tag_list": [
-      "webdev",
-      "css",
-      "javascript",
-      "showdev"
-    ],
+    "slug": "digital-clocks-in-css",
+    "tag_list": "webdev, css, javascript, showdev",
     "public_reactions_count": 10
   },
   {
@@ -149,12 +127,8 @@
     "published_timestamp": "2025-02-25T13:46:44Z",
     "edited_at": "2025-03-26T18:30:37Z",
     "url": "https://dev.to/madsstoumann/clocks-and-watches-in-css-36mm",
-    "tag_list": [
-      "css",
-      "javascript",
-      "webdev",
-      "tutorial"
-    ],
+    "slug": "clocks-and-watches-in-css",
+    "tag_list": "css, javascript, webdev, tutorial",
     "public_reactions_count": 104
   },
   {
@@ -165,12 +139,8 @@
     "published_timestamp": "2025-02-11T09:38:37Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/the-unofficial-devto-embed-web-component-1hjk",
-    "tag_list": [
-      "javascript",
-      "css",
-      "webdev",
-      "showdev"
-    ],
+    "slug": "the-unofficial-devto-embed-web-component",
+    "tag_list": "javascript, css, webdev, showdev",
     "public_reactions_count": 57
   },
   {
@@ -181,12 +151,8 @@
     "published_timestamp": "2025-01-24T11:45:37Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/creating-a-print-preview-web-component-1ma5",
-    "tag_list": [
-      "javascript",
-      "webdev",
-      "webcomponents",
-      "tutorial"
-    ],
+    "slug": "creating-a-print-preview-web-component",
+    "tag_list": "javascript, webdev, webcomponents, tutorial",
     "public_reactions_count": 11
   },
   {
@@ -197,12 +163,8 @@
     "published_timestamp": "2024-12-07T15:55:34Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/art-with-css-grid-and-svg-filters-1ke6",
-    "tag_list": [
-      "css",
-      "javascript",
-      "webdev",
-      "showdev"
-    ],
+    "slug": "art-with-css-grid-and-svg-filters",
+    "tag_list": "css, javascript, webdev, showdev",
     "public_reactions_count": 48
   },
   {
@@ -213,12 +175,8 @@
     "published_timestamp": "2024-12-02T19:43:39Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/creating-a-scroll-grid-en5",
-    "tag_list": [
-      "javascript",
-      "css",
-      "webdev",
-      "tutorial"
-    ],
+    "slug": "creating-a-scroll-grid",
+    "tag_list": "javascript, css, webdev, tutorial",
     "public_reactions_count": 6
   },
   {
@@ -229,12 +187,8 @@
     "published_timestamp": "2024-11-10T11:27:50Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/can-i-drive-coding-an-alcohol-tester-163g",
-    "tag_list": [
-      "javascript",
-      "css",
-      "webdev",
-      "tutorial"
-    ],
+    "slug": "can-i-drive-coding-an-alcohol-tester",
+    "tag_list": "javascript, css, webdev, tutorial",
     "public_reactions_count": 4
   },
   {
@@ -245,12 +199,8 @@
     "published_timestamp": "2024-11-03T16:03:08Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/designing-better-tables-using-popovers-for-extra-data-d1i",
-    "tag_list": [
-      "javascript",
-      "css",
-      "webdev",
-      "tutorial"
-    ],
+    "slug": "designing-better-tables-using-popovers-for-extra-data",
+    "tag_list": "javascript, css, webdev, tutorial",
     "public_reactions_count": 50
   },
   {
@@ -261,12 +211,8 @@
     "published_timestamp": "2024-09-25T09:37:20Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/the-golden-ratio-in-css-53d0",
-    "tag_list": [
-      "css",
-      "webdev",
-      "showdev",
-      "tutorial"
-    ],
+    "slug": "the-golden-ratio-in-css",
+    "tag_list": "css, webdev, showdev, tutorial",
     "public_reactions_count": 243
   },
   {
@@ -277,12 +223,8 @@
     "published_timestamp": "2024-09-13T10:18:40Z",
     "edited_at": "2024-09-14T05:44:22Z",
     "url": "https://dev.to/madsstoumann/from-typewriters-to-pixels-a-journey-with-cmyk-rgb-and-building-a-color-visualizer-484b",
-    "tag_list": [
-      "css",
-      "javascript",
-      "webdev",
-      "tutorial"
-    ],
+    "slug": "from-typewriters-to-pixels-a-journey-with-cmyk-rgb-and-building-a-color-visualizer",
+    "tag_list": "css, javascript, webdev, tutorial",
     "public_reactions_count": 4
   },
   {
@@ -293,12 +235,8 @@
     "published_timestamp": "2024-09-12T07:48:01Z",
     "edited_at": "2024-09-12T09:35:33Z",
     "url": "https://dev.to/madsstoumann/alien-signals-3ni8",
-    "tag_list": [
-      "devchallenge",
-      "frontendchallenge",
-      "css",
-      "javascript"
-    ],
+    "slug": "alien-signals",
+    "tag_list": "devchallenge, frontendchallenge, css, javascript",
     "public_reactions_count": 9
   },
   {
@@ -309,12 +247,8 @@
     "published_timestamp": "2024-09-08T08:40:16Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/the-periodic-table-in-css-3lmm",
-    "tag_list": [
-      "css",
-      "webdev",
-      "showdev",
-      "tutorial"
-    ],
+    "slug": "the-periodic-table-in-css",
+    "tag_list": "css, webdev, showdev, tutorial",
     "public_reactions_count": 128
   },
   {
@@ -325,12 +259,8 @@
     "published_timestamp": "2024-09-01T09:39:36Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/and-the-oscar-goes-to-coding-a-chronology-component-24hf",
-    "tag_list": [
-      "css",
-      "webdev",
-      "showdev",
-      "tutorial"
-    ],
+    "slug": "and-the-oscar-goes-to-coding-a-chronology-component",
+    "tag_list": "css, webdev, showdev, tutorial",
     "public_reactions_count": 5
   },
   {
@@ -341,12 +271,8 @@
     "published_timestamp": "2024-08-25T15:43:48Z",
     "edited_at": "2024-08-27T04:32:52Z",
     "url": "https://dev.to/madsstoumann/the-solar-system-in-css-51bo",
-    "tag_list": [
-      "css",
-      "webdev",
-      "showdev",
-      "tutorial"
-    ],
+    "slug": "the-solar-system-in-css",
+    "tag_list": "css, webdev, showdev, tutorial",
     "public_reactions_count": 276
   },
   {
@@ -357,12 +283,8 @@
     "published_timestamp": "2024-08-19T09:34:30Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/line-numbers-for-using-svg-1216",
-    "tag_list": [
-      "javascript",
-      "webdev",
-      "showdev",
-      "css"
-    ],
+    "slug": "line-numbers-for-using-svg",
+    "tag_list": "javascript, webdev, showdev, css",
     "public_reactions_count": 36
   },
   {
@@ -373,12 +295,8 @@
     "published_timestamp": "2024-06-22T12:59:57Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/build-a-css-word-search-game-in-css-10d1",
-    "tag_list": [
-      "css",
-      "html",
-      "webdev",
-      "showdev"
-    ],
+    "slug": "build-a-css-word-search-game-in-css",
+    "tag_list": "css, html, webdev, showdev",
     "public_reactions_count": 24
   },
   {
@@ -389,12 +307,8 @@
     "published_timestamp": "2024-06-02T14:34:14Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/sunday-fun-re-creating-a-radiohead-cover-20ma",
-    "tag_list": [
-      "css",
-      "javascript",
-      "webdev",
-      "showdev"
-    ],
+    "slug": "sunday-fun-re-creating-a-radiohead-cover",
+    "tag_list": "css, javascript, webdev, showdev",
     "public_reactions_count": 3
   },
   {
@@ -405,12 +319,8 @@
     "published_timestamp": "2024-05-30T10:57:54Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/a-trip-to-the-beach-f9i",
-    "tag_list": [
-      "devchallenge",
-      "frontendchallenge",
-      "css",
-      "javascript"
-    ],
+    "slug": "a-trip-to-the-beach",
+    "tag_list": "devchallenge, frontendchallenge, css, javascript",
     "public_reactions_count": 6
   },
   {
@@ -421,11 +331,8 @@
     "published_timestamp": "2024-05-29T18:55:03Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/la-luzerne-bfe",
-    "tag_list": [
-      "frontendchallenge",
-      "devchallenge",
-      "css"
-    ],
+    "slug": "la-luzerne",
+    "tag_list": "frontendchallenge, devchallenge, css",
     "public_reactions_count": 2
   },
   {
@@ -436,12 +343,8 @@
     "published_timestamp": "2024-05-24T06:54:41Z",
     "edited_at": "2024-05-24T08:24:23Z",
     "url": "https://dev.to/madsstoumann/getting-creative-with-css-grid-mco",
-    "tag_list": [
-      "css",
-      "webdev",
-      "tutorial",
-      "showdev"
-    ],
+    "slug": "getting-creative-with-css-grid",
+    "tag_list": "css, webdev, tutorial, showdev",
     "public_reactions_count": 44
   },
   {
@@ -452,12 +355,8 @@
     "published_timestamp": "2024-05-23T08:21:31Z",
     "edited_at": "2024-11-13T18:18:55Z",
     "url": "https://dev.to/madsstoumann/wheel-of-fortune-with-css-p-pi-1ne9",
-    "tag_list": [
-      "css",
-      "webdev",
-      "tutorial",
-      "javascript"
-    ],
+    "slug": "wheel-of-fortune-with-css-p-pi",
+    "tag_list": "css, webdev, tutorial, javascript",
     "public_reactions_count": 211
   },
   {
@@ -468,12 +367,8 @@
     "published_timestamp": "2024-05-12T07:27:11Z",
     "edited_at": "2024-05-14T14:38:20Z",
     "url": "https://dev.to/madsstoumann/unleashing-the-hidden-power-of-html-forms-2gkl",
-    "tag_list": [
-      "html",
-      "javascript",
-      "webdev",
-      "tutorial"
-    ],
+    "slug": "unleashing-the-hidden-power-of-html-forms",
+    "tag_list": "html, javascript, webdev, tutorial",
     "public_reactions_count": 31
   },
   {
@@ -484,12 +379,8 @@
     "published_timestamp": "2024-05-08T15:20:05Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/eurovision-gradients-4fog",
-    "tag_list": [
-      "css",
-      "webdev",
-      "showdev",
-      "tutorial"
-    ],
+    "slug": "eurovision-gradients",
+    "tag_list": "css, webdev, showdev, tutorial",
     "public_reactions_count": 54
   },
   {
@@ -500,12 +391,8 @@
     "published_timestamp": "2024-05-03T09:49:44Z",
     "edited_at": "2024-05-04T05:58:36Z",
     "url": "https://dev.to/madsstoumann/animating-numbers-1oc8",
-    "tag_list": [
-      "css",
-      "javascript",
-      "webdev",
-      "tutorial"
-    ],
+    "slug": "animating-numbers",
+    "tag_list": "css, javascript, webdev, tutorial",
     "public_reactions_count": 54
   },
   {
@@ -516,12 +403,8 @@
     "published_timestamp": "2024-04-09T20:29:18Z",
     "edited_at": "2024-04-09T20:37:37Z",
     "url": "https://dev.to/madsstoumann/small-tips-for-styling-card-components-16hg",
-    "tag_list": [
-      "css",
-      "html",
-      "webdev",
-      "tutorial"
-    ],
+    "slug": "small-tips-for-styling-card-components",
+    "tag_list": "css, html, webdev, tutorial",
     "public_reactions_count": 12
   },
   {
@@ -532,12 +415,8 @@
     "published_timestamp": "2024-03-22T12:12:16Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/fetch-with-abortcontroller-4ph2",
-    "tag_list": [
-      "frontendchallenge",
-      "devchallenge",
-      "javascript",
-      "webdev"
-    ],
+    "slug": "fetch-with-abortcontroller",
+    "tag_list": "frontendchallenge, devchallenge, javascript, webdev",
     "public_reactions_count": 5
   },
   {
@@ -548,12 +427,8 @@
     "published_timestamp": "2024-03-22T07:18:07Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/camping-with-html-and-css-3en3",
-    "tag_list": [
-      "frontendchallenge",
-      "devchallenge",
-      "css",
-      "javascript"
-    ],
+    "slug": "camping-with-html-and-css",
+    "tag_list": "frontendchallenge, devchallenge, css, javascript",
     "public_reactions_count": 16
   },
   {
@@ -564,11 +439,8 @@
     "published_timestamp": "2024-03-21T09:11:48Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/liquorice-allsorts-4a13",
-    "tag_list": [
-      "frontendchallenge",
-      "devchallenge",
-      "css"
-    ],
+    "slug": "liquorice-allsorts",
+    "tag_list": "frontendchallenge, devchallenge, css",
     "public_reactions_count": 30
   },
   {
@@ -579,12 +451,8 @@
     "published_timestamp": "2024-03-02T13:33:18Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/styling-checkboxes-and-switches-pf0",
-    "tag_list": [
-      "css",
-      "tutorial",
-      "webdev",
-      "showdev"
-    ],
+    "slug": "styling-checkboxes-and-switches",
+    "tag_list": "css, tutorial, webdev, showdev",
     "public_reactions_count": 134
   },
   {
@@ -595,12 +463,8 @@
     "published_timestamp": "2024-01-28T10:06:26Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/a-first-look-at-apples-new-switch-control-3pnd",
-    "tag_list": [
-      "css",
-      "webdev",
-      "tutorial",
-      "showdev"
-    ],
+    "slug": "a-first-look-at-apples-new-switch-control",
+    "tag_list": "css, webdev, tutorial, showdev",
     "public_reactions_count": 7
   },
   {
@@ -611,12 +475,8 @@
     "published_timestamp": "2024-01-28T08:25:33Z",
     "edited_at": "2024-02-01T07:03:06Z",
     "url": "https://dev.to/madsstoumann/a-guide-to-styling-tables-28d2",
-    "tag_list": [
-      "css",
-      "webdev",
-      "tutorial",
-      "showdev"
-    ],
+    "slug": "a-guide-to-styling-tables",
+    "tag_list": "css, webdev, tutorial, showdev",
     "public_reactions_count": 197
   },
   {
@@ -627,12 +487,8 @@
     "published_timestamp": "2023-09-01T12:04:30Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/clocks-countdowns-timing-in-css-and-javascript-554n",
-    "tag_list": [
-      "javascript",
-      "css",
-      "webdev",
-      "showdev"
-    ],
+    "slug": "clocks-countdowns-timing-in-css-and-javascript",
+    "tag_list": "javascript, css, webdev, showdev",
     "public_reactions_count": 133
   },
   {
@@ -643,12 +499,8 @@
     "published_timestamp": "2023-08-12T15:16:54Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/syntax-highlight-css-with-semantic-html-and-get-dark-mode-for-free-4mim",
-    "tag_list": [
-      "css",
-      "html",
-      "webdev",
-      "showdev"
-    ],
+    "slug": "syntax-highlight-css-with-semantic-html-and-get-dark-mode-for-free",
+    "tag_list": "css, html, webdev, showdev",
     "public_reactions_count": 11
   },
   {
@@ -659,12 +511,8 @@
     "published_timestamp": "2023-07-22T05:00:10Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/circle-packing-with-javascript-and-svg-the-kusama-way-b59",
-    "tag_list": [
-      "javascript",
-      "css",
-      "webdev",
-      "showdev"
-    ],
+    "slug": "circle-packing-with-javascript-and-svg-the-kusama-way",
+    "tag_list": "javascript, css, webdev, showdev",
     "public_reactions_count": 17
   },
   {
@@ -675,12 +523,8 @@
     "published_timestamp": "2023-07-18T14:48:57Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/the-moon-in-10241-dots-re-creating-a-1969-masterpiece-35e2",
-    "tag_list": [
-      "css",
-      "javascript",
-      "webdev",
-      "showdev"
-    ],
+    "slug": "the-moon-in-10241-dots-re-creating-a-1969-masterpiece",
+    "tag_list": "css, javascript, webdev, showdev",
     "public_reactions_count": 35
   },
   {
@@ -691,12 +535,8 @@
     "published_timestamp": "2023-07-10T17:19:12Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/in-the-footsteps-of-poul-gernes-making-an-interactive-art-poster-5580",
-    "tag_list": [
-      "css",
-      "webdev",
-      "showdev",
-      "javascript"
-    ],
+    "slug": "in-the-footsteps-of-poul-gernes-making-an-interactive-art-poster",
+    "tag_list": "css, webdev, showdev, javascript",
     "public_reactions_count": 14
   },
   {
@@ -707,12 +547,8 @@
     "published_timestamp": "2023-07-05T07:08:21Z",
     "edited_at": "2023-07-06T07:27:44Z",
     "url": "https://dev.to/madsstoumann/re-creating-a-japanese-fireworks-catalog-from-1883-in-css-83j",
-    "tag_list": [
-      "css",
-      "codepen",
-      "webdev",
-      "showdev"
-    ],
+    "slug": "re-creating-a-japanese-fireworks-catalog-from-1883-in-css",
+    "tag_list": "css, codepen, webdev, showdev",
     "public_reactions_count": 159
   },
   {
@@ -723,12 +559,8 @@
     "published_timestamp": "2023-06-13T09:15:40Z",
     "edited_at": "2023-06-13T14:02:19Z",
     "url": "https://dev.to/madsstoumann/color-compare-range-slider-3o1k",
-    "tag_list": [
-      "javascript",
-      "css",
-      "webdev",
-      "showdev"
-    ],
+    "slug": "color-compare-range-slider",
+    "tag_list": "javascript, css, webdev, showdev",
     "public_reactions_count": 9
   },
   {
@@ -739,12 +571,8 @@
     "published_timestamp": "2023-06-12T08:05:01Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/using-a-single-input-for-one-time-code-352l",
-    "tag_list": [
-      "css",
-      "javascript",
-      "webdev",
-      "showdev"
-    ],
+    "slug": "using-a-single-input-for-one-time-code",
+    "tag_list": "css, javascript, webdev, showdev",
     "public_reactions_count": 224
   },
   {
@@ -755,11 +583,8 @@
     "published_timestamp": "2023-05-23T06:03:57Z",
     "edited_at": "2023-05-23T18:32:36Z",
     "url": "https://dev.to/madsstoumann/tetris-testimonial-quotes-55i5",
-    "tag_list": [
-      "codepen",
-      "css",
-      "showdev"
-    ],
+    "slug": "tetris-testimonial-quotes",
+    "tag_list": "codepen, css, showdev",
     "public_reactions_count": 30
   },
   {
@@ -770,12 +595,8 @@
     "published_timestamp": "2023-05-13T08:38:27Z",
     "edited_at": "2023-05-13T11:56:32Z",
     "url": "https://dev.to/madsstoumann/mobile-to-desktop-menu-in-2-lines-of-css-4ikn",
-    "tag_list": [
-      "webdev",
-      "css",
-      "tutorial",
-      "javascript"
-    ],
+    "slug": "mobile-to-desktop-menu-in-2-lines-of-css",
+    "tag_list": "webdev, css, tutorial, javascript",
     "public_reactions_count": 97
   },
   {
@@ -786,11 +607,8 @@
     "published_timestamp": "2023-05-07T07:54:19Z",
     "edited_at": "2023-05-07T08:02:48Z",
     "url": "https://dev.to/madsstoumann/configurable-css-components-32gn",
-    "tag_list": [
-      "css",
-      "showdev",
-      "webdev"
-    ],
+    "slug": "configurable-css-components",
+    "tag_list": "css, showdev, webdev",
     "public_reactions_count": 11
   },
   {
@@ -801,12 +619,8 @@
     "published_timestamp": "2023-04-29T12:25:08Z",
     "edited_at": "2023-05-06T12:10:39Z",
     "url": "https://dev.to/madsstoumann/dark-mode-in-3-lines-of-css-and-other-adventures-1ljj",
-    "tag_list": [
-      "css",
-      "webdev",
-      "tutorial",
-      "javascript"
-    ],
+    "slug": "dark-mode-in-3-lines-of-css-and-other-adventures",
+    "tag_list": "css, webdev, tutorial, javascript",
     "public_reactions_count": 470
   },
   {
@@ -817,12 +631,8 @@
     "published_timestamp": "2022-10-07T09:14:12Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/extending-emmet-and-vs-code-and-discovering-415-css-properties-1dfo",
-    "tag_list": [
-      "javascript",
-      "webdev",
-      "showdev",
-      "css"
-    ],
+    "slug": "extending-emmet-and-vs-code-and-discovering-415-css-properties",
+    "tag_list": "javascript, webdev, showdev, css",
     "public_reactions_count": 10
   },
   {
@@ -833,12 +643,8 @@
     "published_timestamp": "2022-09-16T09:01:14Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/recreating-apples-color-picker-icon-20aa",
-    "tag_list": [
-      "css",
-      "design",
-      "webdev",
-      "showdev"
-    ],
+    "slug": "recreating-apples-color-picker-icon",
+    "tag_list": "css, design, webdev, showdev",
     "public_reactions_count": 25
   },
   {
@@ -849,12 +655,8 @@
     "published_timestamp": "2022-09-12T07:48:59Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/build-a-css-transition-tool-for-your-editors-4emh",
-    "tag_list": [
-      "css",
-      "javascript",
-      "webdev",
-      "tutorial"
-    ],
+    "slug": "build-a-css-transition-tool-for-your-editors",
+    "tag_list": "css, javascript, webdev, tutorial",
     "public_reactions_count": 13
   },
   {
@@ -865,12 +667,8 @@
     "published_timestamp": "2022-09-06T19:00:17Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/svg-geometry-and-a-dash-of-javascript-3f9l",
-    "tag_list": [
-      "svg",
-      "javascript",
-      "showdev",
-      "webdev"
-    ],
+    "slug": "svg-geometry-and-a-dash-of-javascript",
+    "tag_list": "svg, javascript, showdev, webdev",
     "public_reactions_count": 46
   },
   {
@@ -881,12 +679,8 @@
     "published_timestamp": "2022-08-14T05:12:45Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/build-a-multi-language-countdown-component-260j",
-    "tag_list": [
-      "javascript",
-      "webdev",
-      "tutorial",
-      "css"
-    ],
+    "slug": "build-a-multi-language-countdown-component",
+    "tag_list": "javascript, webdev, tutorial, css",
     "public_reactions_count": 13
   },
   {
@@ -897,12 +691,8 @@
     "published_timestamp": "2022-08-03T19:24:00Z",
     "edited_at": "2022-08-04T06:12:36Z",
     "url": "https://dev.to/madsstoumann/word-wheel-in-css-426n",
-    "tag_list": [
-      "css",
-      "javascript",
-      "showdev",
-      "webdev"
-    ],
+    "slug": "word-wheel-in-css",
+    "tag_list": "css, javascript, showdev, webdev",
     "public_reactions_count": 32
   },
   {
@@ -913,12 +703,8 @@
     "published_timestamp": "2022-07-24T16:45:50Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/masking-and-coloring-product-images-using-css-and-svg-2eil",
-    "tag_list": [
-      "css",
-      "svg",
-      "tutorial",
-      "webdev"
-    ],
+    "slug": "masking-and-coloring-product-images-using-css-and-svg",
+    "tag_list": "css, svg, tutorial, webdev",
     "public_reactions_count": 47
   },
   {
@@ -929,12 +715,8 @@
     "published_timestamp": "2022-07-08T11:33:02Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/creating-svg-icons-from-json-100a",
-    "tag_list": [
-      "javascript",
-      "svg",
-      "design",
-      "webdev"
-    ],
+    "slug": "creating-svg-icons-from-json",
+    "tag_list": "javascript, svg, design, webdev",
     "public_reactions_count": 42
   },
   {
@@ -945,12 +727,8 @@
     "published_timestamp": "2022-07-05T08:09:21Z",
     "edited_at": "2022-07-07T05:23:44Z",
     "url": "https://dev.to/madsstoumann/creating-a-grid-visualizer-3di0",
-    "tag_list": [
-      "css",
-      "design",
-      "javascript",
-      "webdev"
-    ],
+    "slug": "creating-a-grid-visualizer",
+    "tag_list": "css, design, javascript, webdev",
     "public_reactions_count": 11
   },
   {
@@ -961,12 +739,8 @@
     "published_timestamp": "2022-06-25T09:56:49Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/how-to-embed-youtube-and-vimeo-the-light-way-2pek",
-    "tag_list": [
-      "html",
-      "javascript",
-      "webdev",
-      "tutorial"
-    ],
+    "slug": "how-to-embed-youtube-and-vimeo-the-light-way",
+    "tag_list": "html, javascript, webdev, tutorial",
     "public_reactions_count": 35
   },
   {
@@ -977,12 +751,8 @@
     "published_timestamp": "2022-06-23T06:06:36Z",
     "edited_at": "2022-06-23T11:21:00Z",
     "url": "https://dev.to/madsstoumann/re-creating-apples-dark-mode-icon-199j",
-    "tag_list": [
-      "svg",
-      "design",
-      "css",
-      "javascript"
-    ],
+    "slug": "re-creating-apples-dark-mode-icon",
+    "tag_list": "svg, design, css, javascript",
     "public_reactions_count": 25
   },
   {
@@ -993,12 +763,8 @@
     "published_timestamp": "2022-01-18T09:19:36Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/showing-time-ago-in-a-social-feed-using-intlrelativetimeformat-5ceo",
-    "tag_list": [
-      "javascript",
-      "webdev",
-      "showdev",
-      "tutorial"
-    ],
+    "slug": "showing-time-ago-in-a-social-feed-using-intlrelativetimeformat",
+    "tag_list": "javascript, webdev, showdev, tutorial",
     "public_reactions_count": 33
   },
   {
@@ -1009,12 +775,8 @@
     "published_timestamp": "2021-12-18T13:59:44Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/play-blur-onblur-4f8",
-    "tag_list": [
-      "html",
-      "javascript",
-      "webdev",
-      "showdev"
-    ],
+    "slug": "play-blur-onblur",
+    "tag_list": "html, javascript, webdev, showdev",
     "public_reactions_count": 9
   },
   {
@@ -1025,12 +787,8 @@
     "published_timestamp": "2021-12-04T17:12:48Z",
     "edited_at": "2021-12-05T12:36:13Z",
     "url": "https://dev.to/madsstoumann/learning-from-the-masters-design-35pg",
-    "tag_list": [
-      "html",
-      "css",
-      "design",
-      "webdev"
-    ],
+    "slug": "learning-from-the-masters-design",
+    "tag_list": "html, css, design, webdev",
     "public_reactions_count": 26
   },
   {
@@ -1041,12 +799,8 @@
     "published_timestamp": "2021-11-11T13:12:24Z",
     "edited_at": "2021-11-11T19:26:09Z",
     "url": "https://dev.to/madsstoumann/creating-global-components-a-checklist-with-examples-2n4g",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "webdev"
-    ],
+    "slug": "creating-global-components-a-checklist-with-examples",
+    "tag_list": "html, css, javascript, webdev",
     "public_reactions_count": 60
   },
   {
@@ -1057,12 +811,8 @@
     "published_timestamp": "2021-10-28T07:42:07Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/introducing-the-eyedropper-api-14d7",
-    "tag_list": [
-      "codepen",
-      "css",
-      "javascript",
-      "webdev"
-    ],
+    "slug": "introducing-the-eyedropper-api",
+    "tag_list": "codepen, css, javascript, webdev",
     "public_reactions_count": 7
   },
   {
@@ -1073,12 +823,8 @@
     "published_timestamp": "2021-10-10T17:36:24Z",
     "edited_at": "2021-10-11T04:59:59Z",
     "url": "https://dev.to/madsstoumann/validating-markup-write-your-own-snippet-2p8d",
-    "tag_list": [
-      "html",
-      "webdev",
-      "codequality",
-      "javascript"
-    ],
+    "slug": "validating-markup-write-your-own-snippet",
+    "tag_list": "html, webdev, codequality, javascript",
     "public_reactions_count": 44
   },
   {
@@ -1089,12 +835,8 @@
     "published_timestamp": "2021-09-27T10:37:59Z",
     "edited_at": "2021-09-27T11:12:59Z",
     "url": "https://dev.to/madsstoumann/build-a-css-ruler-2opn",
-    "tag_list": [
-      "css",
-      "html",
-      "javascript",
-      "webdev"
-    ],
+    "slug": "build-a-css-ruler",
+    "tag_list": "css, html, javascript, webdev",
     "public_reactions_count": 88
   },
   {
@@ -1105,12 +847,8 @@
     "published_timestamp": "2021-09-17T06:43:20Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/layered-gradient-playground-102j",
-    "tag_list": [
-      "css",
-      "codepen",
-      "webdev",
-      "showdev"
-    ],
+    "slug": "layered-gradient-playground",
+    "tag_list": "css, codepen, webdev, showdev",
     "public_reactions_count": 32
   },
   {
@@ -1121,12 +859,8 @@
     "published_timestamp": "2021-09-02T15:06:47Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/kaoss-fun-with-web-audio-3gb9",
-    "tag_list": [
-      "javascript",
-      "css",
-      "webdev",
-      "html"
-    ],
+    "slug": "kaoss-fun-with-web-audio",
+    "tag_list": "javascript, css, webdev, html",
     "public_reactions_count": 187
   },
   {
@@ -1137,12 +871,8 @@
     "published_timestamp": "2021-08-27T07:01:44Z",
     "edited_at": "2021-08-27T09:03:54Z",
     "url": "https://dev.to/madsstoumann/nested-border-radius-playground-kcl",
-    "tag_list": [
-      "css",
-      "webdev",
-      "showdev",
-      "discuss"
-    ],
+    "slug": "nested-border-radius-playground",
+    "tag_list": "css, webdev, showdev, discuss",
     "public_reactions_count": 33
   },
   {
@@ -1153,12 +883,8 @@
     "published_timestamp": "2021-08-23T15:46:30Z",
     "edited_at": "2021-08-25T06:53:32Z",
     "url": "https://dev.to/madsstoumann/a-simple-color-picker-using-css5-color-contrast-and-color-mix-384p",
-    "tag_list": [
-      "css",
-      "html",
-      "codepen",
-      "webdev"
-    ],
+    "slug": "a-simple-color-picker-using-css5-color-contrast-and-color-mix",
+    "tag_list": "css, html, codepen, webdev",
     "public_reactions_count": 26
   },
   {
@@ -1169,12 +895,8 @@
     "published_timestamp": "2021-08-09T06:54:07Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/the-frontend-agency-3pfa",
-    "tag_list": [
-      "webdev",
-      "showdev",
-      "javascript",
-      "css"
-    ],
+    "slug": "the-frontend-agency",
+    "tag_list": "webdev, showdev, javascript, css",
     "public_reactions_count": 152
   },
   {
@@ -1185,12 +907,8 @@
     "published_timestamp": "2021-08-07T06:42:43Z",
     "edited_at": "2021-08-07T06:46:09Z",
     "url": "https://dev.to/madsstoumann/building-a-minimal-autosuggest-4big",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "webdev"
-    ],
+    "slug": "building-a-minimal-autosuggest",
+    "tag_list": "html, css, javascript, webdev",
     "public_reactions_count": 243
   },
   {
@@ -1201,12 +919,8 @@
     "published_timestamp": "2021-07-17T08:24:00Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/building-a-reaction-component-2noe",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "webdev"
-    ],
+    "slug": "building-a-reaction-component",
+    "tag_list": "html, css, javascript, webdev",
     "public_reactions_count": 137
   },
   {
@@ -1217,12 +931,8 @@
     "published_timestamp": "2021-07-09T16:54:34Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/comics-graphic-design-and-the-power-of-javascript-2kap",
-    "tag_list": [
-      "javascript",
-      "design",
-      "comics",
-      "scripting"
-    ],
+    "slug": "comics-graphic-design-and-the-power-of-javascript",
+    "tag_list": "javascript, design, comics, scripting",
     "public_reactions_count": 34
   },
   {
@@ -1233,12 +943,8 @@
     "published_timestamp": "2021-07-07T14:33:38Z",
     "edited_at": "2021-07-07T16:25:56Z",
     "url": "https://dev.to/madsstoumann/mood-selector-jhi",
-    "tag_list": [
-      "html",
-      "css",
-      "webdev",
-      "showdev"
-    ],
+    "slug": "mood-selector",
+    "tag_list": "html, css, webdev, showdev",
     "public_reactions_count": 28
   },
   {
@@ -1249,12 +955,8 @@
     "published_timestamp": "2021-07-03T10:56:03Z",
     "edited_at": "2021-07-07T12:39:56Z",
     "url": "https://dev.to/madsstoumann/star-rating-using-a-single-input-i0l",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "webdev"
-    ],
+    "slug": "star-rating-using-a-single-input",
+    "tag_list": "html, css, javascript, webdev",
     "public_reactions_count": 174
   },
   {
@@ -1265,12 +967,8 @@
     "published_timestamp": "2021-06-19T09:38:42Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/updating-a-25-year-old-website-42jm",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "webdev"
-    ],
+    "slug": "updating-a-25-year-old-website",
+    "tag_list": "html, css, javascript, webdev",
     "public_reactions_count": 788
   },
   {
@@ -1281,11 +979,8 @@
     "published_timestamp": "2021-06-16T13:57:47Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/a-quick-guide-to-css-logical-properties-2fce",
-    "tag_list": [
-      "html",
-      "css",
-      "webdev"
-    ],
+    "slug": "a-quick-guide-to-css-logical-properties",
+    "tag_list": "html, css, webdev",
     "public_reactions_count": 27
   },
   {
@@ -1296,12 +991,8 @@
     "published_timestamp": "2021-05-26T11:50:27Z",
     "edited_at": "2021-05-28T07:24:45Z",
     "url": "https://dev.to/madsstoumann/container-queries-another-polyfill-2488",
-    "tag_list": [
-      "javascript",
-      "css",
-      "showdev",
-      "webdev"
-    ],
+    "slug": "container-queries-another-polyfill",
+    "tag_list": "javascript, css, showdev, webdev",
     "public_reactions_count": 27
   },
   {
@@ -1312,12 +1003,8 @@
     "published_timestamp": "2021-05-24T13:38:54Z",
     "edited_at": "2021-05-24T13:58:35Z",
     "url": "https://dev.to/madsstoumann/deconstructing-art-learning-from-constraints-p7m",
-    "tag_list": [
-      "javascript",
-      "showdev",
-      "design",
-      "webdev"
-    ],
+    "slug": "deconstructing-art-learning-from-constraints",
+    "tag_list": "javascript, showdev, design, webdev",
     "public_reactions_count": 21
   },
   {
@@ -1328,12 +1015,8 @@
     "published_timestamp": "2021-05-18T14:41:42Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/random-art-generator-dots-rings-3ca3",
-    "tag_list": [
-      "codepen",
-      "javascript",
-      "showdev",
-      "webdev"
-    ],
+    "slug": "random-art-generator-dots-rings",
+    "tag_list": "codepen, javascript, showdev, webdev",
     "public_reactions_count": 39
   },
   {
@@ -1344,12 +1027,8 @@
     "published_timestamp": "2021-05-16T14:45:24Z",
     "edited_at": "2021-05-16T14:50:25Z",
     "url": "https://dev.to/madsstoumann/how-to-fill-out-a-form-with-your-voice-3k6d",
-    "tag_list": [
-      "codepen",
-      "javascript",
-      "webdev",
-      "showdev"
-    ],
+    "slug": "how-to-fill-out-a-form-with-your-voice",
+    "tag_list": "codepen, javascript, webdev, showdev",
     "public_reactions_count": 31
   },
   {
@@ -1360,11 +1039,8 @@
     "published_timestamp": "2021-04-27T09:05:07Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/color-stripes-4fpa",
-    "tag_list": [
-      "css",
-      "codepen",
-      "showdev"
-    ],
+    "slug": "color-stripes",
+    "tag_list": "css, codepen, showdev",
     "public_reactions_count": 5
   },
   {
@@ -1375,12 +1051,8 @@
     "published_timestamp": "2021-04-23T13:43:17Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/how-to-build-a-color-wheel-with-tints-shades-nfj",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "webdev"
-    ],
+    "slug": "how-to-build-a-color-wheel-with-tints-shades",
+    "tag_list": "html, css, javascript, webdev",
     "public_reactions_count": 32
   },
   {
@@ -1391,12 +1063,8 @@
     "published_timestamp": "2021-04-19T11:42:37Z",
     "edited_at": "2021-04-19T15:17:55Z",
     "url": "https://dev.to/madsstoumann/why-dark-mode-is-more-energy-efficent-how-to-calculate-image-energy-cost-45pp",
-    "tag_list": [
-      "html",
-      "javascript",
-      "webdev",
-      "performance"
-    ],
+    "slug": "why-dark-mode-is-more-energy-efficent-how-to-calculate-image-energy-cost",
+    "tag_list": "html, javascript, webdev, performance",
     "public_reactions_count": 181
   },
   {
@@ -1407,12 +1075,8 @@
     "published_timestamp": "2021-04-16T08:32:07Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/svg-circle-pattern-generator-2g6g",
-    "tag_list": [
-      "svg",
-      "design",
-      "javascript",
-      "webdev"
-    ],
+    "slug": "svg-circle-pattern-generator",
+    "tag_list": "svg, design, javascript, webdev",
     "public_reactions_count": 16
   },
   {
@@ -1423,12 +1087,8 @@
     "published_timestamp": "2021-04-11T14:02:35Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/data-attributes-vs-bem-2k6n",
-    "tag_list": [
-      "css",
-      "html",
-      "discuss",
-      "codepen"
-    ],
+    "slug": "data-attributes-vs-bem",
+    "tag_list": "css, html, discuss, codepen",
     "public_reactions_count": 10
   },
   {
@@ -1439,12 +1099,8 @@
     "published_timestamp": "2021-04-02T14:32:10Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/lockdown-fun-your-age-in-binary-2f3k",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "webdev"
-    ],
+    "slug": "lockdown-fun-your-age-in-binary",
+    "tag_list": "html, css, javascript, webdev",
     "public_reactions_count": 69
   },
   {
@@ -1455,11 +1111,8 @@
     "published_timestamp": "2021-03-28T12:31:02Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/when-lighthouse-itself-causes-issues-2k3i",
-    "tag_list": [
-      "lighthouse",
-      "security",
-      "discuss"
-    ],
+    "slug": "when-lighthouse-itself-causes-issues",
+    "tag_list": "lighthouse, security, discuss",
     "public_reactions_count": 2
   },
   {
@@ -1470,12 +1123,8 @@
     "published_timestamp": "2021-03-27T14:56:43Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/responsive-images-how-they-work-and-how-to-use-them-with-art-direction-and-dark-mode-2119",
-    "tag_list": [
-      "html",
-      "css",
-      "webdev",
-      "codepen"
-    ],
+    "slug": "responsive-images-how-they-work-and-how-to-use-them-with-art-direction-and-dark-mode",
+    "tag_list": "html, css, webdev, codepen",
     "public_reactions_count": 37
   },
   {
@@ -1486,12 +1135,8 @@
     "published_timestamp": "2021-03-20T16:33:18Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/colors-are-math-how-they-match-and-how-to-build-a-color-picker-4ei8",
-    "tag_list": [
-      "css",
-      "javascript",
-      "design",
-      "webdev"
-    ],
+    "slug": "colors-are-math-how-they-match-and-how-to-build-a-color-picker",
+    "tag_list": "css, javascript, design, webdev",
     "public_reactions_count": 206
   },
   {
@@ -1502,12 +1147,8 @@
     "published_timestamp": "2021-03-13T16:05:08Z",
     "edited_at": "2021-03-14T07:48:29Z",
     "url": "https://dev.to/madsstoumann/creating-a-fun-fast-secure-and-sustainable-website-50nk",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "security"
-    ],
+    "slug": "creating-a-fun-fast-secure-and-sustainable-website",
+    "tag_list": "html, css, javascript, security",
     "public_reactions_count": 282
   },
   {
@@ -1518,12 +1159,8 @@
     "published_timestamp": "2021-03-10T13:35:40Z",
     "edited_at": "2021-03-10T13:37:34Z",
     "url": "https://dev.to/madsstoumann/sharing-with-the-navigator-share-api-109b",
-    "tag_list": [
-      "html",
-      "javascript",
-      "css",
-      "codepen"
-    ],
+    "slug": "sharing-with-the-navigator-share-api",
+    "tag_list": "html, javascript, css, codepen",
     "public_reactions_count": 16
   },
   {
@@ -1534,12 +1171,8 @@
     "published_timestamp": "2021-03-03T06:22:13Z",
     "edited_at": "2021-03-03T14:16:53Z",
     "url": "https://dev.to/madsstoumann/flashlight-website-2dp4",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "codepen"
-    ],
+    "slug": "flashlight-website",
+    "tag_list": "html, css, javascript, codepen",
     "public_reactions_count": 7
   },
   {
@@ -1550,12 +1183,8 @@
     "published_timestamp": "2021-03-01T09:09:27Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/accessible-modal-with-or-without-javascript-3g1d",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "a11y"
-    ],
+    "slug": "accessible-modal-with-or-without-javascript",
+    "tag_list": "html, css, javascript, a11y",
     "public_reactions_count": 16
   },
   {
@@ -1566,12 +1195,8 @@
     "published_timestamp": "2021-02-22T06:36:05Z",
     "edited_at": "2021-02-22T06:38:24Z",
     "url": "https://dev.to/madsstoumann/table-designer-1588",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "codepen"
-    ],
+    "slug": "table-designer",
+    "tag_list": "html, css, javascript, codepen",
     "public_reactions_count": 24
   },
   {
@@ -1582,12 +1207,8 @@
     "published_timestamp": "2021-02-17T18:00:46Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/web-typography-checklist-52a2",
-    "tag_list": [
-      "html",
-      "css",
-      "typography",
-      "design"
-    ],
+    "slug": "web-typography-checklist",
+    "tag_list": "html, css, typography, design",
     "public_reactions_count": 9
   },
   {
@@ -1598,12 +1219,8 @@
     "published_timestamp": "2021-02-10T12:20:04Z",
     "edited_at": "2021-02-10T15:39:32Z",
     "url": "https://dev.to/madsstoumann/making-sustainable-websites-hd3",
-    "tag_list": [
-      "css",
-      "javascript",
-      "sustainability",
-      "discuss"
-    ],
+    "slug": "making-sustainable-websites",
+    "tag_list": "css, javascript, sustainability, discuss",
     "public_reactions_count": 24
   },
   {
@@ -1614,12 +1231,8 @@
     "published_timestamp": "2021-02-05T08:40:34Z",
     "edited_at": "2021-02-05T08:42:43Z",
     "url": "https://dev.to/madsstoumann/lockdown-fun-pascal-s-triangle-3dk1",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "codepen"
-    ],
+    "slug": "lockdown-fun-pascal-s-triangle",
+    "tag_list": "html, css, javascript, codepen",
     "public_reactions_count": 28
   },
   {
@@ -1630,12 +1243,8 @@
     "published_timestamp": "2021-02-04T13:55:20Z",
     "edited_at": "2021-02-05T13:16:19Z",
     "url": "https://dev.to/madsstoumann/accessible-resizable-table-columns-5eof",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "a11y"
-    ],
+    "slug": "accessible-resizable-table-columns",
+    "tag_list": "html, css, javascript, a11y",
     "public_reactions_count": 41
   },
   {
@@ -1646,11 +1255,8 @@
     "published_timestamp": "2021-01-27T11:05:18Z",
     "edited_at": "2021-02-05T09:12:02Z",
     "url": "https://dev.to/madsstoumann/frontend-security-security-headers-517p",
-    "tag_list": [
-      "html",
-      "javascript",
-      "security"
-    ],
+    "slug": "frontend-security-security-headers",
+    "tag_list": "html, javascript, security",
     "public_reactions_count": 225
   },
   {
@@ -1661,11 +1267,8 @@
     "published_timestamp": "2021-01-25T07:43:42Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/frontend-security-content-security-policy-17dl",
-    "tag_list": [
-      "html",
-      "javascript",
-      "security"
-    ],
+    "slug": "frontend-security-content-security-policy",
+    "tag_list": "html, javascript, security",
     "public_reactions_count": 100
   },
   {
@@ -1676,12 +1279,8 @@
     "published_timestamp": "2021-01-19T20:33:44Z",
     "edited_at": "2021-02-04T20:56:30Z",
     "url": "https://dev.to/madsstoumann/accessible-image-compare-one-line-of-javascript-3gn4",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "codepen"
-    ],
+    "slug": "accessible-image-compare-one-line-of-javascript",
+    "tag_list": "html, css, javascript, codepen",
     "public_reactions_count": 38
   },
   {
@@ -1692,12 +1291,8 @@
     "published_timestamp": "2021-01-17T16:01:20Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/staying-alive-the-screen-wake-lock-api-31fh",
-    "tag_list": [
-      "html",
-      "javascript",
-      "css",
-      "api"
-    ],
+    "slug": "staying-alive-the-screen-wake-lock-api",
+    "tag_list": "html, javascript, css, api",
     "public_reactions_count": 24
   },
   {
@@ -1708,11 +1303,8 @@
     "published_timestamp": "2021-01-14T05:51:08Z",
     "edited_at": "2021-01-14T08:01:29Z",
     "url": "https://dev.to/madsstoumann/frontend-security-npm-audit-and-script-integrity-kl3",
-    "tag_list": [
-      "html",
-      "javascript",
-      "security"
-    ],
+    "slug": "frontend-security-npm-audit-and-script-integrity",
+    "tag_list": "html, javascript, security",
     "public_reactions_count": 93
   },
   {
@@ -1723,12 +1315,8 @@
     "published_timestamp": "2021-01-09T21:13:06Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/polygon-to-clip-path-svg-1om3",
-    "tag_list": [
-      "css",
-      "design",
-      "codepen",
-      "javascript"
-    ],
+    "slug": "polygon-to-clip-path-svg",
+    "tag_list": "css, design, codepen, javascript",
     "public_reactions_count": 14
   },
   {
@@ -1739,11 +1327,8 @@
     "published_timestamp": "2021-01-07T13:04:12Z",
     "edited_at": "2021-01-07T19:14:55Z",
     "url": "https://dev.to/madsstoumann/google-tracking-and-the-ping-attribute-41d5",
-    "tag_list": [
-      "html",
-      "analytics",
-      "discuss"
-    ],
+    "slug": "google-tracking-and-the-ping-attribute",
+    "tag_list": "html, analytics, discuss",
     "public_reactions_count": 16
   },
   {
@@ -1754,12 +1339,8 @@
     "published_timestamp": "2021-01-04T06:28:23Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/275-bytes-bmi-calculator-1253",
-    "tag_list": [
-      "html",
-      "javascript",
-      "css",
-      "codepen"
-    ],
+    "slug": "275-bytes-bmi-calculator",
+    "tag_list": "html, javascript, css, codepen",
     "public_reactions_count": 24
   },
   {
@@ -1770,12 +1351,8 @@
     "published_timestamp": "2021-01-02T16:45:39Z",
     "edited_at": "2021-02-04T20:56:13Z",
     "url": "https://dev.to/madsstoumann/accessible-circular-sliders-11p",
-    "tag_list": [
-      "css",
-      "javascript",
-      "a11y",
-      "codepen"
-    ],
+    "slug": "accessible-circular-sliders",
+    "tag_list": "css, javascript, a11y, codepen",
     "public_reactions_count": 86
   },
   {
@@ -1786,12 +1363,8 @@
     "published_timestamp": "2020-12-31T11:16:19Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/is-the-latest-always-the-greatest-jok",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "discuss"
-    ],
+    "slug": "is-the-latest-always-the-greatest",
+    "tag_list": "html, css, javascript, discuss",
     "public_reactions_count": 1
   },
   {
@@ -1802,11 +1375,8 @@
     "published_timestamp": "2020-12-29T11:51:24Z",
     "edited_at": "2020-12-29T12:08:29Z",
     "url": "https://dev.to/madsstoumann/fetch-22-41mg",
-    "tag_list": [
-      "javascript",
-      "html",
-      "codepen"
-    ],
+    "slug": "fetch-22",
+    "tag_list": "javascript, html, codepen",
     "public_reactions_count": 12
   },
   {
@@ -1817,11 +1387,8 @@
     "published_timestamp": "2020-12-23T08:42:52Z",
     "edited_at": "2020-12-23T12:13:31Z",
     "url": "https://dev.to/madsstoumann/creating-a-button-library-4lb4",
-    "tag_list": [
-      "css",
-      "html",
-      "codepen"
-    ],
+    "slug": "creating-a-button-library",
+    "tag_list": "css, html, codepen",
     "public_reactions_count": 12
   },
   {
@@ -1832,12 +1399,8 @@
     "published_timestamp": "2020-12-22T07:58:34Z",
     "edited_at": "2020-12-22T08:21:12Z",
     "url": "https://dev.to/madsstoumann/full-circle-3c98",
-    "tag_list": [
-      "html",
-      "css",
-      "javascript",
-      "performance"
-    ],
+    "slug": "full-circle",
+    "tag_list": "html, css, javascript, performance",
     "public_reactions_count": 7
   },
   {
@@ -1848,12 +1411,8 @@
     "published_timestamp": "2020-12-19T07:34:49Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/into-the-halftone-verse-1ckl",
-    "tag_list": [
-      "css",
-      "codepen",
-      "comics",
-      "cmyk"
-    ],
+    "slug": "into-the-halftone-verse",
+    "tag_list": "css, codepen, comics, cmyk",
     "public_reactions_count": 10
   },
   {
@@ -1864,12 +1423,8 @@
     "published_timestamp": "2020-12-18T10:00:24Z",
     "edited_at": "2021-01-01T15:33:56Z",
     "url": "https://dev.to/madsstoumann/implementing-icons-5875",
-    "tag_list": [
-      "fundamentals",
-      "css",
-      "svg",
-      "codepen"
-    ],
+    "slug": "implementing-icons",
+    "tag_list": "fundamentals, css, svg, codepen",
     "public_reactions_count": 11
   },
   {
@@ -1880,12 +1435,8 @@
     "published_timestamp": "2020-12-16T08:09:22Z",
     "edited_at": "2021-02-04T20:55:52Z",
     "url": "https://dev.to/madsstoumann/accessible-color-pickers-5e9p",
-    "tag_list": [
-      "css",
-      "a11y",
-      "javascript",
-      "codepen"
-    ],
+    "slug": "accessible-color-pickers",
+    "tag_list": "css, a11y, javascript, codepen",
     "public_reactions_count": 23
   },
   {
@@ -1896,12 +1447,8 @@
     "published_timestamp": "2020-11-17T16:51:04Z",
     "edited_at": "2020-11-17T17:18:54Z",
     "url": "https://dev.to/madsstoumann/an-insignificant-browser-bug-4bk8",
-    "tag_list": [
-      "css",
-      "chrome",
-      "bug",
-      "typography"
-    ],
+    "slug": "an-insignificant-browser-bug",
+    "tag_list": "css, chrome, bug, typography",
     "public_reactions_count": 4
   },
   {
@@ -1912,11 +1459,8 @@
     "published_timestamp": "2020-11-16T11:35:04Z",
     "edited_at": null,
     "url": "https://dev.to/madsstoumann/populate-a-drop-down-with-function-names-from-external-module-5o",
-    "tag_list": [
-      "javascript",
-      "html",
-      "module"
-    ],
+    "slug": "populate-a-drop-down-with-function-names-from-external-module",
+    "tag_list": "javascript, html, module",
     "public_reactions_count": 1
   },
   {
@@ -1927,10 +1471,11 @@
     "published_timestamp": "2016-11-20T10:44:26+02:00",
     "edited_at": null,
     "url": "https://madsstoumann.wordpress.com/2016/11/20/the-state-of-front-end-building-progressive-components/",
+    "slug": "the-state-of-front-end-building-progressive-components",
     "tag_list": [
-      "css3",
-      "html5",
-      "javascript"
+      null,
+      null,
+      null
     ],
     "public_reactions_count": 1,
     "source": "wordpress"
@@ -1943,10 +1488,11 @@
     "published_timestamp": "2016-11-10T11:18:49+02:00",
     "edited_at": null,
     "url": "https://madsstoumann.wordpress.com/2016/11/10/what-is-a-front-end-developer/",
+    "slug": "what-is-a-front-end-developer",
     "tag_list": [
-      "css3",
-      "html5",
-      "javascript"
+      null,
+      null,
+      null
     ],
     "public_reactions_count": 0,
     "source": "wordpress"
@@ -1959,10 +1505,11 @@
     "published_timestamp": "2016-08-01T10:06:18+02:00",
     "edited_at": null,
     "url": "https://madsstoumann.wordpress.com/2016/08/01/front-end-security/",
+    "slug": "front-end-security",
     "tag_list": [
-      "google-tag-manager",
-      "javascript",
-      "security"
+      null,
+      null,
+      null
     ],
     "public_reactions_count": 0,
     "source": "wordpress"
@@ -1975,10 +1522,11 @@
     "published_timestamp": "2016-06-30T21:26:50+02:00",
     "edited_at": "2016-07-08T06:31:54+02:00",
     "url": "https://madsstoumann.wordpress.com/2016/06/30/front-end-detective/",
+    "slug": "front-end-detective",
     "tag_list": [
-      "css3",
-      "html5",
-      "svg"
+      null,
+      null,
+      null
     ],
     "public_reactions_count": 0,
     "source": "wordpress"
@@ -1991,9 +1539,10 @@
     "published_timestamp": "2016-04-28T12:29:39+02:00",
     "edited_at": null,
     "url": "https://madsstoumann.wordpress.com/2016/04/28/thinking-in-modules-2/",
+    "slug": "thinking-in-modules-2",
     "tag_list": [
-      "css3",
-      "html5"
+      null,
+      null
     ],
     "public_reactions_count": 0,
     "source": "wordpress"
@@ -2006,8 +1555,9 @@
     "published_timestamp": "2016-04-18T11:45:18+02:00",
     "edited_at": null,
     "url": "https://madsstoumann.wordpress.com/2016/04/18/click-delay-revisited/",
+    "slug": "click-delay-revisited",
     "tag_list": [
-      "css3"
+      null
     ],
     "public_reactions_count": 0,
     "source": "wordpress"
@@ -2020,8 +1570,9 @@
     "published_timestamp": "2016-01-03T13:21:41+02:00",
     "edited_at": null,
     "url": "https://madsstoumann.wordpress.com/2016/01/03/loop-performance/",
+    "slug": "loop-performance",
     "tag_list": [
-      "javascript"
+      null
     ],
     "public_reactions_count": 0,
     "source": "wordpress"
@@ -2034,11 +1585,12 @@
     "published_timestamp": "2015-12-30T15:57:35+02:00",
     "edited_at": "2015-12-30T15:58:20+02:00",
     "url": "https://madsstoumann.wordpress.com/2015/12/30/radial-progress-indicators/",
+    "slug": "radial-progress-indicators",
     "tag_list": [
-      "css3",
-      "html5",
-      "javascript",
-      "svg"
+      null,
+      null,
+      null,
+      null
     ],
     "public_reactions_count": 0,
     "source": "wordpress"
@@ -2051,10 +1603,11 @@
     "published_timestamp": "2015-11-26T14:22:40+02:00",
     "edited_at": null,
     "url": "https://madsstoumann.wordpress.com/2015/11/26/crisp-svg-icons/",
+    "slug": "crisp-svg-icons",
     "tag_list": [
-      "css3",
-      "guidelines",
-      "svg"
+      null,
+      null,
+      null
     ],
     "public_reactions_count": 0,
     "source": "wordpress"
@@ -2067,9 +1620,10 @@
     "published_timestamp": "2015-11-18T15:35:42+02:00",
     "edited_at": null,
     "url": "https://madsstoumann.wordpress.com/2015/11/18/avoiding-endless-scroll/",
+    "slug": "avoiding-endless-scroll",
     "tag_list": [
-      "html5",
-      "schema.org"
+      null,
+      null
     ],
     "public_reactions_count": 1,
     "source": "wordpress"
@@ -2082,11 +1636,12 @@
     "published_timestamp": "2015-11-11T16:45:07+02:00",
     "edited_at": null,
     "url": "https://madsstoumann.wordpress.com/2015/11/11/the-curse-of-the-click-delay/",
+    "slug": "the-curse-of-the-click-delay",
     "tag_list": [
-      "css3",
-      "html5",
-      "javascript",
-      "touch"
+      null,
+      null,
+      null,
+      null
     ],
     "public_reactions_count": 0,
     "source": "wordpress"
@@ -2099,10 +1654,11 @@
     "published_timestamp": "2015-11-05T10:38:07+02:00",
     "edited_at": "2015-11-05T10:41:03+02:00",
     "url": "https://madsstoumann.wordpress.com/2015/11/05/tracking-facebook-interactions-in-google-tag-manager/",
+    "slug": "tracking-facebook-interactions-in-google-tag-manager",
     "tag_list": [
-      "facebook",
-      "google-tag-manager",
-      "google-universal-analytics"
+      null,
+      null,
+      null
     ],
     "public_reactions_count": 0,
     "source": "wordpress"
@@ -2115,10 +1671,11 @@
     "published_timestamp": "2015-04-18T17:33:08+02:00",
     "edited_at": null,
     "url": "https://madsstoumann.wordpress.com/2015/04/18/welcome-to-polygonia/",
+    "slug": "welcome-to-polygonia",
     "tag_list": [
-      "css3",
-      "html5",
-      "javascript"
+      null,
+      null,
+      null
     ],
     "public_reactions_count": 0,
     "source": "wordpress"
@@ -2131,9 +1688,10 @@
     "published_timestamp": "2015-03-26T12:14:30+02:00",
     "edited_at": null,
     "url": "https://madsstoumann.wordpress.com/2015/03/26/product-variants-with-schemas/",
+    "slug": "product-variants-with-schemas",
     "tag_list": [
-      "html5",
-      "schema.org"
+      null,
+      null
     ],
     "public_reactions_count": 0,
     "source": "wordpress"
@@ -2146,10 +1704,11 @@
     "published_timestamp": "2015-03-08T21:14:09+02:00",
     "edited_at": null,
     "url": "https://madsstoumann.wordpress.com/2015/03/08/free-tool-for-creating-structured-data-schemas/",
+    "slug": "free-tool-for-creating-structured-data-schemas",
     "tag_list": [
-      "html5",
-      "javascript",
-      "schema.org"
+      null,
+      null,
+      null
     ],
     "public_reactions_count": 0,
     "source": "wordpress"
@@ -2162,11 +1721,12 @@
     "published_timestamp": "2015-02-25T22:07:43+02:00",
     "edited_at": "2015-02-25T22:11:32+02:00",
     "url": "https://madsstoumann.wordpress.com/2015/02/25/tracking-forms-user-behaviour-2/",
+    "slug": "tracking-forms-user-behaviour-2",
     "tag_list": [
-      "google-tag-manager",
-      "google-universal-analytics",
-      "html5",
-      "javascript"
+      null,
+      null,
+      null,
+      null
     ],
     "public_reactions_count": 0,
     "source": "wordpress"
@@ -2179,10 +1739,11 @@
     "published_timestamp": "2015-01-23T17:51:38+02:00",
     "edited_at": null,
     "url": "https://madsstoumann.wordpress.com/2015/01/23/front-end-guidelines-html5-seo-and-schemas/",
+    "slug": "front-end-guidelines-html5-seo-and-schemas",
     "tag_list": [
-      "guidelines",
-      "html5",
-      "schema.org"
+      null,
+      null,
+      null
     ],
     "public_reactions_count": 0,
     "source": "wordpress"
@@ -2195,9 +1756,10 @@
     "published_timestamp": "2015-01-23T16:19:56+02:00",
     "edited_at": null,
     "url": "https://madsstoumann.wordpress.com/2015/01/23/front-end-guidelines-meta-and-apps/",
+    "slug": "front-end-guidelines-meta-and-apps",
     "tag_list": [
-      "guidelines",
-      "meta"
+      null,
+      null
     ],
     "public_reactions_count": 0,
     "source": "wordpress"
@@ -2210,9 +1772,10 @@
     "published_timestamp": "2015-01-23T15:44:27+02:00",
     "edited_at": null,
     "url": "https://madsstoumann.wordpress.com/2015/01/23/front-end-guidelines-css/",
+    "slug": "front-end-guidelines-css",
     "tag_list": [
-      "css3",
-      "guidelines"
+      null,
+      null
     ],
     "public_reactions_count": 0,
     "source": "wordpress"
@@ -2225,10 +1788,11 @@
     "published_timestamp": "2015-01-23T15:42:15+02:00",
     "edited_at": null,
     "url": "https://madsstoumann.wordpress.com/2015/01/23/front-end-guidelines-javascript-2/",
+    "slug": "front-end-guidelines-javascript-2",
     "tag_list": [
-      "guidelines",
-      "javascript",
-      "google-closure"
+      null,
+      null,
+      null
     ],
     "public_reactions_count": 0,
     "source": "wordpress"
@@ -2241,11 +1805,12 @@
     "published_timestamp": "2014-08-07T16:04:49+02:00",
     "edited_at": null,
     "url": "https://madsstoumann.wordpress.com/2014/08/07/google-tag-manager-getting-started/",
+    "slug": "google-tag-manager-getting-started",
     "tag_list": [
-      "google-tag-manager",
-      "google-universal-analytics",
-      "html5",
-      "javascript"
+      null,
+      null,
+      null,
+      null
     ],
     "public_reactions_count": 0,
     "source": "wordpress"
@@ -2258,10 +1823,11 @@
     "published_timestamp": "2014-08-03T13:47:18+02:00",
     "edited_at": null,
     "url": "https://madsstoumann.wordpress.com/2014/08/03/performance-optimizing-existing-content/",
+    "slug": "performance-optimizing-existing-content",
     "tag_list": [
-      "css3",
-      "html5",
-      "javascript"
+      null,
+      null,
+      null
     ],
     "public_reactions_count": 0,
     "source": "wordpress"
@@ -2274,9 +1840,10 @@
     "published_timestamp": "2014-07-29T09:40:12+02:00",
     "edited_at": "2014-08-03T14:03:47+02:00",
     "url": "https://madsstoumann.wordpress.com/2014/07/29/target-the-dialog-and-minify-2/",
+    "slug": "target-the-dialog-and-minify-2",
     "tag_list": [
-      "css3",
-      "html5"
+      null,
+      null
     ],
     "public_reactions_count": 0,
     "source": "wordpress"
@@ -2289,13 +1856,14 @@
     "published_timestamp": "2014-07-21T11:19:35+02:00",
     "edited_at": "2014-08-03T14:05:23+02:00",
     "url": "https://madsstoumann.wordpress.com/2014/07/21/better-search-results-with-schemas/",
+    "slug": "better-search-results-with-schemas",
     "tag_list": [
-      "css3",
-      "html5",
-      "javascript",
-      "schema.org",
-      "rich-snippets",
-      "schemas"
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
     ],
     "public_reactions_count": 0,
     "source": "wordpress"

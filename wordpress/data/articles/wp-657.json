@@ -1,0 +1,45 @@
+{
+  "type_of": "article",
+  "id": "wp-657",
+  "title": "SVG, pair of dice",
+  "description": "Tutorial on creating interactive SVG dice with JavaScript-controlled animations and pseudo-3D effects using CSS gradients.",
+  "slug": "svg-pair-of-dice",
+  "url": "https://madsstoumann.wordpress.com/2016/07/08/svg-pair-of-dice/",
+  "path": "/svg-pair-of-dice",
+  "canonical_url": "https://madsstoumann.wordpress.com/2016/07/08/svg-pair-of-dice/",
+  "cover_image": null,
+  "social_image": null,
+  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p>Last week I got my hands on a simple dice game: Yatzy.</p>\n<p>I like to play around with SVG and animations, so I thought I&#8217;d create a digital version of the game using CSS (SCSS) for the pseudo-3D-look of the dice, and JavaScript for controlling the throw.</p>\n<p>In this version, clicking on a die will &#8220;lock&#8221; it, so that the next throw won&#8217;t change that die. The locked die will have a red shadow.</p>\n<p>Clicking &#8220;Roll&#8221; will throw all unlocked dice.</p>\n<p>By the way, I&#8217;ve used an old-school random-snippet (I thought I&#8217;d share it!):</p>\n<pre class=\"brush: jscript; title: ; notranslate\" title=\"\">\nfunction getRandom(nMin, nMax) {\n  return ~~(Math.random() * (nMax - nMin + 1)) + nMin;\n}\n</pre>\n<p>Enjoy!</p>\n<div class=\"embed-codepen\"><iframe title=\"SVG Dice\" id=\"cp_embed_RRYxLV\" src=\"https://codepen.io/stoumann/embed/preview/RRYxLV?default-tabs=result&amp;height=300&amp;host=https%3A%2F%2Fcodepen.io&amp;slug-hash=RRYxLV\" scrolling=\"no\" frameborder=\"0\" height=\"300\" allowtransparency=\"true\" allowfullscreen=\"true\" allowpaymentrequest=\"true\" class=\"cp_embed_iframe\" style=\"width: 100%; overflow: hidden;\"></iframe></div>\n<p>Happy coding!</p>",
+  "body_markdown": null,
+  "reading_time_minutes": 1,
+  "published_at": "2016-07-08T11:35:27+02:00",
+  "published_timestamp": "2016-07-08T11:35:27+02:00",
+  "created_at": "2016-07-08T11:35:27+02:00",
+  "edited_at": null,
+  "last_comment_at": null,
+  "comments_count": 0,
+  "public_reactions_count": 0,
+  "positive_reactions_count": 0,
+  "tag_list": "javascript, svg",
+  "tags": [
+    {
+      "id": "javascript",
+      "name": "javascript"
+    },
+    {
+      "id": "svg",
+      "name": "svg"
+    }
+  ],
+  "language": "en",
+  "source": "wordpress",
+  "source_site": "madsstoumann.wordpress.com",
+  "readable_publish_date": "Jul 8 '16",
+  "user": {
+    "name": "Mads Stoumann",
+    "username": "madsstoumann",
+    "user_id": 1,
+    "profile_image": null,
+    "profile_image_90": null
+  }
+}

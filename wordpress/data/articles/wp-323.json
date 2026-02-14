@@ -1,0 +1,53 @@
+{
+  "type_of": "article",
+  "id": "wp-323",
+  "title": "Tracking Forms & User Behaviour",
+  "description": "Article exploring how to track form submissions and user behavior using HTML5 validation with Google Tag Manager.",
+  "slug": "tracking-forms-user-behaviour-2",
+  "url": "https://madsstoumann.wordpress.com/2015/02/25/tracking-forms-user-behaviour-2/",
+  "path": "/tracking-forms-user-behaviour-2",
+  "canonical_url": "https://madsstoumann.wordpress.com/2015/02/25/tracking-forms-user-behaviour-2/",
+  "cover_image": null,
+  "social_image": null,
+  "body_html": "<p>By <a href=\"https://plus.google.com/+MadsStoumannDK?rel=author\">Mads Stoumann</a></p>\n<p>Tracking valid form-submissions with Google Tag Manager and HTML5's built-in form-validation.</p>",
+  "body_markdown": null,
+  "reading_time_minutes": 1,
+  "published_at": "2015-02-25T22:07:43+02:00",
+  "published_timestamp": "2015-02-25T22:07:43+02:00",
+  "created_at": "2015-02-25T22:07:43+02:00",
+  "edited_at": "2015-02-25T22:11:32+02:00",
+  "last_comment_at": null,
+  "comments_count": 0,
+  "public_reactions_count": 0,
+  "positive_reactions_count": 0,
+  "tag_list": "google-tag-manager, google-universal-analytics, html5, javascript",
+  "tags": [
+    {
+      "id": "google-tag-manager",
+      "name": "google-tag-manager"
+    },
+    {
+      "id": "google-universal-analytics",
+      "name": "google-universal-analytics"
+    },
+    {
+      "id": "html5",
+      "name": "html5"
+    },
+    {
+      "id": "javascript",
+      "name": "javascript"
+    }
+  ],
+  "language": "en",
+  "source": "wordpress",
+  "source_site": "madsstoumann.wordpress.com",
+  "readable_publish_date": "Feb 25 '15",
+  "user": {
+    "name": "Mads Stoumann",
+    "username": "madsstoumann",
+    "user_id": 1,
+    "profile_image": null,
+    "profile_image_90": null
+  }
+}

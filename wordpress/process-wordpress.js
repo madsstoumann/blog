@@ -97,6 +97,7 @@ function createMetadataEntry(article) {
 		published_timestamp: article.published_timestamp,
 		edited_at: article.edited_at,
 		url: article.url,
+		slug: article.slug,
 		tag_list: article.tags.map(t => t.name),
 		public_reactions_count: article.public_reactions_count,
 		source: 'wordpress'
