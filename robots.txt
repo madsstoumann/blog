@@ -13,6 +13,9 @@ Allow: /
 User-agent: Baiduspider
 Allow: /
 
+User-agent: unified-search-bot
+Allow: /
+
 User-agent: *
 Disallow: /
 
