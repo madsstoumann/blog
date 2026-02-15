@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Accessible Image Compare — One Line of JavaScript — Mads Stoumann</title>
+	<meta name="description" content="Sometimes it's funny to revisit old ideas and  components, you did a long time ago!  I once did an &quot;I...">
+	<link rel="canonical" href="https://blog.stoumann.dk/accessible-image-compare-one-line-of-javascript">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Accessible Image Compare — One Line of JavaScript">
+	<meta property="og:description" content="Sometimes it's funny to revisit old ideas and  components, you did a long time ago!  I once did an &quot;I...">
+	<meta property="og:url" content="https://blog.stoumann.dk/accessible-image-compare-one-line-of-javascript">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/575731/4509db89.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Accessible Image Compare — One Line of JavaScript">
+	<meta name="twitter:description" content="Sometimes it's funny to revisit old ideas and  components, you did a long time ago!  I once did an &quot;I...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/575731/4509db89.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Accessible Image Compare — One Line of JavaScript</h1>
+			<p>Sometimes it's funny to revisit old ideas and  components, you did a <em>long</em> time ago!</p>
+
+<p>I once did an "Image Compare"-component, with one image defined in a regular <code>&lt;img&gt;</code>-tag, one as <code>background-image</code>, a <code>&lt;div&gt;</code> for the draggable control — and a good chunk of JavaScript to handle the functionality.</p>
+
+<p>Looking through old code during a cleanup, I stumbled across this component and thought about what I'd change, if I were to make a "2021 version". </p>
+
+<p>First, I'd replace the <code>&lt;div&gt;</code> with an <code>&lt;input type="range"&gt;</code> for the draggable component. The <code>oninput</code>-event should update a single <em>CSS Custom Property</em>, setting a <code>--value</code>-property on the <code>parentNode</code>, so other <code>children</code> can access the value as well:</p>
+
+<p><em>Like this:</em><br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"range"</span> <span class="na">oninput=</span><span class="s">"this.parentNode.style.setProperty('--value', `${this.value}%`)"</span><span class="nt">&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>The images should be two regular <code>&lt;img&gt;</code>-tags, and the <code>--value</code> should be used to update two <code>clip-path</code>'s:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nc">.c-compare__left</span> <span class="p">{</span>
+  <span class="nl">clip-path</span><span class="p">:</span> <span class="n">polygon</span><span class="p">(</span><span class="m">0%</span> <span class="m">0%</span><span class="p">,</span> <span class="n">var</span><span class="p">(</span><span class="n">--value</span><span class="p">)</span> <span class="m">0%</span><span class="p">,</span> <span class="n">var</span><span class="p">(</span><span class="n">--value</span><span class="p">)</span> <span class="m">100%</span><span class="p">,</span> <span class="m">0%</span> <span class="m">100%</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nc">.c-compare__right</span> <span class="p">{</span>
+  <span class="nl">clip-path</span><span class="p">:</span> <span class="n">polygon</span><span class="p">(</span><span class="m">100%</span> <span class="m">0%</span><span class="p">,</span> <span class="n">var</span><span class="p">(</span><span class="n">--value</span><span class="p">)</span> <span class="m">0%</span><span class="p">,</span> <span class="n">var</span><span class="p">(</span><span class="n">--value</span><span class="p">)</span> <span class="m">100%</span><span class="p">,</span> <span class="m">100%</span> <span class="m">100%</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>And that's the core of it! </p>
+
+<p>A fully functional "Image Compare"-component in one line of JavaScript and two dynamic CSS <code>clip-path: polygon()</code>.</p>
+
+<p>The rest is just styling.</p>
+
+
+<hr>
+
+<h2>
+  <a name="accessibility" href="#accessibility">
+  </a>
+  Accessibility
+</h2>
+
+<p>You get accessibility for free, since the <code>&lt;input type="range"&gt;</code> is focusable, and navigable with the arrow-keys. Set the <code>:focus</code>-style in CSS.</p>
+
+
+<hr>
+
+<h2>
+  <a name="demo" href="#demo">
+  </a>
+  Demo
+</h2>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/VwKgJNv?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+<p>Thanks for reading!</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

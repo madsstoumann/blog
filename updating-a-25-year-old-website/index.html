@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Updating A 25-Year-Old Website — Mads Stoumann</title>
+	<meta name="description" content="As frontend developers, we always want to use the latest and the greatest. A lot of the time however,...">
+	<link rel="canonical" href="https://blog.stoumann.dk/updating-a-25-year-old-website">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Updating A 25-Year-Old Website">
+	<meta property="og:description" content="As frontend developers, we always want to use the latest and the greatest. A lot of the time however,...">
+	<meta property="og:url" content="https://blog.stoumann.dk/updating-a-25-year-old-website">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/728708/ce28cc9a.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Updating A 25-Year-Old Website">
+	<meta name="twitter:description" content="As frontend developers, we always want to use the latest and the greatest. A lot of the time however,...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/728708/ce28cc9a.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Updating A 25-Year-Old Website</h1>
+			<p>As frontend developers, we always want to use the latest and the greatest. A lot of the time however, the clients we work for, are dependent on old systems, that would cost a <em>fortune</em> to update. A couple of years ago, I had to work with the code of a 25-year-old website.</p>
+
+
+<hr>
+
+<p>But first, a little flashback. Back in 1993, as a 20-year old geek, I was working for a comicbook-shop in Copenhagen, Denmark, called “Fantask”.</p>
+
+<p>Fantask used a database called “Perfect Filer” to handle all customers, products and — most important — subscriptions. Customers could subscribe to all kinds of products: american comics, danish comics, books by specific authors or series etc.</p>
+
+<p><a href="assets/728708/f4ef9da8.jpg" class="article-body-image-wrapper"><img src="assets/728708/f4ef9da8.jpg" alt="Filer" loading="lazy" width="640" height="400"></a></p>
+
+<p>Released in 1983, “Perfect Filer” was a CLI-based tool, and took up 261kB of HDD-space and a whopping <strong>128kB of RAM!</strong> Needless to say, it was <em>very complicated</em> to use with vast amounts of data, and Fantask had a growing customer-base.</p>
+
+<p>Because I had an interest in IT, and had done some “computer work” on Fantask's catalogues, they asked me to create a new, graphical UI for handling customers, products, subscriptions and much more.</p>
+
+<p>Luckily for me, my best friend studied data science, and could help me with database-design and coding - as I knew next to <em>nothing</em> about either!</p>
+
+<p>At that time, “SQL Server” was for OS/2 only, so we picked the brand new “Microsoft Access 1.0”-database, which also had support for VBA: Visual Basic for Applications.</p>
+
+<p>With VBA you could — and still can — build:</p>
+
+<ul>
+<li>A database application</li>
+<li>Custom forms</li>
+<li>Custom reports</li>
+<li>Custom navigation</li>
+</ul>
+
+<p>... and pack it like an app, with icon etc.</p>
+
+<p>I cannot remember how many months it took to develop, but … <strong>they've been using it ever since!</strong> (more on that later)</p>
+
+
+<hr>
+
+<p>A couple of years later, a thing called the <em>World Wide Web</em> was suddenly on everybody's lips, so I had to learn another kind of “programming”: <code>HTML</code>.</p>
+
+<p>I created this beautiful website in september 1995:</p>
+
+<p><a href="assets/728708/a48c1581.jpg" class="article-body-image-wrapper"><img src="assets/728708/a48c1581.jpg" alt="Fantask First Website" loading="lazy" width="800" height="782"></a></p>
+
+<p>Sorry for hurting your eyes, but that's how most websites looked back then!</p>
+
+<p>In December 1996, Microsoft launched <code>Active Server Pages</code> (today called  “Classic ASP”), allowing you to connect databases with websites. </p>
+
+<p>Suddenly, we could connect the Access-database with the website and create an online shop. And, mind you, there were <strong>a lot</strong> of data:</p>
+
+<ul>
+<li>More than 50.000 comics</li>
+<li>More than 5.000 books</li>
+<li>More than 5.000 games, figures, films etc.</li>
+<li>More than 10.000 customers</li>
+</ul>
+
+<p>Shortly thereafter, I left the company to start my own business.<br>
+And for the next <strong>21 years</strong>, the site looked like this:</p>
+
+<p><a href="assets/728708/356f2312.jpg" class="article-body-image-wrapper"><img src="assets/728708/356f2312.jpg" alt="FantaskBefore" loading="lazy" width="800" height="585"></a></p>
+
+<p>The search-experince was like … well, 1997, the layout was done with a <code>&lt;table&gt;</code>, and the look-and-feel was not winning any design-awards 😂</p>
+
+
+<hr>
+
+<p>During these 21 years they'd asked a lot of companies to help them with a new website … but it was simply <em>too</em> expensive for a small comicbook-shop (20-25.000$+). And “out-of-the-box” shops simply didn't cater for such large amounts of products/data.</p>
+
+<p>Then in 2018, Fantask was on the brink of bankruptcy — and reached out to me for help. They thought a flashy new website could help the store survive. I didn't have much spare-time, but promised to spend all my Sundays for one month to help them.</p>
+
+<p>With a limited timeframe and no budget, I realized the cheapest solution would be to … well, <em>continue using Classic ASP!</em> </p>
+
+<p>For reasons unknown, it's <em>still</em> supported by Microsoft (or = it still works), even though it was replaced by <code>.Net</code> in 2002, and the last stable release is more than 21 years old!</p>
+
+<p>I installed the “Classic ASP Syntaxes and Snippets”-plugin for “VS Code”, traversed my old code (oh, the horror!) — and split it up into:</p>
+
+<ul>
+<li>Modules</li>
+<li>Services</li>
+<li>Components</li>
+</ul>
+
+<p>I added input sanitation, re-used database-connections, were careful not to overuse the <code>session</code>-objects, and applied some of the “best practices” of the past 20 years. </p>
+
+<p>I added modern semantics, valid- and structures (schema.org) markup, Google Snippets, a mega-menu and a <code>fetch()</code>-based “auto-suggest”:</p>
+
+<p><a href="assets/728708/b94b1205.jpg" class="article-body-image-wrapper"><img src="assets/728708/b94b1205.jpg" alt="Mega Menu and Autosuggest" loading="lazy" width="800" height="447"></a></p>
+
+<p>Then I applied all of the “Google Analytics Enhanced Ecommerce”-logic:</p>
+
+<ul>
+<li>Product impressions</li>
+<li>Detail-click</li>
+<li>Detail-impressions</li>
+<li>Add-to-basket transaction</li>
+<li>Remove-from-basket transaction</li>
+<li>Purchase transaction</li>
+</ul>
+
+<p>… As well as “Google Merchant”- and “Facebook Business”-feeds.<br>
+I also removed all sensitive data from the Access-database, since I figured it's probably easier to hack than modern databases. </p>
+
+
+<hr>
+
+<h2>
+  <a name="recap" href="#recap">
+  </a>
+  Recap
+</h2>
+
+<p>The project ended up taking <strong>7 days</strong> (and not just the 4 Sundays I'd agreed to), and included:</p>
+
+<ul>
+<li>Complete re-write of "backend" code, into: Modules, services and - components</li>
+<li>Complete re-write of HTML (no <code>&lt;table&gt;</code>-based design!)</li>
+<li>Complete re-write of CSS</li>
+<li>Complete re-write of JS</li>
+<li>Structured, semantic and valid markup</li>
+<li>Google Search Snippet</li>
+<li>Google Enhanced Ecommerce integration</li>
+<li>Google Merchant and Facebook Business integration</li>
+<li>Structured, measurable goal-friendly checkout-flow</li>
+<li>Performance optimizations</li>
+<li>... and much more!</li>
+</ul>
+
+<p>The website was re-launched in December 2018 — Fantask is still going strong! — and can be visited at <a href="//fantask.dk">fantask.dk</a> (sorry, only in Danish!):</p>
+
+<p><a href="assets/728708/9f8425a4.jpg" class="article-body-image-wrapper"><img src="assets/728708/9f8425a4.jpg" alt="Fantask Website Today" loading="lazy" width="800" height="609"></a></p>
+
+
+<hr>
+
+<h2>
+  <a name="conclusion" href="#conclusion">
+  </a>
+  Conclusion
+</h2>
+
+<p>Working with old code is sometimes unavoidable, either because of scope or costs, but it can also teach you a thing ot two. </p>
+
+<p>In this case, the only way I could accomplish the re-write in such a short time was because of the simple and reduced <em>tech stack:</em> <code>HTML</code>, <code>ASP</code>, <code>CSS</code> and <code>JavaScript</code>. No frameworks. No backend-development, since “Classic ASP” is dead-simple, like PHP. Just <em>VS Code</em> and <em>Internet Information Server</em>, with a few tweaks.</p>
+
+<p>But also, and this is perhaps the most important reason, <strong>because I could make all decisions myself!</strong> No discussions with BE-developers, no Project Manager, no Scrum Master, no JIRA-tickets, no UX-discussions — or designers wanting a <code>1px box-shadow</code>!</p>
+
+<p>In other words: <strong>completely unrealistic</strong> in the real world!</p>
+
+<p>But it was fun to do, and while I won't recommend using “Classic ASP” for your next project, I <em>will</em> recommend looking at the tech stack, and see, if anything can be simplified.</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Polygon to clip-path &amp; SVG — Mads Stoumann</title>
+	<meta name="description" content="I've made a new clip-path-tool, which makes it easier to create equal-sided polygons, from 3-sided tr...">
+	<link rel="canonical" href="https://blog.stoumann.dk/polygon-to-clip-path-svg">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Polygon to clip-path &amp; SVG">
+	<meta property="og:description" content="I've made a new clip-path-tool, which makes it easier to create equal-sided polygons, from 3-sided tr...">
+	<meta property="og:url" content="https://blog.stoumann.dk/polygon-to-clip-path-svg">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/567256/1770e3fc.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Polygon to clip-path &amp; SVG">
+	<meta name="twitter:description" content="I've made a new clip-path-tool, which makes it easier to create equal-sided polygons, from 3-sided tr...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/567256/1770e3fc.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Polygon to clip-path &amp; SVG</h1>
+			<p>I've made a new <code>clip-path</code>-tool, which makes it easier to create equal-sided polygons, from 3-sided triangles to a hundred-sided hectogon.</p>
+
+<p>You get live feedback and generated code for both CSS <code>clip-path</code> and inline <code>SVG</code>.</p>
+
+<p><a href="assets/567256/81454701.jpg" class="article-body-image-wrapper"><img src="assets/567256/81454701.jpg" alt="Polygon Editor" loading="lazy" width="800" height="544"></a></p>
+
+<p>Drag the <code>sides</code>-range-slider to set the number of sides. The <code>inset</code>-range-slider creates a point on the middle of each side, and the amount you set drags it "inwards" for cool effects. </p>
+
+<p>If you chose the first, transparent image, the color of the color-picker will be used:</p>
+
+<p><a href="assets/567256/d30b648b.jpg" class="article-body-image-wrapper"><img src="assets/567256/d30b648b.jpg" alt="Blue Star" loading="lazy" width="800" height="747"></a></p>
+
+<p>Otherwise, chose one of the sample images:</p>
+
+<p><a href="assets/567256/428be573.jpg" class="article-body-image-wrapper"><img src="assets/567256/428be573.jpg" alt="Image Star" loading="lazy" width="800" height="755"></a></p>
+
+<p>When you hover the "Animation Preview"-area, you'll see a transition between the original <code>inset</code> and the <code>animation inset</code>:</p>
+
+<p><a href="assets/567256/13492ffc.jpg" class="article-body-image-wrapper"><img src="assets/567256/13492ffc.jpg" alt="Animation Preview" loading="lazy" width="800" height="364"></a></p>
+
+<p>The tool works best in <a href="https://codepen.io/stoumann/full/MWjBRJv" target="_blank" rel="noopener noreferrer">fullscreen on Codepen</a>, but here's an inline version as well:</p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/MWjBRJv?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+<p>If you prefer a <code>clip-path</code>-tool with draggable points (for simpler shapes), use my original tool:</p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/abZxoOM?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+<p>Thanks for reading - hope you'll enjoy the tools!</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Circle-Packing with Javascript and SVG — the Kusama Way — Mads Stoumann</title>
+	<meta name="description" content="I love the works of Japanese artist Yayoi Kusama, and have — for a long time — wanted to make an...">
+	<link rel="canonical" href="https://blog.stoumann.dk/circle-packing-with-javascript-and-svg-the-kusama-way">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Circle-Packing with Javascript and SVG — the Kusama Way">
+	<meta property="og:description" content="I love the works of Japanese artist Yayoi Kusama, and have — for a long time — wanted to make an...">
+	<meta property="og:url" content="https://blog.stoumann.dk/circle-packing-with-javascript-and-svg-the-kusama-way">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/1544660/c1f3a1b7.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Circle-Packing with Javascript and SVG — the Kusama Way">
+	<meta name="twitter:description" content="I love the works of Japanese artist Yayoi Kusama, and have — for a long time — wanted to make an...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/1544660/c1f3a1b7.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Circle-Packing with Javascript and SVG — the Kusama Way</h1>
+			<p>I love the works of Japanese artist Yayoi Kusama, and have — for a long time — wanted to make an interactive poster of her famous dots.</p>
+
+<p>Although my father is a retired Math-teacher, I simply <em>cannot</em> grasp the super-complicated "circle-packing" algorithms, so I ended up doing something more simple:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">function</span> <span class="nf">kusamaDots</span><span class="p">(</span>
+  <span class="nx">numDots</span><span class="p">,</span>
+  <span class="nx">minRadius</span><span class="p">,</span>
+  <span class="nx">maxRadius</span><span class="p">,</span>
+  <span class="nx">width</span><span class="p">,</span>
+  <span class="nx">height</span>
+<span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">dots</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="kd">function</span> <span class="nf">createDot</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nf">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span> <span class="o">*</span> <span class="nx">width</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">y</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nf">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span> <span class="o">*</span> <span class="nx">height</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">radius</span> <span class="o">=</span>
+      <span class="nb">Math</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="nx">maxRadius</span> <span class="o">-</span> <span class="nx">minRadius</span><span class="p">)</span> <span class="o">+</span> <span class="nx">minRadius</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">dot</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span> <span class="p">};</span>
+    <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">dots</span><span class="p">.</span><span class="nf">some</span><span class="p">((</span><span class="nx">c</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nf">intersects</span><span class="p">(</span><span class="nx">dot</span><span class="p">,</span> <span class="nx">c</span><span class="p">)))</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">dot</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">while </span><span class="p">(</span><span class="nx">dots</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="nx">numDots</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">dot</span> <span class="o">=</span> <span class="nf">createDot</span><span class="p">();</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">dot</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="nx">dots</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="nx">dot</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">dots</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Parameters are:</p>
+
+<ol>
+<li>
+<code>numDots</code>. Total number of dots.</li>
+<li>
+<code>minRadius</code>. Minimum radius of a dot.</li>
+<li>
+<code>maxRadius</code>. maximum radius of a dot.</li>
+<li>
+<code>width</code> of the "canvas" (SVG viewBox).</li>
+<li>
+<code>height</code> of the same.</li>
+</ol>
+
+<p>The <code>createDot</code> method creates a random <code>x</code> and <code>y</code>-position within the boundaries of the <code>viewBox</code>. It sets a random radius between the values of <code>minRadius</code> and <code>maxRadius</code>. </p>
+
+<p>It creates a <code>dot</code>-object, and then it checks whether the dot <em>intersects</em> with any other dots (that have been created already). For this, we need a small helper-method:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">function</span> <span class="nf">intersects</span><span class="p">(</span><span class="nx">first</span><span class="p">,</span> <span class="nx">second</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">dx</span> <span class="o">=</span> <span class="nx">first</span><span class="p">.</span><span class="nx">x</span> <span class="o">-</span> <span class="nx">second</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">dy</span> <span class="o">=</span> <span class="nx">first</span><span class="p">.</span><span class="nx">y</span> <span class="o">-</span> <span class="nx">second</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">distance</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="nx">dx</span> <span class="o">*</span> <span class="nx">dx</span> <span class="o">+</span> <span class="nx">dy</span> <span class="o">*</span> <span class="nx">dy</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">sumOfRadii</span> <span class="o">=</span> <span class="nx">first</span><span class="p">.</span><span class="nx">radius</span> <span class="o">+</span> <span class="nx">second</span><span class="p">.</span><span class="nx">radius</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">distance</span> <span class="o">&lt;=</span> <span class="nx">sumOfRadii</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>If the dot does <em>not</em> intersect with any other dots, it's <code>return</code>ed. </p>
+
+<p>After that, a <code>while</code>-loop runs until <code>numDots</code> have been reached.</p>
+
+<p>To <em>output</em> the dots, we simply create <code>&lt;circle&gt;</code>s in SVG:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">dots</span> <span class="o">=</span> <span class="nf">kusamaDots</span><span class="p">(</span>
+  <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">valueAsNumber</span><span class="p">,</span>
+  <span class="mi">10</span><span class="p">,</span>
+  <span class="mi">150</span><span class="p">,</span>
+  <span class="mi">1000</span><span class="p">,</span>
+  <span class="mi">1000</span>
+<span class="p">);</span>
+<span class="nx">svg</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">dots</span>
+  <span class="p">.</span><span class="nf">map</span><span class="p">(</span>
+    <span class="p">(</span><span class="nx">dot</span><span class="p">)</span> <span class="o">=&gt;</span>
+      <span class="s2">`&lt;circle r="</span><span class="p">${</span><span class="nx">dot</span><span class="p">.</span><span class="nx">radius</span><span class="p">}</span><span class="s2">" cx="</span><span class="p">${</span><span class="nx">dot</span><span class="p">.</span><span class="nx">x</span><span class="p">}</span><span class="s2">" cy="</span><span class="p">${</span><span class="nx">dot</span><span class="p">.</span><span class="nx">y</span><span class="p">}</span><span class="s2">"&gt;&lt;/circle&gt;`</span>
+  <span class="p">)</span>
+  <span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="dl">""</span><span class="p">)</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+
+<hr>
+
+<h2>
+  <a name="css" href="#css">
+  </a>
+  CSS
+</h2>
+
+<p>The CSS is fairly simple. The frame and responsive texts are similar to <a href="https://dev.to/madsstoumann/the-moon-in-10241-dots-re-creating-a-1969-masterpiece-35e2">The Moon in 10241 Dots</a>. </p>
+
+<p>The most important part is a custom property used for the dot color (as <code>fill</code>)! </p>
+
+<p>However, I decided to do a custom range slider and a color-picker as part of the poster, thus making it <em>an interactive</em> poster:</p>
+
+<p><a href="assets/1544660/351728ba.jpg" class="article-body-image-wrapper"><img src="assets/1544660/351728ba.jpg" alt="Kusama Poster Final" loading="lazy" width="800" height="912"></a></p>
+
+<p>Can you spot them?!</p>
+
+<p>Drag the slider and click the color-picker to make your <strong>own</strong> poster:</p>
+
+<p><a href="assets/1544660/6502186e.jpg" class="article-body-image-wrapper"><img src="assets/1544660/6502186e.jpg" alt="Modified version" loading="lazy" width="800" height="937"></a></p>
+
+
+<hr>
+
+<h2>
+  <a name="demo" href="#demo">
+  </a>
+  Demo
+</h2>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/bGQjNXQ?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

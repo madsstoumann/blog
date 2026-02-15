@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>SVG, Geometry — and a dash of JavaScript — Mads Stoumann</title>
+	<meta name="description" content="I'm currently reading Science Illustration — A History of Visual Knowledge from the 15th Century to...">
+	<link rel="canonical" href="https://blog.stoumann.dk/svg-geometry-and-a-dash-of-javascript">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="SVG, Geometry — and a dash of JavaScript">
+	<meta property="og:description" content="I'm currently reading Science Illustration — A History of Visual Knowledge from the 15th Century to...">
+	<meta property="og:url" content="https://blog.stoumann.dk/svg-geometry-and-a-dash-of-javascript">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/1185936/af186385.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="SVG, Geometry — and a dash of JavaScript">
+	<meta name="twitter:description" content="I'm currently reading Science Illustration — A History of Visual Knowledge from the 15th Century to...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/1185936/af186385.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>SVG, Geometry — and a dash of JavaScript</h1>
+			<p>I'm currently reading <a href="https://www.goodreads.com/book/show/51860322-science-illustration-a-history-of-visual-knowledge-from-the-15th-centur" target="_blank" rel="noopener noreferrer">Science Illustration — A History of Visual Knowledge from the 15th Century to Today</a>. Highly recommended! Great books on science and/or design, are always a source of inspiration for me. </p>
+
+<p><a href="assets/1185936/a5ce2dd2.jpg" class="article-body-image-wrapper"><img src="assets/1185936/a5ce2dd2.jpg" alt="Science Illustration" loading="lazy" width="800" height="1147"></a></p>
+
+<p>The book is a treasure trove of great illustrations — and some of them are just <strong>meant to be coded</strong> in <code>&lt;svg&gt;</code>! ... like this one (sorry for the bad quality, picture taken with my phone):</p>
+
+<p><a href="assets/1185936/c6d08bad.jpg" class="article-body-image-wrapper"><img src="assets/1185936/c6d08bad.jpg" alt="Interconnecting lines" loading="lazy" width="800" height="1058"></a></p>
+
+<p>Luckily, it's not overly complex to do in <code>&lt;svg&gt;</code>. </p>
+
+<p>We just need a bit of Math and JavaScript.</p>
+
+<p>To start with, we need a canvas:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;svg</span> <span class="na">viewBox=</span><span class="s">"0 0 1000 1000"</span><span class="nt">&gt;&lt;/svg&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Now, we need some data!</p>
+
+<p>The <code>viewBox</code> has a <code>size</code> of 1000, and we need 16 points around the circle:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">size</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">radius</span> <span class="o">=</span> <span class="nx">size</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">numOfPoints</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Next, let's create an array of points:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code>  <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[...</span><span class="k">new</span> <span class="nc">Array</span><span class="p">(</span><span class="nx">numOfPoints</span><span class="p">)].</span><span class="nf">map</span><span class="p">((</span><span class="nx">_a</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">angle</span> <span class="o">=</span> <span class="mi">360</span> <span class="o">/</span> <span class="nx">numOfPoints</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">radian</span> <span class="o">=</span> <span class="nx">angle</span> <span class="o">*</span> <span class="p">(</span><span class="nx">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nf">polarToCartesian</span><span class="p">(</span><span class="nx">radius</span><span class="p">,</span> <span class="nx">radian</span><span class="p">)</span>
+  <span class="p">})</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>We need a small helper-method, <code>polarToCartesian</code>, to get the coordinates of our 16 points:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">polarToCartesian</span> <span class="o">=</span> <span class="p">(</span><span class="nx">r</span><span class="p">,</span> <span class="nx">degrees</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">radians</span> <span class="o">=</span> <span class="nx">degrees</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span> <span class="o">/</span> <span class="mf">180.0</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nx">r</span> <span class="o">+</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nf">cos</span><span class="p">(</span><span class="nx">radians</span><span class="p">)),</span> <span class="nx">r</span> <span class="o">+</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nf">sin</span><span class="p">(</span><span class="nx">radians</span><span class="p">))]</span>
+  <span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>A method like this typically needs <code>x</code> and <code>y</code> as well, but since these are the same as <code>radius</code> (in this case), we can go for a simpler version.</p>
+
+<p>Cool, now we have an array of arrays:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="p">[</span>
+  <span class="p">[</span><span class="mf">961.9397662556433</span><span class="p">,</span> <span class="mf">691.3417161825449</span><span class="p">],</span>
+  <span class="p">[</span><span class="mf">853.5533905932738</span><span class="p">,</span> <span class="mf">853.5533905932737</span><span class="p">],</span>
+  <span class="p">...</span><span class="nx">etc</span><span class="p">,</span>
+<span class="p">]</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>For each point, we need to draw a line to all the other points, feeding in the <code>X</code> and <code>Y</code>of the current point:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">renderLines</span> <span class="o">=</span> <span class="p">(</span><span class="nx">X</span><span class="p">,</span><span class="nx">Y</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">data</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="nx">entry</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="p">[</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">]</span> <span class="o">=</span> <span class="nx">entry</span><span class="p">;</span>
+      <span class="k">if </span><span class="p">(</span><span class="nx">X</span> <span class="o">!==</span> <span class="nx">x</span> <span class="o">&amp;&amp;</span> <span class="nx">Y</span> <span class="o">!==</span> <span class="nx">y</span><span class="p">)</span> <span class="k">return</span> <span class="s2">`&lt;line x1="</span><span class="p">${</span><span class="nx">X</span><span class="p">}</span><span class="s2">" y1="</span><span class="p">${</span><span class="nx">Y</span><span class="p">}</span><span class="s2">" x2="</span><span class="p">${</span><span class="nx">x</span><span class="p">}</span><span class="s2">" y2="</span><span class="p">${</span><span class="nx">y</span><span class="p">}</span><span class="s2">"&gt;&lt;/line&gt;`</span>
+    <span class="p">})</span>
+  <span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Now, the only thing remaining is to call that method and set the returned string as <code>innerHTML</code> of our <code>&lt;svg&gt;</code>:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="nx">svg</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="nx">entry</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">[</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">]</span> <span class="o">=</span> <span class="nx">entry</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nf">renderLines</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">).</span><span class="nf">join</span><span class="p">(</span><span class="dl">''</span><span class="p">);</span>
+  <span class="p">})</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Let's see what we've built:</p>
+
+<p><a href="assets/1185936/55606fd9.jpg" class="article-body-image-wrapper"><img src="assets/1185936/55606fd9.jpg" alt="BW Interconnecting Lines" loading="lazy" width="800" height="790"></a></p>
+
+<p>Looks great, but a bit dull! Let's add a method for generating random values between a <code>min</code> and a <code>max</code>-range:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">random</span> <span class="o">=</span> <span class="p">(</span><span class="nx">max</span><span class="p">,</span> <span class="nx">min</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nb">Math</span><span class="p">.</span><span class="nf">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="nx">max</span> <span class="o">-</span> <span class="nx">min</span><span class="p">)</span> <span class="o">+</span> <span class="nx">min</span><span class="p">);</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>... and then use it to create random colors and stroke-widths:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">stroke</span> <span class="o">=</span> <span class="s2">`hsl(</span><span class="p">${</span><span class="nf">random</span><span class="p">(</span><span class="mi">360</span><span class="p">)}</span><span class="s2">, </span><span class="p">${</span><span class="nf">random</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">)}</span><span class="s2">%, </span><span class="p">${</span><span class="nf">random</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="mi">30</span><span class="p">)}</span><span class="s2">%)`</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">strokeWidth</span> <span class="o">=</span> <span class="nf">random</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10</span><span class="p">;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p><a href="assets/1185936/a65614f6.jpg" class="article-body-image-wrapper"><img src="assets/1185936/a65614f6.jpg" alt="Colour Interconnecting Lines" loading="lazy" width="800" height="795"></a></p>
+
+<p>Much better! Let's try to change the <code>numberOfPoints</code>-variable to a much lower value:</p>
+
+<p><a href="assets/1185936/6b9332c3.jpg" class="article-body-image-wrapper"><img src="assets/1185936/6b9332c3.jpg" alt="Fewer points" loading="lazy" width="800" height="785"></a></p>
+
+<p>Or perhaps a much higher value?</p>
+
+<p><a href="assets/1185936/4d34058e.jpg" class="article-body-image-wrapper"><img src="assets/1185936/4d34058e.jpg" alt="Many points" loading="lazy" width="800" height="796"></a></p>
+
+<p>Wow! Almost like a kaleidoscope. Or a rubber-ball!</p>
+
+<h2>
+  <a name="demo" href="#demo">
+  </a>
+  Demo
+</h2>
+
+<p>I hope this little post inspired you to do some creative things with <code>&lt;svg&gt;</code>. </p>
+
+<p>Below is a Pen, where you can drag the "points"-slider to in- or decrease the number of points.</p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/GRdgbjN?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

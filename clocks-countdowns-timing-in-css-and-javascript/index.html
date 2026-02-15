@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Clocks &amp; Countdowns: Timing in CSS and JavaScript — Mads Stoumann</title>
+	<meta name="description" content="The other day I needed a digital clock-component, so I quickly composed a simple...">
+	<link rel="canonical" href="https://blog.stoumann.dk/clocks-countdowns-timing-in-css-and-javascript">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Clocks &amp; Countdowns: Timing in CSS and JavaScript">
+	<meta property="og:description" content="The other day I needed a digital clock-component, so I quickly composed a simple...">
+	<meta property="og:url" content="https://blog.stoumann.dk/clocks-countdowns-timing-in-css-and-javascript">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/1582422/b01401a7.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Clocks &amp; Countdowns: Timing in CSS and JavaScript">
+	<meta name="twitter:description" content="The other day I needed a digital clock-component, so I quickly composed a simple...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/1582422/b01401a7.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Clocks &amp; Countdowns: Timing in CSS and JavaScript</h1>
+			<p>The other day I needed a <strong>digital clock</strong>-component, so I quickly composed a simple JavaScript-method:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">function</span> <span class="nf">uiDigitalClock</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">now</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">node</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Date</span><span class="p">().</span><span class="nf">toLocaleTimeString</span><span class="p">()</span>
+    <span class="nf">requestAnimationFrame</span><span class="p">(</span><span class="nx">now</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="nf">now</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Somewhere I read that <code>requestAnimationFrame</code> should be better for performance than <code>setInterval</code>, but the method kept nagging me. </p>
+
+<p>Under optimal conditions, <code>requestAnimationFrame</code> will trigger <strong>60 times per second</strong> — which is 60 times more than the digital clock requires!</p>
+
+<p>It cannot be good for performance to create a <code>Date()</code>-object 60 times per second!</p>
+
+<p>So I tried with <code>setInterval</code>:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">function</span> <span class="nf">interval</span><span class="p">(</span><span class="nx">node</span><span class="p">){</span>
+  <span class="k">return</span> <span class="nf">setInterval</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">node</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Date</span><span class="p">().</span><span class="nf">toLocaleTimeString</span><span class="p">(),</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Again, not much code, the visual result is the same — and only <strong>one</strong> <code>Date()</code>-object per second.</p>
+
+<p>What about <code>setTimeout()</code>?<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">function</span> <span class="nf">timeout</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">now</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">node</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Date</span><span class="p">().</span><span class="nf">toLocaleTimeString</span><span class="p">()</span>
+    <span class="nf">setTimeout</span><span class="p">(</span><span class="nx">now</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="nf">now</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>It also works with a similar result, but with an <em>annoying</em> delay (<code>setImmediate()</code> is only in Node)</p>
+
+<p>I then decided to <strong>rework</strong> the initial version to only trigger every second, as <code>requestAnimationFrame()</code> returns a timestamp:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">function</span> <span class="nf">frame</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">last</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">render</span> <span class="o">=</span> <span class="nx">now</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">last</span> <span class="o">||</span> <span class="nx">now</span> <span class="o">-</span> <span class="nx">last</span> <span class="o">&gt;=</span> <span class="mi">1000</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">last</span> <span class="o">=</span> <span class="nx">now</span><span class="p">;</span>
+      <span class="nx">node</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Date</span><span class="p">().</span><span class="nf">toLocaleTimeString</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="nf">requestAnimationFrame</span><span class="p">(</span><span class="nx">render</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="nb">window</span><span class="p">.</span><span class="nf">requestAnimationFrame</span><span class="p">(</span><span class="nx">render</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>With all 3 methods running,  I happened to inspect the markup in Dev Tools, and noticed that I couldn't even <em>expand</em> the nodes, because they were being refreshed constantly, and looking like the old <code>&lt;blink&gt;</code>-tag! </p>
+
+
+<hr>
+
+<h2>
+  <a name="asking-bard-for-help" href="#asking-bard-for-help">
+  </a>
+  Asking Bard for help
+</h2>
+
+<p>Still not really knowing which method to pick, I decided to ask Google Bard, to which it replied:</p>
+
+<ul>
+<li><p><strong>clock1</strong> uses the <code>setInterval()</code> method, which creates a recurring timer that fires every 1000 milliseconds (1 second). This is the least performant method because it creates a new timer for each iteration, which can add up to a significant amount of overhead.</p></li>
+<li><p><strong>clock2</strong> uses the <code>setTimeout()</code> method, which creates a single timer that fires after 1000 milliseconds. This is more performant than clock1 because it does not create a new timer for each iteration. However, it is still less performant than clock3 because the browser has to wait for the timer to fire before updating the text content.</p></li>
+<li><p><strong>clock3</strong> uses the <code>requestAnimationFrame()</code> method, which is a more efficient way to request a repaint of the browser. The browser will only repaint the element when it is necessary, which can save a significant amount of CPU time.</p></li>
+</ul>
+
+<p>Fine, I decieded to go with <strong>clock3</strong> ... but then it hit me: "What about <strong>number-animations in CSS</strong>, using <code>@property</code>?</p>
+
+<p>Jhey made a <a href="https://codepen.io/jh3y/pen/jOVmJBL" target="_blank" rel="noopener noreferrer">Pure CSS Stopwatch</a> a while ago, so I decided to try something similar.<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="k">@property</span> <span class="n">--seconds</span> <span class="p">{</span>
+  <span class="py">syntax</span><span class="p">:</span> <span class="s1">"&lt;integer&gt;"</span><span class="p">;</span>
+  <span class="py">initial-value</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="py">inherits</span><span class="p">:</span> <span class="n">false</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">@property</span> <span class="n">--minutes</span> <span class="p">{</span>
+  <span class="py">syntax</span><span class="p">:</span> <span class="s1">"&lt;integer&gt;"</span><span class="p">;</span>
+  <span class="py">initial-value</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="py">inherits</span><span class="p">:</span> <span class="n">false</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">@property</span> <span class="n">--hours</span> <span class="p">{</span>
+  <span class="py">syntax</span><span class="p">:</span> <span class="s1">"&lt;integer&gt;"</span><span class="p">;</span>
+  <span class="py">initial-value</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="py">inherits</span><span class="p">:</span> <span class="n">false</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Then, in an <code>&lt;ol&gt;</code>-tag, I added a <code>&lt;li&gt;</code>-tag for each time-unit.</p>
+
+<p>To use the value of the <code>@property</code>-declaration, you need to use a CSS counter, so for seconds it's:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nc">.seconds</span> <span class="p">{</span>
+  <span class="nl">animation</span><span class="p">:</span> <span class="n">seconds</span> <span class="m">60s</span> <span class="n">steps</span><span class="p">(</span><span class="m">60</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span> <span class="n">infinite</span><span class="p">;</span>
+  <span class="nl">animation-delay</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--delay-seconds</span><span class="p">,</span> <span class="m">0s</span><span class="p">);</span>
+  <span class="nl">counter-reset</span><span class="p">:</span> <span class="n">seconds</span> <span class="n">var</span><span class="p">(</span><span class="n">--seconds</span><span class="p">);</span>
+  <span class="err">&amp;::after</span> <span class="err">{</span> <span class="nl">content</span><span class="p">:</span> <span class="n">counter</span><span class="p">(</span><span class="n">seconds</span><span class="p">,</span> <span class="nb">decimal-leading-zero</span><span class="p">)</span> <span class="s2">' '</span><span class="p">;</span> <span class="p">}</span>
+<span class="err">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>To <strong>animate</strong> the seconds, a keyframe is needed:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="k">@keyframes</span> <span class="n">seconds</span> <span class="p">{</span> 
+  <span class="nt">from</span> <span class="p">{</span> <span class="py">--seconds</span><span class="p">:</span> <span class="m">0</span><span class="p">;}</span>
+  <span class="nt">to</span> <span class="p">{</span> <span class="py">--seconds</span><span class="p">:</span> <span class="m">60</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>For minutes, it's almost the same, but the animation takes 60 times longer (60 x 60 = 3600):<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">animation</span><span class="o">:</span> <span class="nt">minutes</span> <span class="err">3600</span><span class="nt">s</span> <span class="nt">steps</span><span class="o">(</span><span class="err">60</span><span class="o">,</span> <span class="nt">end</span><span class="o">)</span> <span class="nt">infinite</span><span class="o">;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>And for hours, we need to multiple that number with 24:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">animation</span><span class="o">:</span> <span class="nt">hours</span> <span class="err">86400</span><span class="nt">s</span> <span class="nt">steps</span><span class="o">(</span><span class="err">24</span><span class="o">,</span> <span class="nt">end</span><span class="o">)</span> <span class="nt">infinite</span><span class="o">;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Yay! We have a working CSS Clock ... but it only works at midnight, since both hours, minutes and seconds start at <code>0</code> (zero). </p>
+
+<p>So what to do? I could easily update the properties from JavaScript, after having created an initial <code>Date()</code>-object. </p>
+
+<p>But then the animations would be wrong, as they would run for the same amount of times (60 seconds for seconds), even if the actual amount of seconds were less than that.</p>
+
+<p>I asked for help on Twitter — and to my luck, Temani Afif and Álvaro Montoro replied! The solution was to use a <strong>negative</strong> <code>animation-delay</code>.</p>
+
+<p>So, with a bit of JavaScript to set the current time and calculate the delays:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">time</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Date</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">hours</span> <span class="o">=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">getHours</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">minutes</span> <span class="o">=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">getMinutes</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">seconds</span> <span class="o">=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">getSeconds</span><span class="p">();</span>
+
+<span class="c1">// Delays</span>
+<span class="kd">const</span> <span class="nx">HOURS</span> <span class="o">=</span> <span class="o">-</span><span class="nb">Math</span><span class="p">.</span><span class="nf">abs</span><span class="p">((</span><span class="nx">hours</span> <span class="o">*</span> <span class="mi">3600</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="nx">minutes</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span> <span class="o">+</span> <span class="nx">seconds</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">MINS</span> <span class="o">=</span> <span class="o">-</span><span class="nb">Math</span><span class="p">.</span><span class="nf">abs</span><span class="p">((</span><span class="nx">minutes</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span> <span class="o">+</span> <span class="nx">seconds</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">SECS</span> <span class="o">=</span> <span class="o">-</span><span class="nb">Math</span><span class="p">.</span><span class="nf">abs</span><span class="p">(</span><span class="nx">seconds</span><span class="p">);</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>... we can <strong>update</strong> the CSS Properties specified earlier, for example:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="nx">node</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nf">setProperty</span><span class="p">(</span><span class="s2">`--delay-seconds`</span><span class="p">,</span> <span class="s2">`</span><span class="p">${</span><span class="nx">seconds</span><span class="p">}</span><span class="s2">s`</span><span class="p">);</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Now, we have a <strong>working digital CSS clock</strong> — compare it with the other methods here:</p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/eYbJaqV?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+<p>If you inspect the markup in Dev Tools, you'll see that the CSS-version isn't re-writing DOM-content.</p>
+
+
+<hr>
+
+<h2>
+  <a name="countdown" href="#countdown">
+  </a>
+  Countdown
+</h2>
+
+<p>After this, I decided to revisit an old Codepen of mine, a multilanguage countdown, and make a CSS-only-version:</p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/yLGJPZK?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+<p>You can play around with the <code>locale</code> in the JS-code, if you want it in another language:</p>
+
+<p><a href="assets/1582422/f0433250.jpg" class="article-body-image-wrapper"><img src="assets/1582422/f0433250.jpg" alt="CSS Countdown" loading="lazy" width="800" height="261"></a></p>
+
+<p>But what about performance? CSS might not be blocking the main thread like JavaScript, but can we be sure it's using the GPU instead of the CPU?</p>
+
+<p>There's an old trick for that:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nc">.useGpu</span> <span class="p">{</span>
+  <span class="nl">transform</span><span class="p">:</span> <span class="n">translateZ</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
+  <span class="py">will-change</span><span class="p">:</span> <span class="n">transform</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Then, in Dev Tools, go to "Layers":<br>
+<a href="assets/1582422/7d0e73c9.jpg" class="article-body-image-wrapper"><img src="assets/1582422/7d0e73c9.jpg" alt="Layers" loading="lazy" width="800" height="318"></a></p>
+
+<p>See how the "countdown" now has it's <strong>own</strong> rendering-layer? Not sure if this is still applicable, but guess it doesn't hurt to add.</p>
+
+<hr>
+<h2>
+  <a name="leaving-a-browser-tab" href="#leaving-a-browser-tab">
+  </a>
+  Leaving a Browser Tab
+</h2>
+
+<p>I haven't had any issues with the CSS-only clock when I leave a browser-tab and return. Maybe I haven't been waiting long enough! But <strong>should</strong> you encounter any issues, recalculate the clock's delays using this event:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="nb">document</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">visibilitychange</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nb">document</span><span class="p">.</span><span class="nx">hidden</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+<span class="p">})</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+
+<hr>
+
+<h2>
+  <a name="analog-clock" href="#analog-clock">
+  </a>
+  Analog Clock
+</h2>
+
+<p>As a bonus – here's an analog clock, I did a while ago:</p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/wvxOQKo?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+
+<hr>
+
+<p>And now it's time (pun intended), to end this article!</p>
+
+<p>Cover image by DALL·E.</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

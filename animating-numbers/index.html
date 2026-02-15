@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Animating Numbers — Mads Stoumann</title>
+	<meta name="description" content="This tutorial will look into creating a small web component for animating numbers — and all the...">
+	<link rel="canonical" href="https://blog.stoumann.dk/animating-numbers">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Animating Numbers">
+	<meta property="og:description" content="This tutorial will look into creating a small web component for animating numbers — and all the...">
+	<meta property="og:url" content="https://blog.stoumann.dk/animating-numbers">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/1841223/49c9851c.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Animating Numbers">
+	<meta name="twitter:description" content="This tutorial will look into creating a small web component for animating numbers — and all the...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/1841223/49c9851c.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Animating Numbers</h1>
+			<p>This tutorial will look into creating a small web component for animating numbers — and all the pitfalls you need to be aware of to make it work across modern browsers.</p>
+
+<p>Here's what we'll be building:</p>
+
+<p><a href="assets/1841223/fe0ffbc4.jpg" class="article-body-image-wrapper"><img src="assets/1841223/fe0ffbc4.jpg" alt="Animated Number" loading="lazy" width="298" height="296" data-animated="true"></a></p>
+
+<blockquote>
+<p>Disclaimer: The GIF above does not show all the steps of the animation — which looks much better!</p>
+</blockquote>
+
+<h2>
+  <a name="html" href="#html">
+  </a>
+  HTML
+</h2>
+
+<p>In HTML, we'll be using:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;ui-number</span> <span class="na">start=</span><span class="s">"7580"</span> <span class="na">end=</span><span class="s">"8620"</span> <span class="na">duration=</span><span class="s">"2000"</span><span class="nt">&gt;&lt;/ui-number&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Additional attributes are <code>iteration</code>, which can be either <code>-1</code> for "infinite" — or any positive integer, and <code>suffix</code>, which can be a percentage symbol, currency symbol or similar.</p>
+
+<p><code>duration</code> is in milliseconds.</p>
+
+<p>Now, on to the JavaScript.</p>
+
+<h2>
+  <a name="javascript" href="#javascript">
+  </a>
+  JavaScript
+</h2>
+
+<p>The foundations of our web component is:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">class</span> <span class="nc">uiNumber</span> <span class="kd">extends</span> <span class="nc">HTMLElement</span> <span class="p">{</span>
+  <span class="nf">constructor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">();</span>
+    <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">uiNumber</span><span class="p">.</span><span class="nx">adopted</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">adopted</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CSSStyleSheet</span><span class="p">();</span>
+      <span class="nx">adopted</span><span class="p">.</span><span class="nf">replaceSync</span><span class="p">(</span><span class="s2">`
+        ... styles here ...
+      `</span><span class="p">);</span>
+      <span class="nb">document</span><span class="p">.</span><span class="nx">adoptedStyleSheets</span> <span class="o">=</span> 
+      <span class="p">[...</span><span class="nb">document</span><span class="p">.</span><span class="nx">adoptedStyleSheets</span><span class="p">,</span> <span class="nx">adopted</span><span class="p">];</span>
+      <span class="nx">uiNumber</span><span class="p">.</span><span class="nx">adopted</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">uiNumber</span><span class="p">.</span><span class="nx">adopted</span> <span class="o">=</span> <span class="kc">false</span>
+<span class="nx">customElements</span><span class="p">.</span><span class="nf">define</span><span class="p">(</span><span class="dl">'</span><span class="s1">ui-number</span><span class="dl">'</span><span class="p">,</span> <span class="nx">uiNumber</span><span class="p">);</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p><code>uiNumber.adopted</code> makes sure the global styles we need to add, are only added once. We could also have used <code>CSS.registerProperty</code> in JavaScript, but since we need to add more styles, that should only be declared once, we'll be sticking with an adopted stylesheet.</p>
+
+<p>Next, we need to grab all the attributes, we declared in the HTML:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">start</span> <span class="o">=</span> <span class="nf">parseInt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nf">getAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">start</span><span class="dl">'</span><span class="p">));</span>
+<span class="kd">const</span> <span class="nx">end</span> <span class="o">=</span> <span class="nf">parseInt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nf">getAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">end</span><span class="dl">'</span><span class="p">))</span><span class="o">||</span><span class="mi">1</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">iteration</span> <span class="o">=</span> <span class="nf">parseInt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nf">getAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">iteration</span><span class="dl">'</span><span class="p">))</span><span class="o">||</span><span class="mi">1</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">suffix</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nf">getAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">suffix</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="p">[</span>
+<span class="s2">`--num: </span><span class="p">${</span><span class="nx">start</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+<span class="s2">`--end: </span><span class="p">${</span><span class="nx">end</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+<span class="s2">`--duration: </span><span class="p">${</span><span class="nf">parseInt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nf">getAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">duration</span><span class="dl">'</span><span class="p">))</span><span class="o">||</span><span class="mi">200</span><span class="p">}</span><span class="s2">ms`</span><span class="p">,</span>
+<span class="s2">`--iteration: </span><span class="p">${</span><span class="nx">iteration</span><span class="o">===-</span><span class="mi">1</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">infinite</span><span class="dl">'</span><span class="p">:</span><span class="nx">iteration</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+<span class="s2">`--timing: steps(</span><span class="p">${</span><span class="nb">Math</span><span class="p">.</span><span class="nf">abs</span><span class="p">(</span><span class="nx">end</span><span class="o">-</span><span class="nx">start</span><span class="p">)}</span><span class="s2">)`</span>
+<span class="p">]</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Now, let's add <code>styles</code> and some helper <code>&lt;span&gt;</code>-tags to the shadowDOM of our component:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="k">this</span><span class="p">.</span><span class="nf">attachShadow</span><span class="p">({</span> <span class="na">mode</span><span class="p">:</span> <span class="dl">'</span><span class="s1">open</span><span class="dl">'</span> <span class="p">}).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s2">`
+&lt;span part="number" style="</span><span class="p">${</span><span class="nx">styles</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="dl">'</span><span class="s1">;</span><span class="dl">'</span><span class="p">)}</span><span class="s2">"&gt;</span><span class="p">${</span>
+  <span class="nx">suffix</span> <span class="p">?</span> <span class="s2">`&lt;span part="suffix"&gt;</span><span class="p">${</span><span class="nx">suffix</span><span class="p">}</span><span class="s2">&lt;/span&gt;`</span><span class="p">:</span><span class="dl">''</span><span class="p">}</span><span class="s2">
+&lt;/span&gt;`</span><span class="p">;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Notice <code>part="number"</code> (and <code>part="suffix"</code>), which will allow us to target the element from CSS via <code>:host::part(number)</code>.</p>
+
+<p>And now for some cross-browser fixes. We need to create an adopted stylesheet per <em>instance</em> because of issues in Firefox and Safari:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">stylesheet</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CSSStyleSheet</span><span class="p">();</span>
+<span class="nx">stylesheet</span><span class="p">.</span><span class="nf">replaceSync</span><span class="p">(</span><span class="s2">`
+  :host::part(number) {
+    animation: N var(--duration, 2s) /* more */);
+  }
+  @keyframes N { to { --num: </span><span class="p">${</span><span class="nx">end</span><span class="p">}</span><span class="s2">; } }
+`</span><span class="p">);</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>The first one — the <code>animation</code> — breaks functionality in Safari, if it's moved to the global, adopted stylesheet.</p>
+
+<p>The <code>${end}</code> in the keyframes should be <code>var(--end, 10)</code>, but that doesn't work in Firefox. And because an actual, unique number is inserted, the <code>@keyframes</code> cannot be moved either!</p>
+
+<p>So what <strong>can</strong> be added to the global stylesheet? This:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="k">@property</span> <span class="n">--num</span> <span class="p">{</span>
+  <span class="py">syntax</span><span class="p">:</span> <span class="s2">'&lt;integer&gt;'</span><span class="p">;</span>
+  <span class="py">initial-value</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="py">inherits</span><span class="p">:</span> <span class="n">false</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">ui-number</span><span class="nd">::part</span><span class="o">(</span><span class="nt">number</span><span class="o">)</span> <span class="p">{</span> <span class="nl">counter-reset</span><span class="p">:</span> <span class="n">N</span> <span class="n">var</span><span class="p">(</span><span class="n">--num</span><span class="p">);</span> <span class="p">}</span>
+<span class="nt">ui-number</span><span class="nd">::part</span><span class="o">(</span><span class="nt">number</span><span class="o">)</span><span class="nd">::before</span> <span class="p">{</span> <span class="nl">content</span><span class="p">:</span> <span class="n">counter</span><span class="p">(</span><span class="n">N</span><span class="p">);</span> <span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Now, all that's left, is to add the instance stylesheet to the <code>shadowRoot</code>:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="k">this</span><span class="p">.</span><span class="nx">shadowRoot</span><span class="p">.</span><span class="nx">adoptedStyleSheets</span> <span class="o">=</span> <span class="p">[</span><span class="nx">stylesheet</span><span class="p">];</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>And that's it for the web component. If you want to try it, add this to a page:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code>Here's my <span class="nt">&lt;ui-number</span> <span class="na">start=</span><span class="s">"7580"</span> <span class="na">end=</span><span class="s">"8620"</span><span class="nt">&gt;&lt;/ui-number&gt;</span> number
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://browser.style/ui/number/index.js"</span> <span class="na">type=</span><span class="s">"module"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>— and you'll get:</p>
+
+<p><a href="assets/1841223/dadabaa7.jpg" class="article-body-image-wrapper"><img src="assets/1841223/dadabaa7.jpg" alt="Inline number" loading="lazy" width="246" height="34"></a></p>
+
+<p>The number is <em>inline</em>, and animates as soon as the instance has been mounted. Let's create a more fancy-looking component, using <code>animation-timeline</code> in CSS!</p>
+
+
+<hr>
+
+<h2>
+  <a name="animation-timeline" href="#animation-timeline">
+  </a>
+  Animation Timeline
+</h2>
+
+<p>First of all, let's wrap the component in some additional markup:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"ui-number-card"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;ui-number</span> <span class="na">start=</span><span class="s">"7580"</span> <span class="na">end=</span><span class="s">"8620"</span> <span class="na">duration=</span><span class="s">"2000"</span><span class="nt">&gt;&lt;/ui-number&gt;</span>
+  <span class="nt">&lt;p&gt;</span>Millions of adults have gained literacy skills in the last decade.<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>The CSS is:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nd">:where</span><span class="o">(</span><span class="nc">.ui-number-card</span><span class="o">)</span> <span class="p">{</span>
+  <span class="py">aspect-ratio</span><span class="p">:</span> <span class="m">1</span><span class="p">/</span><span class="m">1</span><span class="p">;</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="m">#CCC</span><span class="p">;</span>
+  <span class="py">padding-block-end</span><span class="p">:</span> <span class="m">2ch</span><span class="p">;</span>
+  <span class="py">padding-inline</span><span class="p">:</span> <span class="m">2ch</span><span class="p">;</span> 
+  <span class="nl">text-align</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+  <span class="err">&amp;</span> <span class="err">p</span> <span class="err">{</span> <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span> <span class="p">}</span>
+  <span class="o">&amp;</span> <span class="nt">ui-number</span> <span class="p">{</span>
+    <span class="nl">font-size</span><span class="p">:</span> <span class="m">500%</span><span class="p">;</span>
+    <span class="nl">font-variant-numeric</span><span class="p">:</span> <span class="n">tabular-nums</span><span class="p">;</span>
+    <span class="nl">font-weight</span><span class="p">:</span> <span class="m">900</span><span class="p">;</span>
+    <span class="err">&amp;::part(number)</span> <span class="err">{</span>
+      <span class="py">--playstate</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--scroll-trigger</span><span class="p">,</span> <span class="n">running</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="o">&amp;</span><span class="nd">::part</span><span class="o">(</span><span class="nt">suffix</span><span class="o">)</span> <span class="p">{</span>
+      <span class="nl">font-size</span><span class="p">:</span> <span class="m">75%</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="err">}</span>
+<span class="err">}</span>
+<span class="k">@keyframes</span> <span class="n">trigger</span> <span class="p">{</span>
+  <span class="nt">to</span> <span class="p">{</span> <span class="py">--scroll-trigger</span><span class="p">:</span> <span class="n">running</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">@supports</span> <span class="p">(</span><span class="n">animation-timeline</span><span class="p">:</span> <span class="n">view</span><span class="p">())</span> <span class="p">{</span>
+  <span class="nd">:where</span><span class="o">(</span><span class="nc">.ui-number-card</span><span class="o">)</span> <span class="p">{</span>
+    <span class="py">--scroll-trigger</span><span class="p">:</span> <span class="n">paused</span><span class="p">;</span>
+    <span class="nl">animation</span><span class="p">:</span> <span class="n">trigger</span> <span class="n">linear</span><span class="p">;</span>
+    <span class="py">animation-range</span><span class="p">:</span> <span class="n">cover</span><span class="p">;</span>
+    <span class="py">animation-timeline</span><span class="p">:</span> <span class="n">view</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Most of it is basic styling, the important part is:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight plaintext"><code>--playstate: var(--scroll-trigger, running);
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Here, we set the <strong>playstate</strong> of the animation to <em>another</em> property, that we then update in a <code>@keyframes</code>-animation on the <code>.ui-number-card</code>-wrapper. </p>
+
+<p><strong>That</strong> animation is within a <code>@supports</code>-block, so we only control and run the "paused/running"-state if <code>animation-timeline</code> is actually supported (only Chrome for the moment). In other cases (Firefox and Safari), the number-animation will run immediately.</p>
+
+
+<hr>
+
+<h2>
+  <a name="demo" href="#demo">
+  </a>
+  Demo
+</h2>
+
+<p>You can see a <a href="https://browser.style/ui/number/" target="_blank" rel="noopener noreferrer">demo here</a> — or you can copy/paste this snippet and play with the parameters in your own code:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"https://browser.style/base.css"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"https://browser.style/ui/number/ui-number.css"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;style&gt;</span><span class="nc">.ui-number-card</span><span class="p">{</span><span class="nl">max-width</span><span class="p">:</span><span class="m">320px</span><span class="p">}</span><span class="nt">&lt;/style&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"ui-number-card"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;ui-number</span> <span class="na">start=</span><span class="s">"7580"</span> <span class="na">end=</span><span class="s">"8620"</span> <span class="na">duration=</span><span class="s">"2000"</span><span class="nt">&gt;&lt;/ui-number&gt;</span>
+    <span class="nt">&lt;p&gt;</span>Millions of adults have gained literacy skills in the last decade.<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://browser.style/ui/number/index.js"</span> <span class="na">type=</span><span class="s">"module"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<h2>
+  <a name="why-not-just-use-javascript" href="#why-not-just-use-javascript">
+  </a>
+  Why not just use JavaScript?
+</h2>
+
+<p>The web component requires JavaScript, so why not just use JavaScript for the number animations as well?</p>
+
+<p>JavaScript is single-threaded — like a single-lane highway. The more stuff we can move to CSS (and the GPU), the faster we can go on that highway. Way better, in my opinion — and unlike real highways, there are no speed-limits!</p>
+
+<p>In this case, we're just using JavaScript to init and mount the component instance/s. All the heavy lifting is done by CSS.</p>
+
+
+<hr>
+
+<h2>
+  <a name="addendum" href="#addendum">
+  </a>
+  Addendum
+</h2>
+
+<p>Thanks to <a class="mentioned-user" href="https://dev.to/efpage">@efpage</a> I had to do some JS-based, random and colorful counters (press rerun at bottom right):</p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/OJGeqKa?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+<p>Cover Photo by Mateusz Dach: <a href="https://www.pexels.com/da-dk/foto/332835/" target="_blank" rel="noopener noreferrer">https://www.pexels.com/da-dk/foto/332835/</a></p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Alien Signals — 2-in-1 Challenge — Mads Stoumann</title>
+	<meta name="description" content="This is a submission for Frontend Challenge v24.09.04, Glam Up My Markup: Space  But it's also a...">
+	<link rel="canonical" href="https://blog.stoumann.dk/alien-signals">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Alien Signals — 2-in-1 Challenge">
+	<meta property="og:description" content="This is a submission for Frontend Challenge v24.09.04, Glam Up My Markup: Space  But it's also a...">
+	<meta property="og:url" content="https://blog.stoumann.dk/alien-signals">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/1997745/9c3582e7.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Alien Signals — 2-in-1 Challenge">
+	<meta name="twitter:description" content="This is a submission for Frontend Challenge v24.09.04, Glam Up My Markup: Space  But it's also a...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/1997745/9c3582e7.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Alien Signals — 2-in-1 Challenge</h1>
+			<p><em>This is a submission for <a href="https://dev.to/challenges/frontend-2024-09-04">Frontend Challenge v24.09.04</a>, Glam Up My Markup: Space</em></p>
+
+<p><em>But it's <strong>also</strong> a submission for <a href="https://dev.to/challenges/frontend-2024-09-04">Frontend Challenge v24.09.04</a>, CSS Art: Space.</em></p>
+
+<h2>
+  <a name="what-i-built" href="#what-i-built">
+  </a>
+  What I Built
+</h2>
+
+<p>I've built an unreadable version of the provided markup that looks like alien signals in space. That's why this is a double-submission — it also works for the CSS Art Challenge 😁</p>
+
+<h2>
+  <a name="journey" href="#journey">
+  </a>
+  Journey
+</h2>
+
+<p>A fun way to ruin any design is to use:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="o">*</span> <span class="p">{</span> <span class="nl">display</span><span class="p">:</span> <span class="n">contents</span> <span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>This "removes the parent", so if you add it to all children of a node, there are essentially no tags, only raw content.</p>
+
+<p>Before we go there, let's add some basic styles to <code>body</code>:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">body</span> <span class="p">{</span>
+  <span class="py">aspect-ratio</span><span class="p">:</span> <span class="m">1</span> <span class="p">/</span> <span class="m">1</span><span class="p">;</span>
+  <span class="nl">background</span><span class="p">:</span> <span class="n">radial-gradient</span><span class="p">(</span><span class="nb">circle</span> <span class="n">at</span> <span class="nb">center</span><span class="p">,</span>
+    <span class="m">#1d2a30</span> <span class="m">40%</span><span class="p">,</span>
+    <span class="m">#0B1215</span> <span class="m">75%</span><span class="p">,</span>
+    <span class="m">#111</span><span class="p">);</span>
+  <span class="py">container-type</span><span class="p">:</span> <span class="n">inline-size</span><span class="p">;</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">grid</span><span class="p">;</span>
+  <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">100vw</span><span class="p">;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>We set a square (<code>aspect-ratio</code>) as a grid, with a radial background.</p>
+
+<p>Next, we set the child-elements:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nd">:is</span><span class="o">(</span><span class="nt">footer</span><span class="o">,</span> <span class="nt">header</span><span class="o">,</span> <span class="nt">section</span><span class="o">)</span> <span class="p">{</span>
+  <span class="err">*</span> <span class="err">{</span> <span class="nl">display</span><span class="p">:</span> <span class="n">contents</span><span class="p">;</span> <span class="p">}</span>
+  <span class="nt">font-size</span><span class="o">:</span> <span class="err">3</span><span class="nt">cqi</span><span class="o">;</span>
+  <span class="nt">grid-area</span><span class="o">:</span> <span class="err">1</span> <span class="o">/</span> <span class="err">1</span><span class="o">;</span>
+  <span class="nt">height</span><span class="o">:</span> <span class="err">25</span><span class="nt">cqi</span><span class="o">;</span>
+  <span class="nt">overflow</span><span class="o">:</span> <span class="nt">hidden</span><span class="o">;</span>
+  <span class="nt">place-content</span><span class="o">:</span> <span class="nt">center</span><span class="o">;</span>
+  <span class="nt">place-self</span><span class="o">:</span> <span class="nt">center</span><span class="o">;</span>
+  <span class="nt">text-align</span><span class="o">:</span> <span class="nt">center</span><span class="o">;</span>
+  <span class="nt">width</span><span class="o">:</span> <span class="err">80</span><span class="nt">cqi</span><span class="o">;</span>
+<span class="err">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>We use the "grid-stack" technique to place all the children in the same grid-cell.</p>
+
+<p>This gives us:</p>
+
+<p><a href="assets/1997745/8458341c.jpg" class="article-body-image-wrapper"><img src="assets/1997745/8458341c.jpg" alt="Initial" loading="lazy" width="800" height="276"></a></p>
+
+<p>What a mess! Now, let's add rotation and color:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">footer</span> <span class="p">{</span> <span class="py">rotate</span><span class="p">:</span> <span class="m">300deg</span><span class="p">;</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#FFFD</span><span class="p">;</span> <span class="p">}</span>
+<span class="nt">header</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#FFFA</span><span class="p">;</span> <span class="p">}</span>
+<span class="nt">section</span> <span class="p">{</span>
+  <span class="err">&amp;:nth-of-type(1)</span> <span class="err">{</span> <span class="py">rotate</span><span class="p">:</span> <span class="m">60deg</span><span class="p">;</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#FFF4</span><span class="p">;</span> <span class="p">}</span>
+  <span class="o">&amp;</span><span class="nd">:nth-of-type</span><span class="o">(</span><span class="err">2</span><span class="o">)</span> <span class="p">{</span> <span class="py">rotate</span><span class="p">:</span> <span class="m">120deg</span><span class="p">;</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#FFF9</span><span class="p">;</span> <span class="p">}</span>
+  <span class="o">&amp;</span><span class="nd">:nth-of-type</span><span class="o">(</span><span class="err">3</span><span class="o">)</span> <span class="p">{</span> <span class="py">rotate</span><span class="p">:</span> <span class="m">180deg</span><span class="p">;</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#FFFE</span><span class="p">;</span> <span class="p">}</span>
+  <span class="o">&amp;</span><span class="nd">:nth-of-type</span><span class="o">(</span><span class="err">4</span><span class="o">)</span> <span class="p">{</span> <span class="py">rotate</span><span class="p">:</span> <span class="m">240deg</span><span class="p">;</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#FFF7</span><span class="p">;</span> <span class="p">}</span>
+<span class="err">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Now we get:</p>
+
+<p><a href="assets/1997745/80d62e57.jpg" class="article-body-image-wrapper"><img src="assets/1997745/80d62e57.jpg" alt="Text" loading="lazy" width="800" height="800"></a></p>
+
+<p>Almost there! All we need to do is add a weird font and a shaky animation:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="k">@import</span> <span class="nb">url</span><span class="p">(</span><span class="s2">'https://fonts.googleapis.com/css2?
+family=Redacted+Script&amp;display=swap'</span><span class="p">);</span>
+
+<span class="k">@keyframes</span> <span class="n">shake</span> <span class="p">{</span>
+  <span class="err">0</span><span class="o">%</span> <span class="p">{</span> <span class="nl">transform</span><span class="p">:</span> <span class="n">skewY</span><span class="p">(</span><span class="m">-15deg</span><span class="p">);</span> <span class="p">}</span>
+  <span class="err">1</span><span class="o">%</span> <span class="p">{</span> <span class="nl">transform</span><span class="p">:</span> <span class="n">skewY</span><span class="p">(</span><span class="m">15deg</span><span class="p">);</span> <span class="p">}</span>
+  <span class="err">2</span><span class="o">%</span> <span class="p">{</span> <span class="nl">transform</span><span class="p">:</span> <span class="n">skewY</span><span class="p">(</span><span class="m">-15deg</span><span class="p">);</span> <span class="p">}</span>
+  <span class="err">3</span><span class="o">%</span> <span class="p">{</span> <span class="nl">transform</span><span class="p">:</span> <span class="n">skewY</span><span class="p">(</span><span class="m">15deg</span><span class="p">);</span> <span class="p">}</span>
+  <span class="err">4</span><span class="o">%,</span> <span class="err">100</span><span class="o">%</span> <span class="p">{</span> <span class="nl">transform</span><span class="p">:</span> <span class="n">skewY</span><span class="p">(</span><span class="m">0deg</span><span class="p">);</span> <span class="py">translate</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span> <span class="p">}</span>
+  <span class="err">5</span><span class="o">%</span> <span class="p">{</span> <span class="py">translate</span><span class="p">:</span> <span class="m">-100vw</span> <span class="m">-50vw</span><span class="p">;</span> <span class="p">}</span>
+  <span class="err">6</span><span class="o">%</span> <span class="p">{</span> <span class="py">translate</span><span class="p">:</span> <span class="m">100vw</span> <span class="m">50vw</span><span class="p">;</span> <span class="p">}</span>
+  <span class="err">7</span><span class="o">%</span> <span class="p">{</span> <span class="py">translate</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<h2>
+  <a name="demo" href="#demo">
+  </a>
+  Demo
+</h2>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/mdZgdxX?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Click-Delay Revisited — Mads Stoumann</title>
+	<meta name="description" content="A while ago, I wrote a blog-post called The Curse Of The Click-Delay, on how to avoid the 300 ms click-delay on touch-devices, using a small JavaScript. Since then, iOS has been updated with a new CSS">
+	<link rel="canonical" href="https://blog.stoumann.dk/click-delay-revisited">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Click-Delay Revisited">
+	<meta property="og:description" content="A while ago, I wrote a blog-post called The Curse Of The Click-Delay, on how to avoid the 300 ms click-delay on touch-devices, using a small JavaScript. Since then, iOS has been updated with a new CSS">
+	<meta property="og:url" content="https://blog.stoumann.dk/click-delay-revisited">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/generic_cover.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Click-Delay Revisited">
+	<meta name="twitter:description" content="A while ago, I wrote a blog-post called The Curse Of The Click-Delay, on how to avoid the 300 ms click-delay on touch-devices, using a small JavaScript. Since then, iOS has been updated with a new CSS">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/generic_cover.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Click-Delay Revisited</h1>
+			<p>A while ago, I wrote a blog-post called <a href="https://madsstoumann.wordpress.com/2015/11/11/the-curse-of-the-click-delay/" target="_blank">The Curse Of The Click-Delay</a>, on how to avoid the 300 ms click-delay on touch-devices, using a small JavaScript.</p>
+<p>Since then, iOS has been updated with a new CSS-property:</p>
+<pre class="brush: css; title: ; notranslate" title="">
+touch-action: manipulation;
+</pre>
+<p>&mdash; and <em>that property</em>, along with some other settings, removes the delay without using JavaScript!</p>
+<p>First, in the &lt;head&gt;-section, add either this:</p>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot;&gt;
+</pre>
+<p>&mdash; OR this:</p>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta name=&quot;viewport&quot; content=&quot;user-scalable=no&quot;&gt;
+</pre>
+<p>You&#8217;re free to add more settings to these meta-values, like:</p>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no&quot;&gt;
+</pre>
+<p>My updated CSS:</p>
+<pre class="brush: css; title: ; notranslate" title="">
+html {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+  -webkit-touch-callout: none;
+}
+
+/* Elements with no delay, ie. button, label etc. */
+
+button, label {
+  touch-action: manipulation;
+}
+</pre>
+<p>Happy coding!</p>
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

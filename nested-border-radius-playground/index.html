@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Nested border-radius Playground — Mads Stoumann</title>
+	<meta name="description" content="When nesting elements with a border-radius, I found this formula, which I implemented in the Codepen...">
+	<link rel="canonical" href="https://blog.stoumann.dk/nested-border-radius-playground">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Nested border-radius Playground">
+	<meta property="og:description" content="When nesting elements with a border-radius, I found this formula, which I implemented in the Codepen...">
+	<meta property="og:url" content="https://blog.stoumann.dk/nested-border-radius-playground">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/804923/06b54f03.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Nested border-radius Playground">
+	<meta name="twitter:description" content="When nesting elements with a border-radius, I found this formula, which I implemented in the Codepen...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/804923/06b54f03.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Nested border-radius Playground</h1>
+			<p>When nesting elements with a <code>border-radius</code>, I found <a href="https://joshnh.com/weblog/getting-inner-border-radius-just-right/" target="_blank" rel="noopener noreferrer">this formula</a>, which I implemented in the Codepen below:</p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/RwgPyqw?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+
+<hr>
+
+<p>Each “inner ring” multiplies the <code>--gap</code>, and deducts it from the border-radius: <code>--bdrs</code>:</p>
+
+<p><code>calc(var(--bdrs) - (var(--gap) * 1))</code> etc.</p>
+
+<p>It looks fine with larger border-radii, but when the gap increases, and you use smaller radii, you'll end up with <strong>negative</strong> radii (thus, not visible) in those inner rings, where the multiplied <code>--gap</code> ends up being larger than the radii.</p>
+
+<p>I'll never use this irl, but – just out of curiosity – does anyone have a better formula, that'll work with infinite inner radii? Or maybe use something like <code>clamp()</code>?</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

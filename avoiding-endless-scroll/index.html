@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Avoiding endless scroll — Mads Stoumann</title>
+	<meta name="description" content="Have you ever tried to pick your country from a drop-down on a mobile phone? It&amp;#8217;s either endless &amp;#8220;wheeling&amp;#8221; or scrolling. It&amp;#8217;s painful. Especially if you live in Zimbabwe! And ">
+	<link rel="canonical" href="https://blog.stoumann.dk/avoiding-endless-scroll">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Avoiding endless scroll">
+	<meta property="og:description" content="Have you ever tried to pick your country from a drop-down on a mobile phone? It&amp;#8217;s either endless &amp;#8220;wheeling&amp;#8221; or scrolling. It&amp;#8217;s painful. Especially if you live in Zimbabwe! And ">
+	<meta property="og:url" content="https://blog.stoumann.dk/avoiding-endless-scroll">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/generic_cover.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Avoiding endless scroll">
+	<meta name="twitter:description" content="Have you ever tried to pick your country from a drop-down on a mobile phone? It&amp;#8217;s either endless &amp;#8220;wheeling&amp;#8221; or scrolling. It&amp;#8217;s painful. Especially if you live in Zimbabwe! And ">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/generic_cover.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Avoiding endless scroll</h1>
+			<p>Have you ever tried to pick your country from a drop-down on a mobile phone?<br />
+It&#8217;s either endless &#8220;wheeling&#8221; or scrolling. It&#8217;s painful.<br />
+Especially if you live in Zimbabwe!<br />
+And when you finally reach your country, you&#8217;re too exhausted to click it.</p>
+<p>HTML5 introduced a new element, the &lt;datalist&gt;, which, unfortunately, is not used that many places — yet!</p>
+<p>It&#8217;s basically a list:</p>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;datalist id=&quot;country-select-datalist&quot;&gt;
+  &lt;option&gt;Armenia&lt;/option&gt;
+  &lt;option&gt;Bahrain&lt;/option&gt;
+  ...
+&lt;/datalist&gt;
+</pre>
+<p>That&#8217;s associated with an &lt;input&gt;-field:</p>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;input type=&quot;text&quot; list=&quot;country-select-datalist&quot;&gt;
+</pre>
+<p>The result is this:</p>
+<p><a href="https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/datalist.png"><img loading="lazy" data-attachment-id="467" data-permalink="https://madsstoumann.wordpress.com/2015/11/18/avoiding-endless-scroll/datalist/" data-orig-file="https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/datalist.png" data-orig-size="297,147" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="datalist" data-image-description="" data-image-caption="" data-medium-file="https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/datalist.png?w=297" data-large-file="https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/datalist.png?w=297" class="alignnone size-full wp-image-467" src="assets/wp-460/b0bcff01.png" alt="datalist" width="297" height="147" srcset="https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/datalist.png 297w, https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/datalist.png?w=150&amp;h=74 150w" sizes="(max-width: 297px) 100vw, 297px" /></a></p>
+<p>All browsers — except Safari — supports &lt;datalist&gt;. Even Internet Explorer 10!<br />
+It&#8217;s a nice, fast and JavaScript-free autosuggest.</p>
+<p>For Safari, there are plenty of polyfills to make datalist work, among them Lea Verous <a href="http://leaverou.github.io/awesomplete/" target="_blank">Awesomplete</a>, which is very easy to work with.</p>
+<p>If you&#8217;re using the structure above (there are other options as well), all you have to do, is add the class &#8220;awesomplete&#8221; to the &lt;input&gt;-field:</p>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;input type=&quot;text&quot; list=&quot;country-select-datalist&quot; class=&quot;awesomplete&quot;&gt;
+</pre>
+<p>The result is slightly different:</p>
+<p><a href="https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/awesomplete.png"><img loading="lazy" data-attachment-id="466" data-permalink="https://madsstoumann.wordpress.com/2015/11/18/avoiding-endless-scroll/awesomplete/" data-orig-file="https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/awesomplete.png" data-orig-size="303,125" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="awesomplete" data-image-description="" data-image-caption="" data-medium-file="https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/awesomplete.png?w=300" data-large-file="https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/awesomplete.png?w=303" class="alignnone size-full wp-image-466" src="assets/wp-460/62d478c4.png" alt="awesomplete" width="303" height="125" srcset="https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/awesomplete.png 303w, https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/awesomplete.png?w=150&amp;h=62 150w, https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/awesomplete.png?w=300&amp;h=124 300w" sizes="(max-width: 303px) 100vw, 303px" /></a></p>
+<p>For structured markup, you can add the <em>ListItem</em>-schema:</p>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;datalist id=&quot;country-select-datalist&quot; itemscope=&quot;&quot; itemtype=&quot;http://schema.org/ListItem&quot;&gt;
+  &lt;option itemprop=&quot;name&quot;&gt;Armenia&lt;/option&gt;
+  &lt;option itemprop=&quot;name&quot;&gt;Bahrain&lt;/option&gt;
+ ...
+&lt;/datalist&gt;
+</pre>
+<p>Happy coding!</p>
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

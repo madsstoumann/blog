@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Creating Global Components: A Checklist With Examples — Mads Stoumann</title>
+	<meta name="description" content="When working with components that need to work “across borders”, supporting multiple languages and...">
+	<link rel="canonical" href="https://blog.stoumann.dk/creating-global-components-a-checklist-with-examples">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Creating Global Components: A Checklist With Examples">
+	<meta property="og:description" content="When working with components that need to work “across borders”, supporting multiple languages and...">
+	<meta property="og:url" content="https://blog.stoumann.dk/creating-global-components-a-checklist-with-examples">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/770148/0dac0e77.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Creating Global Components: A Checklist With Examples">
+	<meta name="twitter:description" content="When working with components that need to work “across borders”, supporting multiple languages and...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/770148/0dac0e77.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Creating Global Components: A Checklist With Examples</h1>
+			<p>When working with components that need to work “across borders”, supporting multiple languages and writing-modes, you'll need a large “todo-checklist”, or you'll get lost sooner or later.</p>
+
+<p>In this tutorial — which is one big todo-list —  we'll be creating a <strong>Timeline-component</strong>, that can be configured in multiple ways, supports <code>dir="ltr"</code> and <code>dir="rtl"</code> — and much, much more.</p>
+
+<p>Let's dive in.</p>
+
+<h2>
+  <a name="table-of-contents" href="#table-of-contents">
+  </a>
+  Table Of Contents
+</h2>
+
+<ul>
+<li><a href="#c1">Markup should be minimal and semantically correct</a></li>
+<li><a href="#c2">Does it work with both <code>dir="ltr"</code> and <code>dir="rtl"</code>?</a></li>
+<li><a href="#c3">Should the markup be enriched with microdata?</a></li>
+<li><a href="#c4">Is it navigable by keyboard?</a></li>
+<li><a href="#c5">Does it have focus-styles?</a></li>
+<li><a href="#c6">What about <code>:hover</code>?</a></li>
+<li><a href="#c7">Does it scale with longer content?</a></li>
+<li><a href="#c8">Scrolling and snapping</a></li>
+<li><a href="#c9">Testing with Dev Tools</a></li>
+<li><a href="#c10">Checking Validity and Document Outline</a></li>
+<li><a href="#c11">Bonus: A News Timeline</a></li>
+<li><a href="#c12">Conclusion</a></li>
+<li><a href="#code">Code Examples</a></li>
+</ul>
+
+
+<hr>
+
+<h2>
+  <a name="markup-should-be-minimal-and-semantically-correct" href="#markup-should-be-minimal-and-semantically-correct">
+  </a>
+  Markup should be minimal and semantically correct<a name="c1"></a>
+</h2>
+
+<p>Timelines are typically <em>lists</em>, build with <code>&lt;ul&gt;</code> and <code>&lt;li&gt;</code>-tags. But <strong>do</strong> you always need a list? If the first thing you do, is adding <code>list-style: none;</code> to your CSS, are you using the correct tag?</p>
+
+<p>I've worked on quite a few projects, where someone decided to “CSS reset” all list-styles:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">ul</span><span class="o">,</span>
+<span class="nt">ol</span> <span class="p">{</span>
+  <span class="nl">list-style</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>This is <em>really</em> annoying, because I typically want to show a <em>list</em> when I'm using <code>&lt;ul&gt;</code> or <code>&lt;ol&gt;</code>-tags, otherwise I'd chosen different tags!</p>
+
+<p>Andy Bell's “CSS reset” is much nicer:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="c">/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */</span>
+<span class="nt">ul</span><span class="o">[</span><span class="nt">role</span><span class="o">=</span><span class="s1">"list"</span><span class="o">],</span>
+<span class="nt">ol</span><span class="o">[</span><span class="nt">role</span><span class="o">=</span><span class="s1">"list"</span><span class="o">]</span> <span class="p">{</span>
+  <span class="nl">list-style</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+
+<hr>
+
+<p>In our first <em>Timeline</em>-example, we'll be using plain <code>&lt;a&gt;</code>nchor-tags, since the timeline only contains <code>&lt;a&gt;</code>nchors pointing to locations within the same document. </p>
+
+<p>In CSS naming, we'll consider the <code>&lt;a&gt;</code>nchors as a type of list-items anyway, and use the class <code>tmln__item</code> — and <code>tmln__list</code> for the “list wrapper”:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"tmln"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h2</span> <span class="na">class=</span><span class="s">"tmln__header"</span><span class="nt">&gt;</span>Timeline<span class="nt">&lt;/h2&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"tmln__list"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"tmln__item"</span> <span class="na">href=</span><span class="s">"#2021"</span><span class="nt">&gt;&lt;span</span> <span class="na">data-title</span><span class="nt">&gt;</span>2021<span class="nt">&lt;/span&gt;&lt;/a&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"tmln__item"</span> <span class="na">href=</span><span class="s">"#2020"</span><span class="nt">&gt;&lt;span</span> <span class="na">data-title</span><span class="nt">&gt;</span>2020<span class="nt">&lt;/span&gt;&lt;/a&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"tmln__item"</span> <span class="na">href=</span><span class="s">"#2019"</span><span class="nt">&gt;&lt;span</span> <span class="na">data-title</span><span class="nt">&gt;</span>2019<span class="nt">&lt;/span&gt;&lt;/a&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"tmln__item"</span> <span class="na">href=</span><span class="s">"#2018"</span><span class="nt">&gt;&lt;span</span> <span class="na">data-title</span><span class="nt">&gt;</span>2018<span class="nt">&lt;/span&gt;&lt;/a&gt;</span>
+  /* etc. */
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/nav&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Here's the default, <code>dir="ltr"</code> version:<br>
+<a href="assets/770148/be043c8a.jpg" class="article-body-image-wrapper"><img src="assets/770148/be043c8a.jpg" alt="Default left-to-right" loading="lazy" width="800" height="725"></a></p>
+
+<hr>
+<h2>
+  <a name="does-it-work-with-both-raw-dirltr-endraw-and-raw-dirrtl-endraw-" href="#does-it-work-with-both-raw-dirltr-endraw-and-raw-dirrtl-endraw-">
+  </a>
+  Does it work with both <code>dir="ltr"</code> and <code>dir="rtl"</code>?<a name="c2"></a>
+</h2>
+
+<p>Instead of writing unique CSS for both text-directions, use <em>CSS Logical Properties</em>. I've <a href="https://dev.to/madsstoumann/a-quick-guide-to-css-logical-properties-2fce">written about them here</a>. Here's the <code>dir="rtl"</code> version:</p>
+
+<p><a href="assets/770148/b100ca0d.jpg" class="article-body-image-wrapper"><img src="assets/770148/b100ca0d.jpg" alt="Default right-to-left" loading="lazy" width="800" height="619"></a> </p>
+
+<hr>
+
+<p>Before we continue, let's add a <em>horizontal version</em>. We'll add a modifier to the main element, <code>tmln--hr</code>:</p>
+
+<p><a href="assets/770148/8e63ed5e.jpg" class="article-body-image-wrapper"><img src="assets/770148/8e63ed5e.jpg" alt="03_tmln_hr_ltr" loading="lazy" width="752" height="306"></a></p>
+
+<p>Remeber to check the <code>dir="rtl"</code> version:<br>
+<a href="assets/770148/1d9fcaca.jpg" class="article-body-image-wrapper"><img src="assets/770148/1d9fcaca.jpg" alt="04_tmln_hr_ltr" loading="lazy" width="752" height="306"></a></p>
+
+<hr>
+<h2>
+  <a name="should-the-markup-be-enriched-with-microdata" href="#should-the-markup-be-enriched-with-microdata">
+  </a>
+  Should the markup be enriched with microdata?<a name="c3"></a>
+</h2>
+
+<p>While we're still working with the markup, let's consider whether we can enrich the markup by adding microdata, aka <a href="https://schema.org" target="_blank" rel="noopener noreferrer">schema.org</a>, telling search-engines in more detail about the content.</p>
+
+<p>Is your content a list of <a href="https://schema.org/Event" target="_blank" rel="noopener noreferrer">Events</a> or <a href="https://schema.org/NewsArticle" target="_blank" rel="noopener noreferrer">News Articles</a>?</p>
+
+<p>Google calls schemas for “Rich Results”, and have created a <a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener noreferrer">testing-tool</a>, where you can either paste a url or markup.</p>
+
+<hr>
+<h2>
+  <a name="is-it-navigable-by-keyboard" href="#is-it-navigable-by-keyboard">
+  </a>
+  Is it navigable by keyboard?<a name="c4"></a>
+</h2>
+
+<p>In this case, because we used <code>&lt;a&gt;</code>-tags, it's navigable by keyboard by default. If you'd used a <code>&lt;div&gt;</code>-tag and added a click-handler with JavaScript, you'd have to add <code>tabindex="0"</code> for it to recieve keyboard-focus (but please: don't go there!)</p>
+
+<hr>
+<h2>
+  <a name="does-it-have-focusstyles" href="#does-it-have-focusstyles">
+  </a>
+  Does it have focus-styles?<a name="c5"></a>
+</h2>
+
+<p>To make it usable for keyboard-users, we'll add some styles using <code>focus-visible</code>, thus not triggering the style, when using a pointer-device (mouse or touch):</p>
+
+<p><a href="assets/770148/be22f9d1.jpg" class="article-body-image-wrapper"><img src="assets/770148/be22f9d1.jpg" alt="09_focus-visible" loading="lazy" width="752" height="306"></a></p>
+
+<p>I'm gonna jump ahead to show an example from the next type of <em>Timeline</em>, we'll be creating — just to show you how <code>focus-within</code> can be used to target parent-elements of focusable elements.</p>
+
+<p>In this case, a <code>box-shadow</code> is added to the bullet, a subtle <code>box-shadow</code> is added to the main box, and a <code>dotted outline</code> to the link itself:</p>
+
+<p><a href="assets/770148/5eec7a52.jpg" class="article-body-image-wrapper"><img src="assets/770148/5eec7a52.jpg" alt="10_focus-within" loading="lazy" width="752" height="824"></a></p>
+
+<hr>
+<h2>
+  <a name="what-about-raw-hover-endraw-" href="#what-about-raw-hover-endraw-">
+  </a>
+  What about <code>:hover</code>?<a name="c6"></a>
+</h2>
+
+<p>Should <code>:hover</code> work intentionally on mobile devices (it acts like a “pseudo-click”), or should it be disabled?</p>
+
+<p>If you only want to show <code>:hover</code>-styles on devices that actually support them (recommended), use:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="k">@media</span> <span class="p">(</span><span class="n">hover</span><span class="p">:</span> <span class="n">hover</span><span class="p">)</span> <span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+
+<hr>
+
+<h2>
+  <a name="does-it-scale-with-longer-content" href="#does-it-scale-with-longer-content">
+  </a>
+  Does it scale with longer content?<a name="c7"></a>
+</h2>
+
+<p>Some languages take up <a href="https://www.w3.org/International/articles/article-text-size" target="_blank" rel="noopener noreferrer">much more space</a> than others:</p>
+
+<div class="table-wrapper-paragraph"><table>
+<thead>
+<tr>
+<th>Language</th>
+<th>Translation</th>
+<th>Ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Korean</td>
+<td>조회</td>
+<td>0.8</td>
+</tr>
+<tr>
+<td>English</td>
+<td>views</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Chinese</td>
+<td>次檢視</td>
+<td>1.2</td>
+</tr>
+<tr>
+<td>Portuguese</td>
+<td>visualizações</td>
+<td>2.6</td>
+</tr>
+<tr>
+<td>French</td>
+<td>consultations</td>
+<td>2.6</td>
+</tr>
+<tr>
+<td>German</td>
+<td>mal angesehen</td>
+<td>2.8</td>
+</tr>
+<tr>
+<td>Italian</td>
+<td>visualizzazioni</td>
+<td>3</td>
+</tr>
+</tbody>
+</table></div>
+
+<p>Check with various text-length (or use <em>Google Translate</em> live on your content) — depending on your layout, look into <code>min-width</code> (or <code>min-inline-size</code>), <code>fit-content</code> or similar.</p>
+
+
+<hr>
+
+<h2>
+  <a name="scrolling-and-snapping" href="#scrolling-and-snapping">
+  </a>
+  Scrolling and snapping<a name="c8"></a>
+</h2>
+
+<p>If your content <em>overflows</em> (like our <em>horizontal timeline</em>), do <strong>not</strong> hide the default scrollbar (it <em>will</em> be hidden on mobile devices, though — but that's expected). The browsers default scrollbar can be navigated by keyboard, using the arrow-keys. You're welcome to style it, though:</p>
+
+<p><a href="assets/770148/f50883c3.jpg" class="article-body-image-wrapper"><img src="assets/770148/f50883c3.jpg" alt="15_scrollbar-button" loading="lazy" width="800" height="195"></a></p>
+
+<p>For a nicer design, you can set the scrollbar-buttons, <code>::-webkit-scrollbar-button</code> in WebKit, to the same color as the background:</p>
+
+<p><a href="assets/770148/4f68d323.jpg" class="article-body-image-wrapper"><img src="assets/770148/4f68d323.jpg" alt="13_scrollbar" loading="lazy" width="787" height="194"></a></p>
+
+<p>As always, remember to check <code>rtl</code>:<br>
+<a href="assets/770148/fda24a5e.jpg" class="article-body-image-wrapper"><img src="assets/770148/fda24a5e.jpg" alt="14_scrollbar_rtl" loading="lazy" width="778" height="525"></a></p>
+
+<p>On mobile devices, add “scroll-snap” to the parent:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nc">.tmln__list</span> <span class="p">{</span>
+  <span class="nl">overflow-x</span><span class="p">:</span> <span class="nb">auto</span><span class="p">;</span>
+  <span class="py">scroll-snap-type</span><span class="p">:</span> <span class="n">x</span> <span class="n">mandatory</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>On the items, add this:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nc">.tmln__item</span> <span class="p">{</span>
+  <span class="py">scroll-snap-align</span><span class="p">:</span> <span class="n">start</span><span class="p">;</span>
+  <span class="py">scroll-margin-inline-start</span><span class="p">:</span> <span class="n">value</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+
+<hr>
+
+<h2>
+  <a name="testing-with-dev-tools" href="#testing-with-dev-tools">
+  </a>
+  Testing with Dev Tools<a name="c9"></a>
+</h2>
+
+<p>Before we continue, let's check our component in <em>Lighthouse:</em></p>
+
+<p><a href="assets/770148/1febdf6c.jpg" class="article-body-image-wrapper"><img src="assets/770148/1febdf6c.jpg" alt="lighthouse" loading="lazy" width="674" height="213"></a></p>
+
+<p>Wow - looks good so far!</p>
+
+<p>Now is also a good time to check <em>CSS Coverage</em>. </p>
+
+<p>Open the <em>drawer</em> in <em>Chrome Dev Tools</em> by pressing <em>Escape</em> (if it's not already open). Add/Check the “Coverage”-tab:</p>
+
+<p><a href="assets/770148/7e7acd88.jpg" class="article-body-image-wrapper"><img src="assets/770148/7e7acd88.jpg" alt="coverage" loading="lazy" width="592" height="98"></a></p>
+
+<p>Hmm ... there's 9.9% unused CSS ... Let's check:</p>
+
+<p><a href="assets/770148/165301bf.jpg" class="article-body-image-wrapper"><img src="assets/770148/165301bf.jpg" alt="coverage2" loading="lazy" width="325" height="107"></a></p>
+
+<p>Ah! It's because the CSS is <em>unminified</em> and contains comments. </p>
+
+<p>When building your own components, look through the entire file, to check, whether you have unused CSS. </p>
+
+
+<hr>
+
+<h2>
+  <a name="checking-validity-and-document-outline" href="#checking-validity-and-document-outline">
+  </a>
+  Checking Validity and Document Outline<a name="c10"></a>
+</h2>
+
+<p>Although <em>Lighthouse</em> finds most issues, I always <a href="https://dev.to/madsstoumann/validating-markup-write-your-own-snippet-2p8d">validate the markup</a> — check the console for errors, and fix them. </p>
+
+<p>To see a visualization of the <em>Document Outline</em>, I use <a href="https://chrome.google.com/webstore/detail/html5-outliner/afoibpobokebhgfnknfndkgemglggomo?hl=en-GB" target="_blank" rel="noopener noreferrer">HTML5 Outliner</a>, a plugin for Chrome:</p>
+
+<p><a href="assets/770148/7f000bbd.jpg" class="article-body-image-wrapper"><img src="assets/770148/7f000bbd.jpg" alt="outline" loading="lazy" width="333" height="178"></a></p>
+
+<blockquote>
+<p><strong>Tip!</strong> Add a headline (<code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code>) to your <code>&lt;nav&gt;</code>-tags to prevent a bunch of <code>untitled NAV</code>-entries in the outliner. </p>
+</blockquote>
+
+
+<hr>
+
+<h2>
+  <a name="bonus-a-news-timeline" href="#bonus-a-news-timeline">
+  </a>
+  Bonus: A News Timeline<a name="c11"></a>
+</h2>
+
+<p>Now, let's look into a <strong>News Timeline</strong>. In this case, we <strong>do</strong> need a list, so we'll replace the <code>&lt;div&gt;</code> and <code>&lt;a&gt;</code>nchors with <code>&lt;ul&gt;</code> and <code>&lt;li&gt;</code>-items:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"tmln tmln--box tmln--hr"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h2</span> <span class="na">class=</span><span class="s">"tmln__header"</span><span class="nt">&gt;</span>Latest News<span class="nt">&lt;/h2&gt;</span>
+  <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"tmln__list"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"tmln__item tmln__item--active"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">data-title</span><span class="nt">&gt;</span>32 mins ago<span class="nt">&lt;/span&gt;</span>
+      <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"tmln__item-headline"</span><span class="nt">&gt;</span>Someone, somewhere, did something stupid<span class="nt">&lt;/h3&gt;</span>
+      <span class="nt">&lt;p&gt;</span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, ab? Sequi dolorem aspernatur ad earum! Eius nulla tempora pariatur temporibus.<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;/nav&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p><a href="assets/770148/9fd38be6.jpg" class="article-body-image-wrapper"><img src="assets/770148/9fd38be6.jpg" alt="New Timeline LTR" loading="lazy" width="752" height="1068"></a></p>
+
+<p>And again, let's make sure the <code>dir="rtl"</code> version works as well:</p>
+
+<p><a href="assets/770148/830b0061.jpg" class="article-body-image-wrapper"><img src="assets/770148/830b0061.jpg" alt="News Timeline RTL" loading="lazy" width="752" height="1065"></a></p>
+
+<p>Now, let's <strong>mix</strong> the horizontal and the box-versions:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"tmln tmln--box tmln--hr"</span><span class="nt">&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p><a href="assets/770148/bb97f088.jpg" class="article-body-image-wrapper"><img src="assets/770148/bb97f088.jpg" alt="07_tmln_boxhr_ltr" loading="lazy" width="752" height="824"></a></p>
+
+<p>And … let's check the <code>dir="rtl"</code> version:<br>
+<a href="assets/770148/63fcdb5e.jpg" class="article-body-image-wrapper"><img src="assets/770148/63fcdb5e.jpg" alt="08_tmln_boxhr_rtl" loading="lazy" width="752" height="824"></a></p>
+
+<hr>
+<h3>
+  <a name="recheck-the-list" href="#recheck-the-list">
+  </a>
+  Re-check the list
+</h3>
+
+<p>At this point, we need to review all the steps from the regular <strong>Timeline Component</strong> again, add or edit focus-states etc.:</p>
+
+<p><a href="assets/770148/9f4f76e8.jpg" class="article-body-image-wrapper"><img src="assets/770148/9f4f76e8.jpg" alt="11-focus-within-dark" loading="lazy" width="388" height="421"></a></p>
+
+<hr>
+<h2>
+  <a name="conclusion" href="#conclusion">
+  </a>
+  Conclusion<a name="c12"></a>
+</h2>
+
+<p>Wow — you made it to the end! If you're primarily a JavaScript-developer, you might wonder why I:</p>
+
+<ol>
+<li>Tagged this article with <code>JavaScript</code> †)</li>
+<li>Chose the tags I did (instead of just using <code>&lt;div&gt;</code>s for everything). Here's a screenshot demonstrating why chosing the correct HTML-tags matters, if CSS for some reason fails:</li>
+</ol>
+
+<p><a href="assets/770148/9f0c3daa.jpg" class="article-body-image-wrapper"><img src="assets/770148/9f0c3daa.jpg" alt="No CSS" loading="lazy" width="800" height="966"></a></p>
+
+<p>†) Because of <strong>2</strong> 😁</p>
+
+<hr>
+<h2>
+  <a name="code-examples" href="#code-examples">
+  </a>
+  Code Examples<a name="code"></a>
+</h2>
+
+<p>Here's a Codepen with examples:</p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/vYJavdK?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+
+<hr>
+
+<p>Cover photo by Andrey Grushnikov from Pexels</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

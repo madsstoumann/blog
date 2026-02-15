@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Learning from the Masters of Design — Mads Stoumann</title>
+	<meta name="description" content="I recently bought two huge books on the history of graphic design from Taschen – here's volume...">
+	<link rel="canonical" href="https://blog.stoumann.dk/learning-from-the-masters-design">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Learning from the Masters of Design">
+	<meta property="og:description" content="I recently bought two huge books on the history of graphic design from Taschen – here's volume...">
+	<meta property="og:url" content="https://blog.stoumann.dk/learning-from-the-masters-design">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/917199/57603f25.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Learning from the Masters of Design">
+	<meta name="twitter:description" content="I recently bought two huge books on the history of graphic design from Taschen – here's volume...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/917199/57603f25.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Learning from the Masters of Design</h1>
+			<p>I recently bought two <strong>huge</strong> books on the history of graphic design from Taschen – here's volume one:</p>
+
+<p><a href="assets/917199/986583a0.jpg" class="article-body-image-wrapper"><img src="assets/917199/986583a0.jpg" alt="History of Graphic Design" loading="lazy" width="400" height="573"></a></p>
+
+<p>As each book weighs more than 4 kg, I can only read for about half an hour, or I'll lose the blood-circulation in my legs!</p>
+
+<p>I find it <em>very</em> inspirational to look at beautiful designs from these <strong>masters of design</strong>. </p>
+
+<p>One thing I tend to do, and can <strong>highly recommend</strong>, is trying to <em>recreate a classic design</em> to something you can use on the web.</p>
+
+<p>Take a look at this simple example:</p>
+
+<p><a href="assets/917199/e8654f16.jpg" class="article-body-image-wrapper"><img src="assets/917199/e8654f16.jpg" alt="Blue Columns" loading="lazy" width="768" height="1024"></a></p>
+
+<p>How would <strong>you</strong> do this in HTML and CSS?</p>
+
+<p>There's no right or wrong answer – and you can probably think of <em>many ways</em> of accomplishing it. And that's the beauty of it: You can chose to do it in a known and familiar way – or chose to challenge yourself, going into unknown territory.</p>
+
+<p>Either way, I <strong>guarentee</strong> you'll learn something. I always do.</p>
+
+
+<hr>
+
+<p>Now, back to the blue columns. Notice how each blue column is <em>half</em> the size of the previous column? In CSS Grid, with the smallest column being <code>1fr</code>, it's:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nc">.columns</span> <span class="p">{</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">grid</span><span class="p">;</span>
+  <span class="py">grid-template-columns</span><span class="p">:</span> <span class="m">16</span><span class="n">fr</span> <span class="m">8</span><span class="n">fr</span> <span class="m">4</span><span class="n">fr</span> <span class="m">2</span><span class="n">fr</span> <span class="m">1</span><span class="n">fr</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Adding five <code>&lt;div&gt;</code>s inside a wrapper with <code>class="columns"</code>, we get this:</p>
+
+<p><a href="assets/917199/c662ea2b.jpg" class="article-body-image-wrapper"><img src="assets/917199/c662ea2b.jpg" alt="Five blue columns" loading="lazy" width="800" height="726"></a> </p>
+
+<p>Now, it's only a matter of <code>translateY()</code>'ing columns 2-4, adding <code>aspect-ratio: 1/1.75</code> to the first column, and we have the initial version:</p>
+
+<p><a href="assets/917199/fff6f341.jpg" class="article-body-image-wrapper"><img src="assets/917199/fff6f341.jpg" alt="Finished Blue Columns" loading="lazy" width="800" height="1234"></a></p>
+
+<p>How can we “webify” this? That's up to your imagination! For me, the columns look a bit like books on a shelf, so I'll add some dynamic font-sizing using <code>clamp()</code> and set the <code>writing-mode</code> to <code>vertical-lr</code>:</p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/MWEaVPL?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+
+<hr>
+
+<p>Let's look at another example from the book – a beautiful, old movie-poster:</p>
+
+<p><a href="assets/917199/3f02745a.jpg" class="article-body-image-wrapper"><img src="assets/917199/3f02745a.jpg" alt="No Way Out" loading="lazy" width="600" height="744"></a></p>
+
+<p>For me, this screams “clip-path” – so that's what I did, a bunch of layered <code>clip-path</code>s:</p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/WNoxbLX?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+<p>I also figured this could work as a custom header for an article – so I wrote a small piece on the “imposter syndrome” (something I have to deal with from time to time).</p>
+
+
+<hr>
+
+<h2>
+  <a name="one-final-example" href="#one-final-example">
+  </a>
+  One final example
+</h2>
+
+<p>There are hundreds of beautiful designs in the Taschen-books – currently, I've fallen in love with this:</p>
+
+<p><a href="assets/917199/483dd4fa.jpg" class="article-body-image-wrapper"><img src="assets/917199/483dd4fa.jpg" alt="Red Circle" loading="lazy" width="594" height="571"></a></p>
+
+<p>I've started to create the red circle, using a <code>radial-gradient</code>:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nc">.circle</span> <span class="p">{</span>
+  <span class="py">aspect-ratio</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span>
+  <span class="nl">background-image</span><span class="p">:</span> <span class="n">radial-gradient</span><span class="p">(</span><span class="nb">circle</span><span class="p">,</span> 
+    <span class="n">hsl</span><span class="p">(</span><span class="m">3deg</span> <span class="m">94%</span> <span class="m">28%</span><span class="p">)</span> <span class="m">50%</span><span class="p">,</span> 
+    <span class="m">#FFF</span> <span class="m">0</span> <span class="m">52%</span><span class="p">,</span> 
+    <span class="n">hsl</span><span class="p">(</span><span class="m">3deg</span> <span class="m">94%</span> <span class="m">28%</span><span class="p">)</span> <span class="m">0</span> <span class="m">57%</span><span class="p">,</span>
+    <span class="m">#FFF</span> <span class="m">0</span> <span class="m">59%</span><span class="p">,</span> 
+    <span class="n">hsl</span><span class="p">(</span><span class="m">3deg</span> <span class="m">94%</span> <span class="m">28%</span><span class="p">)</span> <span class="m">0</span> <span class="m">64%</span><span class="p">,</span>
+    <span class="m">#FFF</span> <span class="m">0</span> <span class="m">66%</span><span class="p">,</span> 
+    <span class="n">hsl</span><span class="p">(</span><span class="m">3deg</span> <span class="m">94%</span> <span class="m">28%</span><span class="p">)</span> <span class="m">0</span> <span class="m">100%</span>
+  <span class="p">);</span>
+  <span class="nl">border-radius</span><span class="p">:</span> <span class="m">50%</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p><a href="assets/917199/6f846564.jpg" class="article-body-image-wrapper"><img src="assets/917199/6f846564.jpg" alt="Red Circle CSS" loading="lazy" width="772" height="772"></a></p>
+
+<p>But then again, I might switch to <code>svg</code>, animate the indivdual rings, add text-on-a-path etc. </p>
+
+<p>Maybe you might find this whole “recreate classic designs in CSS” silly or a waste of time – but believe me: it's fun, challenging, and <em>always</em> a great way to learn new stuff!</p>
+
+<p>If you've become inspired to do something similar, or already <em>have</em> done, please share links to your work in the comments.</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

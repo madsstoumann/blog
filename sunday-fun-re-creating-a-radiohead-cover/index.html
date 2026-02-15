@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Sunday Fun: Re-creating a Radiohead cover — Mads Stoumann</title>
+	<meta name="description" content="The other day, I read an article about how Radiohead's graphic designer, Stanley Donwood, got...">
+	<link rel="canonical" href="https://blog.stoumann.dk/sunday-fun-re-creating-a-radiohead-cover">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Sunday Fun: Re-creating a Radiohead cover">
+	<meta property="og:description" content="The other day, I read an article about how Radiohead's graphic designer, Stanley Donwood, got...">
+	<meta property="og:url" content="https://blog.stoumann.dk/sunday-fun-re-creating-a-radiohead-cover">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/1873731/26d3fe6c.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Sunday Fun: Re-creating a Radiohead cover">
+	<meta name="twitter:description" content="The other day, I read an article about how Radiohead's graphic designer, Stanley Donwood, got...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/1873731/26d3fe6c.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Sunday Fun: Re-creating a Radiohead cover</h1>
+			<p>The other day, I <a href="https://albumdesignclass.wordpress.com/2014/09/05/radiohead-hail-to-the-thief/" target="_blank" rel="noopener noreferrer">read an article</a> about how Radiohead's graphic designer, Stanley Donwood, got inspired by words from billboards — and the combination of the colors red, green, blue, yellow, orange, black and white — for the cover to "Hail to the Thief" by Radiohead.</p>
+
+<p>The cover has much more graphic elements than this, but let's try to mimic the random color-combinations and the texts in CSS and JavaScript.</p>
+
+<p>First, I asked chatGPT to generate an array of a 100 words, inspired by the cover:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">words</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Fear</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Control</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Truth</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Lies</span><span class="dl">"</span> <span class="p">...]</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Next, I grabbed the primary colors:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">colors</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">#D0001D</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#0D5436</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#093588</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#FDA223</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#F8551A</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#101624</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#EAEFF0</span><span class="dl">'</span><span class="p">];</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>A small method returns a random background-color, and makes sure that the text-color is <strong>not</strong> the same:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">function</span> <span class="nf">getRandomColorPair</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">bgIndex</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nf">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span> <span class="o">*</span> <span class="nx">colors</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+  <span class="kd">let</span> <span class="nx">cIndex</span><span class="p">;</span>
+  <span class="k">do</span> <span class="p">{</span>
+    <span class="nx">cIndex</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nf">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span> <span class="o">*</span> <span class="nx">colors</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">while </span><span class="p">(</span><span class="nx">cIndex</span> <span class="o">===</span> <span class="nx">bgIndex</span><span class="p">);</span>
+  <span class="k">return</span> <span class="p">{</span> <span class="na">bg</span><span class="p">:</span> <span class="nx">colors</span><span class="p">[</span><span class="nx">bgIndex</span><span class="p">],</span> <span class="na">c</span><span class="p">:</span> <span class="nx">colors</span><span class="p">[</span><span class="nx">cIndex</span><span class="p">]</span> <span class="p">};</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>And finally, the words and colors are added to <code>&lt;li&gt;</code>-tags:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">ul</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">canvas</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">words</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="nx">word</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">bg</span><span class="p">,</span> <span class="nx">c</span> <span class="p">}</span> <span class="o">=</span> <span class="nf">getRandomColorPair</span><span class="p">();</span>
+  <span class="k">return</span> <span class="s2">`&lt;li style="--bg: </span><span class="p">${</span><span class="nx">bg</span><span class="p">}</span><span class="s2">;--c: </span><span class="p">${</span><span class="nx">c</span><span class="p">}</span><span class="s2">;"&gt;</span><span class="p">${</span><span class="nx">word</span><span class="p">}</span><span class="s2">&lt;/li&gt;`</span><span class="p">;</span>
+<span class="p">}).</span><span class="nf">join</span><span class="p">(</span><span class="dl">''</span><span class="p">);</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+
+<hr>
+
+<h2>
+  <a name="styling" href="#styling">
+  </a>
+  Styling
+</h2>
+
+<p>I browsed handwriting fonts on Google Fonts, and found a great match: <a href="https://fonts.google.com/specimen/Pangolin" target="_blank" rel="noopener noreferrer">Pangolin</a>.</p>
+
+<p>Next, a few styles for the <code>&lt;li&gt;</code>-elements:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">li</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--bg</span><span class="p">);</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--c</span><span class="p">);</span>
+  <span class="nl">font-family</span><span class="p">:</span> <span class="s1">"Pangolin"</span><span class="p">,</span> <span class="n">system-ui</span><span class="p">,</span> <span class="nb">sans-serif</span><span class="p">;</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="m">5</span><span class="n">cqi</span><span class="p">;</span>
+  <span class="nl">letter-spacing</span><span class="p">:</span> <span class="m">-0.075em</span><span class="p">;</span>
+  <span class="py">padding-inline</span><span class="p">:</span> <span class="m">1ch</span><span class="p">;</span>
+  <span class="nl">text-transform</span><span class="p">:</span> <span class="nb">uppercase</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>And ... almost done. Just need a few styles on the  <code>&lt;ul&gt;</code>-element:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">ul</span> <span class="p">{</span>
+  <span class="nl">all</span><span class="p">:</span> <span class="n">unset</span><span class="p">;</span>
+  <span class="py">container-type</span><span class="p">:</span> <span class="n">inline-size</span><span class="p">;</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+  <span class="nl">flex-wrap</span><span class="p">:</span> <span class="n">wrap</span><span class="p">;</span>
+  <span class="nl">justify-content</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+  <span class="nl">list-style</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>And we get:</p>
+
+<p><a href="assets/1873731/2b0ac538.jpg" class="article-body-image-wrapper"><img src="assets/1873731/2b0ac538.jpg" alt="Hail to the Thief" loading="lazy" width="800" height="1150"></a></p>
+
+<p>That looks a <strong>little bit boring</strong>, doesn't it?</p>
+
+<p>Let's add a squiggly SVG-filter:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">ul</span> <span class="p">{</span>
+  <span class="nl">filter</span><span class="p">:</span> <span class="sx">url('#squiggly-0')</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<blockquote>
+<p><strong>Note:</strong> See the SVG-code for the filter in the CodePen below.</p>
+</blockquote>
+
+<p>And <em>now</em> we get:</p>
+
+<p><a href="assets/1873731/f3739d94.jpg" class="article-body-image-wrapper"><img src="assets/1873731/f3739d94.jpg" alt="Filter" loading="lazy" width="800" height="1150"></a></p>
+
+<p>Much better! </p>
+
+<p>Here's the CodePen demo – re-fresh to get new, random color-combinations:</p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/QWRpJxg?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Front-End Guidelines: CSS — Mads Stoumann</title>
+	<meta name="description" content="This is a series of guidelines written for my team. As they are work-in-progress, feel free to comment and make suggestions! General conventions Validating, minifying and annotating CSS Use CSSLint fo">
+	<link rel="canonical" href="https://blog.stoumann.dk/front-end-guidelines-css">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Front-End Guidelines: CSS">
+	<meta property="og:description" content="This is a series of guidelines written for my team. As they are work-in-progress, feel free to comment and make suggestions! General conventions Validating, minifying and annotating CSS Use CSSLint fo">
+	<meta property="og:url" content="https://blog.stoumann.dk/front-end-guidelines-css">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/generic_cover.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Front-End Guidelines: CSS">
+	<meta name="twitter:description" content="This is a series of guidelines written for my team. As they are work-in-progress, feel free to comment and make suggestions! General conventions Validating, minifying and annotating CSS Use CSSLint fo">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/generic_cover.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Front-End Guidelines: CSS</h1>
+			<p><em>This is a series of guidelines written for my team.<br />
+As they are work-in-progress, feel free to comment and make suggestions!</em></p>
+<h2>General conventions</h2>
+<h3>Validating, minifying and annotating CSS</h3>
+<ul>
+<li>Use <a href="http://csslint.net/" target="_blank">CSSLint</a> for validating your CSS. Also available as a plugin for multiple text-editors, such as Sublime Text and Brackets. The Visual Studio extension <a href="https://visualstudiogallery.msdn.microsoft.com/a921b98e-9430-4be2-bf53-1169e12bdb50" target="_blank">CSSCop</a> brings CSS Lint support to Visual Studio.</li>
+<li>Use <a href="http://cssminifier.com/" target="_blank">CSS Minifier</a> for minifying your CSS, if not built-in to your editor.</li>
+<li>Use /* COMMENTS HERE */-syntax to document your CSS. For larger modules, use a description-syntax like this:
+<pre class="brush: css; title: ; notranslate" title="">
+
+﻿/*  DOCUMENT INFORMATION
+- Document  : Name - Further description of stylesheet here
+- Version   : 1.0.0
+- Client    : Client / project-name
+- Authors   : List of contributors
+- Date edit : Last day of edit, with optional comments
+*/
+</pre>
+</li>
+</ul>
+<h3>Indentation and readability</h3>
+<ul>
+<li>Use tabs or spaces (either 2 or 4 spaces) for indentation. Not both. One or the other.</li>
+<li>Apply a line-break (as well as indentation, depending on nesting-level) after curly brackets, both opening and closing:
+<pre class="brush: css; title: ; notranslate" title="">
+.myClass {
+    color: red;
+}
+</pre>
+</li>
+</ul>
+<h2>Naming conventions</h2>
+<p>Site-level blocks should be names with tag-description, ie:</p>
+<p>form-search<br />
+nav-breadcrumb</p>
+<p><strong>For root-level elements:</strong><br />
+header-root<br />
+main-root<br />
+footer-root</p>
+<p><strong>Module-level and Pagetype-level blocks should be named accordingly:</strong><br />
+product-detail<br />
+product-filter<br />
+product-search-result<br />
+etc.</p>
+<h2>Module-based approach &mdash; Avoiding too many levels</h2>
+<p>Too many nested levels affects performance, as browsers read CSS right-to-left.<br />
+A module-based approach will initially contain a lot of unused classes, but they will be <em>much appreciated</em> later. </p>
+<p><strong>Take this html-snippet:</strong></p>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;section class=&quot;my-module&quot;&gt;
+  &lt;h1 class=&quot;my-module-header&quot;&gt;
+    Header
+  &lt;/h1&gt;
+  &lt;aside class=&quot;my-module-aside&quot;&gt;
+    &lt;h2 class=&quot;my-module-aside-header&quot;&gt;
+      Header 2
+    &lt;/h2&gt;
+  &lt;/aside&gt;
+&lt;/section&gt;
+</pre>
+<p>In regular CSS, it&#8217;s <em>a lot</em> of classes, but you only need to add those you&#8217;re actually going to use.</p>
+<p>The module-based approach is even easier, when using a preprocessor like Sass or Less:</p>
+<pre class="brush: css; title: ; notranslate" title="">
+.my-module {
+  font: small sans-serif;
+  &amp;-header {
+    font-size: large;
+  }
+  &amp;-aside {
+    background-color: green;
+    &amp;-header {
+      font-size: normal;
+    }
+  }
+}
+</pre>
+<p>&mdash;Which will output:</p>
+<pre class="brush: css; title: ; notranslate" title="">
+.my-module { ... }
+.my-module-header { ... }
+.my-module-aside { ... }
+.my-module-aside-header { ... }
+</pre>
+<h2>Responsiveness</h2>
+<p>If coding for <em>evergreen browsers</em>, all element widths-, margins- and paddings should be defined in percentages, or some other relative unit (see below).<br />
+Only the root font-size should, along with breakpoints for mobile devices, be defined in pixels. </p>
+<p><strong>Relative units</strong><br />
+<strong>em</strong> &#8211; relative font-size. If element font-size is 16px, then 1 em is 16px, and .75em is 12px.<br />
+<strong>rem</strong> &#8211; root em. Set html/body to a specific font-size, and root em will always refer to this.<br />
+<strong>vw</strong> &#8211; viewport-width. 1 vw is 1% of the viewport width.<br />
+<strong>vh</strong> &#8211; viewport-height. 1 vh is 1% of the viewport height.<br />
+<strong>vmin</strong> &#8211; 1 vmin is 1vw or 1vh, whatever is smallest<br />
+<strong>vmax</strong> &#8211; 1 vmax is 1vw or 1vh, whatever is largest</p>
+<p>If element-widths are based on the viewport-width or a percentage, they will resize without the use for media-queries, and thus avoiding writing multiple CSS-rules for all viewport-widths.<br />
+All these units works in IE9+ &#8211; for IE8, just use a fallback font-size in either ems or pixels.</p>
+<h3>Mobile first &mdash;min-width instead of max-width</h3>
+<p>Use a <em>Lowest common denominator</em>-approach, which in most cases will be mobile devices and older browsers.<br />
+Design for these devices first, and gradually step up using media-queries with min-width.</p>
+<p><em>Example:</em></p>
+<pre class="brush: css; title: ; notranslate" title="">
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+$breakpoint-large-desktop: 1280px;
+
+@media (min-width: $breakpoint-tablet) {
+...
+}
+</pre>
+<p>&mdash;Extend it with <a href="http://davidwalsh.name/write-media-queries-sass" target="_blank">this great technique:</a></p>
+<pre class="brush: css; title: ; notranslate" title=""> 
+@mixin tablet {
+  @media (min-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $breakpoint-desktop) {
+    @content;
+  }
+}
+</pre>
+<p>&mdash;and use it like here:</p>
+<pre class="brush: css; title: ; notranslate" title="">
+p {
+  font-size: 1em;
+
+  @include tablet {
+    font-size: 1.3em;
+  }
+
+  @include desktop {
+    font-size: 1.6em;
+  }
+}
+</pre>
+<h2>Specificity</h2>
+<p>CSS-rules are weighed after the following matrix:</p>
+<table>
+<tbody>
+<tr>
+<td>Inline-styles* <em>style=&#8221;color:red;&#8221;</em></td>
+<td>1,0,0,0</td>
+</tr>
+<tr>
+<td>ID Selector <em>#myElement</em></td>
+<td>0,1,0,0</td>
+</tr>
+<tr>
+<td>Class Selector <em>.myClass</em></td>
+<td>0,0,1,0</td>
+</tr>
+<tr>
+<td>Element Selector <em>input</em></td>
+<td>0,0,0,1</td>
+</tr>
+</tbody>
+</table>
+<p><em>*) ALWAYS AVOID inline styles!</em></p>
+<p>&mdash; so a CSS-rule like this:</p>
+<pre class="brush: css; title: ; notranslate" title="">
+body &gt; div &gt; table thead tr th {
+  color: red;
+}
+</pre>
+<p>&mdash;Will have a weight of <em>0,0,0,6</em>, which is a lower specificity than a regular class-selector:</p>
+<pre class="brush: css; title: ; notranslate" title="">
+.my-table-header {
+  color: red;
+}
+</pre>
+<p>&mdash;Which will have a weight of <em>0,0,1,0</em>.</p>
+<h3>Specificity Hack</h3>
+<p>For these scenarios where <em>nothing works</em> (or requires too many changes), there&#8217;s a specificity-hack. Just group the selector with itself, as many times it takes.<br />
+This appoach is, of course, not recommended &mdash; but might come in handy as a last resort:</p>
+<pre class="brush: css; title: ; notranslate" title="">
+  .my-class.my-class
+  
+  /* Or even */
+  .my-class.my-class.my-class.my-class
+</pre>
+<h2>CSS Combing</h2>
+<p>The browser renders the page faster, if CSS-rules containing <em>block-level-formatting</em> are listed first &#8211; that is: </p>
+<p><strong>display, position, width, height, margin</strong> etc.</p>
+<p><em>Decorative rules</em>, such as <strong>background, color</strong> etc. should be listed last.</p>
+<p>Apparently, listing all CSS-rules in the various declarations in the same order throughout the stylesheet should improve performance as well.<br />
+For this, a free tool like <a href="http://csscomb.com" target="_blank">csscomb.com</a>, can be used.</p>
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

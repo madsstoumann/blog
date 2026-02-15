@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Google Tag Manager: Getting started — Mads Stoumann</title>
+	<meta name="description" content="Digital marketing agencies all want their scripts at the top of the &amp;lt;head&amp;gt;-section of a site &amp;mdash; thus ensuring their scripts to be loaded and parsed before the browser starts to render the p">
+	<link rel="canonical" href="https://blog.stoumann.dk/google-tag-manager-getting-started">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Google Tag Manager: Getting started">
+	<meta property="og:description" content="Digital marketing agencies all want their scripts at the top of the &amp;lt;head&amp;gt;-section of a site &amp;mdash; thus ensuring their scripts to be loaded and parsed before the browser starts to render the p">
+	<meta property="og:url" content="https://blog.stoumann.dk/google-tag-manager-getting-started">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/generic_cover.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Google Tag Manager: Getting started">
+	<meta name="twitter:description" content="Digital marketing agencies all want their scripts at the top of the &amp;lt;head&amp;gt;-section of a site &amp;mdash; thus ensuring their scripts to be loaded and parsed before the browser starts to render the p">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/generic_cover.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Google Tag Manager: Getting started</h1>
+			<p>Digital marketing agencies all want their scripts at the top of the &lt;head&gt;-section of a site &mdash; thus ensuring their scripts to be loaded and parsed before the browser starts to render the page. This makes sense from their point of view, but has it&#8217;s pitfalls:</p>
+<ul>
+<li>The script is simply too big, and take a long time to download and parse.</li>
+<li>The script appends additional scripts, which in turn requests additional elements or scripts.</li>
+<li>The script contains bad code and raise errors.</li>
+<li>The script is loaded from an external, non-responding server.</li>
+</ul>
+<p>The scripts are often not minified or loaded asynchronously &mdash; and rarely deferred until the page has loaded, thus blocking the rendering of the page.</p>
+<p>This can create a very bad user experience.</p>
+<p>Another issue is maintaining the scripts: updating them with new features, removing redundant code and/or removing the scripts entirely when they&#8217;re not needed anymore. Unfortunately, this rarely happens &#8211; and on large, corporate sites there are often hundreds or thousands of lines of code that nobody knows what does. </p>
+<p>Enter Google Tag Manager (GTM):</p>
+<blockquote><p>Google Tag Manager allows you to conveniently manage tags (such as tracking and marketing optimization JavaScript tags) on your site. You can add and update AdWords, Google Analytics, Floodlight and non-Google tags from the Google Tag Manager user interface instead of editing site code. This reduces errors, frees you from having to involve a webmaster, and allows you to quickly deploy tags on your site.</p></blockquote>
+<p>I must admit I&#8217;m not an expert in how tracking scripts and conversion rates work (!) &mdash; but I know JavaScript, and with GTM you have access to all the elements on a given page <em>as well as</em> almost all events, so 99% of all scripting needs should be doable in GTM.</p>
+<p>And that&#8217;s not all: GTM also offers versioning and preview, so you can always revert to a previous (and working!) version.</p>
+<h3>Getting started</h3>
+<p>Go to <a href="http://www.google.com/tagmanager/">google.com/tagmanager</a> and sign in or create an account.<br />
+Create a container and go to &#8220;Admin &gt; Install GTM&#8221;. The code should look like this:</p>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;!-- Google Tag Manager --&gt;
+&lt;noscript&gt;&lt;/noscript&gt;
+&lt;script&gt;(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','YOURCODE');&lt;/script&gt;
+&lt;!-- End Google Tag Manager --&gt;
+</pre>
+<p>Paste this code directly (replace CODE with your GTM-code) below the opening &lt;body&gt;-tag in your master-layout &mdash; and you&#8217;re good to go. </p>
+<p>From now on, you won&#8217;t have to insert external marketing-scripts directly on your site anymore (fingers crossed)!</p>
+<h3>Tags, rules and macros</h3>
+<p>A GTM-container contains 3 types of objects: tags, rules and macros.<br />
+A tag is an &#8220;action&#8221; to run when a certain &#8220;condition&#8221; (rule) is met.<br />
+A macro can be a custom JavaScript-function or pointers to elements, urls or other variables. These are accessible from within tags.</p>
+<h3>dataLayer</h3>
+<p>An important part of GTM is a JavaScript-object called the &#8220;dataLayer&#8221;.<br />
+GTM creates it automatically &mdash; if you want to call it something else, you can, but remember to change the value &#8220;dataLayer&#8221; in the GTM-embed-code (above).<br />
+The dataLayer is where GTM looks for events and data; you can push your own objects and events directly to the dataLayer (to walk through the power of the dataLayer will take another blog post!). If your page is a <abbr title="Single Page Application">SPA</abbr>, or have dynamic actions, use the dataLayer.</p>
+<p>Time for some examples:</p>
+<h3>Connecting to <abbr title="Google Universal Analytics">UA &mdash; Tracking Page Views</h3>
+<p>Create a new tag, call it &#8220;UA &#8211; PageView&#8221; or whatever you like.<br />
+Set: </p>
+<ul>
+<li>Tag Type = Universal Analytics</li>
+<li>Tracking ID = Your UA-Code, ie &#8220;UA-XX-CODE&#8221;</li>
+<li>Firing Rules: Add the &#8220;All Pages&#8221; rule</li>
+<li>Track Type = Page View</li>
+</ul>
+<p>Publish or preview your changes, and verify that you&#8217;re receiving page views in your UA-account.</p>
+<h3>Tracking PDF downloads</h3>
+<p>First, create a general link-click-listener: Create a tag, &#8220;Link Click Listener&#8221;, with the type &#8220;Link Click Listener&#8221; and firing rule &#8220;All Pages&#8221;.</p>
+<p>Then, create a new rule: &#8220;Download PDF&#8221; with these conditions:</p>
+<ul>
+<li>{{event}} &gt; equals &gt; gtm.linkClick</li>
+<li>{{element url}} &gt; ends with &gt; .pdf</li>
+</ul>
+<p>Finally, create a new tag, &#8220;UA &#8211; Download PDF&#8221; with these settings:</p>
+<ul>
+<li>Tag Type: Universal Analytics</li>
+<li>Firing Rules: Download PDF</li>
+<li>TrackingID : Your UA-Code, ie &#8220;UA-XX-CODE&#8221;</li>
+<li>Track Type: Event</li>
+<li>Event Tracking Parameters:
+<ul>
+<li>Category: Download PDF</li>
+<li>Action: {{element text}}</li>
+<li>Label: {{element url}}</li>
+<li>Value: 1</li>
+</ul>
+</li>
+</ul>
+<p>Publish/preview your changes, click on a pdf-link on your page, and verify that you&#8217;re receiving events in UA.</p>
+<h3>Collecting form-data</h3>
+<p>In this example I&#8217;m going to write custom JavaScript-macros that collect the title and data from a submitted form, and saves/pushes the data to a UA event/label/value.<br />
+This is for demo-purposes only, you shouldn&#8217;t really save all your form data in your UA account!</p>
+<p>First, create a simple form:</p>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;form method=&quot;post&quot; action=&quot;/action.php&quot; title=&quot;User details&quot;&gt;
+  &lt;fieldset&gt;
+    &lt;legend&gt;Please provide your details&lt;/legend&gt;
+    
+    &lt;label for=&quot;f_name&quot;&gt;Name&lt;/label&gt;
+    &lt;input type=&quot;text&quot; id=&quot;f_name&quot; name=&quot;fullname&quot; required title=&quot;Please write your name&quot; /&gt;
+    
+    &lt;label for=&quot;f_email&quot;&gt;Email&lt;/label&gt;
+    &lt;input type=&quot;email&quot; id=&quot;f_email&quot; name=&quot;email&quot; required title=&quot;Please write your email&quot; /&gt;
+    
+    &lt;label for=&quot;f_favice&quot;&gt;Favorite icecream&lt;/label&gt;
+    &lt;select id=&quot;f_favice&quot; multiple name=&quot;favicecream&quot; required title=&quot;Please select one or more flavours&quot;&gt;
+      &lt;option&gt;Chocolate&lt;/option&gt;
+      &lt;option&gt;Strawberry&lt;/option&gt;
+      &lt;option&gt;Vanilla&lt;/option&gt;
+    &lt;/select&gt;
+    
+    &lt;label for=&quot;f_accept&quot;&gt;Accept conditions&lt;/label&gt;
+    &lt;input type=&quot;checkbox&quot; id=&quot;f_accept&quot; name=&quot;accept&quot; /&gt;
+    &lt;button type=&quot;submit&quot;&gt;Submit form&lt;/button&gt;
+  &lt;/fieldset&gt;  
+&lt;/form&gt;
+</pre>
+<p>Then, create a new tag &#8220;Form Submit Listener&#8221; that fires on &#8220;All Pages&#8221; and with the Tag Type &#8220;Form Submit Listener&#8221;.</p>
+<p>Next, create a new rule &#8220;Form Submit Rule&#8221; with these conditions:</p>
+<ul>
+<li>{{event}} &gt; equals &gt; gtm.formSubmit</li>
+</ul>
+<p>Now it&#8217;s time for the custom macros. Create a new macro called &#8220;.formAction&#8221; with the Macro Type &#8220;Custom JavaScript&#8221;. Paste this in the Custom JavaScript:</p>
+<pre class="brush: jscript; title: ; notranslate" title="">
+function(){
+  return {{element}}.title ? {{element}}.title : {{element}}.action;
+}
+</pre>
+<p>Create another &#8220;Custom JavaScript&#8221;-macro, call it &#8220;.formData&#8221; and paste this:</p>
+<pre class="brush: jscript; title: ; notranslate" title="">
+function() {
+  try {
+    var 
+    E,
+    F = {{element}},
+    k,
+    l = F.elements.length,
+    o = &quot;&quot;,
+    O;
+    
+    o+= &quot;formAction:&quot; + F.action + &quot;;&quot;;
+
+    for (l = l; l--;) {
+      E = F.elements[l];
+      if (E.name &amp;&amp; E.value) {
+        o+= E.name + &quot;:&quot;;
+        if (E.tagName === &quot;SELECT&quot;) {
+          O = E.options;
+          k = O.length;
+          for (k = k;k--;){
+            if(O[k].selected) {
+              o+= O[k].value + &quot;|&quot;;
+            }
+          }
+        } else {
+            o+= E.value
+            if (E.type &amp;&amp; (E.type === &quot;radio&quot; || E.type === &quot;checkbox&quot;) &amp;&amp; E.checked) {
+              o+= &quot;|checked&quot;;
+            }
+        }
+        o += &quot;;&quot;;
+      }
+    }
+    return o;
+  } catch(e) {}
+  return &quot;&quot;;
+}
+</pre>
+<p>If you don&#8217;t add any changes to the code, you can also use the minified version:</p>
+<pre class="brush: jscript; title: ; notranslate" title="">
+function(){try{var e,t={{element}},n,r=t.elements.length,i=&quot;&quot;,s;i+=&quot;formAction:&quot;+t.action+&quot;;&quot;;for(r=r;r--;){e=t.elements[r];if(e.name&amp;&amp;e.value){i+=e.name+&quot;:&quot;;if(e.tagName===&quot;SELECT&quot;){s=e.options;n=s.length;for(n=n;n--;){if(s[n].selected){i+=s[n].value+&quot;|&quot;}}}else{i+=e.value;if(e.type&amp;&amp;(e.type===&quot;radio&quot;||e.type===&quot;checkbox&quot;)&amp;&amp;e.checked){i+=&quot;|checked&quot;}}i+=&quot;;&quot;}}sessionStorage.setItem(&quot;formData&quot;,i);return i}catch(o){}return&quot;&quot;}
+</pre>
+<p>Finally, create a new tag, &#8220;UA &#8211; Collect Form Data&#8221; with these settings:</p>
+<ul>
+<li>Tag Type: Universal Analytics</li>
+<li>Firing Rules: Form Submit Rule</li>
+<li>TrackingID : Your UA-Code, ie &#8220;UA-XX-CODE&#8221;</li>
+<li>Track Type: Event</li>
+<li>Event Tracking Parameters:
+<ul>
+<li>Category: formSubmit</li>
+<li>Action: {{.formAction}}</li>
+<li>Label: {{.formData}}</li>
+<li>Value: 1</li>
+</ul>
+</li>
+</ul>
+<p>Publish/preview your changes, submit your form, and verify that form-data is being saved in UA.</p>
+<p>As mentioned earlier, you shouldn&#8217;t save ALL your form&#8217;s data to UA, but what if you have a questonaire with 10 questions that each can have a value from 1 to 5? Then the pushed data to UA could be:</p>
+<pre class="brush: plain; title: ; notranslate" title="">
+1;5;4;5;1;3;5;5;1;5
+</pre>
+<p>&#8211; I&#8217;m sure, a clever UA Report designer could create a useful graph from these data-strings!</p>
+<h3>Social Media</h3>
+<p>UA has support for social media, and these can be triggered directly from GTM. If you want to track, let&#8217;s say <em>&#8220;number of Facebook-Share-Clicks&#8221;</em>, you can either attach a function to all your Facebook-Share-Links that pushes event and data to the dataLayer OR you could set up a click-listener-tag, with a firing rule that only responds to a certain class, for instance &#8220;btn-facebook&#8221;. You would then need to create a macro, grapping the button or link that was clicked with GTM&#8217;s {{element}}-macro, and pushing the values to another tag with the <em>Event Type: </em> <strong>social</strong>.</p>
+<h3>Collecting Object-data</h3>
+<p>You can push your custom JavaScript-Objects to the dataLayer, but it&#8217;s also possible to access them directly from GTM, ie. if you have this object on your page:</p>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;script&gt;
+window.myObject = {
+  frstName : &quot;Mads&quot;,
+  lastName : &quot;Stoumann&quot;,
+  compName : &quot;Valtech&quot;
+}  
+&lt;/script&gt;
+</pre>
+<p>&#8211; you can create a &#8220;Custom JavaScript&#8221;-macro called &#8220;.objectData&#8221; with this code:</p>
+<pre class="brush: jscript; title: ; notranslate" title="">
+function() {
+  return myObject.frstName +  &quot; &quot; + myObject.lastName + &quot; (&quot; + myObject.compName + &quot;)&quot;;
+}
+</pre>
+<p>&#8211; and then access {{.objectData}} from a tag, and push/save it to UA if you like.</p>
+<h3>Final thoughts</h3>
+<p>I really like the idea of having all tracking-scripts and event-listeners stored in one place; the way it&#8217;s possible to create quite complex actions without coding is also appealing. <strong>But!</strong> You need to create some kind of logical structure in the way you name tags, rules and macros &#8212; or it will soon be just as cluttered as before. If external providers have access to your site, they should name their objects with a prefix that clearly indicate the company name. If a group of tags, rules and macros are for a temporary campaign &#8212; maybe also indicate that in the naming of the objects.</p>
+<p>The code for the examples is available here:<br />
+<a href="http://www.stoumann.dk/examples/gtm/">http://www.stoumann.dk/examples/gtm/</a><br />
+Replace the embed-code with your own GTM-code and have fun with GTM!</p>
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

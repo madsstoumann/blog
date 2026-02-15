@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Dark Mode in 3 Lines of CSS and Other Adventures — Mads Stoumann</title>
+	<meta name="description" content="Dark Mode is a design trend where the color scheme of a website is changed to a dark background with...">
+	<link rel="canonical" href="https://blog.stoumann.dk/dark-mode-in-3-lines-of-css-and-other-adventures">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Dark Mode in 3 Lines of CSS and Other Adventures">
+	<meta property="og:description" content="Dark Mode is a design trend where the color scheme of a website is changed to a dark background with...">
+	<meta property="og:url" content="https://blog.stoumann.dk/dark-mode-in-3-lines-of-css-and-other-adventures">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/1452126/db460d1d.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Dark Mode in 3 Lines of CSS and Other Adventures">
+	<meta name="twitter:description" content="Dark Mode is a design trend where the color scheme of a website is changed to a dark background with...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/1452126/db460d1d.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Dark Mode in 3 Lines of CSS and Other Adventures</h1>
+			<p>Dark Mode is a design trend where the color scheme of a website is changed to a dark background with light-colored text and elements. It's also referred to as <em>Night Mode</em> or <em>Dark Theme</em>. The purpose of Dark Mode is to reduce eye strain in low light environments, conserve battery life on mobile devices, and create a sleek and modern aesthetic. </p>
+
+<p>Many popular websites and applications now offer a Dark Mode option — here’s TailwindCSS:</p>
+
+<p><a href="assets/1452126/a3aabbab.jpg" class="article-body-image-wrapper"><img src="assets/1452126/a3aabbab.jpg" alt="Tailwind Color Scheme Selector" loading="lazy" width="176" height="136"></a></p>
+
+<p>If you’re a developer, you most likely already know how to toggle Dark Mode in Dev Tools (for those who don’t know, go to the “rendering” tab!):</p>
+
+<p><a href="assets/1452126/31d3146a.jpg" class="article-body-image-wrapper"><img src="assets/1452126/31d3146a.jpg" alt="Dev Tools Color Scheme Selector" loading="lazy" width="319" height="163"></a></p>
+
+<p>If you want to toggle on Dark Mode for your <strong>operating system</strong> (and thus all apps supporting Dark Mode), go to System Settings. On a Mac, you‘ll find it under System Settings &gt; Appearance:</p>
+
+<p><a href="assets/1452126/3244ea11.jpg" class="article-body-image-wrapper"><img src="assets/1452126/3244ea11.jpg" alt="MacOS Toggle Dark Mode" loading="lazy" width="800" height="151"></a></p>
+
+<p>There are <strong>a lot of tutorials</strong> out there already on how to implement dark mode for a webiste.</p>
+
+<p>This tutorial will look into <strong>different approaches</strong>, including some rad new CSS-features, that’ll allow you to ditch JavaScript.</p>
+
+<p>Ready? Let’s get started.</p>
+
+
+<hr>
+
+<h2>
+  <a name="dark-mode-using-system-colors" href="#dark-mode-using-system-colors">
+  </a>
+  Dark Mode using System Colors
+</h2>
+
+<p>First, we’ll create a simple HTML-document with a headline:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;h1&gt;</span>Hello Darkness, My Old Friend<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>In a stylesheet, we’ll add:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">body</span> <span class="p">{</span>
+  <span class="py">color-scheme</span><span class="p">:</span> <span class="n">light</span> <span class="n">dark</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>This will tell the browser, that our document can accept <strong>both</strong> a light and a dark <code>color-scheme</code>.</p>
+
+<p>If you run this snippett in a browser, even with Dark Mode <strong>on</strong>, it will be … light.</p>
+
+<p>Your browser UI will be dark, though.</p>
+
+<p><a href="assets/1452126/b16535c3.jpg" class="article-body-image-wrapper"><img src="assets/1452126/b16535c3.jpg" alt="Light Dark" loading="lazy" width="800" height="506"></a></p>
+
+<p>That’s because the <strong>user-agent</strong>-stylesheet does not have any default colors set up.</p>
+
+<p>We can fix that quickly, by using <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/system-color" target="_blank" rel="noopener noreferrer">System Colors</a>:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">body</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="n">Canvas</span><span class="p">;</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="n">CanvasText</span><span class="p">;</span>
+  <span class="py">color-scheme</span><span class="p">:</span> <span class="n">light</span> <span class="n">dark</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Let’s check our snippet again:</p>
+
+<p><a href="assets/1452126/625abc86.jpg" class="article-body-image-wrapper"><img src="assets/1452126/625abc86.jpg" alt="Dark Mode with System Colors" loading="lazy" width="800" height="506"></a></p>
+
+<p>Much better! Dark Mode for your entire website in <strong>3 lines of CSS!</strong></p>
+
+<p>Let’s dive a bit more into <strong>System Colors</strong>. From the specs:</p>
+
+<blockquote>
+<p>In general, the <code>&lt;system-color&gt;</code> keywords reflect default color choices made by the user, the browser, or the OS. They are typically used in the browser default stylesheet, for this reason.</p>
+</blockquote>
+
+<p>Here’s a Light Mode-demo, showing the available System Colors in Safari:</p>
+
+<p><a href="assets/1452126/9383c7da.jpg" class="article-body-image-wrapper"><img src="assets/1452126/9383c7da.jpg" alt="System Colors" loading="lazy" width="800" height="991"></a></p>
+
+<p>If we switch to Dark Mode, some colors are changed <strong>completely</strong> (like <code>Canvas</code> and <code>CanvasText</code> as we’ve already encountered), while others are only <em>slightly</em> changed:</p>
+
+<p><a href="assets/1452126/bb590545.jpg" class="article-body-image-wrapper"><img src="assets/1452126/bb590545.jpg" alt="System Colors in Dark Mode" loading="lazy" width="800" height="991"></a></p>
+
+<p>Using <em>System Colors</em> for Dark Mode is a bit of a simplified Dark Mode-experience. </p>
+
+<p>Yes, it will work — but pure black and white is a bit boring. </p>
+
+<p>We can spice it up using <code>color-mix</code> in CSS. We can mix a bit of <code>CanvasText</code> (black or white) into <code>Canvas</code> (white or black) for the <code>background-color</code>, and the opposite for <code>color</code>:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">body</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="n">color-mix</span><span class="p">(</span><span class="n">in</span> <span class="n">srgb</span><span class="p">,</span> <span class="n">Canvas</span><span class="p">,</span> <span class="n">CanvasText</span> <span class="m">2.5%</span><span class="p">);</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="n">color-mix</span><span class="p">(</span><span class="n">in</span> <span class="n">srgb</span><span class="p">,</span> <span class="n">CanvasText</span><span class="p">,</span> <span class="n">Canvas</span> <span class="m">15%</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>This results in a “softer” look:</p>
+
+<p><a href="assets/1452126/43c948e5.jpg" class="article-body-image-wrapper"><img src="assets/1452126/43c948e5.jpg" alt="Softer Dark Mode" loading="lazy" width="800" height="441"></a></p>
+
+<p>Deducting saturation from a color, is a widely used way to make variations of colors in Dark Mode. </p>
+
+<p>Using <a href="https://www.stefanjudis.com/notes/new-in-css-relative-colors/" target="_blank" rel="noopener noreferrer">relative colors</a> in CSS, we can do exactly that:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">background</span><span class="o">:</span> <span class="nt">hsl</span><span class="o">(</span><span class="nt">from</span> <span class="nt">ActiveText</span> <span class="nt">h</span> <span class="nt">calc</span><span class="o">(</span><span class="nt">s</span> <span class="nt">-</span> <span class="err">30</span><span class="o">%)</span> <span class="nt">l</span><span class="o">);</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Unfortunately, relative colors don’t work with System Colors in <strong>any</strong> browsers — yet!</p>
+
+<blockquote>
+<p><strong>NOTE:</strong> System Colors can be overwritten with <strong>forced colors</strong> (although used rarely) — so don’t rely too much on this technique. </p>
+</blockquote>
+
+<p>Let’s move on to another technique, that’ll allow us to fine-control our Dark Mode colors.</p>
+
+
+<hr>
+
+<h2>
+  <a name="using-a-raw-preferscolorscheme-endraw-mediaquery" href="#using-a-raw-preferscolorscheme-endraw-mediaquery">
+  </a>
+  Using a <code>prefers-color-scheme</code> media-query
+</h2>
+
+<p>To specify specific colors for light and dark mode, I recommend using <em>CSS Custom Properties</em>, and then update these using a <code>prefers-color-scheme</code> media-query. </p>
+
+<p>With <strong>Light Mode</strong> as our default, let’s add the colors to a <code>:where(body)</code>-section, to separate them from our regular <code>body</code>-styles:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="c">/* Properties */</span>
+<span class="nd">:where</span><span class="o">(</span><span class="nt">body</span><span class="o">)</span> <span class="p">{</span>
+  <span class="py">--background-color</span><span class="p">:</span> <span class="m">#FFF</span><span class="p">;</span>
+  <span class="py">--text-color</span><span class="p">:</span> <span class="m">#222</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">body</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--background-color</span><span class="p">);</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--text-color</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Then, for <strong>Dark Mode</strong>, we’ll simply <strong>update</strong> these colors-properties:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="k">@media</span> <span class="p">(</span><span class="n">prefers-color-scheme</span><span class="p">:</span> <span class="n">dark</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nd">:where</span><span class="o">(</span><span class="nt">body</span><span class="o">)</span> <span class="p">{</span>
+    <span class="py">--background-color</span><span class="p">:</span> <span class="n">hsl</span><span class="p">(</span><span class="m">228</span><span class="p">,</span> <span class="m">5%</span><span class="p">,</span> <span class="m">15%</span><span class="p">);</span>
+    <span class="py">--text-color</span><span class="p">:</span> <span class="n">hsl</span><span class="p">(</span><span class="m">228</span><span class="p">,</span> <span class="m">5%</span><span class="p">,</span> <span class="m">80%</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Let’s check it out:</p>
+
+<p><a href="assets/1452126/1df4bf7d.jpg" class="article-body-image-wrapper"><img src="assets/1452126/1df4bf7d.jpg" alt="Dark Mode with media-query" loading="lazy" width="800" height="441"></a></p>
+
+<p>But what if we want the users to <strong>choose</strong> which version of our website they want, indepently of the System Settings? </p>
+
+<p>They might prefer a system set to Dark Mode, but our website in Light Mode. </p>
+
+<p>Let’s create a toggler!</p>
+
+
+<hr>
+
+<h2>
+  <a name="creating-a-colorscheme-toggler" href="#creating-a-colorscheme-toggler">
+  </a>
+  Creating a color-scheme toggler
+</h2>
+
+<p><strong>Using JavaScript</strong></p>
+
+<p>If you go to a site like <a href="https://tailwindcss.com/" target="_blank" rel="noopener noreferrer">TailwindCSS</a>, you’ll notice that a <code>dark</code>-class is added to the <code>html</code>-node when you select ”dark” from the color-scheme-toggler. This is done with JavaScript:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nf">matchMedia</span><span class="p">(</span><span class="dl">'</span><span class="s1">(prefers-color-scheme: dark)</span><span class="dl">'</span><span class="p">).</span><span class="nx">matches</span><span class="p">))</span> <span class="p">{</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">dark</span><span class="dl">'</span><span class="p">)</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nf">remove</span><span class="p">(</span><span class="dl">'</span><span class="s1">dark</span><span class="dl">'</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p><a href="https://open-props.style/" target="_blank" rel="noopener noreferrer">Open Props</a> is using a similar method, but updating a <code>data-theme</code>-attribute instead, and then defining properties in two blocks:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="o">[</span><span class="nt">data-theme</span><span class="o">=</span><span class="nt">light</span><span class="o">]</span> <span class="p">{</span>
+  <span class="py">--nav-icon</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--gray-7</span><span class="p">);</span> <span class="c">/* etc */</span>
+<span class="p">}</span>
+<span class="o">[</span><span class="nt">data-theme</span><span class="o">=</span><span class="nt">dark</span><span class="o">]</span> <span class="p">{</span>
+  <span class="py">--nav-icon</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--gray-5</span><span class="p">);</span> <span class="c">/* etc */</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p><strong>Using CSS</strong></p>
+
+<p>Using some brand new CSS-techniques, we can create a toggler <strong>without</strong> JavaScript.</p>
+
+<p>We’ll create a toggler with 3 states:</p>
+
+<ul>
+<li>Light (forced)</li>
+<li>Auto (system default, could be either light or dark)</li>
+<li>Dark (forced)</li>
+</ul>
+
+<p>First, some basic markup:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;fieldset&gt;</span>
+  <span class="nt">&lt;label&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"radio"</span> <span class="na">name=</span><span class="s">"color-scheme"</span> <span class="na">id=</span><span class="s">"color-scheme-light"</span> <span class="na">value=</span><span class="s">"0"</span><span class="nt">&gt;</span>
+    Light
+  <span class="nt">&lt;/label&gt;</span>
+  <span class="nt">&lt;label&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"radio"</span> <span class="na">name=</span><span class="s">"color-scheme"</span> <span class="na">value=</span><span class="s">"auto"</span> <span class="na">checked</span><span class="nt">&gt;</span>
+    Auto
+  <span class="nt">&lt;/label&gt;</span>
+  <span class="nt">&lt;label&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"radio"</span> <span class="na">name=</span><span class="s">"color-scheme"</span> <span class="na">id=</span><span class="s">"color-scheme-dark"</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+    Dark
+  <span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;/fieldset&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>After adding some basic styles (see the Codepen-demo below), it renders like this:</p>
+
+<p><a href="assets/1452126/4d98576b.jpg" class="article-body-image-wrapper"><img src="assets/1452126/4d98576b.jpg" alt="Basic Dark Mode Toggler" loading="lazy" width="231" height="60"></a></p>
+
+<p>We’ll add a <code>--darkmode</code>-property and <code>container-type</code> to the html-element:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">html</span> <span class="p">{</span>
+  <span class="py">--darkmode</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="py">container-name</span><span class="p">:</span> <span class="n">root</span><span class="p">;</span>
+  <span class="py">container-type</span><span class="p">:</span> <span class="nb">normal</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>We’ll be using <code>@container style()</code>-queries, so we need to set the node as a “container”. </p>
+
+<p>Since we don’t want to observe <code>inline-size</code>-changes, we just add the value <code>normal</code>.</p>
+
+<p>If the user picks a “forced” value, we’ll update <code>--darkmode</code>:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">html</span><span class="nd">:has</span><span class="o">(</span><span class="nf">#color-scheme-light</span><span class="nd">:checked</span><span class="o">)</span> <span class="p">{</span> <span class="py">--darkmode</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span> <span class="p">}</span>
+<span class="nt">html</span><span class="nd">:has</span><span class="o">(</span><span class="nf">#color-scheme-dark</span><span class="nd">:checked</span><span class="o">)</span> <span class="p">{</span> <span class="py">--darkmode</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span> <span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>And finally, we’ll use a container <code>style()</code>-query to check, if <code>--darkmode</code> is set to <code>1</code>:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="k">@container</span> <span class="n">root</span> <span class="n">style</span><span class="p">(</span><span class="n">--darkmode</span><span class="p">:</span> <span class="m">1</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nt">body</span> <span class="p">{</span>
+    <span class="py">--background-color</span><span class="p">:</span> <span class="n">hsl</span><span class="p">(</span><span class="m">228</span><span class="p">,</span> <span class="m">5%</span><span class="p">,</span> <span class="m">15%</span><span class="p">);</span>
+    <span class="py">--text-color</span><span class="p">:</span> <span class="n">hsl</span><span class="p">(</span><span class="m">228</span><span class="p">,</span> <span class="m">5%</span><span class="p">,</span> <span class="m">80%</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<blockquote>
+<p><strong>NOTE:</strong> <code>@container style()</code>-queries only works <em>behind-a-flag</em> in Chrome at the moment, it’s early days, so do not use in production.</p>
+</blockquote>
+
+<p>Now, after selecting “Dark”, our toggler (and page) looks like this:</p>
+
+<p><a href="assets/1452126/f8a58f24.jpg" class="article-body-image-wrapper"><img src="assets/1452126/f8a58f24.jpg" alt="Toggler in Dark Mode" loading="lazy" width="467" height="137"></a></p>
+
+<p>Simple and effective!</p>
+
+
+<hr>
+
+<h2>
+  <a name="storing-state" href="#storing-state">
+  </a>
+  Storing state
+</h2>
+
+<p>If we want to <strong>store</strong> the users choice, I’m afraid we need a bit of JavaScript!</p>
+
+<p>First, let’s add an identifier to our <code>&lt;fieldset&gt;</code>:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;fieldset</span> <span class="na">id=</span><span class="s">"colorScheme"</span><span class="nt">&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Then, in JavaScript:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">colorScheme</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">colorScheme</span><span class="dl">'</span><span class="p">)</span>
+<span class="nx">colorScheme</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">change</span><span class="dl">'</span><span class="p">,</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">localStorage</span><span class="p">.</span><span class="nf">setItem</span><span class="p">(</span><span class="dl">'</span><span class="s1">color-scheme</span><span class="dl">'</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Now, all we have to do is setting the property to the <code>localStorage</code>-value when the document has been loaded:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">load</span><span class="dl">"</span><span class="p">,</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">scheme</span> <span class="o">=</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nf">getItem</span><span class="p">(</span><span class="dl">'</span><span class="s1">color-scheme</span><span class="dl">'</span><span class="p">)</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">auto</span><span class="dl">'</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">scheme</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nf">setProperty</span><span class="p">(</span><span class="dl">'</span><span class="s1">--darkmode</span><span class="dl">'</span><span class="p">,</span> <span class="nx">scheme</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>To select the correct mode in the toggler, add this to the <code>if</code>-block:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">selected</span> <span class="o">=</span> <span class="p">[...</span><span class="nx">colorScheme</span><span class="p">.</span><span class="nx">elements</span><span class="p">].</span><span class="nf">filter</span><span class="p">(</span><span class="nx">element</span> <span class="o">=&gt;</span> <span class="nx">element</span><span class="p">.</span><span class="nx">value</span> <span class="o">===</span> <span class="nx">scheme</span><span class="p">)</span>
+<span class="k">if </span><span class="p">(</span><span class="nx">selected</span><span class="p">)</span> <span class="nx">selected</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">checked</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+
+<hr>
+
+<h2>
+  <a name="demos" href="#demos">
+  </a>
+  Demos
+</h2>
+
+<p><strong>Toggler</strong></p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/KKGNbQr?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+<p><strong>System Colors</strong></p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/GRYNPzy?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+
+<hr>
+
+<p>Photo-credit: <a href="https://www.pexels.com/da-dk/foto/mand-baerbar-computer-browsing-internet-5926379/" target="_blank" rel="noopener noreferrer">Sora Shimazaki</a></p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

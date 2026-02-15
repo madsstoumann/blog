@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Is The Latest Always The Greatest? — Mads Stoumann</title>
+	<meta name="description" content="I don’t know how many times I’ve created an accordion in the last 20 years. My first accordions used...">
+	<link rel="canonical" href="https://blog.stoumann.dk/is-the-latest-always-the-greatest">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Is The Latest Always The Greatest?">
+	<meta property="og:description" content="I don’t know how many times I’ve created an accordion in the last 20 years. My first accordions used...">
+	<meta property="og:url" content="https://blog.stoumann.dk/is-the-latest-always-the-greatest">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/555414/e6b0e679.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Is The Latest Always The Greatest?">
+	<meta name="twitter:description" content="I don’t know how many times I’ve created an accordion in the last 20 years. My first accordions used...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/555414/e6b0e679.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Is The Latest Always The Greatest?</h1>
+			<p>I don’t know how many times I’ve created an accordion in the last 20 years.<br>
+My first accordions used <code>&lt;div&gt;</code>-tags and were JavaScript-based. Later, they were based on the “checkbox-hack”. Then came HTML5 and the <code>&lt;details&gt;</code>-element, and the only JavaScript needed was to poly-fill the browsers which didn’t support that element. </p>
+
+<p>Later I added <em>structured markup</em> (schema.org) for SEO-purposes — and my latest accordion added JavaScript for <em>animating</em> the <code>&lt;details&gt;</code>-element. A future accordion will possibly remove that again. But for now, I have the <em>perfect</em> accordion — at least <em>my version</em> of a perfect accordion!</p>
+
+<p>It’ a “three-stage rocket” that:</p>
+
+<ol>
+<li>Looks OK and works with HTML only.</li>
+<li>Looks even greater and has a <code>height</code>-transition, when CSS is enabled.</li>
+<li>Has a smooth <code>height</code>-animation, when JavaScript is enabled.</li>
+</ol>
+
+<p>The UX and Design is based on research by the Nielsen/Norman Group. They always seem to have extensive, thorough research and user-feedback for the most popular web components.<br>
+Hence, it’s my default “goto”-place, before I develop any UI-component.</p>
+
+
+<hr>
+
+<h2>
+  <a name="futureproof" href="#futureproof">
+  </a>
+  Future-proof?
+</h2>
+
+<p>So is that the end of it? Do I finally have an accordion, I can just copy/paste to future projects?</p>
+
+<p>No. That’s not the end of it. Because even if I have the “final” HTML, CSS and JavaScript for that “perfect” accordion, the strange part of being a frontend developer, is that architectural decisions require me to use:</p>
+
+<ol>
+<li>Something else than JavaScript to output JavaScript (TypeScript)</li>
+<li>Something else than CSS to output CSS (Sass)</li>
+<li>Something else than HTML to output HTML (Pug)</li>
+</ol>
+
+<p>In other words: I need to <em>rewrite</em> the code for all three languages to <em>something else</em>, that then compiles to something similar to the original code.</p>
+
+<p>If a project uses a JavaScript-framework, which is <em>more than</em> likely, I need to <em>re-write</em> the code, so it fits that framework. And if I’m already <em>using</em> a framework, maybe Vue 2.x, should I then switch to the newer Vue 3.x? And if so, should I go for the “composition api”, or … ? Et cetera. </p>
+
+<p>I can completely understand the frustrated project manager who doesn’t understand <em>why</em> it requires development time to develop something that has been developed <em>so many</em> times before.</p>
+
+<p>And it’s not only frontend development time. It’s UX. Design. Backend. Meetings.<br>
+Even though the research has been done, and everybody agrees on how an accordion should look and function, there will be new iterations of that “final” accordion.</p>
+
+<p>But here’s the thing:</p>
+
+<blockquote>
+<p>The user of the website does NOT care how that accordion was made</p>
+</blockquote>
+
+<p>In fact, the 20-year old, first version of my accordion, would be just fine for the user.<br>
+In many cases, it would be good enough for the client as well (if they don’t care much about SEO).<br>
+I wouldn’t be happy about it. In fact, I’d argue for a long time about semantic markup, accessibility, SEO and other stuff, trying to convince the client to chose the latest version.</p>
+
+<p>But should the client pay for my happiness and a new accordion, if the old one works?</p>
+
+
+<hr>
+
+<h2>
+  <a name="the-latest-and-the-greatest" href="#the-latest-and-the-greatest">
+  </a>
+  The Latest And The Greatest
+</h2>
+
+<p>When two frontend developers meet, they rarely have conversations about the stability, accessibility and user-friendliness of the sites, they’ve created. Instead, it’s:</p>
+
+<p>— “Have you used framework X?”<br>
+— “Did you try build-tool Y?”<br>
+— “Everyone’s crazy about tool Z”</p>
+
+<p>Web-architecture change all the time — for both backend and frontend. <br>
+But is it <em>always</em> necessary? <br>
+And, more importantly … is it driven by developers longing for <em>change</em> and using the <em>latest technology</em>, or by client needs?</p>
+
+<p>There’s a <em>huge</em> cost involved in learning a new framework and re-writing an existing code-base.<br>
+What’s the cost-justification? By which parameters do we measure and justify that cost?</p>
+
+<p>Typically, it’s:</p>
+
+<ul>
+<li>[easier] Maintenance</li>
+<li>Future-proof</li>
+<li>Scalable</li>
+</ul>
+
+<p>But if we constantly need to re-write the code-base because there’s a new, smarter version of a popular framework, have we gained anything?</p>
+
+<p>All developers should read this <a href="https://css-tricks.com/how-the-web-is-really-built/" target="_blank" rel="noopener noreferrer">eye-opening article</a> by Lea Verou. Lea has looked at the numbers, and in contrast to how the modern developer thinks the web-landscape looks, the web is built on stable, old tech.</p>
+
+<p>Does that mean we should stick with the old? No, of course not. But maybe we shouldn’t always focus on the latest and the greatest, just because it’s <em>new.</em> Maybe we should focus on what we already have and try to make it better.</p>
+
+<p>Or <em>really</em> measure the pros and cons when we decide to create yet another … accordion!</p>
+
+<p>Thanks for reading!</p>
+
+
+<hr>
+
+<p>NB! Kyle Simpson has written an article about <a href="https://css-tricks.com/change-vs-inertia/" target="_blank" rel="noopener noreferrer">Change vs. Inertia</a>; maybe we’re slowly reaching a point, where inertia will triumph — at least until someone dares to challenge it.</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

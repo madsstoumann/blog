@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Radial Progress Indicators — Mads Stoumann</title>
+	<meta name="description" content="I like radial progress indicators. They save a lot of space and can communicate really complex scenarios very well. A client recently asked me to create a radial progress indicator with multiple value">
+	<link rel="canonical" href="https://blog.stoumann.dk/radial-progress-indicators">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Radial Progress Indicators">
+	<meta property="og:description" content="I like radial progress indicators. They save a lot of space and can communicate really complex scenarios very well. A client recently asked me to create a radial progress indicator with multiple value">
+	<meta property="og:url" content="https://blog.stoumann.dk/radial-progress-indicators">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/generic_cover.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Radial Progress Indicators">
+	<meta name="twitter:description" content="I like radial progress indicators. They save a lot of space and can communicate really complex scenarios very well. A client recently asked me to create a radial progress indicator with multiple value">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/generic_cover.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Radial Progress Indicators</h1>
+			<p>I like radial progress indicators. They save a lot of space and can communicate really complex scenarios very well.</p>
+<p>A client recently asked me to create a radial progress indicator with multiple values, like this:</p>
+<p><a href="https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/radial.png"><img loading="lazy" data-attachment-id="477" data-permalink="https://madsstoumann.wordpress.com/2015/12/30/radial-progress-indicators/radial/" data-orig-file="https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/radial.png" data-orig-size="215,215" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="radial" data-image-description="" data-image-caption="" data-medium-file="https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/radial.png?w=215" data-large-file="https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/radial.png?w=215" class="alignnone size-full wp-image-477" src="assets/wp-475/3e987cf7.png" alt="radial" width="215" height="215" srcset="https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/radial.png 215w, https://madsstoumann.wordpress.com/wp-content/uploads/2015/11/radial.png?w=150&amp;h=150 150w" sizes="(max-width: 215px) 100vw, 215px" /></a></p>
+<p>These are the times of SVG, and with SVG&#8217;s &lt;circle&gt;-element, it&#8217;s pretty easy:</p>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;circle r=&quot;90&quot; cx=&quot;100&quot; cy=&quot;100&quot;&gt;&lt;/circle&gt;
+</pre>
+<p>To create the progress, however, is a bit more tricky UNLESS you use the wonderful &#8220;stroke-dasharray&#8221;-hack!</p>
+<p>It&#8217;s basically a dashed line to stroke the circle with &mdash; but we&#8217;ll make one single dash the length we need, and the distance to the next dash the circumference of the circle, so we won&#8217;t ever see it. Pretty clever.</p>
+<p>In order to create the radial progress indicator shown in the image above, we need more &#8220;layers&#8221; of dashes:</p>
+<h2>SVG markup</h2>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;div class=&quot;radial-progress-wrapper&quot; id=&quot;radial1&quot; itemscope itemtype=&quot;http://schema.org/ActionStatusType&quot;&gt;
+  &lt;svg class=&quot;radial-progress&quot; version=&quot;1.1&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
+    &lt;circle r=&quot;90&quot; cx=&quot;100&quot; cy=&quot;100&quot;&gt;&lt;/circle&gt;
+    &lt;circle r=&quot;90&quot; cx=&quot;100&quot; cy=&quot;100&quot; class=&quot;radial-progress-1&quot; style=&quot;stroke-dasharray: 565.487px; stroke-dashoffset: 166.105px;&quot;&gt;&lt;/circle&gt;
+    &lt;circle r=&quot;90&quot; cx=&quot;100&quot; cy=&quot;100&quot; class=&quot;radial-progress-2&quot; style=&quot;stroke-dasharray: 565.487px; stroke-dashoffset: 194.379px;&quot;&gt;&lt;/circle&gt;
+    &lt;circle r=&quot;90&quot; cx=&quot;100&quot; cy=&quot;100&quot; class=&quot;radial-progress-3&quot; style=&quot;stroke-dasharray: 565.487px; stroke-dashoffset: 364.025px;&quot;&gt;&lt;/circle&gt;
+  &lt;/svg&gt;
+  &lt;div class=&quot;radial-progress-inner&quot;&gt;
+    &lt;meta itemprop=&quot;name&quot; content=&quot;Progress&quot; /&gt;
+    &lt;h1 class=&quot;radial-progress-header&quot; itemprop=&quot;description&quot;&gt;&lt;span class=&quot;radial-progress-percent&quot;&gt;73.63&lt;/span&gt;%&lt;/h1&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+<p>&mdash; the CSS will be rendered from this mixin:</p>
+<h2>Mixin</h2>
+<pre class="brush: css; title: ; notranslate" title="">
+@mixin radial-progress($size, $strokewidth, $color-bg, $strokes...) {
+    width: $size;
+    height: $size;
+    @include prefixed(transform, rotate(270deg));
+    stroke: $color-bg;
+    stroke-width: $strokewidth;
+	
+	&amp; &gt; circle { 
+		fill: transparent;
+	}
+	
+	@each $stroke in $strokes {
+    $i: index($strokes, $stroke);
+	    &amp;-#{$i} { 
+			stroke: $stroke;
+	    }
+	}
+
+	&amp;-inner {
+		@include prefixed(transform, translate(-50%, -50%));
+		position: absolute;
+		left: 50%;
+		top: 50%;
+	}
+	&amp;-wrapper {
+		display: inline-block;
+		position: relative;
+	}
+}
+</pre>
+<p>Now, let&#8217;s create a <em>class</em> using the mixin, with size, stroke and an array of colors:</p>
+<pre class="brush: css; title: ; notranslate" title="">
+.radial-progress {
+	@include radial-progress(200px, 1rem, #dedede, lighten(#ad87c4, 10), #ad87c4, #826296, #501a71 );
+}
+</pre>
+<p>The result can be seen in the follwing pen:</p>
+<div class="embed-codepen"><iframe title="Radial progress 1" id="cp_embed_LpMEZB" src="https://codepen.io/stoumann/embed/preview/LpMEZB?default-tabs=css%2Cresult&amp;height=300&amp;host=https%3A%2F%2Fcodepen.io&amp;slug-hash=LpMEZB" scrolling="no" frameborder="0" height="300" allowtransparency="true" allowfullscreen="true" allowpaymentrequest="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe></div>
+<p>Now, to be fair, a little JavaScript is needed to actually calculate the lengths of the dashes, but let&#8217;s wait with that, because wouldn&#8217;t it be nice if the progress was <em>animated</em>:</p>
+<div class="embed-codepen"><iframe title="Radial progress 2" id="cp_embed_yYrzjX" src="https://codepen.io/stoumann/embed/preview/yYrzjX?default-tabs=css%2Cresult&amp;height=300&amp;host=https%3A%2F%2Fcodepen.io&amp;slug-hash=yYrzjX" scrolling="no" frameborder="0" height="300" allowtransparency="true" allowfullscreen="true" allowpaymentrequest="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe></div>
+<p>For the animation, I use <em>requestAnimationFrame</em>, calculate the different lengths using a series of calculations, invilving:</p>
+<pre class="brush: jscript; title: ; notranslate" title="">
+(nRadius * Math.PI) * 2 // Circumference
+nRadius - ((nRadius / 100) * value)
+etc.
+</pre>
+<p>The complete function looks like this:</p>
+<pre class="brush: jscript; title: ; notranslate" title="">
+*	radial.js
+*	Animated Radial Progress-indicator
+*	(c)	Copyright 2015 Mads Stoumann
+*/
+function radial(aCircles, oTextCounter) {
+	var
+	aSum = [],
+	i,
+	nCurVal,
+	nLen = aCircles.length,
+	nRadius = (90 * Math.PI) * 2,
+	nStep,
+	nVal = 0;
+	
+	for (i = 0; i &lt; nLen; i++) {
+		aCircles[i].style.strokeDashoffset = nRadius;
+		aCircles[i].style.strokeDasharray = nRadius;
+		nVal += aCircles[i].getAttribute(&quot;data-val&quot;)-0;
+		aSum.push(nRadius - ((nRadius / 100) * nVal));
+	}
+	
+	aSum.reverse();
+	nStep = ((nRadius - ((nRadius / 100) * nVal)) / (100-nVal));
+	
+	function _animate() {
+		nCurVal = oTextCounter.innerHTML-0;
+		if (nCurVal &lt; nVal) {
+			nCurVal++;
+			for (i = nLen; i--;) {
+				if (aSum[i] &lt;= (nRadius - (nCurVal * nStep) + nStep)) {
+					aCircles[i].style.strokeDashoffset = nRadius - (nCurVal * nStep); 
+				}
+			}
+			oTextCounter.innerHTML = nCurVal;
+			window.requestAnimationFrame(_animate);
+		} 
+	}
+	window.requestAnimationFrame(_animate);
+}
+</pre>
+<p>The result can be seen in this Pen:</p>
+<div class="embed-codepen"><iframe title="Radial Progress 3" id="cp_embed_GpLYgP" src="https://codepen.io/stoumann/embed/preview/GpLYgP?default-tabs=html%2Cresult&amp;height=300&amp;host=https%3A%2F%2Fcodepen.io&amp;slug-hash=GpLYgP" scrolling="no" frameborder="0" height="300" allowtransparency="true" allowfullscreen="true" allowpaymentrequest="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe></div>
+<p>Happy coding &mdash; and Happy New Year!</p>
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

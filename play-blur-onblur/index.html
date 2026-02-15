@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Play Blur onblur — Mads Stoumann</title>
+	<meta name="description" content="Yesterday, a colleague asked me what we should do onfocusout on a task, we're working on. I told him...">
+	<link rel="canonical" href="https://blog.stoumann.dk/play-blur-onblur">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Play Blur onblur">
+	<meta property="og:description" content="Yesterday, a colleague asked me what we should do onfocusout on a task, we're working on. I told him...">
+	<meta property="og:url" content="https://blog.stoumann.dk/play-blur-onblur">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/929897/09178161.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Play Blur onblur">
+	<meta name="twitter:description" content="Yesterday, a colleague asked me what we should do onfocusout on a task, we're working on. I told him...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/929897/09178161.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Play Blur onblur</h1>
+			<p>Yesterday, a colleague asked me what we should do <code>onfocusout</code> on a task, we're working on. I told him it's called <code>onblur</code> in JavaScript (we were both right, more on this later!) </p>
+
+<p>To this, <em>another</em> colleague said:</p>
+
+<blockquote>
+<p>“Is this a reference to the band? Otherwise, it's a shitty name”.</p>
+</blockquote>
+
+<p>(if you're not familiar with the band <a href="https://en.wikipedia.org/wiki/Blur_(band)" target="_blank" rel="noopener noreferrer">Blur</a> or the <code>onblur</code>-event, this probably isn't funny at all) </p>
+
+<p>… maybe it <strong>is</strong> a shitty name, but what if we could <strong>play</strong> Blur <code>onblur</code>?</p>
+
+<p>First, we need to add an audio-file:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;audio</span> <span class="na">src=</span><span class="s">"woohoo.mp3"</span> <span class="na">hidden</span> <span class="na">id=</span><span class="s">"woohoo"</span><span class="nt">&gt;&lt;/audio&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>We'll give it an id, <code>woohoo</code>, so we can easily reach it from code.</p>
+
+<p>Then, we'll add a fieldset, with some inputs:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;fieldset</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;legend&gt;</span>Play Blur onblur<span class="nt">&lt;/legend&gt;</span>
+  <span class="nt">&lt;label&gt;</span>♪ Woohoo<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="nt">/&gt;&lt;/label&gt;</span>
+  <span class="nt">&lt;label&gt;</span>♫ Woohoo<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="nt">/&gt;&lt;/label&gt;</span>
+  <span class="nt">&lt;label&gt;</span>♫ Woohoo<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="nt">/&gt;&lt;/label&gt;</span>
+<span class="nt">&lt;/fieldset&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>And finally, a little snippet of JavaScript, where we iterate the <code>elements</code>-collection of the fieldset, and add an <code>onblur</code>-eventListener to each input:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="p">[...</span><span class="nx">app</span><span class="p">.</span><span class="nx">elements</span><span class="p">].</span><span class="nf">forEach</span><span class="p">(</span><span class="nx">input</span> <span class="o">=&gt;</span> <span class="nx">input</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">blur</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">woohoo</span><span class="p">.</span><span class="nf">play</span><span class="p">()</span>
+<span class="p">}))</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>And that's it! Now focus on a field and leave it ;-)</p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/ExwmqOv?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+
+<hr>
+
+<h2>
+  <a name="real-usecases" href="#real-usecases">
+  </a>
+  Real use-cases
+</h2>
+
+<p>Okay, so admittedly this is just plain <em>stupid</em>, but maybe we could actually use this technique in conjunction with the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Constraint_validation" target="_blank" rel="noopener noreferrer">Constraint validation API</a>?</p>
+
+<p>If a form-field is <strong>valid</strong>, it could play a tiny "ding!"-sound, and if it's <strong>invalid</strong>, a tiny "buzz"-sound.</p>
+
+
+<hr>
+
+<h2>
+  <a name="-raw-focusout-endraw-" href="#-raw-focusout-endraw-">
+  </a>
+  <code>focusout</code>
+</h2>
+
+<p>Turns out my colleague was right: there <strong>is</strong> an event called <code>focusout</code> (and it's counter-part: <code>onfocusin</code>) – I'm just so old-school, that I've used <code>focus</code> and <code>blur</code> for ages! </p>
+
+<p>Unlike <code>blur</code>, <code>onfocusout</code> actually <em>bubbles up</em>, meaning we can add a single event to the fieldset instead:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="nx">app</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">focusout</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">woohoo</span><span class="p">.</span><span class="nx">play</span><span class="p">)</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>– but it's not funny at all to play Blur <code>onfocusout</code>, is it? 😂</p>
+
+<p>In conslusion: Thank you to my colleagues for giving me an excuse to code something stupid <strong>and</strong> learning about the <code>onfocusout</code>-event!</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

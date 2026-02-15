@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Creating a Maintenance Page using a Cloudflare Worker — Mads Stoumann</title>
+	<meta name="description" content="Last night, an Azure outage took down several sites my company maintains. While the servers were...">
+	<link rel="canonical" href="https://blog.stoumann.dk/creating-a-maintenance-page-using-a-cloudflare-worker">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Creating a Maintenance Page using a Cloudflare Worker">
+	<meta property="og:description" content="Last night, an Azure outage took down several sites my company maintains. While the servers were...">
+	<meta property="og:url" content="https://blog.stoumann.dk/creating-a-maintenance-page-using-a-cloudflare-worker">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/2975676/20910df9.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Creating a Maintenance Page using a Cloudflare Worker">
+	<meta name="twitter:description" content="Last night, an Azure outage took down several sites my company maintains. While the servers were...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/2975676/20910df9.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Creating a Maintenance Page using a Cloudflare Worker</h1>
+			<p>Last night, an Azure outage took down several sites my company maintains. While the servers were running, a critical downstream service — the headless CMS, Umbraco Cloud — was down. The result? Users saw a blank page. They did what any of us would do: they refreshed, and refreshed again. This flood of requests hammered the services, even though the root cause was elsewhere.</p>
+
+<p>When a site's availability depends on other services, it is vulnerable to their downtime. A simple, robust maintenance page served from the edge is a cost-effective solution to this problem. It provides a clear, calm message to users, letting them know we're aware of the issue and working on it. This — hopefully! — stops the frantic refreshing that can overload the infrastructure.</p>
+
+<p>This article will guide you through creating a maintenance worker using Cloudflare Workers. It's a "break glass in case of emergency" tool that can be activated in seconds when a site is in trouble, ensuring users are never left staring at a blank screen again.</p>
+
+<p>We'll start with ...</p>
+
+<h2>
+  <a name="the-basics" href="#the-basics">
+  </a>
+  The Basics
+</h2>
+
+<p>In your IDE of choice, create a simple HTML page:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en-US"</span> <span class="na">dir=</span><span class="s">"ltr"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;title&gt;</span>Site Maintenance<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1, viewport-fit=cover"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"description"</span> <span class="na">content=</span><span class="s">"Site is under maintenance"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"view-transition"</span> <span class="na">content=</span><span class="s">"same-origin"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;style&gt;</span>
+    <span class="nt">body</span> <span class="p">{</span>
+      <span class="nl">background</span><span class="p">:</span> <span class="n">Canvas</span><span class="p">;</span>
+      <span class="nl">color</span><span class="p">:</span> <span class="n">CanvasText</span><span class="p">;</span>
+      <span class="py">color-scheme</span><span class="p">:</span> <span class="n">light</span> <span class="n">dark</span><span class="p">;</span>
+      <span class="nl">font-family</span><span class="p">:</span> <span class="n">system-ui</span><span class="p">;</span>
+      <span class="nl">line-height</span><span class="p">:</span> <span class="m">1.6</span><span class="p">;</span>
+      <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span> <span class="nb">auto</span><span class="p">;</span>
+      <span class="py">max-inline-size</span><span class="p">:</span> <span class="m">1024px</span><span class="p">;</span>
+      <span class="nl">padding</span><span class="p">:</span> <span class="m">0ch</span> <span class="m">4ch</span>
+    <span class="p">}</span>
+    <span class="nt">h1</span> <span class="p">{</span>
+      <span class="nl">font-size</span><span class="p">:</span> <span class="n">clamp</span><span class="p">(</span><span class="m">2em</span><span class="p">,</span> <span class="m">5vw</span><span class="p">,</span> <span class="m">4em</span><span class="p">);</span>
+      <span class="nl">line-height</span><span class="p">:</span> <span class="m">1.1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nt">p</span> <span class="p">{</span>
+      <span class="nl">font-size</span><span class="p">:</span> <span class="n">clamp</span><span class="p">(</span><span class="m">1em</span><span class="p">,</span> <span class="m">2.5vw</span><span class="p">,</span> <span class="m">1.5em</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="nt">&lt;/style&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;h1&gt;</span>We'll Be Right Back<span class="nt">&lt;/h1&gt;</span>
+  <span class="nt">&lt;p&gt;</span>The site is currently undergoing maintenance. Please check back later.<span class="nt">&lt;/p&gt;</span> 
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Now, in the Cloudflare Dashboard:</p>
+
+<ol>
+<li>Go to <code>Compute &amp; AI</code> &gt; <code>Workers &amp; Pages</code>.</li>
+<li>Click on <code>Create application</code>, and just pick the "Hello world" template.</li>
+<li>Go to the new application, and replace the script with:
+</li>
+</ol>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="k">async</span> <span class="nf">fetch</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">env</span><span class="p">,</span> <span class="nx">ctx</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Get the client's IP address</span>
+    <span class="kd">const</span> <span class="nx">clientIP</span> <span class="o">=</span> <span class="nx">request</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">CF-Connecting-IP</span><span class="dl">'</span><span class="p">);</span>
+
+    <span class="c1">// Define the rate limit key based on the client's IP</span>
+    <span class="kd">const</span> <span class="nx">rateLimitKey</span> <span class="o">=</span> <span class="s2">`ratelimit:</span><span class="p">${</span><span class="nx">clientIP</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+
+    <span class="c1">// Check rate limit in KV</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">env</span><span class="p">.</span><span class="nx">RATE_LIMIT</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// Fetch the current request count for the IP from KV</span>
+      <span class="kd">const</span> <span class="nx">count</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">env</span><span class="p">.</span><span class="nx">RATE_LIMIT</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="nx">rateLimitKey</span><span class="p">);</span>
+      <span class="kd">const</span> <span class="nx">requestCount</span> <span class="o">=</span> <span class="nf">parseInt</span><span class="p">(</span><span class="nx">count</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">0</span><span class="dl">'</span><span class="p">);</span>
+
+      <span class="c1">// If rate limit exceeded (60 requests in a minute)</span>
+      <span class="k">if </span><span class="p">(</span><span class="nx">requestCount</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nc">Response</span><span class="p">(</span><span class="dl">'</span><span class="s1">Too many requests. Please try again later.</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+          <span class="na">status</span><span class="p">:</span> <span class="mi">429</span><span class="p">,</span>
+          <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+            <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">text/plain</span><span class="dl">'</span><span class="p">,</span>
+            <span class="dl">'</span><span class="s1">Retry-After</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">60</span><span class="dl">'</span><span class="p">,</span>
+          <span class="p">},</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+
+      <span class="c1">// Increment the request count and set expiration to 1 minute</span>
+      <span class="k">await</span> <span class="nx">env</span><span class="p">.</span><span class="nx">RATE_LIMIT</span><span class="p">.</span><span class="nf">put</span><span class="p">(</span><span class="nx">rateLimitKey</span><span class="p">,</span> <span class="p">(</span><span class="nx">requestCount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">).</span><span class="nf">toString</span><span class="p">(),</span> <span class="p">{</span>
+        <span class="na">expirationTtl</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Maintenance page HTML</span>
+    <span class="kd">const</span> <span class="nx">maintenanceHTML</span> <span class="o">=</span> <span class="s2">`&lt;!DOCTYPE html&gt;
+&lt;html lang="en-US" dir="ltr"&gt;
+&lt;head&gt;
+  &lt;title&gt;Site Maintenance&lt;/title&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"&gt;
+  &lt;meta name="description" content="Site is under maintenance"&gt;
+  &lt;meta name="view-transition" content="same-origin"&gt;
+  &lt;style&gt;
+    body {
+      background: Canvas;
+      color: CanvasText;
+      color-scheme: light dark;
+      font-family: system-ui;
+      line-height: 1.6;
+      margin: 0 auto;
+      max-inline-size: 1024px;
+      padding: 0ch 4ch
+    }
+    h1 {
+      font-size: clamp(2em, 5vw, 4em);
+      line-height: 1.1;
+    }
+    p {
+      font-size: clamp(1em, 2.5vw, 1.5em);
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;We'll Be Right Back&lt;/h1&gt;
+  &lt;p&gt;The site is currently undergoing maintenance. Please check back later.&lt;/p&gt; 
+&lt;/body&gt;
+&lt;/html&gt;`</span><span class="p">;</span>
+
+    <span class="c1">// Return the maintenance page immediately (no origin fetch)</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nc">Response</span><span class="p">(</span><span class="nx">maintenanceHTML</span><span class="p">,</span> <span class="p">{</span>
+      <span class="na">status</span><span class="p">:</span> <span class="mi">503</span><span class="p">,</span>
+      <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+        <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">text/html;charset=UTF-8</span><span class="dl">'</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">Cache-Control</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">no-store, no-cache, must-revalidate</span><span class="dl">'</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">Retry-After</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">3600</span><span class="dl">'</span><span class="p">,</span>
+      <span class="p">},</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<h2>
+  <a name="rate-limiting" href="#rate-limiting">
+  </a>
+  Rate Limiting
+</h2>
+
+<p>We'll limit how many requests a single origin can make to our maintenance page.</p>
+
+<ol>
+<li>Go to <code>Storage &amp; Databases</code>, then <code>Workers KV</code>
+</li>
+<li>Click on <code>Create Instance</code>, call the namespace "RATE_LIMIT"</li>
+<li>Next, go to <code>Workers &amp; Pages</code>, then click on your maintenance worker.</li>
+<li>Click on <code>Bindings</code>, then <code>Add binding</code>
+</li>
+<li>Click on <code>KV namespace</code>, then on <code>Add Binding</code>
+</li>
+<li>Call your variable <code>RATE_LIMIT</code>
+</li>
+</ol>
+
+<h2>
+  <a name="testing" href="#testing">
+  </a>
+  Testing
+</h2>
+
+<p>Now, the worker won't run unless we add a <strong>route</strong>. This is something we only want to do when the site is actually failing.</p>
+
+<p>Go to your domain in Cloudflare, and select <code>Workers Routes</code>.</p>
+
+<ol>
+<li>Click <code>Add route</code> and fill out <code>route</code> — most likely your root domain followed by an asterisk, for example: <code>browser.style/*</code>
+</li>
+<li>Select your maintenance worker from the <code>Worker</code> dropdown</li>
+<li>Save, and after a minute or less, go to your domain. </li>
+<li>Do you see the maintenance page?</li>
+</ol>
+
+<p><a href="assets/2975676/3fd2730e.jpg" class="article-body-image-wrapper"><img src="assets/2975676/3fd2730e.jpg" alt="Maintenance page" loading="lazy" width="800" height="254"></a></p>
+
+
+<hr>
+
+<p>Now, <strong>remove</strong> the route — and next time a service is down and your site fails, re-enable the route.</p>
+
+
+<hr>
+
+<h2>
+  <a name="why-not-just-update-dns" href="#why-not-just-update-dns">
+  </a>
+  Why Not Just Update DNS?
+</h2>
+
+<p>You might wonder why you can't just point your DNS records to a different server with a maintenance page. The primary reason is time. DNS changes can take hours to propagate across the globe, as different DNS servers cache records for varying amounts of time. During a critical outage, you need a solution that works in seconds, not hours.</p>
+
+<p>A Cloudflare Worker, on the other hand, is deployed to Cloudflare's entire global network almost instantly. When you enable the route, the change is reflected worldwide within moments, ensuring all users see the maintenance page immediately. This makes it a far superior solution for rapid response during an incident.</p>
+
+
+<hr>
+
+<h2>
+  <a name="other-services" href="#other-services">
+  </a>
+  Other Services
+</h2>
+
+<p>While this article focuses on Cloudflare, other services offer similar edge computing capabilities that could be used to deploy a maintenance page. I haven't personally tested these, but they operate on similar principles:</p>
+
+<ul>
+<li>  <strong>AWS:</strong> Lambda@Edge and CloudFront Functions</li>
+<li>  <strong>Fastly:</strong> Compute@Edge</li>
+<li>  <strong>Vercel &amp; Netlify:</strong> Edge Functions</li>
+<li>  <strong>Akamai:</strong> EdgeWorkers</li>
+</ul>
+
+
+<hr>
+
+<p><a href="https://www.pexels.com/da-dk/foto/1148820/" target="_blank" rel="noopener noreferrer">Photo by Panumas Nikhomkhai, Pexels.</a></p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

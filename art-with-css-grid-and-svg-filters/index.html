@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Art with CSS Grid and SVG filters — Mads Stoumann</title>
+	<meta name="description" content="Have you ever explored the power of grid-auto-flow: dense? When combined with randomly generated...">
+	<link rel="canonical" href="https://blog.stoumann.dk/art-with-css-grid-and-svg-filters">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Art with CSS Grid and SVG filters">
+	<meta property="og:description" content="Have you ever explored the power of grid-auto-flow: dense? When combined with randomly generated...">
+	<meta property="og:url" content="https://blog.stoumann.dk/art-with-css-grid-and-svg-filters">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/2142769/fc3518c2.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Art with CSS Grid and SVG filters">
+	<meta name="twitter:description" content="Have you ever explored the power of grid-auto-flow: dense? When combined with randomly generated...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/2142769/fc3518c2.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Art with CSS Grid and SVG filters</h1>
+			<p>Have you ever explored the power of <code>grid-auto-flow: dense</code>? When combined with randomly generated values (constrained within a set range), you can use <code>grid-column</code> and <code>grid-row</code> properties to create cool, grid-based art. Let’s dive in!</p>
+
+<p>First, let’s create a base grid structure:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">main</span> <span class="p">{</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">grid</span><span class="p">;</span>
+  <span class="py">grid-auto-flow</span><span class="p">:</span> <span class="n">dense</span><span class="p">;</span>
+  <span class="py">grid-template-columns</span><span class="p">:</span> <span class="nb">repeat</span><span class="p">(</span><span class="n">auto-fill</span><span class="p">,</span>
+ <span class="n">minmax</span><span class="p">(</span><span class="n">var</span><span class="p">(</span><span class="n">--w</span><span class="p">,</span> <span class="m">4</span><span class="n">cqi</span><span class="p">),</span> <span class="m">1</span><span class="n">fr</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<ul>
+<li>
+<code>display: grid</code>: Establishes a CSS grid layout.</li>
+<li>
+<code>grid-auto-flow: dense</code>: Automatically fills gaps in the grid by repositioning items to minimize empty spaces.</li>
+<li>
+<code>grid-template-columns</code>: Defines a responsive column layout. Here, columns are created automatically to fill the available space (<code>auto-fill</code>), each with a minimum width of <code>--w</code> (defaulting to <code>4cqi</code>) and a maximum width of <code>1fr</code>.</li>
+</ul>
+
+<p>At this point, <code>--w</code> is undefined, so the default value (<code>4cqi</code>) is used. Here’s what the initial grid looks like:</p>
+
+<p><a href="assets/2142769/661e1840.jpg" class="article-body-image-wrapper"><img src="assets/2142769/661e1840.jpg" alt="Initial grid" loading="lazy" width="800" height="642"></a></p>
+
+<p>Next, we’ll fill the grid with a bunch of <code>&lt;b&gt;</code>-nodes. As we render these with JavaScript, we add 2 variables per node:</p>
+
+<ul>
+<li>
+<code>--gc</code>: Number of columns to span.</li>
+<li>
+<code>--gr</code>: Number of rows to span.</li>
+</ul>
+
+<p>Here’s how we generate random values in JavaScript:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">random</span> <span class="o">=</span> <span class="p">(</span><span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">)</span> <span class="o">=&gt;</span> 
+  <span class="nb">Math</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="nx">max</span> <span class="o">-</span> <span class="nx">min</span><span class="p">)</span> <span class="o">+</span> <span class="nx">min</span>
+
+<span class="kd">const</span> <span class="nx">column</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> 
+<span class="s2">`--gc:</span><span class="p">${</span><span class="nb">Math</span><span class="p">.</span><span class="nf">floor</span><span class="p">(</span><span class="nf">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">))}</span><span class="s2">;`</span>
+
+<span class="kd">const</span> <span class="nx">row</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> 
+<span class="s2">`--gr:</span><span class="p">${</span><span class="nb">Math</span><span class="p">.</span><span class="nf">floor</span><span class="p">(</span><span class="nf">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">))}</span><span class="s2">;`</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>In CSS, we apply these custom properties:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">b</span> <span class="p">{</span>
+  <span class="nl">background</span><span class="p">:</span> <span class="n">oklch</span><span class="p">(</span><span class="n">var</span><span class="p">(</span><span class="n">--l</span><span class="p">)</span> <span class="n">var</span><span class="p">(</span><span class="n">--c</span><span class="p">)</span> <span class="n">var</span><span class="p">(</span><span class="n">--h</span><span class="p">)</span> <span class="p">/</span> <span class="n">var</span><span class="p">(</span><span class="n">--a</span><span class="p">));</span>
+  <span class="nl">grid-column</span><span class="p">:</span> <span class="n">span</span> <span class="n">var</span><span class="p">(</span><span class="n">--gc</span><span class="p">);</span>
+  <span class="nl">grid-row</span><span class="p">:</span> <span class="n">span</span> <span class="n">var</span><span class="p">(</span><span class="n">--gr</span><span class="p">,</span> <span class="m">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Let’s also add some random colors in <code>oklch</code>, using a small helper method:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">color</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="s2">`--l:</span><span class="p">${</span>
+  <span class="nf">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)}</span><span class="s2">%;--c:</span><span class="p">${</span>
+  <span class="nf">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)}</span><span class="s2">;--h:</span><span class="p">${</span>
+  <span class="nf">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">60</span><span class="p">)}</span><span class="s2">;--a:</span><span class="p">${</span>
+  <span class="nf">random</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)}</span><span class="s2">;`</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Now we get:</p>
+
+<p><a href="assets/2142769/18f30772.jpg" class="article-body-image-wrapper"><img src="assets/2142769/18f30772.jpg" alt="Dense" loading="lazy" width="800" height="639"></a></p>
+
+<p>Thank you, <code>grid-auto-flow: dense</code>!</p>
+
+<p>To make things more dynamic, let’s add transformations like rotation and scaling:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">b</span> <span class="p">{</span>
+  <span class="py">rotate</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--r</span><span class="p">);</span>
+  <span class="py">scale</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--s</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>In JavaScript, we generate random transformation values:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">transform</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> 
+<span class="s2">`--r:</span><span class="p">${</span><span class="nf">random</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)}</span><span class="s2">deg;
+--s:</span><span class="p">${</span><span class="nf">random</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">)}</span><span class="s2">;`</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Let’s check it out:</p>
+
+<p><a href="assets/2142769/db58288e.jpg" class="article-body-image-wrapper"><img src="assets/2142769/db58288e.jpg" alt="transform" loading="lazy" width="800" height="639"></a></p>
+
+<p>Fancy! Now, to take it up a notch, let’s add <a href="https://heredragonsabound.blogspot.com/2020/02/creating-pencil-effect-in-svg.html" target="_blank" rel="noopener noreferrer">some cool SVG filters</a>.</p>
+
+<p>In JavaScript, we add another small helper method to pick a random filter per <code>&lt;b&gt;</code>-node:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">filter</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span>
+  <span class="s2">`--url:url(#</span><span class="p">${</span>
+    <span class="p">[</span>
+      <span class="dl">"</span><span class="s2">pencilTexture</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">pencilTexture2</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">pencilTexture3</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">pencilTexture4</span><span class="dl">"</span><span class="p">,</span>
+    <span class="p">][</span><span class="nb">Math</span><span class="p">.</span><span class="nf">floor</span><span class="p">(</span><span class="nf">random</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">))]</span>
+  <span class="p">}</span><span class="s2">);`</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>This gives us:</p>
+
+<p><a href="assets/2142769/a2c81ade.jpg" class="article-body-image-wrapper"><img src="assets/2142769/a2c81ade.jpg" alt="Filter" loading="lazy" width="800" height="639"></a></p>
+
+<p>Now, by simply adjusting the <code>--w</code> property and the number of elements, we can generate vastly different artworks:</p>
+
+<p><a href="assets/2142769/10f40eac.jpg" class="article-body-image-wrapper"><img src="assets/2142769/10f40eac.jpg" alt="Thin lines" loading="lazy" width="800" height="922"></a></p>
+
+<p>Or:</p>
+
+<p><a href="assets/2142769/6b622500.jpg" class="article-body-image-wrapper"><img src="assets/2142769/6b622500.jpg" alt="Image description" loading="lazy" width="800" height="862"></a></p>
+
+<p>We can also adjust the start- and stop values in the color method:</p>
+
+<p><a href="assets/2142769/a2389f8a.jpg" class="article-body-image-wrapper"><img src="assets/2142769/a2389f8a.jpg" alt="Colors" loading="lazy" width="800" height="922"></a></p>
+
+
+<hr>
+
+<h2>
+  <a name="demo" href="#demo">
+  </a>
+  Demo
+</h2>
+
+<p>Here’s a Codepen demo. I've added controls below the artwork, so you can easily tweak the properties:</p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/yyBOeYX?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Front-End Guidelines: Meta and Apps — Mads Stoumann</title>
+	<meta name="description" content="This is a series of guidelines written for my team. As they are work-in-progress, feel free to comment and make suggestions! All the stuff you cannot see… This document is a comprehensive list of all ">
+	<link rel="canonical" href="https://blog.stoumann.dk/front-end-guidelines-meta-and-apps">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Front-End Guidelines: Meta and Apps">
+	<meta property="og:description" content="This is a series of guidelines written for my team. As they are work-in-progress, feel free to comment and make suggestions! All the stuff you cannot see… This document is a comprehensive list of all ">
+	<meta property="og:url" content="https://blog.stoumann.dk/front-end-guidelines-meta-and-apps">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/generic_cover.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Front-End Guidelines: Meta and Apps">
+	<meta name="twitter:description" content="This is a series of guidelines written for my team. As they are work-in-progress, feel free to comment and make suggestions! All the stuff you cannot see… This document is a comprehensive list of all ">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/generic_cover.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Front-End Guidelines: Meta and Apps</h1>
+			<p><em>This is a series of guidelines written for my team.<br />
+As they are work-in-progress, feel free to comment and make suggestions!</em></p>
+<h2>All the stuff you cannot see…</h2>
+<p>This document is a comprehensive list of all the hidden features you can provide in html, that can enrich the experience on various devices, as well as provide better information about the document for search-engines and crawlers.</p>
+<h3>Icons</h3>
+<p>For favicon, shortcut-icon and app-specific icons, use <a href="http://realfavicongenerator.net/" target="_blank">RealFaviconGenerator</a>, a great tool that can create all the icons for all platforms based on an svg-file.</p>
+<h3>Html</h3>
+<ul>
+<li><strong>Open Graph namespace</strong>. See further OG-metadata further below.
+<pre class="brush: xml; title: ; notranslate" title="">
+prefix=&quot;og: http://ogp.me/ns#&quot;
+</pre>
+</li>
+<li><strong><a href="http://en.wikipedia.org/wiki/Cache_manifest_in_HTML5" target="_blank">Cache Manifest</a></strong>. Which files will be cached in offline-viewing:
+<pre class="brush: xml; title: ; notranslate" title="">
+manifest=&quot;cache.manifest&quot;
+</pre>
+</li>
+</ul>
+<h3>Meta</h3>
+<ul>
+<li><strong>Application Name</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta name=&quot;application-name&quot; content=&quot;Valtech Denmark&quot;&gt;
+</pre>
+</li>
+<li><strong>Author</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta name=&quot;author&quot; content=&quot;Mads Stoumann&quot;&gt;
+</pre>
+</li>
+<li><strong>Charset</strong>. Normally: utf-8, iso-8859-1. Other sets <a href="http://www.iana.org/assignments/character-sets/character-sets.xhtml" target="_blank">here</a>.
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta charset=&quot;utf-8&quot;&gt;
+</pre>
+</li>
+<li><strong>Description</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta name=&quot;description&quot; content=&quot;A digital agency&quot;&gt;
+</pre>
+</li>
+<li><strong>Generator</strong>. If a program generated the content.
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta name=&quot;generator&quot; content=&quot;SoftwareName&quot;&gt;
+</pre>
+</li>
+<li><strong>Keywords</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta name=&quot;keywords&quot; content=&quot;HTML, CSS, JavaScript&quot;&gt;
+</pre>
+</li>
+<li><strong>Mobile Web App</strong>. Use for Android Apps
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta name=&quot;mobile-web-app-capable&quot; content=&quot;yes&quot;&gt;
+</pre>
+</li>
+<li><strong>Robots</strong>. Allow/disallow various crawler-indexing types.
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta name=&quot;robots&quot; content=&quot;index, follow&quot;&gt;
+</pre>
+<p>—Possible values:</p>
+<ul>
+<li>index</li>
+<li>noindex</li>
+<li>noimageindex</li>
+<li>none</li>
+<li>follow</li>
+<li>nofollow</li>
+<li>noarchive</li>
+<li>nocache</li>
+<li>nosnippet</li>
+<li>noodp</li>
+<li>noydir</li>
+</ul>
+</li>
+</ul>
+<h3>Link Rel</h3>
+<ul>
+<li><strong>Alternate</strong>. Links to an alternate version of the document (i.e. print page, translated or mirror). Applies to: link, a, area.
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;link rel=&quot;alternate&quot; type=&quot;application/atom+xml&quot; title=&quot;RRS News&quot; href=&quot;/blog/news/atom&quot;&gt;
+</pre>
+</li>
+<li><strong>Archives</strong>. Links to an index-page with a list of records (blog-posts etc.). Applies to: link, a, area.
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;link rel=&quot;archives&quot; title=&quot;&quot;&gt;
+</pre>
+</li>
+<li><strong>Author</strong>. Links to a URI, representing the author of the document. Applies to: link, a, area.
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;link rel=&quot;author&quot; title=&quot;&quot;&gt;
+</pre>
+</li>
+<li><strong>Canonical</strong>. Indicates that there are multiple versions of the same document.
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;link rel=&quot;canonical&quot; href=&quot;http://example.com/&quot;&gt;
+&lt;link rel=&quot;canonical&quot; href=&quot;http://example.com/index.html&quot;&gt;
+</pre>
+</li>
+<li><strong>Help</strong>. Links to a help document. Applies to: link, a, area.
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;link rel=&quot;help&quot; href=&quot;/help/&quot;&gt;
+</pre>
+</li>
+<li><strong>Icon.</strong> Imports an icon to represent the document.
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;link rel=&quot;icon&quot; href=&quot;/favicon.ico&quot; type=&quot;image/x-icon&quot; sizes=&quot;128x128 512x512 8192x8192 32768x32768&quot;&gt;
+</pre>
+</li>
+<li><strong>Imports</strong>. Imports external HTML, used for templates, web components etc. Resources on other origins must be CORS-enabled.
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;link rel=&quot;import&quot; href=&quot;templates/template.html&quot;&gt;
+</pre>
+</li>
+<li><strong>License</strong>. Links to copyright information for the document. Applies to: link, a, area.
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;link rel=&quot;license&quot; href=&quot;http://www.opensource.org/licenses/mit-license.php&quot;&gt;
+</pre>
+</li>
+<li><strong>Meta</strong>. Gives the possibility to RSS Readers to find the Web site updates feed.
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;link rel=&quot;meta&quot; type=&quot;application/rdf+xml&quot; href=&quot;foaf.rdf&quot;&gt;
+</pre>
+</li>
+<li><strong>Next</strong>. Indicates that the document is a part of a series, and that the next document in the series is the referenced document. Applies to: link, a, area.
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;link rel=&quot;next&quot; href=&quot;http://www.example.com/article?story=abc&amp;page=3&quot;&gt;
+</pre>
+</li>
+<li><strong>Prev</strong>. Indicates that the document is a part of a series, and that the previous document in the series is the referenced document. Applies to: link, a, area.
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;link rel=&quot;prev&quot; href=&quot;http://www.example.com/article?story=abc&amp;page=1&quot;&gt;
+</pre>
+</li>
+<li><strong>Pingback</strong>. Read <a href="http://hixie.ch/specs/pingback/pingback-1.0" target="_blank">more here</a>.
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;link rel=&quot;pingback&quot; href=&quot;pingback server&quot;&gt;
+</pre>
+</li>
+<li><strong>Search</strong>. Links to a search tool for the document. Applies to: link, a, area.
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;link rel=&quot;search&quot; type=&quot;application/opensearchdescription+xml&quot; title=&quot;Website&quot; href=&quot;opensearch.xml&quot;&gt;
+</pre>
+</li>
+<li><strong>Sidebar</strong>. Open URL in sidebar. Applies to: link, a, area.
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;link rel=&quot;sidebar&quot; href=&quot;uri.html&quot;&gt;
+</pre>
+</li>
+<li><strong>Shortcut Icon</strong>.
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;link rel=&quot;shortcut icon&quot; sizes=&quot;196x196&quot; href=&quot;icon196.png&quot;&gt;
+</pre>
+</li>
+<li><strong>Stylesheet</strong>.<br />
+<a href="http://www.w3schools.com/tags/att_link_media.asp" target="_blank">Available media-types</a>:</p>
+<ul>
+<li>all</li>
+<li>aural</li>
+<li>braille</li>
+<li>handheld</li>
+<li>projection</li>
+<li>print</li>
+<li>screen</li>
+<li>tty</li>
+<li>tv</li>
+</ul>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;link rel=&quot;stylesheet&quot; href=&quot;stylesheet.css&quot; type=&quot;text/css&quot; media=&quot;all&quot;&gt;
+</pre>
+</li>
+<li><strong>Tag</strong>. The tag keyword indicates that the tag that the referenced document represents applies to the current document. Applies to: link, a, area.
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;link rel=&quot;tag&quot; href=&quot;uri.html&quot;&gt;
+</pre>
+</li>
+</ul>
+<h4>Performance and caching</h4>
+<ul>
+<li><strong>dns-prefetch</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;link rel=&quot;dns-prefetch&quot; href=&quot;//hostname_to_resolve.com&quot;&gt;
+</pre>
+</li>
+<li><strong>subresource</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;link rel=&quot;subresource&quot; href=&quot;/js/myapp.js&quot;&gt;
+</pre>
+</li>
+<li><strong>prefetch</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;link rel=&quot;prefetch&quot; href=&quot;/images/big.jpeg&quot;&gt;
+</pre>
+</li>
+<li><strong>prerender</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;link rel=&quot;prerender&quot; href=&quot;//example.org/next_page.html&quot;&gt;
+</pre>
+</li>
+</ul>
+<p>Other link rels: <a href="http://microformats.org/wiki/existing-rel-values" rel="nofollow">http://microformats.org/wiki/existing-rel-values</a></p>
+<h2>Vender-specific markup</h2>
+<h3>Apple</h3>
+<ul>
+<li><strong>viewport</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, height=device-height, initial-scale=1, minimum-scale=0.25, maximum-scale=1, user-scalable=no&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;minimal-ui&quot;&gt;
+</pre>
+</li>
+<li><strong>apple-mobile-web-app-capable</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta name=&quot;apple-mobile-web-app-capable&quot; content=&quot;yes&quot;&gt;
+</pre>
+</li>
+<li><strong>apple-mobile-web-app-status-bar-style</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta name=&quot;apple-mobile-web-app-status-bar-style&quot; content=&quot;black&quot;&gt;
+</pre>
+</li>
+<li><strong>apple-mobile-web-app-app-title</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta name=&quot;apple-mobile-web-app-app-title&quot; content=&quot;MyTitle&quot;&gt;
+</pre>
+</li>
+<li><strong>format-detection</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta name=&quot;format-detection&quot; content=&quot;telephone=no&quot;&gt;
+</pre>
+</li>
+<li><strong>apple-touch-startup-image</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;link rel=&quot;apple-touch-startup-image&quot; href=&quot;/startup.png&quot;&gt;
+</pre>
+</li>
+<li><strong>apple-touch-icon</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;link rel=&quot;apple-touch-icon&quot; href=&quot;touch-icon-iphone.png&quot;&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;76x76&quot; href=&quot;touch-icon-ipad.png&quot;&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;120x120&quot; href=&quot;touch-icon-iphone-retina.png&quot;&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;152x152&quot; href=&quot;touch-icon-ipad-retina.png&quot;&gt;
+</pre>
+</li>
+</ul>
+<h4>App-Store</h4>
+<ul>
+<li><strong>app-id:</strong> (Required.) Your app&#8217;s unique identifier.</li>
+<li><strong>affiliate-data:</strong> (Optional.) Your iTunes affiliate string.</li>
+<li><strong>app-argument:</strong> (Optional.) A URL that provides context to your native app.</li>
+<li>Example:
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta name=&quot;apple-itunes-app&quot; content=&quot;app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL&quot;&gt;
+</pre>
+</li>
+</ul>
+<h3>AppLinks</h3>
+<ul>
+<li><strong>al:ios:url</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta property=&quot;al:ios:url&quot; content=&quot;applinks://docs&quot; /&gt;
+</pre>
+</li>
+<li><strong>al:ios:app_store_id</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta property=&quot;al:ios:app_store_id&quot; content=&quot;12345&quot; /&gt;
+</pre>
+</li>
+<li><strong>al:ios:app_name</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta property=&quot;al:ios:app_name&quot; content=&quot;App Links&quot; /&gt;
+</pre>
+</li>
+<li><strong>al:android:url</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta property=&quot;al:android:url&quot; content=&quot;applinks://docs&quot; /&gt;
+</pre>
+</li>
+<li><strong>al:android:app_name</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta property=&quot;al:android:app_name&quot; content=&quot;App Links&quot; /&gt;
+</pre>
+</li>
+<li><strong>al:android:package</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta property=&quot;al:android:package&quot; content=&quot;org.applinks&quot; /&gt;
+</pre>
+</li>
+<li><strong>al:web:url</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta property=&quot;al:web:url&quot; content=&quot;http://applinks.org/documentation&quot; /&gt;
+</pre>
+</li>
+</ul>
+<h3>Google Android</h3>
+<ul>
+<li><strong><a>alternate: android-app</a></strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;link rel=&quot;alternate&quot; href=&quot;android-app://com.example.android/http/example.com/gizmos?1234&quot; /&gt;
+</pre>
+</li>
+</ul>
+<h3>Microsoft</h3>
+<ul>
+<li><strong>X-UA-Compatible</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+</pre>
+<p>&mdash;Possible values:<br />
+IE=5<br />
+IE=EmulateIE7<br />
+IE=7<br />
+IE=EmulateIE8<br />
+IE=8<br />
+IE=EmulateIE9<br />
+IE=9<br />
+IE=edge
+</li>
+<li><strong>cleartype</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta http-equiv=&quot;cleartype&quot; content=&quot;on&quot;&gt;
+</pre>
+</li>
+<li><strong>Conditional comments</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;!--[if expression]&gt; HTML &lt;![endif]--&gt;
+</pre>
+<p>&mdash;Possible values:<br />
+IE : Internet Explorer<br />
+IEMobile : Windows Phone<br />
+WindowsEdition : IE8 on Win7<br />
+lt : Less than operator<br />
+lte :	Less than or equal to<br />
+gt : Greater than<br />
+gte :	Greater than or equal to<br />
+!	: NOT operator<br />
+(): Subexpression operator<br />
+&amp;	: AND operator<br />
+|	: OR operator<br />
+true : Evaluates to true<br />
+false : Evaluates to false
+</li>
+<li><strong>Microsoft Application Metadata. Read <a href="http://msdn.microsoft.com/en-us/library/ie/dn255024(v=vs.85).aspxapplication-name" target="_blank">more here</a>.</strong><br />
+msapplication-allowDomainApiCalls<br />
+msapplication-allowDomainMetaTags<br />
+msapplication-badge<br />
+msapplication-config<br />
+msapplication-navbutton-color<br />
+msapplication-notification<br />
+msapplication-square150x150logo<br />
+msapplication-square310x310logo<br />
+msapplication-square70x70logo<br />
+msapplication-wide310x150logo<br />
+msapplication-starturl<br />
+msapplication-task<br />
+msapplication-task-separator<br />
+msapplication-TileColor<br />
+msapplication-TileImage<br />
+msapplication-tooltip<br />
+msapplication-window
+</li>
+</ul>
+<h4>Windows Tiles</h4>
+<ul>
+<li><strong>msapplication-TileImage</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta name=&quot;msapplication-TileImage&quot; content=&quot;images\tileimage.jpg&quot;&gt;
+</pre>
+</li>
+<li><strong>msapplication-TileColor</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta name=&quot;msapplication-TileColor&quot; content=&quot;#FF3300&quot;&gt;
+</pre>
+</li>
+<li><strong>msapplication-badge</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta name=&quot;msapplication-badge&quot; content=&quot;frequency=30; polling-uri=http://example.com/id45453245/polling.xml&quot;&gt;
+</pre>
+</li>
+<li><strong>msapplication-notification</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta name=&quot;msapplication-notification&quot; content=&quot;frequency=60;polling-uri=http://contoso.com/livetile&quot;&gt;
+</pre>
+</li>
+</ul>
+<h4>Windows Store</h4>
+<ul>
+<li><strong>msApplication-ID</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta name=&quot;msApplication-ID&quot; content=&quot;app-name&quot;/&gt;
+</pre>
+</li>
+<li><strong>msApplication-PackageFamilyName</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta name=&quot;msApplication-PackageFamilyName&quot; content=&quot;app-package&quot;/&gt;
+</pre>
+</li>
+<li><strong>msApplication-Arguments</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta name=&quot;msApplication-Arguments&quot; content=&quot;optional-arguments&quot;/&gt;
+</pre>
+</li>
+</ul>
+<h3>Open Graph. Read <a href="http://ogp.me" target="_blank">more here</a>.</h3>
+<ul>
+<li><strong>og:title</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta property=&quot;og:title&quot; content=&quot;The Rock&quot; /&gt;
+</pre>
+</li>
+<li><strong>og:type</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta property=&quot;og:type&quot; content=&quot;video.movie&quot; /&gt;
+</pre>
+</li>
+<li><strong>og:url</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta property=&quot;og:url&quot; content=&quot;http://www.imdb.com/title/tt0117500/&quot; /&gt;
+</pre>
+</li>
+<li><strong>og:image</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta property=&quot;og:image&quot; content=&quot;http://ia.media-imdb.com/images/rock.jpg&quot; /&gt;
+</pre>
+</li>
+<li><strong>og:site_name</strong>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;meta property=&quot;og:site_name&quot; content=&quot;IMDb&quot; /&gt;
+</pre>
+</li>
+</ul>
+<h3>Inline rel-examples:</h3>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;a href=&quot;http://example.com/&quot; rel=&quot;external nofollow&quot;&gt;Link&lt;/a&gt;
+&lt;a href=&quot;a.html&quot; rel=&quot;bookmark&quot;&gt;Bookmark this&lt;/a&gt;
+&lt;a href=&quot;a.xml&quot; rel=&quot;alternate&quot; type=&quot;application/atom+xml&quot;&gt;Recently Visited Planets&lt;/a&gt;
+&lt;a href=&quot;a.html&quot; rel=&quot;noreferrer&quot;&gt;Dont't refer this&lt;/a&gt;
+</pre>
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>
