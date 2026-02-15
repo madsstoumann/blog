@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Re-creating Apple’s Dark Mode Icon — Mads Stoumann</title>
+	<meta name="description" content="A couple of weeks ago, while fiddling around with my iPhone's Control Center, I noticed a new icon:...">
+	<link rel="canonical" href="https://blog.stoumann.dk/re-creating-apples-dark-mode-icon">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Re-creating Apple’s Dark Mode Icon">
+	<meta property="og:description" content="A couple of weeks ago, while fiddling around with my iPhone's Control Center, I noticed a new icon:...">
+	<meta property="og:url" content="https://blog.stoumann.dk/re-creating-apples-dark-mode-icon">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/1122033/6f4d0773.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Re-creating Apple’s Dark Mode Icon">
+	<meta name="twitter:description" content="A couple of weeks ago, while fiddling around with my iPhone's Control Center, I noticed a new icon:...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/1122033/6f4d0773.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Re-creating Apple’s Dark Mode Icon</h1>
+			<p>A couple of weeks ago, while fiddling around with my iPhone's <em>Control Center</em>, I noticed a new icon: "Dark Mode":</p>
+
+<p><a href="assets/1122033/a6902603.jpg" class="article-body-image-wrapper"><img src="assets/1122033/a6902603.jpg" alt="Apple Dark Mode Icon" loading="lazy" width="302" height="288"></a></p>
+
+<p>I've seen plenty "Dark Mode"-icons — most of them involving the sun and the moon — but this one is so simple and intuitive.</p>
+
+<p>Let's re-create it in SVG, and add some CSS magic!</p>
+
+<p>First, we need a circle:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight xml"><code><span class="nt">&lt;circle</span> <span class="na">r=</span><span class="s">"195"</span> <span class="na">cx=</span><span class="s">"200"</span> <span class="na">cy=</span><span class="s">"200"</span> <span class="na">fill=</span><span class="s">"#FFF"</span> <span class="na">stroke=</span><span class="s">"#000"</span> <span class="na">stroke-width=</span><span class="s">"10"</span> <span class="nt">/&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>I've added a black stroke, so the icon works on light backgrounds as well:</p>
+
+<p><a href="assets/1122033/d7c91ca7.jpg" class="article-body-image-wrapper"><img src="assets/1122033/d7c91ca7.jpg" alt="Circle" loading="lazy" width="436" height="403"></a></p>
+
+<p>Now, the semi-circle is a bit more complicated. For this, we need an <strong>Arc</strong>. </p>
+
+<p>In SVG, this is called <code>A</code>, and is within a <code>path</code>:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight xml"><code><span class="nt">&lt;path</span> <span class="na">d=</span><span class="s">" M 200 375 A 175 175 0 0 1 200 2"</span> <span class="nt">/&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>While you <em>can</em> manually code arcs, it's much easier to use a tool for it. <a href="http://xahlee.info/js/svg_circle_arc.html" target="_blank" rel="noopener noreferrer">Here's an online tool, you can use</a>.</p>
+
+<p>Now, we have this:</p>
+
+<p><a href="assets/1122033/bbda4904.jpg" class="article-body-image-wrapper"><img src="assets/1122033/bbda4904.jpg" alt="SVG Arc" loading="lazy" width="432" height="413"></a></p>
+
+<p>Let's add two more semi-circles<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight xml"><code><span class="nt">&lt;path</span> <span class="na">d=</span><span class="s">" M 200 300 A 100 100 0 0 1 200 100"</span> <span class="na">fill=</span><span class="s">"#FFF"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;path</span> <span class="na">d=</span><span class="s">" M 200 100 A 100 100 180 0 1 200 300"</span> <span class="nt">/&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>— and we have this:</p>
+
+<p><a href="assets/1122033/0556dc61.jpg" class="article-body-image-wrapper"><img src="assets/1122033/0556dc61.jpg" alt="Complete Icon" loading="lazy" width="413" height="420"></a></p>
+
+<p>Now for the fun part! Let's add a single <em>CSS Custom Property</em>, that can either be <code>0</code> or <code>1</code>:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">body</span> <span class="p">{</span>
+  <span class="py">--dark-mode</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Using this property, we'll set the <code>background-color</code> of the page:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">body</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="n">hsl</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0%</span><span class="p">,</span> <span class="n">calc</span><span class="p">(</span><span class="m">100%</span> <span class="err">*</span> <span class="p">(</span><span class="m">1</span> <span class="n">-</span> <span class="n">var</span><span class="p">(</span><span class="n">--dark-mode</span><span class="p">))));</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>In <code>hsl</code>, the third paramter is <em>lightness</em>. <code>0%</code> is black, while <code>100%</code> is white. So we'll multiply <code>100%</code> with either <code>1</code> (dark mode <strong>on</strong>) or <code>0</code> (dark mode <strong>off</strong>).</p>
+
+<p>We'll use the same property to <code>invert</code> and <code>rotate</code> the icon:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nc">.class</span> <span class="p">{</span>
+  <span class="nl">filter</span><span class="p">:</span> <span class="nb">invert</span><span class="p">(</span><span class="n">var</span><span class="p">(</span><span class="n">--dark-mode</span><span class="p">));</span>
+  <span class="nl">transform</span><span class="p">:</span> <span class="n">rotate</span><span class="p">(</span><span class="n">calc</span><span class="p">(</span><span class="n">var</span><span class="p">(</span><span class="n">--dark-mode</span><span class="p">)</span> <span class="err">*</span> <span class="m">180deg</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Now, if you change the <code>--dark-mode</code>-property to <code>1</code>, the icon will invert and rotate, and the background of the page will change to black:</p>
+
+<p><a href="assets/1122033/4300f8f2.jpg" class="article-body-image-wrapper"><img src="assets/1122033/4300f8f2.jpg" alt="Dark Mode" loading="lazy" width="382" height="361"></a></p>
+
+<p>How you toggle the property is up to you. The "no-JS"-way could be a <code>checkbox</code>, while the JS-way could be something like this:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="nx">element</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">current</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nf">getPropertyValue</span><span class="p">(</span><span class="dl">"</span><span class="s2">--dark-mode</span><span class="dl">"</span><span class="p">)</span> <span class="o">-</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nf">setProperty</span><span class="p">(</span><span class="dl">"</span><span class="s2">--dark-mode</span><span class="dl">"</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="nx">current</span><span class="p">);</span>
+<span class="p">})</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>First, get the current status using <code>getPropertyValue()</code>. Convert it to a numeric value by subtracting a <code>0</code> (old JS-hack!), then set the opposite value using <code>setProperty()</code>.</p>
+
+<p>Here's a Codepen demo:</p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/YzeBPrw?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+<blockquote>
+<p><strong>NOTE:</strong> In the Codepen, I've added the JS-toggle-function to the <code>svg</code> itself. In production, add proper semantics, like a <code>&lt;button&gt;</code> or similar.</p>
+</blockquote>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

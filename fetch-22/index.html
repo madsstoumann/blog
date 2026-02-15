@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Fetch-22 — Mads Stoumann</title>
+	<meta name="description" content="Browsers have supported fetch() for years now (except Internet Explorer), but I still see many develo...">
+	<link rel="canonical" href="https://blog.stoumann.dk/fetch-22">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Fetch-22">
+	<meta property="og:description" content="Browsers have supported fetch() for years now (except Internet Explorer), but I still see many develo...">
+	<meta property="og:url" content="https://blog.stoumann.dk/fetch-22">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/555399/2a330124.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Fetch-22">
+	<meta name="twitter:description" content="Browsers have supported fetch() for years now (except Internet Explorer), but I still see many develo...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/555399/2a330124.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Fetch-22</h1>
+			<p>Browsers have supported <code>fetch()</code> for years now (except Internet Explorer), but I still see many developers use classic XHR-based "ajax". </p>
+
+<p>Why is that? I think — partly — it's because <code>fetch()</code> is missing <code>timeout</code> and an easier way of handling errors. Yet, developers <strong>do</strong> want to use it because of its simplicity.<br>
+In other words: it's a <strong>fetch-22</strong> situation (bad pun intended!)</p>
+
+<p>I've written a small module, fetch22(), which extends the fetch() init-object with:</p>
+
+<ul>
+<li>
+<strong>callback(true|false)</strong> : function to call when fetch starts(true) and ends(false)</li>
+<li>
+<strong>errorHandler(error)</strong> : custom function to run if an error occurs</li>
+<li>
+<strong>errorList</strong> : Array of status-codes to manually trigger errors</li>
+<li>
+<strong>parser(response)</strong> : custom function to parse the response, default will use .json() or .text(), depending on response content-type</li>
+<li>
+<strong>parserArgs</strong> : Array of extra arguments to send to the custom parser after response</li>
+<li>
+<strong>timeout</strong> : period in milliseconds to allow before a Timeout Error. Default is 9999ms</li>
+</ul>
+
+<p>The module itself can be <a href="https://assets.stoumann.dk/js/fetch22.mjs" target="_blank" rel="noopener noreferrer">grabbed here</a>, and a Pen with examples can be seen here (but go to Codepen and see it in full-screen):</p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/yLaPmaB?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+<p>Here are some of the examples from the demo:</p>
+
+<h2>
+  <a name="custom-callback" href="#custom-callback">
+  </a>
+  Custom callback
+</h2>
+
+<p>The custom callback is called twice, once when the fetch initiates, and then when the fetch is complete done:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">function</span> <span class="nf">startStop</span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">bool</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">START</span><span class="dl">'</span><span class="p">}</span>
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">STOP</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<h2>
+  <a name="custom-errorhandler" href="#custom-errorhandler">
+  </a>
+  Custom ErrorHandler
+</h2>
+
+<p>Receives the error-object as it's only param:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">function</span> <span class="nf">handleError</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<h2>
+  <a name="custom-parser" href="#custom-parser">
+  </a>
+  Custom parser
+</h2>
+
+<p>The default parser returns json or text, depending on <code>content-type</code>. An example of a custom parser, finding a <code>&lt;symbol&gt;</code> by <code>id</code> in an svg:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="k">async</span> <span class="kd">function</span> <span class="nf">getSymbolFromSVG</span><span class="p">(</span><span class="nx">response</span><span class="p">,</span> <span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">text</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nf">text</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="nx">parser</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DOMParser</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="nx">doc</span> <span class="o">=</span> <span class="nx">parser</span><span class="p">.</span><span class="nf">parseFromString</span><span class="p">(</span><span class="nx">text</span><span class="p">,</span> <span class="dl">"</span><span class="s2">text/xml</span><span class="dl">"</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">svg</span> <span class="o">=</span> <span class="nx">doc</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">svg</span><span class="p">.</span><span class="nx">outerHTML</span><span class="p">.</span><span class="nf">toString</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Hope it will be as useful for you, as it has been for me. </p>
+
+<p>Thanks for reading, and happy coding!</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Recreating Apple's Color Picker Icon — Mads Stoumann</title>
+	<meta name="description" content="I'm currently working on a colorpicker, where a user can select a predefined theme-color:    While...">
+	<link rel="canonical" href="https://blog.stoumann.dk/recreating-apples-color-picker-icon">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Recreating Apple's Color Picker Icon">
+	<meta property="og:description" content="I'm currently working on a colorpicker, where a user can select a predefined theme-color:    While...">
+	<meta property="og:url" content="https://blog.stoumann.dk/recreating-apples-color-picker-icon">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/1194837/deadad53.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Recreating Apple's Color Picker Icon">
+	<meta name="twitter:description" content="I'm currently working on a colorpicker, where a user can select a predefined theme-color:    While...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/1194837/deadad53.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Recreating Apple's Color Picker Icon</h1>
+			<p>I'm currently working on a colorpicker, where a user can select a predefined theme-color:</p>
+
+<p><a href="assets/1194837/5e91caa1.jpg" class="article-body-image-wrapper"><img src="assets/1194837/5e91caa1.jpg" alt="Initial colorpicker" loading="lazy" width="394" height="246"></a></p>
+
+<p>While this is fairly simple to code and use, there <strong>will</strong> be cases where the user needs to create a custom color.</p>
+
+<p>So, how do you indicate that a color is custom, is not a part of the default theme-colors — and can be modified?</p>
+
+<p>I've spent quite some time investigating this, and then I discovered how Apple do it in their Notes-app: </p>
+
+<p><a href="assets/1194837/48c94721.jpg" class="article-body-image-wrapper"><img src="assets/1194837/48c94721.jpg" alt="Apple Color Picker" loading="lazy" width="800" height="151"></a></p>
+
+<p>Simple and beautiful! The chosen color is displayed at the center of the circle, surrounded by an inner border and a gradient of hues.</p>
+
+<p>But how to achieve this in CSS?</p>
+
+<p>As always, Temani Afif has <a href="https://dev.to/afif/border-with-gradient-and-radius-387f">the answer</a>.</p>
+
+<p>We'll just replace the <code>linear-gradient</code> with a <code>conic-gradient</code>:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nc">.box</span><span class="nd">::after</span> <span class="p">{</span>
+  <span class="nl">content</span><span class="p">:</span> <span class="s1">""</span><span class="p">;</span>
+  <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
+  <span class="py">inset</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">border-radius</span><span class="p">:</span> <span class="nb">inherit</span><span class="p">;</span> 
+  <span class="nl">padding</span><span class="p">:</span> <span class="m">8px</span><span class="p">;</span> 
+  <span class="nl">background</span><span class="p">:</span> <span class="n">conic-gradient</span><span class="p">(</span>
+    <span class="n">hsl</span><span class="p">(</span><span class="m">360</span><span class="p">,</span> <span class="m">100%</span><span class="p">,</span> <span class="m">50%</span><span class="p">),</span>
+    <span class="n">hsl</span><span class="p">(</span><span class="m">315</span><span class="p">,</span> <span class="m">100%</span><span class="p">,</span> <span class="m">50%</span><span class="p">),</span>
+    <span class="n">hsl</span><span class="p">(</span><span class="m">270</span><span class="p">,</span> <span class="m">100%</span><span class="p">,</span> <span class="m">50%</span><span class="p">),</span>
+    <span class="n">hsl</span><span class="p">(</span><span class="m">225</span><span class="p">,</span> <span class="m">100%</span><span class="p">,</span> <span class="m">50%</span><span class="p">),</span>
+    <span class="n">hsl</span><span class="p">(</span><span class="m">180</span><span class="p">,</span> <span class="m">100%</span><span class="p">,</span> <span class="m">50%</span><span class="p">),</span>
+    <span class="n">hsl</span><span class="p">(</span><span class="m">135</span><span class="p">,</span> <span class="m">100%</span><span class="p">,</span> <span class="m">50%</span><span class="p">),</span>
+    <span class="n">hsl</span><span class="p">(</span><span class="m">90</span><span class="p">,</span> <span class="m">100%</span><span class="p">,</span> <span class="m">50%</span><span class="p">),</span>
+    <span class="n">hsl</span><span class="p">(</span><span class="m">45</span><span class="p">,</span> <span class="m">100%</span><span class="p">,</span> <span class="m">50%</span><span class="p">),</span>
+    <span class="n">hsl</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">100%</span><span class="p">,</span> <span class="m">50%</span><span class="p">)</span>
+<span class="p">)</span> <span class="n">border-box</span><span class="p">;</span>
+  <span class="nl">-webkit-mask</span><span class="p">:</span> 
+     <span class="n">linear-gradient</span><span class="p">(</span><span class="m">#fff</span> <span class="m">0</span> <span class="m">0</span><span class="p">)</span> <span class="n">content-box</span><span class="p">,</span> 
+     <span class="n">linear-gradient</span><span class="p">(</span><span class="m">#fff</span> <span class="m">0</span> <span class="m">0</span><span class="p">);</span>
+  <span class="nl">-webkit-mask-composite</span><span class="p">:</span> <span class="n">xor</span><span class="p">;</span>
+          <span class="py">mask-composite</span><span class="p">:</span> <span class="n">exclude</span><span class="p">;</span> 
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>... which results in this:</p>
+
+<p><a href="assets/1194837/38b3fe8e.jpg" class="article-body-image-wrapper"><img src="assets/1194837/38b3fe8e.jpg" alt="Color Picker Icon with gradient border" loading="lazy" width="388" height="75"></a></p>
+
+<p>Nice! Now, for the "inner border", I created a second mask:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nc">.box</span><span class="nd">::before</span> <span class="p">{</span>
+  <span class="nl">content</span><span class="p">:</span> <span class="s1">""</span><span class="p">;</span>
+  <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
+  <span class="py">inset</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">border-radius</span><span class="p">:</span> <span class="nb">inherit</span><span class="p">;</span> 
+  <span class="nl">padding</span><span class="p">:</span> <span class="m">12px</span><span class="p">;</span>
+  <span class="nl">background</span><span class="p">:</span> <span class="n">linear-gradient</span><span class="p">(</span><span class="n">var</span><span class="p">(</span><span class="n">--body-bg</span><span class="p">)</span> <span class="m">0</span> <span class="m">0</span><span class="p">)</span> <span class="n">border-box</span><span class="p">;</span>
+  <span class="nl">-webkit-mask</span><span class="p">:</span> 
+     <span class="n">linear-gradient</span><span class="p">(</span><span class="m">#fff</span> <span class="m">0</span> <span class="m">0</span><span class="p">)</span> <span class="n">content-box</span><span class="p">,</span> 
+     <span class="n">linear-gradient</span><span class="p">(</span><span class="m">#fff</span> <span class="m">0</span> <span class="m">0</span><span class="p">);</span>
+  <span class="nl">-webkit-mask-composite</span><span class="p">:</span> <span class="n">xor</span><span class="p">;</span>
+          <span class="py">mask-composite</span><span class="p">:</span> <span class="n">exclude</span><span class="p">;</span> 
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Which gives us:</p>
+
+<p><a href="assets/1194837/bb6c0f51.jpg" class="article-body-image-wrapper"><img src="assets/1194837/bb6c0f51.jpg" alt="With inner white border" loading="lazy" width="385" height="76"></a></p>
+
+<p>Almost there ... but what about "dark mode"? Did you notice the <code>--body-bg</code>-variable? That takes care of inheriting the background-color, so:</p>
+
+<p><a href="assets/1194837/0196b303.jpg" class="article-body-image-wrapper"><img src="assets/1194837/0196b303.jpg" alt="Dark mode" loading="lazy" width="400" height="80"></a></p>
+
+<p>The great thing about this technique, is that it just works with and without <code>border-radius</code>:</p>
+
+<p><a href="assets/1194837/38e3330a.jpg" class="article-body-image-wrapper"><img src="assets/1194837/38e3330a.jpg" alt="Square picker" loading="lazy" width="396" height="242"></a></p>
+
+
+<hr>
+
+<h2>
+  <a name="final-thoughts" href="#final-thoughts">
+  </a>
+  Final Thoughts
+</h2>
+
+<p>I must admit it annoys me a bit to use <strong>both</strong> <code>pseudo</code>-elements for masks: one for the <code>conic-gradient</code> and one for the inner border. The last one should simply "cut out" an area and let the background-color of the page or section "shine through". If you know how to do this, please share your findings in the comments!</p>
+
+
+<hr>
+
+<p>After I finished writing this post, I noticed that Apple's icon is a bit more de-saturated. To achieve this, just change the <code>saturation</code>-part of the <code>hsl</code>-colors in the mask.</p>
+
+<p>Example: Change <code>hsl(360, 100%, 50%)</code> to <code>hsl(360, 80%, 50%)</code> etc.</p>
+
+<p><a href="assets/1194837/f5b33900.jpg" class="article-body-image-wrapper"><img src="assets/1194837/f5b33900.jpg" alt="Desaturated" loading="lazy" width="390" height="78"></a></p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

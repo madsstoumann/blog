@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Eurovision Gradients — Mads Stoumann</title>
+	<meta name="description" content="So, it's that time of the year, if you live in Europe: Eurovision! It's the world's oldest and...">
+	<link rel="canonical" href="https://blog.stoumann.dk/eurovision-gradients">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Eurovision Gradients">
+	<meta property="og:description" content="So, it's that time of the year, if you live in Europe: Eurovision! It's the world's oldest and...">
+	<meta property="og:url" content="https://blog.stoumann.dk/eurovision-gradients">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/1846440/0a531d52.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Eurovision Gradients">
+	<meta name="twitter:description" content="So, it's that time of the year, if you live in Europe: Eurovision! It's the world's oldest and...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/1846440/0a531d52.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Eurovision Gradients</h1>
+			<p>So, it's <em>that</em> time of the year, if you live in Europe: <strong>Eurovision!</strong> It's the world's oldest and largest song competition — that people either love, hate or love/hate!</p>
+
+<p>I watched the first semifinal yesterday, and was actually blown away by the graphic design this year. Really nice, animated gradients — and a very vibrant color palette.</p>
+
+<p>But … then I went to the <a href="https://eurovision.tv/" target="_blank" rel="noopener noreferrer">official website</a>, and saw a 4.6 megabyte pixelated, sad looking animated gradient! Why? When we can easily do animated gradients in CSS?</p>
+
+<p>Let's dive in.</p>
+
+<h2>
+  <a name="recreating-the-gradients" href="#recreating-the-gradients">
+  </a>
+  Re-creating the gradients
+</h2>
+
+<p>If you look at the gradients — or if you watched the show — you'll notice it's basically a grid with columns that span between 1—8.<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nc">.eurovision</span> <span class="p">{</span>
+  <span class="py">aspect-ratio</span><span class="p">:</span> <span class="m">4</span><span class="p">/</span><span class="m">1</span><span class="p">;</span>
+  <span class="py">container-type</span><span class="p">:</span> <span class="n">inline-size</span><span class="p">;</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">grid</span><span class="p">;</span>
+  <span class="py">grid-auto-flow</span><span class="p">:</span> <span class="n">column</span><span class="p">;</span>
+  <span class="nl">position</span><span class="p">:</span> <span class="nb">relative</span><span class="p">;</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Now, for the columns, we'll create a bunch of <code>&lt;b&gt;</code>-tags (can be any tag, basically), and add some CSS:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">b</span> <span class="p">{</span>
+  <span class="nl">animation</span><span class="p">:</span> <span class="n">Y</span> <span class="n">var</span><span class="p">(</span><span class="n">--animdur</span><span class="p">,</span> <span class="m">5s</span><span class="p">)</span> <span class="n">var</span><span class="p">(</span><span class="n">--animdel</span><span class="p">,</span> <span class="m">0s</span><span class="p">)</span> <span class="n">var</span><span class="p">(</span><span class="n">--animtf</span><span class="p">,</span> <span class="n">linear</span><span class="p">)</span> <span class="n">infinite</span><span class="p">;</span>
+  <span class="nl">background</span><span class="p">:</span> <span class="n">repeating-linear-gradient</span><span class="p">(</span><span class="n">var</span><span class="p">(</span><span class="n">--deg</span><span class="p">,</span> <span class="m">0deg</span><span class="p">),</span> <span class="n">var</span><span class="p">(</span><span class="n">--c1</span><span class="p">,</span> <span class="no">orange</span><span class="p">),</span> <span class="n">var</span><span class="p">(</span><span class="n">--c2</span><span class="p">,</span> <span class="no">hotpink</span><span class="p">),</span> <span class="n">var</span><span class="p">(</span><span class="n">--c3</span><span class="p">,</span> <span class="no">yellow</span><span class="p">),</span> <span class="n">var</span><span class="p">(</span><span class="n">--c2</span><span class="p">,</span> <span class="no">hotpink</span><span class="p">),</span> <span class="n">var</span><span class="p">(</span><span class="n">--c1</span><span class="p">,</span> <span class="no">orange</span><span class="p">));</span>
+  <span class="nl">background-size</span><span class="p">:</span> <span class="m">100%</span> <span class="m">500%</span><span class="p">;</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="nb">block</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>The animation simply moves the Y-position of the background:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="k">@keyframes</span> <span class="n">Y</span> <span class="p">{</span>
+  <span class="nt">to</span> <span class="p">{</span> <span class="py">background-position-y</span><span class="p">:</span> <span class="m">250%</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>To create some variation, we change the <code>animation-delay</code> for the <code>&lt;b&gt;</code>-tags, based on their <code>nth-of-type</code>:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">b</span> <span class="p">{</span>
+  <span class="err">&amp;:nth-of-type(1)</span> <span class="err">{</span> <span class="py">--animdel</span><span class="p">:</span> <span class="m">50ms</span><span class="p">;</span> <span class="p">}</span>
+  <span class="o">&amp;</span><span class="nd">:nth-of-type</span><span class="o">(</span><span class="err">2</span><span class="o">)</span> <span class="p">{</span> <span class="py">--animdel</span><span class="p">:</span> <span class="m">100ms</span><span class="p">;</span> <span class="p">}</span>
+  <span class="o">&amp;</span><span class="nd">:nth-of-type</span><span class="o">(</span><span class="err">3</span><span class="o">)</span> <span class="p">{</span> <span class="py">--animdel</span><span class="p">:</span> <span class="m">150ms</span><span class="p">;</span> <span class="p">}</span>
+  <span class="o">&amp;</span><span class="nd">:nth-of-type</span><span class="o">(</span><span class="err">4</span><span class="o">)</span> <span class="p">{</span> <span class="py">--animdel</span><span class="p">:</span> <span class="m">200ms</span><span class="p">;</span> <span class="p">}</span>
+  <span class="o">&amp;</span><span class="nd">:nth-of-type</span><span class="o">(</span><span class="err">5</span><span class="o">)</span> <span class="p">{</span> <span class="py">--animdel</span><span class="p">:</span> <span class="m">250ms</span><span class="p">;</span> <span class="p">}</span>
+  <span class="c">/* etc. */</span>
+<span class="err">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Finally, for the column-spans, we add some modifier-classes:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nc">.span-2</span> <span class="p">{</span> <span class="nl">grid-column</span><span class="p">:</span> <span class="n">span</span> <span class="m">2</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.span-3</span> <span class="p">{</span> <span class="nl">grid-column</span><span class="p">:</span> <span class="n">span</span> <span class="m">3</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.span-4</span> <span class="p">{</span> <span class="nl">grid-column</span><span class="p">:</span> <span class="n">span</span> <span class="m">4</span><span class="p">;</span> <span class="p">}</span>
+<span class="c">/* etc. */</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Let's see how we're doing:</p>
+
+<p><a href="assets/1846440/4684dbfa.jpg" class="article-body-image-wrapper"><img src="assets/1846440/4684dbfa.jpg" alt="yellow" loading="lazy" width="800" height="199"></a></p>
+
+<p>Vibrant! Now, because of the custom properties, we can just add a class with some updates to get the purple/pink-gradient:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nc">.header</span> <span class="p">{</span>
+  <span class="py">--c1</span><span class="p">:</span> <span class="no">purple</span><span class="p">;</span>
+  <span class="py">--c2</span><span class="p">:</span> <span class="no">deeppink</span><span class="p">;</span>
+  <span class="py">--c3</span><span class="p">:</span> <span class="no">hotpink</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p><a href="assets/1846440/b9b0115e.jpg" class="article-body-image-wrapper"><img src="assets/1846440/b9b0115e.jpg" alt="Purple" loading="lazy" width="800" height="198"></a></p>
+
+<p>Nice! I added a gradient text as well:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">h1</span> <span class="p">{</span>
+  <span class="nl">background</span><span class="p">:</span> <span class="n">linear-gradient</span><span class="p">(</span><span class="m">95deg</span><span class="p">,</span> <span class="no">yellow</span><span class="p">,</span> <span class="no">hotpink</span><span class="p">,</span> <span class="no">deeppink</span><span class="p">,</span> <span class="no">orange</span><span class="p">);</span>
+  <span class="nl">background-clip</span><span class="p">:</span> <span class="nb">text</span><span class="p">;</span>
+  <span class="nl">font-family</span><span class="p">:</span> <span class="s1">"Hind"</span><span class="p">,</span> <span class="nb">sans-serif</span><span class="p">;</span>
+  <span class="py">font-optical-sizing</span><span class="p">:</span> <span class="nb">auto</span><span class="p">;</span>
+  <span class="nl">font-weight</span><span class="p">:</span> <span class="m">500</span><span class="p">;</span>
+  <span class="nl">font-style</span><span class="p">:</span> <span class="nb">normal</span><span class="p">;</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="m">10</span><span class="n">cqi</span><span class="p">;</span>
+  <span class="nl">letter-spacing</span><span class="p">:</span> <span class="m">-0.075ch</span><span class="p">;</span>
+  <span class="py">place-self</span><span class="p">:</span> <span class="nb">center</span> <span class="nb">center</span><span class="p">;</span>
+  <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
+  <span class="nl">text-transform</span><span class="p">:</span> <span class="nb">uppercase</span><span class="p">;</span>
+  <span class="nl">-webkit-text-fill-color</span><span class="p">:</span> <span class="nb">transparent</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Now, for the red/blue-version, I took one of the nice <code>linear()</code> timing-functions from Adam Argyle's <a href="https://open-props.style/" target="_blank" rel="noopener noreferrer">Open Props</a>:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nc">.red-shift</span> <span class="p">{</span>
+  <span class="py">--c1</span><span class="p">:</span><span class="no">red</span><span class="p">;</span>
+  <span class="py">--c2</span><span class="p">:</span><span class="no">purple</span><span class="p">;</span>
+  <span class="py">--c3</span><span class="p">:</span><span class="no">blue</span><span class="p">;</span>
+  <span class="py">--animtf</span><span class="p">:</span><span class="n">linear</span><span class="p">(</span> <span class="m">0</span><span class="p">,</span> <span class="m">.006</span><span class="p">,</span> <span class="m">.025</span> <span class="m">2.8%</span><span class="p">,</span> <span class="m">.101</span> <span class="m">6.1%</span><span class="p">,</span> <span class="m">.539</span> <span class="m">18.9%</span><span class="p">,</span> <span class="m">.721</span> <span class="m">25.3%</span><span class="p">,</span> <span class="m">.849</span> <span class="m">31.5%</span><span class="p">,</span> <span class="m">.937</span> <span class="m">38.1%</span><span class="p">,</span> <span class="m">.968</span> <span class="m">41.8%</span><span class="p">,</span> <span class="m">.991</span> <span class="m">45.7%</span><span class="p">,</span> <span class="m">1.006</span> <span class="m">50.1%</span><span class="p">,</span> <span class="m">1.015</span> <span class="m">55%</span><span class="p">,</span> <span class="m">1.017</span> <span class="m">63.9%</span><span class="p">,</span> <span class="m">1.001</span> <span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>And we get:</p>
+
+<p><a href="assets/1846440/a51e3499.jpg" class="article-body-image-wrapper"><img src="assets/1846440/a51e3499.jpg" alt="Red Shift" loading="lazy" width="800" height="200"></a></p>
+
+
+<hr>
+
+<p>And that's it! Remember to vote for your favorite song, and check out the CodePen here:</p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/dyEbejJ?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

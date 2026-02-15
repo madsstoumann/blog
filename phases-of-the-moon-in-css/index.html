@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Phases of the Moon in CSS — Mads Stoumann</title>
+	<meta name="description" content="You might have heard that the humble, old attr() method in CSS just got a big update. It's only in...">
+	<link rel="canonical" href="https://blog.stoumann.dk/phases-of-the-moon-in-css">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Phases of the Moon in CSS">
+	<meta property="og:description" content="You might have heard that the humble, old attr() method in CSS just got a big update. It's only in...">
+	<meta property="og:url" content="https://blog.stoumann.dk/phases-of-the-moon-in-css">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/2394843/591e3e4c.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Phases of the Moon in CSS">
+	<meta name="twitter:description" content="You might have heard that the humble, old attr() method in CSS just got a big update. It's only in...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/2394843/591e3e4c.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Phases of the Moon in CSS</h1>
+			<p>You might have heard that the humble, old <code>attr()</code> method in CSS <a href="https://developer.chrome.com/blog/advanced-attr" target="_blank" rel="noopener noreferrer">just got a big update</a>. It's only in Chrome for now, but I assume the Firefox and Safari teams are working hard on implementing this!</p>
+
+<p>So what's the difference? Well, we now have <strong>types</strong> and <strong>fallbacks</strong>, so we can directly update a CSS custom property to a numeric value, with a fallback:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">--property</span><span class="o">:</span> <span class="nt">attr</span><span class="o">(</span><span class="nt">my-attr</span> <span class="nt">type</span><span class="o">&lt;</span><span class="nt">number</span><span class="o">&gt;,</span> <span class="err">15</span><span class="o">);</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>How cool is that?! It means we can now create really complex <strong>CSS-only</strong> components. In this tutorial, we'll build a <code>&lt;moon-phase&gt;</code>-component, using <strong>only</strong> CSS!</p>
+
+<h2>
+  <a name="markup" href="#markup">
+  </a>
+  Markup
+</h2>
+
+<p>To start with, let's create a simple custom element called <code>&lt;moon-phase&gt;</code>. We give it two attributes: <code>illumination</code> and <code>phase</code>.</p>
+
+<p>Valid phases are:</p>
+
+<ul>
+<li>new moon</li>
+<li>waxing crescent</li>
+<li>first quarter</li>
+<li>waxing gibbous</li>
+<li>full moon</li>
+<li>waning gibbous</li>
+<li>last quarter</li>
+<li>waning crescent</li>
+</ul>
+
+<p><strong>Example:</strong><br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;moon-phase</span>
+  <span class="na">illumination=</span><span class="s">"58"</span>
+  <span class="na">phase=</span><span class="s">"waxing crescent"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/moon-phase&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>And ... that's it (for now). Let's switch to CSS!</p>
+
+<h2>
+  <a name="css" href="#css">
+  </a>
+  CSS
+</h2>
+
+<p>Our custom element needs a few default styles:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">moon-phase</span> <span class="p">{</span>
+  <span class="py">aspect-ratio</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span>
+  <span class="nl">border-radius</span><span class="p">:</span> <span class="m">50%</span><span class="p">;</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="nb">block</span><span class="p">;</span>
+  <span class="nl">overflow</span><span class="p">:</span> <span class="n">clip</span><span class="p">;</span>
+  <span class="nl">position</span><span class="p">:</span> <span class="nb">relative</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>We add an image of the moon to a <code>::before</code>-pseudo element:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">moon-phase</span><span class="nd">::before</span> <span class="p">{</span>
+  <span class="nl">background</span><span class="p">:</span> <span class="sx">url('moon.png')</span> <span class="nb">center</span> <span class="p">/</span> <span class="n">cover</span> <span class="nb">no-repeat</span><span class="p">;</span>  
+  <span class="nl">content</span><span class="p">:</span> <span class="s2">''</span><span class="p">;</span>
+  <span class="py">inset</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>And we get:</p>
+
+<p><a href="assets/2394843/16198480.jpg" class="article-body-image-wrapper"><img src="assets/2394843/16198480.jpg" alt="Full Moon, no filter" loading="lazy" width="304" height="304"></a></p>
+
+<p>Not very exciting! Let's add a <code>filter</code> to spice it up a bit:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">moon-phase</span><span class="nd">::before</span> <span class="p">{</span>
+  <span class="nl">filter</span><span class="p">:</span> <span class="n">sepia</span><span class="p">(</span><span class="m">1</span><span class="p">)</span> <span class="n">grayscale</span><span class="p">(</span><span class="m">.25</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Now we have:</p>
+
+<p><a href="assets/2394843/ffd42ba7.jpg" class="article-body-image-wrapper"><img src="assets/2394843/ffd42ba7.jpg" alt="Full Moon with filter" loading="lazy" width="304" height="304"></a></p>
+
+<p>Much better! If you want to play around with CSS filters, <a href="https://codepen.io/stoumann/pen/MWeNmyb" target="_blank" rel="noopener noreferrer">I've made a small editor</a>.</p>
+
+<p>Now, we add an <code>::after</code> pseudo-element:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">moon-phase</span><span class="nd">::after</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="m">#000</span><span class="p">;</span>
+  <span class="nl">border-radius</span><span class="p">:</span>
+    <span class="n">var</span><span class="p">(</span><span class="n">--_btlr</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span>
+    <span class="n">var</span><span class="p">(</span><span class="n">--_btrr</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span>
+    <span class="n">var</span><span class="p">(</span><span class="n">--_bbrr</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span>
+    <span class="n">var</span><span class="p">(</span><span class="n">--_bblr</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
+  <span class="nl">content</span><span class="p">:</span> <span class="s2">''</span><span class="p">;</span>
+  <span class="nl">height</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+  <span class="py">inset-inline</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--_ii</span><span class="p">,</span> <span class="nb">auto</span> <span class="m">0</span><span class="p">);</span>
+  <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--_w</span><span class="p">,</span> <span class="m">0%</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Phew, let that sink in! We add four properties to control all <code>border-radius</code>-sides, and one for <code>width</code>. Let's start with that:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">moon-phase</span> <span class="p">{</span>
+  <span class="py">--_w</span><span class="p">:</span> <span class="n">calc</span><span class="p">(</span><span class="m">100%</span> <span class="n">-</span> <span class="m">1%</span> <span class="err">*</span> <span class="n">attr</span><span class="p">(</span><span class="n">illumination</span> <span class="n">type</span><span class="p">(</span><span class="err">&lt;</span><span class="n">number</span><span class="err">&gt;</span><span class="p">),</span> <span class="m">0%</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p><strong>So what's going on?</strong> We read the <code>illumination</code>-attribute as a number, convert it to a percentage by multiplying with <code>1%</code>, and deduct that from the full width.</p>
+
+<p>So, if <code>illumination</code> is set to <code>6%</code>, the width will be <code>94%</code> etc.</p>
+
+<p>Next, we need to adjust the <code>border-radius</code> properties and <code>inset</code>, depending on which <code>phase</code> the moon has:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="o">[</span><span class="nt">phase</span><span class="o">*=</span><span class="s1">"first-quarter"</span><span class="o">],</span>
+<span class="o">[</span><span class="nt">phase</span><span class="o">*=</span><span class="s1">"waxing"</span><span class="o">]</span> <span class="p">{</span>
+  <span class="py">--_ii</span><span class="p">:</span> <span class="m">0</span> <span class="nb">auto</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="o">[</span><span class="nt">phase</span><span class="o">*=</span><span class="s1">"crescent"</span><span class="o">],</span>
+<span class="o">[</span><span class="nt">phase</span><span class="o">*=</span><span class="s1">"first-quarter"</span><span class="o">],</span>
+<span class="o">[</span><span class="nt">phase</span><span class="o">*=</span><span class="s1">"waxing"</span><span class="o">]</span> <span class="p">{</span>
+  <span class="py">--_bblr</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+  <span class="py">--_btlr</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="o">[</span><span class="nt">phase</span><span class="o">*=</span><span class="s1">"crescent"</span><span class="o">],</span>
+<span class="o">[</span><span class="nt">phase</span><span class="o">*=</span><span class="s1">"last-quarter"</span><span class="o">],</span>
+<span class="o">[</span><span class="nt">phase</span><span class="o">*=</span><span class="s1">"waning"</span><span class="o">]</span> <span class="p">{</span>
+  <span class="py">--_btrr</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+  <span class="py">--_bbrr</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="o">[</span><span class="nt">phase</span><span class="o">*=</span><span class="s1">"gibbous"</span><span class="o">]</span><span class="nd">::after</span> <span class="p">{</span>
+  <span class="nl">border-radius</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Let's see how we're doing, with <strong>6%  illumination</strong>:</p>
+
+<p><a href="assets/2394843/1a3e0a61.jpg" class="article-body-image-wrapper"><img src="assets/2394843/1a3e0a61.jpg" alt="Waxing crescent moon with 6% illumination" loading="lazy" width="304" height="304"></a></p>
+
+<p>Yay, a thin slice of moon! </p>
+
+<p>Now, for the "gibbous" phases, the shape is inwards, and we cannot use <code>border-radius</code>.</p>
+
+<p>Instead, the <code>::after</code>-element takes up <code>100%</code>, and is cut with a <code>mask</code>:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="o">[</span><span class="nt">phase</span><span class="o">=</span><span class="s1">"waxing gibbous"</span><span class="o">]</span><span class="nd">::after</span> <span class="p">{</span>
+  <span class="nl">mask</span><span class="p">:</span> <span class="n">radial-gradient</span><span class="p">(</span><span class="nb">circle</span> <span class="n">at</span> <span class="m">100%</span> <span class="m">50%</span><span class="p">,</span>
+    <span class="m">#0000</span> <span class="n">calc</span><span class="p">(</span><span class="m">100%</span> <span class="n">-</span> <span class="n">var</span><span class="p">(</span><span class="n">--_w</span><span class="p">)),</span>
+    <span class="m">#000</span> <span class="n">calc</span><span class="p">(</span><span class="m">100%</span> <span class="n">-</span> <span class="n">var</span><span class="p">(</span><span class="n">--_w</span><span class="p">)</span> <span class="err">+</span> <span class="m">1px</span> <span class="m">100%</span><span class="p">));</span>
+<span class="p">}</span>
+<span class="o">[</span><span class="nt">phase</span><span class="o">=</span><span class="s1">"waning gibbous"</span><span class="o">]</span><span class="nd">::after</span> <span class="p">{</span>
+  <span class="nl">mask</span><span class="p">:</span> <span class="n">radial-gradient</span><span class="p">(</span><span class="nb">circle</span> <span class="n">at</span> <span class="m">0%</span> <span class="m">50%</span><span class="p">,</span>
+    <span class="m">#0000</span> <span class="n">calc</span><span class="p">(</span><span class="m">100%</span> <span class="n">-</span> <span class="n">var</span><span class="p">(</span><span class="n">--_w</span><span class="p">)),</span>
+    <span class="m">#000</span> <span class="n">calc</span><span class="p">(</span><span class="m">100%</span> <span class="n">-</span> <span class="n">var</span><span class="p">(</span><span class="n">--_w</span><span class="p">)</span> <span class="err">+</span> <span class="m">1px</span> <span class="m">100%</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>With <strong>58% illumination</strong> we get:</p>
+
+<p><a href="assets/2394843/e8679fca.jpg" class="article-body-image-wrapper"><img src="assets/2394843/e8679fca.jpg" alt="waxing gibbous, 58% illuminated" loading="lazy" width="304" height="304"></a></p>
+
+<h2>
+  <a name="latitude-and-time" href="#latitude-and-time">
+  </a>
+  Latitude and time
+</h2>
+
+<p>Now, the moon looks different depending on where on Earth you reside, so let's add two new attributes to our component:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;moon-phase</span>
+  <span class="na">illumination=</span><span class="s">"25"</span>
+  <span class="na">phase=</span><span class="s">"waxing crescent"</span>
+  <span class="na">lat=</span><span class="s">"-33.86"</span>
+  <span class="na">hour=</span><span class="s">"22"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/moon-phase&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>As before, we read these directly in CSS:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">moon-phase</span> <span class="p">{</span>
+  <span class="py">--_lat</span><span class="p">:</span> <span class="n">attr</span><span class="p">(</span><span class="n">lat</span> <span class="n">type</span><span class="p">(</span><span class="err">&lt;</span><span class="n">number</span><span class="err">&gt;</span><span class="p">),</span> <span class="m">0</span><span class="p">);</span>
+  <span class="py">--_hour</span><span class="p">:</span> <span class="n">attr</span><span class="p">(</span><span class="n">hour</span> <span class="n">type</span><span class="p">(</span><span class="err">&lt;</span><span class="n">number</span><span class="err">&gt;</span><span class="p">),</span> <span class="m">12</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>The calculations needed for the rotation angle, are a bit complex:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">moon-phase</span> <span class="p">{</span>
+  <span class="py">--_l</span><span class="p">:</span> <span class="n">calc</span><span class="p">(</span><span class="n">var</span><span class="p">(</span><span class="n">--_lat</span><span class="p">)</span> <span class="err">*</span> <span class="m">1.5deg</span><span class="p">);</span>
+  <span class="py">--_a</span><span class="p">:</span> <span class="n">calc</span><span class="p">(((</span><span class="n">var</span><span class="p">(</span><span class="n">--_hour</span><span class="p">)</span> <span class="n">-</span> <span class="m">12</span><span class="p">)</span> <span class="err">*</span> <span class="m">15</span> <span class="err">*</span> <span class="m">0.7</span><span class="p">)</span> <span class="err">*</span> <span class="m">1deg</span><span class="p">);</span>
+  <span class="py">--_r</span><span class="p">:</span> <span class="n">calc</span><span class="p">(</span><span class="n">var</span><span class="p">(</span><span class="n">--_l</span><span class="p">)</span> <span class="err">+</span> <span class="n">var</span><span class="p">(</span><span class="n">--_a</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Let's break it down:</p>
+
+<ol>
+<li>
+<p><strong>Latitude Tilt (<code>--_l</code>)</strong><br><br>
+We multiply the latitude by <code>1.5deg</code> to simulate how the moon’s tilt changes as you move north or south. This creates:  </p>
+
+<ul>
+<li>
+<strong>Upward tilt</strong> in the Southern Hemisphere (negative latitudes).
+</li>
+<li>
+<strong>Downward tilt</strong> in the Northern Hemisphere.
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Hour Rotation (<code>--_a</code>)</strong><br><br>
+The hour calculation <code>calc(((var(--_hour) - 12) * 15 * 0.7) * 1deg)</code> works like this:  </p>
+
+<ul>
+<li>
+<code>(var(--_hour) - 12)</code>: Centers rotation at solar noon.
+</li>
+<li>
+<code>* 15</code>: Earth rotates 15° per hour (solar motion).
+</li>
+<li>
+<code>* 0.7</code>: Dampens the effect to match the moon’s slower apparent speed (~14.5°/hour).
+</li>
+<li>
+<code>* 1deg</code>: Converts to degrees.
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Combined Rotation (<code>--_r</code>)</strong><br><br>
+Adding <code>--_l</code> and <code>--_a</code> gives a realistic orientation. Examples:  </p>
+
+<ul>
+<li>
+<strong>Equator (lat=0)</strong>: Vertical terminator (🌒).
+</li>
+<li>
+<strong>Sydney (lat=-34)</strong>: Tilted upward (/).
+</li>
+<li>
+<strong>London (lat=51.5)</strong>: Tilted downward (\).
+</li>
+<li>
+<strong>North Pole (lat=90)</strong>: Horizontal terminator (⊐).
+</li>
+</ul>
+</li>
+</ol>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">moon-phase</span> <span class="p">{</span>
+  <span class="py">rotate</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--_r</span><span class="p">,</span> <span class="m">0deg</span><span class="p">);</span>  <span class="c">/* Applies the final rotation */</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Let's see an example: Same day, but different latitudes:</p>
+
+<p><a href="assets/2394843/7223f2d7.jpg" class="article-body-image-wrapper"><img src="assets/2394843/7223f2d7.jpg" alt="Same day, different latitudes" loading="lazy" width="800" height="631"></a></p>
+
+<blockquote>
+<p>A small disclaimer: At extreme latitudes (&gt;80°), the tilt calculation becomes approximate (the moon doesn’t quite lie flat at the poles with this formula). Also — while I’ve done my best to match real-world behavior — I am by no means an astrophysicist. If you spot errors in the calculations, you know who to blame! </p>
+</blockquote>
+
+<h2>
+  <a name="demo" href="#demo">
+  </a>
+  Demo
+</h2>
+
+<p>Here's a Codepen with all the phases of the moon; it's pure CSS, but only working in Chrome for now:</p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/VYwJYKQ?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

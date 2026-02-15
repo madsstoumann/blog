@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>SVG Circle Pattern Generator — Mads Stoumann</title>
+	<meta name="description" content="The other day – trying to empty my head and relax a bit – I stared at the colorful rug next to my cha...">
+	<link rel="canonical" href="https://blog.stoumann.dk/svg-circle-pattern-generator">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="SVG Circle Pattern Generator">
+	<meta property="og:description" content="The other day – trying to empty my head and relax a bit – I stared at the colorful rug next to my cha...">
+	<meta property="og:url" content="https://blog.stoumann.dk/svg-circle-pattern-generator">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/664154/9862a4e8.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="SVG Circle Pattern Generator">
+	<meta name="twitter:description" content="The other day – trying to empty my head and relax a bit – I stared at the colorful rug next to my cha...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/664154/9862a4e8.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>SVG Circle Pattern Generator</h1>
+			<p>The other day – trying to empty my head and relax a bit – I stared at the <a href="https://hay.dk/da-dk/hay/rugs-7e0ae5e6/pinocchio" target="_blank" rel="noopener noreferrer">colorful rug</a> next to my chair:</p>
+
+<p><a href="assets/664154/f5ffc381.jpg" class="article-body-image-wrapper"><img src="assets/664154/f5ffc381.jpg" alt="Hay Rug" loading="lazy" width="800" height="800"></a></p>
+
+<p>And suddenly, instead of emptying my head, I started to wonder about how I could re-create this in <code>svg</code> — that is: repeating circles with random colors!</p>
+
+
+<hr>
+
+<p>When working with <em>random patterns</em>, the first thing you need is a random function:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">function</span> <span class="nf">R</span><span class="p">(</span><span class="nx">max</span><span class="p">,</span> <span class="nx">min</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nf">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="nx">max</span> <span class="o">-</span> <span class="nx">min</span><span class="p">)</span> <span class="o">+</span> <span class="nx">min</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>If you call it like <code>R(360)</code>, it will return a random number between <code>0</code> and <code>360</code>. If you add a second parameter, like <code>R(360, 200)</code>, it will limit the random number to a number between <code>200</code> and <code>360</code>.</p>
+
+<p>The <em>circles</em> are created within a dual loop – one for the <code>y</code>-axis, and one for the <code>x</code>-axis (<em>excerpt</em>) :<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="o">&lt;</span><span class="nx">circle</span>
+  <span class="nx">cx</span><span class="o">=</span><span class="dl">"</span><span class="s2">${cx}</span><span class="dl">"</span> <span class="nx">cy</span><span class="o">=</span><span class="dl">"</span><span class="s2">${cy}</span><span class="dl">"</span> <span class="nx">r</span><span class="o">=</span><span class="dl">"</span><span class="s2">${r}</span><span class="dl">"</span> 
+  <span class="nx">fill</span><span class="o">=</span><span class="dl">"</span><span class="s2">hsl(${R(A.elements.he.valueAsNumber,
+ A.elements.hs.valueAsNumber)},
+ ${R(A.elements.se.valueAsNumber,
+ A.elements.ss.valueAsNumber)}%,
+ ${R(A.elements.le.valueAsNumber,
+ A.elements.ls.valueAsNumber)}%)</span><span class="dl">"</span>
+<span class="o">/&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Most of the code deals with the <em>random colors</em>.</p>
+
+<p><code>hsl()</code> is perfect for this, since it's three ranges of numbers, that can be randomized:</p>
+
+<ul>
+<li>hue (0-360)</li>
+<li>saturation (0-100)</li>
+<li>lightness (0-100)</li>
+</ul>
+
+<p><code>A</code> is the main form for editing the variables:</p>
+
+<p><a href="assets/664154/ba94394f.jpg" class="article-body-image-wrapper"><img src="assets/664154/ba94394f.jpg" alt="Form" loading="lazy" width="604" height="1130"></a></p>
+
+<p>– and as mentioned above, you can <em>limit</em> the randomness, in this case the <code>hue</code> (min and max):</p>
+
+<p><a href="assets/664154/13edc320.jpg" class="article-body-image-wrapper"><img src="assets/664154/13edc320.jpg" alt="circles" loading="lazy" width="800" height="429"></a></p>
+
+<p>If you set the <code>radius</code> to a larger value than the <code>size</code>, you end up with something similar to my rug: </p>
+
+<p><a href="assets/664154/07b3864d.jpg" class="article-body-image-wrapper"><img src="assets/664154/07b3864d.jpg" alt="Pattern" loading="lazy" width="800" height="542"></a></p>
+
+<p>Here's a Codepen with the final result. Open it in <a href="https://codepen.io/stoumann/full/PoWRaaR" target="_blank" rel="noopener noreferrer">fullscreen</a>, click on the rotating <code>cog-wheel</code> to open the editor, and have fun!</p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/PoWRaaR?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+<p>If you want, you can save the pattern you create as either <code>png</code>, <code>jpg</code> or <code>webp</code> — just select a type, and click on <code>Save to Image</code>.</p>
+
+<p>Thanks for reading!</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

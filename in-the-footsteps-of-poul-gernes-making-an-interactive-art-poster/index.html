@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>In the Footsteps of Poul Gernes — Making an Interactive Art Poster — Mads Stoumann</title>
+	<meta name="description" content="Poul Gernes was a very colorful danish artist, furniture designer, and founder of an art school. He...">
+	<link rel="canonical" href="https://blog.stoumann.dk/in-the-footsteps-of-poul-gernes-making-an-interactive-art-poster">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="In the Footsteps of Poul Gernes — Making an Interactive Art Poster">
+	<meta property="og:description" content="Poul Gernes was a very colorful danish artist, furniture designer, and founder of an art school. He...">
+	<meta property="og:url" content="https://blog.stoumann.dk/in-the-footsteps-of-poul-gernes-making-an-interactive-art-poster">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/1531999/1e9248ad.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="In the Footsteps of Poul Gernes — Making an Interactive Art Poster">
+	<meta name="twitter:description" content="Poul Gernes was a very colorful danish artist, furniture designer, and founder of an art school. He...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/1531999/1e9248ad.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>In the Footsteps of Poul Gernes — Making an Interactive Art Poster</h1>
+			<p>Poul Gernes was a very colorful danish artist, furniture designer, and founder of an art school. He caused quite a stir back in 1989, where he turned a famous, white-washed cinema in Copenhagen, The Palace, into something <strong>very</strong> colorful:</p>
+
+<p><a href="assets/1531999/d51f013c.jpg" class="article-body-image-wrapper"><img src="assets/1531999/d51f013c.jpg" alt="Palads Cinema" loading="lazy" width="800" height="600"></a></p>
+
+<p>It was not to everybody's taste — but now, more than 30 years after, it's a national treasure. And while the owner wants to renew it, many people think the building should be protected.</p>
+
+
+<hr>
+
+<p>In 2016, 20 years after Gernes passed away, a retrospectve exhibition was held at the famous danish art museum, Louisiana:</p>
+
+<p><a href="assets/1531999/b93d1964.jpg" class="article-body-image-wrapper"><img src="assets/1531999/b93d1964.jpg" alt="Gernes Poster, Louisiana Exhibition" loading="lazy" width="800" height="800"></a></p>
+
+<p>I had completely forgotten about Gernes' "dot-paintings" — so when I saw this poster the other day, I just <strong>had</strong> to re-create it! It's so simple, yet hypnotic and beautiful.</p>
+
+<p>Let's code an interactive version of it!</p>
+
+
+<hr>
+
+<h2>
+  <a name="coding-gernes" href="#coding-gernes">
+  </a>
+  Coding Gernes
+</h2>
+
+<p>The poster is a simple 6-column <code>grid</code> within a <code>container</code>, using <code>cqi</code>-values, so it's responsive.</p>
+
+<p>The size of the dots require a little bit of math:</p>
+
+<p>The black frame around the poster is <code>1.25cqi</code>, the padding <em>within</em> is <code>1cqi</code>, and the gap between the 6 cells is also <code>1 cqi</code>. That's <code>2 × 1.25</code> + <code>2 × 1</code> + <code>5 × 1</code> — a total of <code>9.5cqi</code>. </p>
+
+<p>Since the container is <code>100cqi</code>, that leaves <code>90.5cqi</code> for the dots — so each dot is:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight plaintext"><code> --sz: calc(90.5cqi / 6);
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+
+<hr>
+
+<h3>
+  <a name="making-it-interactive" href="#making-it-interactive">
+  </a>
+  Making it interactive
+</h3>
+
+<p>Wouldn't it be great if you could <strong>click</strong> on each color, and change it? </p>
+
+<p>We can do that with <code>&lt;input type="color"&gt;</code> — styled a bit, of course:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">input</span> <span class="p">{</span>
+  <span class="py">--sz</span><span class="p">:</span> <span class="n">calc</span><span class="p">(</span><span class="m">90.5</span><span class="n">cqi</span> <span class="p">/</span> <span class="m">6</span><span class="p">);</span>
+  <span class="nl">background</span><span class="p">:</span> <span class="nb">transparent</span><span class="p">;</span>
+  <span class="nl">border</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">border-radius</span><span class="p">:</span> <span class="m">50%</span><span class="p">;</span>
+  <span class="nl">height</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--sz</span><span class="p">);</span>
+  <span class="nl">padding</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--sz</span><span class="p">);</span>
+  <span class="err">&amp;::-webkit-color-swatch,</span>
+  <span class="err">&amp;::-webkit-color-swatch-wrapper</span> <span class="err">{</span>
+    <span class="nl">border</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">border-radius</span><span class="p">:</span> <span class="nb">inherit</span><span class="p">;</span>
+    <span class="nl">padding</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="err">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Next, the grey lines crossing the middle of the painting. For these, we'll use two <code>linear-gradient</code>s:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">fieldset</span> <span class="p">{</span>
+<span class="nl">background-image</span><span class="p">:</span> 
+  <span class="n">linear-gradient</span><span class="p">(</span><span class="m">90deg</span><span class="p">,</span> <span class="nb">transparent</span> <span class="m">50%</span><span class="p">,</span>
+  <span class="n">var</span><span class="p">(</span><span class="n">--line</span><span class="p">,</span> <span class="m">#DFDFD1</span><span class="p">)</span> <span class="n">calc</span><span class="p">(</span><span class="m">50%</span> <span class="n">-</span> <span class="m">2px</span><span class="p">),</span>
+  <span class="nb">transparent</span> <span class="n">calc</span><span class="p">(</span><span class="m">50%</span> <span class="err">+</span> <span class="m">2px</span><span class="p">)),</span>
+  <span class="n">linear-gradient</span><span class="p">(</span><span class="m">180deg</span><span class="p">,</span> <span class="nb">transparent</span> <span class="m">50%</span><span class="p">,</span>
+  <span class="n">var</span><span class="p">(</span><span class="n">--line</span><span class="p">,</span> <span class="m">#DFDFD1</span><span class="p">)</span> <span class="n">calc</span><span class="p">(</span><span class="m">50%</span> <span class="n">-</span> <span class="m">2px</span><span class="p">),</span>
+  <span class="nb">transparent</span> <span class="n">calc</span><span class="p">(</span><span class="m">50%</span> <span class="err">+</span> <span class="m">2px</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>I think the main font on the poster is <em>Gotham</em> by Hoefler &amp; Co. <em>Gotham</em> is similar to Paul Renner's <em>Futura</em>, so I searched for a free font resembling <em>Futura</em>, and ended up with <a href="https://fonts.google.com/specimen/Jost" target="_blank" rel="noopener noreferrer">Jost</a>. </p>
+
+<p>The <code>font-size</code> was also specified with <code>cqi</code>-units, and — voilà — we have an interactive Gernes-poster:</p>
+
+<p><a href="assets/1531999/8844b251.jpg" class="article-body-image-wrapper"><img src="assets/1531999/8844b251.jpg" alt="Light Version" loading="lazy" width="672" height="742"></a></p>
+
+<p>When clicking on a dot, you'll see your browser's built-in color-picker:</p>
+
+<p><a href="assets/1531999/d8ceb721.jpg" class="article-body-image-wrapper"><img src="assets/1531999/d8ceb721.jpg" alt="Gernes Color Picker" loading="lazy" width="800" height="901"></a></p>
+
+
+<hr>
+
+<p>While prepearing for this article, I googled Gernes, and found <em>another</em> variant of the dot-painting above:</p>
+
+<p><a href="assets/1531999/61d7401a.jpg" class="article-body-image-wrapper"><img src="assets/1531999/61d7401a.jpg" alt="Blue background dots" loading="lazy" width="603" height="607"></a></p>
+
+
+<hr>
+
+<p>With a small JavaScript-snippet, we can easily update the existing poster by iterating all the <code>&lt;input type="color"&gt;</code> and set a new <code>value</code> from an array of colors:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">dots</span> <span class="o">=</span> <span class="p">[</span>
+<span class="dl">'</span><span class="s1">#006951</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#005F64</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#005192</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#D5D111</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#59AF49</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#008956</span><span class="dl">'</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">#A43251</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#B32A39</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#DB2832</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#2F5295</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#52589B</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#7B547D</span><span class="dl">'</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">#FD9026</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#FFC11C</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#F7CF00</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#D9352C</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#E64B2D</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#F4682B</span><span class="dl">'</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">#35714D</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#B84F59</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#0D0D0D</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#00A6A2</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#58221A</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#E4DFD4</span><span class="dl">'</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">#213D1E</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#635B9F</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#2F2D33</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#376470</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#2C1911</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#BE321E</span><span class="dl">'</span><span class="p">,</span>
+<span class="dl">'</span><span class="s1">#984618</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#003548</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#737373</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#AC4E76</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#0089C0</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">#666224</span><span class="dl">'</span>
+<span class="p">]</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>And then simply:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="nx">dots</span><span class="p">.</span><span class="nf">forEach</span><span class="p">((</span><span class="nx">dot</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> 
+  <span class="nx">app</span><span class="p">.</span><span class="nx">elements</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">dot</span>
+<span class="p">)</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Let's also update the background and lines:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="nx">app</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">cssText</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">--bg: #1F375E; --line: #596376;</span><span class="dl">'</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>... and we get:</p>
+
+<p><a href="assets/1531999/fc6dbac7.jpg" class="article-body-image-wrapper"><img src="assets/1531999/fc6dbac7.jpg" alt="Gernes Blue Background Dots" loading="lazy" width="672" height="742"></a></p>
+
+
+<hr>
+
+<h1>
+  <a name="demo" href="#demo">
+  </a>
+  Demo
+</h1>
+
+<p>Here's a Codepen. You can click on the toggler below the poster to toggle between the two versions we've created in this tutorial. And you can click on each dot to change it's color. I hope you'll have fun creating your own take on a Gernes dot-poster!</p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/ExObpBw?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

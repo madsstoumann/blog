@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>How To Fill Out A Form With Your Voice — Mads Stoumann</title>
+	<meta name="description" content="One of my friends is a dermatologist. He has a very busy schedule, seeing up to 60 patients a day. In...">
+	<link rel="canonical" href="https://blog.stoumann.dk/how-to-fill-out-a-form-with-your-voice">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="How To Fill Out A Form With Your Voice">
+	<meta property="og:description" content="One of my friends is a dermatologist. He has a very busy schedule, seeing up to 60 patients a day. In...">
+	<meta property="og:url" content="https://blog.stoumann.dk/how-to-fill-out-a-form-with-your-voice">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/634596/ed8321e2.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="How To Fill Out A Form With Your Voice">
+	<meta name="twitter:description" content="One of my friends is a dermatologist. He has a very busy schedule, seeing up to 60 patients a day. In...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/634596/ed8321e2.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>How To Fill Out A Form With Your Voice</h1>
+			<p>One of my friends is a dermatologist. He has a <em>very</em> busy schedule, seeing up to 60 patients a day. In order to save time, he approached me with a request:</p>
+
+<blockquote>
+<p>Can you help me make a form, where you fill out the fields using speech recognition? Is that possible?</p>
+</blockquote>
+
+<p>Yes, indeed it is, but the <code>SpeechRecognition</code> API is currently only working in Chrome and Edge (according to MDN, it should also work in Safari 14.1 — but I haven't tested that).</p>
+
+<p>To get started is pretty straight-forward:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nx">SpeechRecognition</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">SpeechRecognition</span> <span class="o">||</span> <span class="nb">window</span><span class="p">.</span><span class="nx">webkitSpeechRecognition</span><span class="p">;</span>
+<span class="k">if </span><span class="p">((</span><span class="dl">'</span><span class="s1">SpeechRecognition</span><span class="dl">'</span> <span class="k">in</span> <span class="nb">window</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">webkitSpeechRecognition</span><span class="dl">'</span> <span class="k">in</span> <span class="nb">window</span><span class="p">))</span> <span class="p">{</span> <span class="cm">/* It's supporpted! */</span> <span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>I've chosen to create a <code>speech</code>-object, that will hold all the stuff I need:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">speech</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">enabled</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="na">listening</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="na">recognition</span><span class="p">:</span> <span class="k">new</span> <span class="nb">window</span><span class="p">.</span><span class="nc">SpeechRecognition</span><span class="p">(),</span>
+  <span class="na">text</span><span class="p">:</span> <span class="dl">''</span>
+<span class="p">}</span>
+
+<span class="cm">/* To allow to continously listen: */</span>
+<span class="nx">speech</span><span class="p">.</span><span class="nx">recognition</span><span class="p">.</span><span class="nx">continuous</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="cm">/* To return interim results to a transcript area: */</span>
+<span class="nx">speech</span><span class="p">.</span><span class="nx">recognition</span><span class="p">.</span><span class="nx">interimResults</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="cm">/* To set the language: */</span>
+<span class="nx">speech</span><span class="p">.</span><span class="nx">recognition</span><span class="p">.</span><span class="nx">lang</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">en-US</span><span class="dl">'</span><span class="p">;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>The main <code>eventListener</code> takes the first result of an array of <code>results</code> — and, if the <code>activeElement</code> is either an <code>&lt;input&gt;</code> or a <code>&lt;textarea&gt;</code>, sets the <code>value</code> of that field to the <code>transcript</code>:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="nx">speech</span><span class="p">.</span><span class="nx">recognition</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">result</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">audio</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">results</span><span class="p">[</span><span class="nx">event</span><span class="p">.</span><span class="nx">results</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+  <span class="nx">speech</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="nx">audio</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">transcript</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">tag</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span><span class="p">.</span><span class="nx">nodeName</span><span class="p">;</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">tag</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">INPUT</span><span class="dl">'</span> <span class="o">||</span> <span class="nx">tag</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">TEXTAREA</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">audio</span><span class="p">.</span><span class="nx">isFinal</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nb">document</span><span class="p">.</span><span class="nx">activeElement</span><span class="p">.</span><span class="nx">value</span> <span class="o">+=</span> <span class="nx">speech</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="nx">result</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="nx">speech</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>The toggle button is simply toggling a class, it's <code>innerText</code>, as well as triggering:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="nx">speech</span><span class="p">.</span><span class="nx">recognition</span><span class="p">.</span><span class="nf">start</span><span class="p">();</span>
+<span class="cm">/* and */</span>
+<span class="nx">speech</span><span class="p">.</span><span class="nx">recognition</span><span class="p">.</span><span class="nf">stop</span><span class="p">();</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Now, we're ready to click the ”Toggle listening”-button, focus on a form-field, and start talking. Go to <a href="https://codepen.io/stoumann/pen/dyvXmwz" target="_blank" rel="noopener noreferrer">this Codepen demo</a> — remember to allow your microphone to be used. </p>
+
+<p><a href="assets/634596/4914e845.jpg" class="article-body-image-wrapper"><img src="assets/634596/4914e845.jpg" alt="speech" loading="lazy" width="490" height="522"></a></p>
+
+<p>Pause a bit after a sentence, to allow the engine to process the audio and return a transcript.</p>
+
+<p>There's <strong>a lot</strong> of room for improvement —  maybe you could return a <code>tag-cloud</code> of transcripts, and then click-to-insert the text? What do you think?</p>
+
+<p>To be honest, the <code>SpeechRecognition API</code> <strong>does</strong> feel a little bit shaky, but I'm sure it will improve in the future. I've tested with various languages, and can confirm it works pretty well with danish, english and lithuanian languages!</p>
+
+<p>Thanks for reading!</p>
+
+<blockquote>
+<p><strong>Note:</strong> Due to browser security-restrictions, the Codepen demo doesn't work when embedded.</p>
+</blockquote>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition" target="_blank" rel="noopener noreferrer">Documentation for the API at MDN</a></p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

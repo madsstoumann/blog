@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Free tool for creating Structured Data / Schemas — Mads Stoumann</title>
+	<meta name="description" content="A month ago, my good colleague SEO-mir (real name: Tihomir!), asked me if I knew of a tool, editors could use to write content, enriched with structured data. I didn&amp;#8217;t, unfortunately. But I quic">
+	<link rel="canonical" href="https://blog.stoumann.dk/free-tool-for-creating-structured-data-schemas">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Free tool for creating Structured Data / Schemas">
+	<meta property="og:description" content="A month ago, my good colleague SEO-mir (real name: Tihomir!), asked me if I knew of a tool, editors could use to write content, enriched with structured data. I didn&amp;#8217;t, unfortunately. But I quic">
+	<meta property="og:url" content="https://blog.stoumann.dk/free-tool-for-creating-structured-data-schemas">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/generic_cover.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Free tool for creating Structured Data / Schemas">
+	<meta name="twitter:description" content="A month ago, my good colleague SEO-mir (real name: Tihomir!), asked me if I knew of a tool, editors could use to write content, enriched with structured data. I didn&amp;#8217;t, unfortunately. But I quic">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/generic_cover.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Free tool for creating Structured Data / Schemas</h1>
+			<p>A month ago, my good colleague SEO-mir (real name: Tihomir!), asked me if I knew of a tool, editors could use to write content, enriched with structured data. I didn&#8217;t, unfortunately. But I quickly made a wishlist for such a tool:</p>
+<ul>
+<li>Should be able to run as a <em>bookmarklet</em> — ie. as an overlay to any existing CMS-solution.</li>
+<li>Should be easy to extend with <em>new schemas</em>, as new schemas are constantly created and/or changed.</li>
+<li>The content creator / editor should be able to <em>select the output format</em> (tags) for any schema property.</li>
+<li>The interface designer should be able to <em>set required fields</em>, field order etc. for any schema.</li>
+</ul>
+<p>Now, a month later, I&#8217;m able to set a check-mark for all the requirements on my original wishlist:<br />
+<a href="http://www.stoumann.dk/examples/editor/" rel="nofollow">http://www.stoumann.dk/examples/editor/</a></p>
+<div data-shortcode="caption" id="attachment_334" style="width: 393px" class="wp-caption alignnone"><a href="https://madsstoumann.wordpress.com/wp-content/uploads/2015/02/editor1.png"><img aria-describedby="caption-attachment-334" loading="lazy" data-attachment-id="334" data-permalink="https://madsstoumann.wordpress.com/2015/03/08/free-tool-for-creating-structured-data-schemas/editor-2/" data-orig-file="https://madsstoumann.wordpress.com/wp-content/uploads/2015/02/editor1.png" data-orig-size="383,630" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Structured Markup Editor" data-image-description="" data-image-caption="&lt;p&gt;Structured Markup Editor&lt;/p&gt;
+" data-medium-file="https://madsstoumann.wordpress.com/wp-content/uploads/2015/02/editor1.png?w=182" data-large-file="https://madsstoumann.wordpress.com/wp-content/uploads/2015/02/editor1.png?w=383" class="size-full wp-image-334" src="assets/wp-326/eb46e9cf.png" alt="Structured Markup Editor" width="383" height="630" srcset="https://madsstoumann.wordpress.com/wp-content/uploads/2015/02/editor1.png 383w, https://madsstoumann.wordpress.com/wp-content/uploads/2015/02/editor1.png?w=91&amp;h=150 91w, https://madsstoumann.wordpress.com/wp-content/uploads/2015/02/editor1.png?w=182&amp;h=300 182w" sizes="(max-width: 383px) 100vw, 383px" /></a><p id="caption-attachment-334" class="wp-caption-text">Structured Markup Editor</p></div>
+<p>There are still a lot on my <em>to-do-lis</em>t —  new ideas, such as:</p>
+<ul>
+<li>JSON-LD export</li>
+<li>TinyMCE-plugin</li>
+<li>Advanced mode</li>
+</ul>
+<p>— but the basic editor is there.</p>
+<p>A content editor can pick among some of the most popular schemas:</p>
+<p><em>Article<br />
+Book<br />
+Download<br />
+Event<br />
+LocalBusiness<br />
+Organization<br />
+Person<br />
+Product<br />
+Question<br />
+Recipe<br />
+Review<br />
+Video</em></p>
+<p>— Fill out the selected form, click on &#8220;Generate Schema&#8221;, and follow the on-screen guide.</p>
+<p>The bookmarklet is also in place (click the Info-link from the tool), but will only work with &#8220;http&#8221;-connections, as my own domain doesn&#8217;t support SSL.</p>
+<p>I&#8217;m working on a solution, where the editor will be on a domain that supports both connection types.</p>
+<p>So — go ahead — create some structured markup! Now you don&#8217;t have an excuse!</p>
+<p>I&#8217;d very much like to hear from you if you have suggestions / feedback.</p>
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

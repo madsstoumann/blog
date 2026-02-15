@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>The Frontend Agency — Mads Stoumann</title>
+	<meta name="description" content="After 7 years working as a Technical Director for Valtech, I've decided to go freelance … again (I...">
+	<link rel="canonical" href="https://blog.stoumann.dk/the-frontend-agency">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="The Frontend Agency">
+	<meta property="og:description" content="After 7 years working as a Technical Director for Valtech, I've decided to go freelance … again (I...">
+	<meta property="og:url" content="https://blog.stoumann.dk/the-frontend-agency">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/784934/3ecf4464.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="The Frontend Agency">
+	<meta name="twitter:description" content="After 7 years working as a Technical Director for Valtech, I've decided to go freelance … again (I...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/784934/3ecf4464.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>The Frontend Agency</h1>
+			<p>After 7 years working as a <em>Technical Director</em> for Valtech, I've decided to go freelance … again (I was self-employeed for 15 years before Valtech)! </p>
+
+<p>A new role requires … a new company <strong>and</strong> a new website!</p>
+
+<p>I've just returned from my summer holidays, so the website is still <em>work-in-progress</em> and so far it has <strong>no content</strong>, but it <strong>does</strong> have some features, you can have fun playing around with!</p>
+
+<p>Therefore, I've decided to do an “early release”.</p>
+
+<p>Go to <a href="https://thefrontend.agency" target="_blank" rel="noopener noreferrer">thefrontend.agency</a> and click on the spinning cog-wheel at the top left corner:</p>
+
+<p><a href="assets/784934/8f02dff2.jpg" class="article-body-image-wrapper"><img src="assets/784934/8f02dff2.jpg" alt="The Frontend Agency Editor" loading="lazy" width="800" height="534"></a></p>
+
+<ul>
+<li>Do you prefer polygons over blobs?</li>
+<li>Less or more shapes?</li>
+<li>Slow animations, fast animations … or <strong>no</strong> animations?</li>
+</ul>
+
+<p>Try to drag the color-slider at the top of the page, and then play arund with <code>saturation</code>, <code>lightness</code> and <code>opacity</code>.</p>
+
+<p>In the upcoming version of Safari, you can specify a <code>theme-color</code> – and you can use <em>CSS Custom Properties</em> with it:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"theme-color"</span> <span class="na">content=</span><span class="s">"hsl(var(--h, 192), var(--s, 40%), var(--l, 25%))"</span><span class="nt">&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+<p>Notice how the main browser window/address-bar now has the same <code>background-color</code> as the main page:</p>
+
+<p><a href="assets/784934/5492b651.jpg" class="article-body-image-wrapper"><img src="assets/784934/5492b651.jpg" alt="Safari Theme" loading="lazy" width="800" height="366"></a> </p>
+
+<p>Then, if you drag the color-slider, notice how <em>both</em> the <code>background-color</code> <em>and</em> the <code>theme-color</code> change:</p>
+
+<p><a href="assets/784934/2d65798d.jpg" class="article-body-image-wrapper"><img src="assets/784934/2d65798d.jpg" alt="Safari Theme Modified" loading="lazy" width="800" height="370"></a></p>
+
+<p>I think this is pretty cool – let's hope other browser-vendors implements this as well!</p>
+
+<hr>
+
+<p>Now, typically, I'd never release “half-baked” code, but in this case, I had to release <em>something</em> – and I'm really looking forward to your comments, suggestions etc.</p>
+
+<hr>
+<h2>
+  <a name="the-logo" href="#the-logo">
+  </a>
+  The Logo
+</h2>
+
+<p>The logo is handdrawn by Danish illustrator, Rasmus Meisler. </p>
+
+<p>Last year, he drew one of the most <a href="https://fantask.dk/browse.asp?category=comics&amp;aid=4731" target="_blank" rel="noopener noreferrer">beautiful comic books</a>, I've ever seen:</p>
+
+<p><a href="assets/784934/136ddc62.jpg" class="article-body-image-wrapper"><img src="assets/784934/136ddc62.jpg" alt="den-magiske-spinel-2605502" loading="lazy" width="500" height="669"></a></p>
+
+<p><a href="https://www.rasmusmeisler.dk/weekendavisen" target="_blank" rel="noopener noreferrer">Take a look</a> at some of his amazing illustrations for the danish paper <em>Weekendavisen</em>, too.</p>
+
+<p>Rasmus actually sent me a whole bunch of sketches and ideas for the logo:</p>
+
+<p><a href="assets/784934/04df59e6.jpg" class="article-body-image-wrapper"><img src="assets/784934/04df59e6.jpg" alt="Logo sketches" loading="lazy" width="800" height="292"></a></p>
+
+<p>I like them all, but ended up picking “the agent”, as in “agen(t)-cy”!</p>
+
+<hr>
+<h2>
+  <a name="type-of-work" href="#type-of-work">
+  </a>
+  Type of Work
+</h2>
+
+<p>So what will I be doing? Frontend consulting, obviously – but also much more Graphic Design and UX/UI work, than I've been doing at Valtech. </p>
+
+<p>I will not work as a comicbook-letterer again, but I'd like to use my “crossover-knowledge” of JavaScript and Graphic Design, as I write about here:</p>
+
+
+<div class="ltag__link">
+  <a href="/madsstoumann" class="ltag__link__link">
+    <div class="ltag__link__pic">
+      <img src="assets/784934/47e94670.jpg" alt="madsstoumann" loading="lazy">
+    </div>
+  </a>
+  <a href="https://dev.to/madsstoumann/comics-graphic-design-and-the-power-of-javascript-2kap" class="ltag__link__link">
+    <div class="ltag__link__content">
+      <h2>Comics, Graphic Design — and the Power of JavaScript</h2>
+      <h3>Mads Stoumann ・ Jul 9 '21</h3>
+      <div class="ltag__link__taglist">
+        <span class="ltag__link__tag">#javascript</span>
+        <span class="ltag__link__tag">#design</span>
+        <span class="ltag__link__tag">#comics</span>
+        <span class="ltag__link__tag">#scripting</span>
+      </div>
+    </div>
+  </a>
+</div>
+
+
+
+<p>I'll also spend more time on sustainability:</p>
+
+
+<div class="ltag__link">
+  <a href="/madsstoumann" class="ltag__link__link">
+    <div class="ltag__link__pic">
+      <img src="assets/784934/47e94670.jpg" alt="madsstoumann" loading="lazy">
+    </div>
+  </a>
+  <a href="https://dev.to/madsstoumann/making-sustainable-websites-hd3" class="ltag__link__link">
+    <div class="ltag__link__content">
+      <h2>Making Sustainable Websites</h2>
+      <h3>Mads Stoumann ・ Feb 10 '21</h3>
+      <div class="ltag__link__taglist">
+        <span class="ltag__link__tag">#css</span>
+        <span class="ltag__link__tag">#javascript</span>
+        <span class="ltag__link__tag">#sustainability</span>
+        <span class="ltag__link__tag">#discuss</span>
+      </div>
+    </div>
+  </a>
+</div>
+
+
+<p>I'm planning to write an extension for <em>Lighthouse</em>, and much, much more.</p>
+
+<p>Finally, I'll be spending time on art, coding algorithms with random art, like this:</p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/dyvprJM?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+<p>The plan is to launch a webshop, where you can design, tweak and order a print of a unique piece of art.</p>
+
+<p>Here are two examples, printed on canvas:</p>
+
+<p><a href="assets/784934/399074ce.jpg" class="article-body-image-wrapper"><img src="assets/784934/399074ce.jpg" alt="Art" loading="lazy" width="800" height="499"></a></p>
+
+
+<hr>
+
+<p>So: exiting times ahead! </p>
+
+<p>Naturally, I'll be writing about it all here on dev.to – as well as writing my usual tutorials and guides!</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Piano Chords in CSS — Mads Stoumann</title>
+	<meta name="description" content="A couple of months ago, I wrote an article about Guitar Chords in CSS, using the new typed attr()...">
+	<link rel="canonical" href="https://blog.stoumann.dk/piano-chords-in-css">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Piano Chords in CSS">
+	<meta property="og:description" content="A couple of months ago, I wrote an article about Guitar Chords in CSS, using the new typed attr()...">
+	<meta property="og:url" content="https://blog.stoumann.dk/piano-chords-in-css">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/2722566/9785109f.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Piano Chords in CSS">
+	<meta name="twitter:description" content="A couple of months ago, I wrote an article about Guitar Chords in CSS, using the new typed attr()...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/2722566/9785109f.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Piano Chords in CSS</h1>
+			<p>A couple of months ago, I wrote an article about <a href="https://dev.to/madsstoumann/guitar-chords-in-css-3hk8">Guitar Chords in CSS</a>, using the new typed <code>attr()</code> method in CSS. I didn't plan to write a follow-up, but then I saw <a href="https://detkuloerteudvalg.dk/?s=klaverakkorder&amp;post_type=product" target="_blank" rel="noopener noreferrer">these beautiful posters</a> and wanted to do something similar. It turned out to be <em>way</em> more complicated than guitar chords!</p>
+
+
+<hr>
+
+<h2>
+  <a name="markup" href="#markup">
+  </a>
+  Markup
+</h2>
+
+<p>The markup consists of a single custom element, with a <code>keys</code>-attribute:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;piano-chord</span> <span class="na">keys=</span><span class="s">"14"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/piano-chord&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p><code>keys</code> indicates how many <em>white</em> keys we want to show on our piano. For now, that's all we need; all the heavy lifting is done in CSS.</p>
+
+
+<hr>
+
+<h2>
+  <a name="css" href="#css">
+  </a>
+  CSS
+</h2>
+
+<p>The first thing we do in CSS is grab the <code>keys</code> attribute:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">piano-chord</span> <span class="p">{</span>
+  <span class="py">--_keys</span><span class="p">:</span> <span class="n">attr</span><span class="p">(</span><span class="n">keys</span> <span class="n">type</span><span class="p">(</span><span class="err">&lt;</span><span class="n">number</span><span class="err">&gt;</span><span class="p">),</span> <span class="m">8</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Next, we need a private const to indicate how many white keys are in a regular octave:</p>
+
+<p><code>--_octave-keys: 7;</code></p>
+
+<p>OK, so now we can already draw the white keys, which will be simple lines at calculated intervals:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">background</span><span class="o">:</span> <span class="nt">linear-gradient</span><span class="o">(</span><span class="err">90</span><span class="nt">deg</span><span class="o">,</span> 
+<span class="nt">var</span><span class="o">(</span><span class="nt">--piano-chord-black-key</span><span class="o">)</span> 
+<span class="nt">var</span><span class="o">(</span><span class="nt">--piano-chord-key-gap</span><span class="o">),</span> 
+<span class="err">#0000</span> <span class="err">0</span> <span class="nt">var</span><span class="o">(</span><span class="nt">--piano-chord-key-gap</span><span class="o">));</span>
+
+<span class="nt">border-block</span><span class="o">:</span>
+  <span class="nt">var</span><span class="o">(</span><span class="nt">--piano-chord-key-gap</span><span class="o">)</span>
+  <span class="nt">solid</span> <span class="nt">var</span><span class="o">(</span><span class="nt">--piano-chord-black-key</span><span class="o">);</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>I've added a few properties to set the line color and width. We also need to set the <code>background-size</code>:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">background-size</span><span class="o">:</span> <span class="nt">calc</span><span class="o">(</span><span class="err">100</span><span class="o">%</span> <span class="o">/</span> <span class="nt">var</span><span class="o">(</span><span class="nt">--_keys</span><span class="o">)</span> <span class="nt">-</span> <span class="o">(</span><span class="nt">var</span><span class="o">(</span><span class="nt">--piano-chord-key-gap</span><span class="o">)</span> <span class="o">/</span> <span class="nt">var</span><span class="o">(</span><span class="nt">--_keys</span><span class="o">)))</span> <span class="err">100</span><span class="o">%;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>This gives us:</p>
+
+<p><a href="assets/2722566/37d9d8c5.jpg" class="article-body-image-wrapper"><img src="assets/2722566/37d9d8c5.jpg" alt="White piano keys" loading="lazy" width="800" height="281"></a></p>
+
+
+<hr>
+
+<p>Next, we need to calculate the octave width, as the five black keys in a regular octave will repeat in the next octave, creating the distinct pattern we know from a piano.</p>
+
+<p>For the next calculations, we need a few more private properties:</p>
+
+<h3>
+  <a name="octave-width" href="#octave-width">
+  </a>
+  Octave width
+</h3>
+
+
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">--_ow</span><span class="o">:</span> <span class="nt">calc</span><span class="o">(</span><span class="err">100</span><span class="o">%</span> <span class="o">/</span> <span class="o">(</span><span class="nt">var</span><span class="o">(</span><span class="nt">--_keys</span><span class="o">)</span> <span class="o">/</span> <span class="nt">var</span><span class="o">(</span><span class="nt">--_octave-keys</span><span class="o">)));</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<h3>
+  <a name="black-key-ratio" href="#black-key-ratio">
+  </a>
+  Black key ratio
+</h3>
+
+<p>The black key is always 60% of the width of a white key, but because we change the octave width dynamically, we need another calculation to keep this ratio:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">--_r</span><span class="o">:</span> <span class="nt">calc</span><span class="o">(</span><span class="nt">var</span><span class="o">(</span><span class="nt">--_keys</span><span class="o">)</span> <span class="o">/</span> <span class="nt">var</span><span class="o">(</span><span class="nt">--_octave-keys</span><span class="o">)</span> <span class="o">*</span> <span class="err">0</span><span class="o">.</span><span class="err">6</span><span class="o">);</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<h3>
+  <a name="white-key-width" href="#white-key-width">
+  </a>
+  White key width:
+</h3>
+
+
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">--_wkw</span><span class="o">:</span> <span class="nt">calc</span><span class="o">(</span><span class="err">100</span><span class="o">%</span> <span class="o">/</span> <span class="nt">var</span><span class="o">(</span><span class="nt">--_keys</span><span class="o">));</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<h3>
+  <a name="black-key-width" href="#black-key-width">
+  </a>
+  Black key width
+</h3>
+
+
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">--_bkw</span><span class="o">:</span> <span class="nt">calc</span><span class="o">(</span><span class="nt">var</span><span class="o">(</span><span class="nt">--_wkw</span><span class="o">)</span> <span class="o">*</span> <span class="nt">var</span><span class="o">(</span><span class="nt">--_r</span><span class="o">));</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Phew! And we're not done yet! You might recall that the black key is 60% of a white key and placed exactly in the middle between two white keys. Half of 60% is 30%, so we need to place the first black key (between C and D on a piano) at 70% of the first white key (C):<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">--_off1</span><span class="o">:</span> <span class="nt">calc</span><span class="o">(</span><span class="err">0</span><span class="o">.</span><span class="err">7</span> <span class="o">/</span> <span class="nt">var</span><span class="o">(</span><span class="nt">--_octave-keys</span><span class="o">)</span> <span class="o">*</span> <span class="err">100</span><span class="o">%);</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>To skip forward: The next ones are placed at <code>1.7</code>, <code>3.7</code>, <code>4.7</code>, and <code>5.7</code>. Now, we need to add five extra gradients to our background, one for each black key in an octave.</p>
+
+<p>I'll just show the code for the first here:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">linear-gradient</span><span class="o">(</span><span class="err">90</span><span class="nt">deg</span><span class="o">,</span>
+  <span class="err">#0000</span> <span class="err">0</span> <span class="nt">var</span><span class="o">(</span><span class="nt">--_off1</span><span class="o">),</span>
+  <span class="nt">var</span><span class="o">(</span><span class="nt">--piano-chord-black-key</span><span class="o">)</span> <span class="nt">var</span><span class="o">(</span><span class="nt">--_off1</span><span class="o">)</span>
+  <span class="nt">calc</span><span class="o">(</span><span class="nt">var</span><span class="o">(</span><span class="nt">--_off1</span><span class="o">)</span> <span class="o">+</span> <span class="nt">var</span><span class="o">(</span><span class="nt">--_bkw</span><span class="o">)),</span>
+  <span class="err">#0000</span> <span class="err">0</span><span class="o">))</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Thankfully, the <code>background-size</code> is simple this time: <code>var(--_ow) 60%</code></p>
+
+<p>Let's see what we've got:</p>
+
+<p><a href="assets/2722566/cbcaea55.jpg" class="article-body-image-wrapper"><img src="assets/2722566/cbcaea55.jpg" alt="Piano Chord Initial" loading="lazy" width="724" height="300"></a></p>
+
+<p>Cool! Let's change <code>keys</code> to <code>keys="21"</code>:</p>
+
+<p><a href="assets/2722566/da191ad0.jpg" class="article-body-image-wrapper"><img src="assets/2722566/da191ad0.jpg" alt="Piano with 21 white keys" loading="lazy" width="724" height="240"></a></p>
+
+<p>Isn't that cool? A CSS-only, attribute-controlled piano pattern?</p>
+
+
+<hr>
+
+<h2>
+  <a name="adding-chord-indicators" href="#adding-chord-indicators">
+  </a>
+  Adding chord indicators
+</h2>
+
+<p>Now, let's add chords. For that, we need a new custom element, <code>&lt;piano-key&gt;</code>:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;piano-chord</span> <span class="na">aria-label=</span><span class="s">"C"</span> <span class="na">keys=</span><span class="s">"14"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;piano-key</span> <span class="na">note=</span><span class="s">"C"</span><span class="nt">&gt;&lt;/piano-key&gt;</span>
+  <span class="nt">&lt;piano-key</span> <span class="na">note=</span><span class="s">"E"</span><span class="nt">&gt;&lt;/piano-key&gt;</span>
+  <span class="nt">&lt;piano-key</span> <span class="na">note=</span><span class="s">"G"</span><span class="nt">&gt;&lt;/piano-key&gt;</span>
+ <span class="nt">&lt;/piano-chord&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>That wraps up what we need to do in HTML. Let's go back to CSS. First, we set a piano key to be a grid:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">piano-key</span> <span class="p">{</span> <span class="nl">display</span><span class="p">:</span> <span class="n">grid</span><span class="p">;</span> <span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Next, we need to set at which column location the key is:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">piano-key</span><span class="o">[</span><span class="nt">note</span><span class="o">=</span><span class="s1">"C"</span><span class="o">]</span> <span class="p">{</span>  <span class="nl">grid-column</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span> <span class="p">}</span>
+<span class="nt">piano-key</span><span class="o">[</span><span class="nt">note</span><span class="o">=</span><span class="s1">"D"</span><span class="o">]</span> <span class="p">{</span>  <span class="nl">grid-column</span><span class="p">:</span> <span class="m">2</span><span class="p">;</span> <span class="p">}</span>
+<span class="c">/* etc. */</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Next, we add a pseudo-element showing a small dot:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">piano-key</span><span class="nd">::after</span> <span class="p">{</span>
+  <span class="nl">background</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--_bg</span><span class="p">,</span> <span class="m">#000</span><span class="p">);</span>
+  <span class="nl">border-radius</span><span class="p">:</span> <span class="m">50%</span><span class="p">;</span>
+  <span class="nl">content</span><span class="p">:</span> <span class="s1">""</span><span class="p">;</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="nb">block</span><span class="p">;</span>
+  <span class="nl">height</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+  <span class="py">margin-block</span><span class="p">:</span> <span class="m">8px</span><span class="p">;</span>
+  <span class="py">place-self</span><span class="p">:</span> <span class="n">end</span> <span class="nb">center</span><span class="p">;</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>This renders:</p>
+
+<p><a href="assets/2722566/1b400292.jpg" class="article-body-image-wrapper"><img src="assets/2722566/1b400292.jpg" alt="C major" loading="lazy" width="724" height="300"></a></p>
+
+<p>... and that's <em>almost</em> it! We need to handle sharp and flat notes:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">piano-key</span><span class="o">[</span><span class="nt">note</span><span class="o">*=</span><span class="s1">"#"</span><span class="o">]</span> <span class="p">{</span>
+  <span class="py">translate</span><span class="p">:</span> <span class="m">50%</span> <span class="m">-40%</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">piano-key</span><span class="o">[</span><span class="nt">note</span><span class="o">*=</span><span class="s1">"b"</span><span class="o">]</span> <span class="p">{</span>
+  <span class="py">translate</span><span class="p">:</span> <span class="m">-50%</span> <span class="m">-40%</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>And to make them look just as cool as in the posters I mentioned in the beginning, let's wrap the piano in a wrapper with a dusty blue color and a retro SVG filter (see the final demo for the code!):</p>
+
+<p><a href="assets/2722566/7bca3247.jpg" class="article-body-image-wrapper"><img src="assets/2722566/7bca3247.jpg" alt="C major dusty blue" loading="lazy" width="800" height="453"></a></p>
+
+<p>And that's it! There is, of course, much more to it, but I've covered most of the basics. Here's a CodePen with a bunch of chords:</p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/yyYJmKw?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

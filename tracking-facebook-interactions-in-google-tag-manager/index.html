@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Tracking Facebook interactions in Google Tag Manager — Mads Stoumann</title>
+	<meta name="description" content="To track Facebook interactions like (pun intended!) Like, Un-Like and Comments in Universal Analytics (UA) via Google Tag Manager (GTM), you need to follow a series of steps — and there are multiple p">
+	<link rel="canonical" href="https://blog.stoumann.dk/tracking-facebook-interactions-in-google-tag-manager">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Tracking Facebook interactions in Google Tag Manager">
+	<meta property="og:description" content="To track Facebook interactions like (pun intended!) Like, Un-Like and Comments in Universal Analytics (UA) via Google Tag Manager (GTM), you need to follow a series of steps — and there are multiple p">
+	<meta property="og:url" content="https://blog.stoumann.dk/tracking-facebook-interactions-in-google-tag-manager">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/generic_cover.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Tracking Facebook interactions in Google Tag Manager">
+	<meta name="twitter:description" content="To track Facebook interactions like (pun intended!) Like, Un-Like and Comments in Universal Analytics (UA) via Google Tag Manager (GTM), you need to follow a series of steps — and there are multiple p">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/generic_cover.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Tracking Facebook interactions in Google Tag Manager</h1>
+			<p>To track Facebook interactions like (pun intended!) <em>Like</em>, <em>Un-Like</em> and <em>Comments</em> in Universal Analytics (UA) via Google Tag Manager (GTM), you need to follow a series of steps — and there are multiple pitfalls along the way. Here&#8217;s my findings, as a step-by-step guide.</p>
+<h2>Setup a Facebook App</h2>
+<p>If you have a Facebook-account, you&#8217;re also (almost) a Facebook Developer!<br />
+Go to <a href="http://developer.facebook.com" target="_blank">developer.facebook.com</a><br />
+Click on &#8220;My Apps&#8221;, then on &#8220;Register as a developer&#8221; and finally on &#8220;Register Now&#8221;.<br />
+Have your phone ready (to recieve a confirmation-code) and follow the steps to register.</p>
+<p>When registration is complete, click on &#8220;My Apps&#8221; and &#8220;Add a new app&#8221;.<br />
+Choose &#8220;www&#8221;<br />
+Give your app a name (could be the name of your website), and click on &#8220;Create New Facebook App ID&#8221;.<br />
+Now choose a category and create the app.</p>
+<p>In the &#8220;Setup the Facebook SDK for JavaScript&#8221;-block, copy your app&#8217;s id (a long string of numbers), looking similar to this:</p>
+<pre class="brush: jscript; title: ; notranslate" title="">
+FB.init({
+      appId      : '615880505229182'
+    });
+</pre>
+<p>— and save it for later, we&#8217;re gonna use it in GTM in a few minutes.<br />
+Fill out your site&#8217;s url and proceed.</p>
+<p>Now skip the rest of the intro, go to your app&#8217;s Settings. In the url-field, you&#8217;ll see the url, you wrote in the previous step.<br />
+If you&#8217;re working directly with that url, everything is fine.</p>
+<p>If you&#8217;re working on a localhost or other test-environment, you need to add the url&#8217;s of this/those to Facebook&#8217;s <strong>oAuth-setting</strong>, as Facebook requires a 2-way communication.</p>
+<p>Click on &#8220;Advanced&#8221; and find the section &#8220;Valid OAuth redirect URIs&#8221;.<br />
+Here, add the url&#8217;s of your test-environment/s.</p>
+<p>If your test-environment is <strong>not reachable</strong> from &#8220;the outside&#8221; (like <em>localhost</em>), you might want to use a tool like <a href="http://localtunnel.me" target="_blank">localtunnel.me</a>. localtunnel itself requires <em>node.js</em> — if you don&#8217;t have that, go to <a href="http://nodejs.org" target="_blank">nodejs.org</a> and download/install node.js for your platform.</p>
+<p>After the installation is complete, go to the node.js prompt and type:</p>
+<pre class="brush: bash; title: ; notranslate" title="">
+npm install -g localtunnel
+</pre>
+<p>— to install localtunnel. When that is done, start a tunnel:</p>
+<pre class="brush: bash; title: ; notranslate" title="">
+lt --port 8000
+</pre>
+<p>You will receive a &#8220;tunnel&#8221; to your localhost. Copy this, and add it to the oAuth-list mentioned before.</p>
+<p>Now, let&#8217;s go to GTM (assuming you already have an account there).</p>
+<h2>Google Tag Manager</h2>
+<p>Go to &#8220;Variables&#8221;, click on &#8220;New&#8221;, then on &#8220;Constant&#8221;.<br />
+Name your variable <em>CN Facebook App ID</em> and, as value, paste your Facebook App Id — in the example I created before, it was <em>615880505229182</em>.</p>
+<p>We need 3 more variables, of the type &#8220;Data Layer Variable&#8221;:</p>
+<p><strong>Name</strong> : <em>DL socialAction</em><br />
+<strong>Data Layer Variable Name</strong> : <em>socialAction</em></p>
+<p><strong>Name</strong> : <em>DL socialNetwork</em><br />
+<strong>Data Layer Variable Name</strong> : <em>socialNetwork</em></p>
+<p><strong>Name</strong> : <em>DL socialTarget</em><br />
+<strong>Data Layer Variable Name</strong> : <em>socialTarget</em></p>
+<p>All done? Now go to &#8220;Triggers&#8221;, click on &#8220;New&#8221;, then &#8220;Custom Event&#8221;.<br />
+Under &#8220;Fire on&#8221;, paste the value <em>socialInt</em>, name your trigger <em>EV socialInt</em> and save it.</p>
+<p>Finally, move to <strong>Tags</strong>, click on &#8220;New&#8221; and then on &#8220;Custom HTML&#8221;.<br />
+Name your tag <em>CU Facebook Init</em> and paste the following code under &#8220;Configure tag&#8221;:</p>
+<pre class="brush: xml; title: ; notranslate" title="">
+
+&lt;div id=&quot;fb-root&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : &quot;{{CN Facebook App ID}}&quot;,
+      xfbml      : true,
+      version    : &quot;v2.5&quot;
+    });
+    
+    if (typeof FB !== &quot;undefined&quot;){
+      FB.Event.subscribe(&quot;edge.create&quot;,
+        function(targetURL) {
+          dataLayer.push({
+          &quot;event&quot;: &quot;socialInt&quot;,
+          &quot;socialNetwork&quot;: &quot;Facebook&quot;,
+          &quot;socialAction&quot;: &quot;Like&quot;,
+          &quot;socialTarget&quot;: targetURL
+          });
+        }
+      );
+
+      FB.Event.subscribe(&quot;edge.remove&quot;, function(location){
+        dataLayer.push({
+          &quot;event&quot;: &quot;socialInt&quot;,
+          &quot;socialNetwork&quot;: &quot;Facebook&quot;,
+          &quot;socialAction&quot;: &quot;Unlike&quot;,
+          &quot;socialTarget&quot;: location
+        });
+      });
+      
+      FB.Event.subscribe(&quot;comment.create&quot;, function(){
+        dataLayer.push({
+          &quot;event&quot;: &quot;socialInt&quot;,
+          &quot;socialNetwork&quot;: &quot;Facebook&quot;,
+          &quot;socialAction&quot;: &quot;Comment Create&quot;,
+          &quot;socialTarget&quot;: window.location.href
+        });
+      });
+      
+      FB.Event.subscribe(&quot;comment.remove&quot;, function(){
+        dataLayer.push({
+          &quot;event&quot;: &quot;socialInt&quot;,
+          &quot;socialNetwork&quot;: &quot;Facebook&quot;,
+          &quot;socialAction&quot;: &quot;Comment Remove&quot;,
+          &quot;socialTarget&quot;: window.location.href
+        });
+      });
+                  
+    }
+  };
+(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if (d.getElementById(id)){return;}js=d.createElement(s);js.id=id;js.src=&quot;//connect.facebook.net/{{LT Facebook Language}}/sdk.js&quot;;fjs.parentNode.insertBefore(js,fjs);}(document,&quot;script&quot;,&quot;facebook-jssdk&quot;));
+&lt;/script&gt;
+</pre>
+<p>Add the trigger &#8220;All pages&#8221; and save the tag.<br />
+Almost there!</p>
+<p>Now, create a new tag, select &#8220;Google Analytics&#8221; and then &#8220;Universal Analytics&#8221;.<br />
+Fill out your tracking ID (your UA code).<br />
+Under &#8220;Track Type&#8221;, choose &#8220;Social&#8221;.<br />
+Fill out &#8220;Network&#8221; with <em>{{DL socialNetwork}}</em>, &#8220;Action&#8221; with <em>{{DL socialAction}}</em> and &#8220;Action Target&#8221; with <em>{{DL socialTarget}}</em>.</p>
+<p>Name your tag <em>UA Social Media</em>, fire on <strong>EV socialInt</strong> (the trigger you created before) and save it.</p>
+<p>Preview your container, and then go to a page with the container snippet installed.<br />
+Verify that the tag <em>CU Facebook Init</em> is fired.</p>
+<p>Now, let&#8217;s add a Facebook &#8220;Like&#8221;-button to the html of your page:</p>
+<pre class="brush: xml; title: ; notranslate" title="">
+
+&lt;div class=&quot;fb-like&quot; data-href=&quot;http://yourdomain.name&quot; data-layout=&quot;standard&quot; data-action=&quot;like&quot; data-show-faces=&quot;true&quot; data-share=&quot;true&quot;&gt;&lt;/div&gt;
+
+</pre>
+<p>Be sure to fill out the <em>data-href</em>-attribute with the correct url for the test-page (either a real domain or your localtunnel url).<br />
+If the url is always the url of the page, it might be useful to write a javascript that updates this to:</p>
+<pre class="brush: jscript; title: ; notranslate" title="">
+window.location.href
+</pre>
+<p>Save and refresh the page &#8211; click on &#8220;Like&#8221; a couple of times &#8211; and notice the tag <em>UA Social Media</em> being triggered.</p>
+<h2>See the interactions in UA</h2>
+<p>Now go to Universal Analytics. Be sure to wait some time in order to have the data saved in UA (at <em>least</em> a couple of minutes!).</p>
+<p>Now, go to <strong>Acquisition &gt; Social &gt; Plugins</strong><br />
+Be sure to choose todays date in the date-range in the upper, right corner.</p>
+<p>Now, hopefully (!) you have the entries you just created.<br />
+Click on <em>Social Source and Action</em>.</p>
+<p>You should see the entries:<br />
+<strong><br />
+Facebook : Like<br />
+Facebook : Unlike<br />
+</strong></p>
+<p>— along with a counter!</p>
+<p>Happy tracking.</p>
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Creating a Print Preview Web Component — Mads Stoumann</title>
+	<meta name="description" content="I’m currently working on a large e-commerce project — an update to an app I coded back in 1994-1996!...">
+	<link rel="canonical" href="https://blog.stoumann.dk/creating-a-print-preview-web-component">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Creating a Print Preview Web Component">
+	<meta property="og:description" content="I’m currently working on a large e-commerce project — an update to an app I coded back in 1994-1996!...">
+	<meta property="og:url" content="https://blog.stoumann.dk/creating-a-print-preview-web-component">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/2237641/c21f68de.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Creating a Print Preview Web Component">
+	<meta name="twitter:description" content="I’m currently working on a large e-commerce project — an update to an app I coded back in 1994-1996!...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/2237641/c21f68de.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Creating a Print Preview Web Component</h1>
+			<p>I’m currently working on a large e-commerce project — an update to an app I coded back in 1994-1996! 🤯</p>
+
+<p>Back then, the app was coded in VBA, connecting to a Microsoft Access database. Now — of course — it’s web-based. The differences between MS Access and a web-based solution are <strong>huge</strong>. One of the major challenges has been print control. In MS Access, you have <em>reports</em> that you can fine-tune. This app requires a lot of <em>printed</em> content, like packing slips for orders, invoices, and much more.</p>
+
+<p>Many of these documents don’t appear in the interface but need to be printed nevertheless. For example, a “Print subscription packing slips” button in the UI should simply open the native print dialog with nicely formatted packing slips ready to print.</p>
+
+<p>To solve this, I created a Web Component, <code>&lt;print-preview&gt;</code>, for print control and preview. It uses the <code>popover API</code> to keep it “detached” from the regular DOM (popover content is in the <em>top layer</em>).</p>
+
+<h2>
+  <a name="what-it-does" href="#what-it-does">
+  </a>
+  What It Does
+</h2>
+
+<ul>
+<li>Previews your content exactly as it’ll print</li>
+<li>Fine-tune everything from paper size to fonts</li>
+<li>Handle images smartly (show them, hide them, or just show outlines)</li>
+<li>Templates for dynamic stuff like invoices</li>
+<li>Works in different languages (i18n)</li>
+</ul>
+
+<h2>
+  <a name="getting-started" href="#getting-started">
+  </a>
+  Getting Started
+</h2>
+
+<p>First, drop this into your HTML:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;print-preview&gt;</span>
+  <span class="nt">&lt;paper-sheet&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>Hello, Printer!<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;p&gt;</span>This will look great on paper.<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/paper-sheet&gt;</span>
+<span class="nt">&lt;/print-preview&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<blockquote>
+<p><strong>Note:</strong> The component <em>must</em> be a direct child of <code>&lt;body&gt;</code>. If not, it will not mount. Also: Just <strong>one</strong> instance is allowed.</p>
+</blockquote>
+
+<p>Each <code>&lt;paper-sheet&gt;</code> represents one printed page. If you want more pages, just add more <code>&lt;paper-sheet&gt;</code> elements.</p>
+
+<p>Now, we won't see <em>anything</em> on the page yet. First, we need to load the component itself:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"module"</span><span class="nt">&gt;</span>
+<span class="k">import</span> <span class="nx">PrintPreview</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./index.js</span><span class="dl">'</span><span class="p">;</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Then, show it, using the <code>preview()</code> method:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">printPreview</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">print-preview</span><span class="dl">'</span><span class="p">);</span>
+<span class="k">if </span><span class="p">(</span><span class="nx">printPreview</span><span class="p">)</span> <span class="nx">printPreview</span><span class="p">.</span><span class="nf">preview</span><span class="p">();</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<h2>
+  <a name="templates" href="#templates">
+  </a>
+  Templates
+</h2>
+
+<p>Remember those Access reports I mentioned? For the web-based solution, we use templates instead:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">invoiceTemplate</span> <span class="o">=</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> 
+  <span class="nx">data</span><span class="p">.</span><span class="nf">map</span><span class="p">((</span><span class="nx">obj</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">subtotal</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">products</span><span class="p">.</span><span class="nf">reduce</span><span class="p">((</span><span class="nx">sum</span><span class="p">,</span> <span class="nx">product</span><span class="p">)</span> <span class="o">=&gt;</span> 
+      <span class="nx">sum</span> <span class="o">+</span> <span class="p">(</span><span class="nx">product</span><span class="p">.</span><span class="nx">quantity</span> <span class="o">*</span> <span class="nx">product</span><span class="p">.</span><span class="nx">price</span><span class="p">),</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">vat</span> <span class="o">=</span> <span class="nx">subtotal</span> <span class="o">*</span> <span class="mf">0.2</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">total</span> <span class="o">=</span> <span class="nx">subtotal</span> <span class="o">+</span> <span class="nx">vat</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="s2">`
+    &lt;paper-sheet&gt;
+      &lt;h2&gt;Invoice&lt;/h2&gt;
+      &lt;p&gt;
+        </span><span class="p">${</span><span class="nx">obj</span><span class="p">.</span><span class="nx">customer</span><span class="p">.</span><span class="nx">first_name</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">obj</span><span class="p">.</span><span class="nx">customer</span><span class="p">.</span><span class="nx">last_name</span><span class="p">}</span><span class="s2">&lt;br&gt;
+        </span><span class="p">${</span><span class="nx">obj</span><span class="p">.</span><span class="nx">customer</span><span class="p">.</span><span class="nx">street_address</span><span class="p">}</span><span class="s2">&lt;br&gt;
+        </span><span class="p">${</span><span class="nx">obj</span><span class="p">.</span><span class="nx">customer</span><span class="p">.</span><span class="nx">postal_code</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">obj</span><span class="p">.</span><span class="nx">customer</span><span class="p">.</span><span class="nx">city</span><span class="p">}</span><span class="s2">
+      &lt;/p&gt;
+      &lt;table part="table"&gt;
+        &lt;!-- Your table stuff here --&gt;
+      &lt;/table&gt;
+    &lt;/paper-sheet&gt;
+    `</span><span class="p">;</span>
+  <span class="p">}).</span><span class="nf">join</span><span class="p">(</span><span class="dl">''</span><span class="p">);</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<h2>
+  <a name="making-it-pretty" href="#making-it-pretty">
+  </a>
+  Making It Pretty
+</h2>
+
+<p>One thing I really missed from Access was the report designer's ease of use. Luckily, we have CSS and <code>::part</code>:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">print-preview</span> <span class="p">{</span>
+  <span class="err">&amp;::part(table)</span> <span class="err">{</span>
+    <span class="nl">border-collapse</span><span class="p">:</span> <span class="nb">collapse</span><span class="p">;</span>
+    <span class="py">margin-block-start</span><span class="p">:</span> <span class="m">4rem</span><span class="p">;</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="o">&amp;</span><span class="nd">::part</span><span class="o">(</span><span class="nt">tbody</span><span class="o">)</span> <span class="p">{</span>
+    <span class="nl">break-after</span><span class="p">:</span> <span class="nb">avoid</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="o">&amp;</span><span class="nd">::part</span><span class="o">(</span><span class="nt">tfoot</span><span class="o">)</span> <span class="p">{</span>
+    <span class="py">border-block-start</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">dashed</span><span class="p">;</span>
+    <span class="py">border-block-end</span><span class="p">:</span> <span class="m">4px</span> <span class="nb">double</span><span class="p">;</span>
+    <span class="nl">break-before</span><span class="p">:</span> <span class="nb">avoid</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="err">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>If you want direct styling, not using <code>::part</code>, you can simply add a <code>&lt;style&gt;</code>-block directly in the template:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="k">return</span> <span class="s2">`
+&lt;style&gt;
+  table {
+    margin-block-start: 4rem;
+    width: 100%;
+    :is(td,th) { text-align: left; }
+}
+&lt;/style&gt;
+&lt;paper-sheet&gt; ... &lt;/paper-sheet&gt;`</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Let’s see how the preview looks like:</p>
+
+<p><a href="assets/2237641/5aec5fc7.jpg" class="article-body-image-wrapper"><img src="assets/2237641/5aec5fc7.jpg" alt="Print preview" loading="lazy" width="800" height="1127"></a></p>
+
+<p>Now, click the print button or hit Ctrl+P (or ⌘+P on Mac):</p>
+
+<p><a href="assets/2237641/9e7d2aad.jpg" class="article-body-image-wrapper"><img src="assets/2237641/9e7d2aad.jpg" alt="Print Dialog" loading="lazy" width="800" height="526"></a></p>
+
+<p>Back to the preview — we can change lots of stuff:</p>
+
+<ul>
+<li>Paper size (A4, Letter, whatever you need)</li>
+<li>Portrait or landscape</li>
+<li>Margins</li>
+<li>Fonts and sizes</li>
+<li>Image handling</li>
+</ul>
+
+<p>Let’s change to A5, landscape, a different font etc.:</p>
+
+<p><a href="assets/2237641/027adc9b.jpg" class="article-body-image-wrapper"><img src="assets/2237641/027adc9b.jpg" alt="Print preview after change" loading="lazy" width="800" height="1127"></a></p>
+
+<p>We can also control whether images should be visible, hidden, or displayed as outlines:</p>
+
+<p><a href="assets/2237641/1f196b10.jpg" class="article-body-image-wrapper"><img src="assets/2237641/1f196b10.jpg" alt="Preview with image" loading="lazy" width="800" height="430"></a></p>
+
+<p>If you pick “outline”, you’ll see where the image should be, and you’ll save a lot of printer toner:</p>
+
+<p><a href="assets/2237641/7d521aa8.jpg" class="article-body-image-wrapper"><img src="assets/2237641/7d521aa8.jpg" alt="Preview with image outline" loading="lazy" width="800" height="430"></a></p>
+
+
+<hr>
+
+<h2>
+  <a name="setting-content" href="#setting-content">
+  </a>
+  Setting Content
+</h2>
+
+<p>We’ve already covered templates and placing HTML directly under <code>&lt;print-preview&gt;</code>.</p>
+
+<p>You can also use the <code>setContent()</code> method to set a string of HTML from JavaScript.</p>
+
+<p>We can also <em>pre-configure</em> the settings such as typography, margins, etc.:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="nx">printPreview</span><span class="p">.</span><span class="nf">addTemplate</span><span class="p">(</span><span class="dl">'</span><span class="s1">invoice</span><span class="dl">'</span><span class="p">,</span> <span class="nx">invoiceTemplate</span><span class="p">,</span> <span class="p">{</span>
+  <span class="dl">'</span><span class="s1">font-family</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">ff-transitional</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">font-size</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">large</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">margin-left</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">15mm</span><span class="dl">'</span>
+<span class="p">});</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<h2>
+  <a name="adding-support-for-other-languages" href="#adding-support-for-other-languages">
+  </a>
+  Adding Support for Other Languages
+</h2>
+
+<p>You can easily localize the interface to meet the needs of users in different regions.</p>
+
+<p>To change the interface language, configure the <code>i18n</code> object like this:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="nx">customElements</span><span class="p">.</span><span class="nf">whenDefined</span><span class="p">(</span><span class="dl">'</span><span class="s1">print-preview</span><span class="dl">'</span><span class="p">).</span><span class="nf">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">PrintPreview</span><span class="p">.</span><span class="nx">i18n</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">es</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">bottom</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Abajo</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">close</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Cerrar</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">font_family</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Tipo de letra</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">font_size</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Tamaño de letra</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">left</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Izquierda</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">orientation</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Orientación</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">orientation_landscape</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Horizontal</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">orientation_portrait</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Vertical</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">paper_size</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Tamaño de papel</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">print</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Imprimir</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">right</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Derecha</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">top</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Arriba</span><span class="dl">'</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nf">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">print-preview</span><span class="dl">'</span><span class="p">).</span><span class="nf">setAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">lang</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">es</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<h2>
+  <a name="conclusion-amp-demo" href="#conclusion-amp-demo">
+  </a>
+  Conclusion &amp; Demo
+</h2>
+
+<p>This turned out to be a component I didn’t know I needed 😁 Maybe it’s just <strong>this</strong> particular project that requires such control and preview of printed content — but I <em>hope</em> you find it useful!</p>
+
+<p>There’s more to the component than I’ve covered in this article, so check out the <a href="https://browser.style/ui/print-preview/" target="_blank" rel="noopener noreferrer">demo</a> to see it in action. It’s also on <a href="https://github.com/madsstoumann/browser-style/tree/main/ui/print-preview" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+
+<p>Also — fair warning — it took me two days to code this, assisted by Claude.ai. As I start creating more templates, there <strong>will</strong> be updates and bugfixes, so revisit the demo from time to time.</p>
+
+<p>Happy printing! 📄✨</p>
+
+
+<hr>
+
+<p>Cover image by Wendelin Jacober: <a href="https://www.pexels.com/da-dk/foto/1440504/" target="_blank" rel="noopener noreferrer">https://www.pexels.com/da-dk/foto/1440504/</a></p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

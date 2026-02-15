@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>A Guide to Styling Tables — Mads Stoumann</title>
+	<meta name="description" content="I've recently noticed a small paradox: Many years ago – before CSS grid — we used &amp;lt;table&amp;gt;s to...">
+	<link rel="canonical" href="https://blog.stoumann.dk/a-guide-to-styling-tables">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="A Guide to Styling Tables">
+	<meta property="og:description" content="I've recently noticed a small paradox: Many years ago – before CSS grid — we used &amp;lt;table&amp;gt;s to...">
+	<meta property="og:url" content="https://blog.stoumann.dk/a-guide-to-styling-tables">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/1742918/b4107dad.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="A Guide to Styling Tables">
+	<meta name="twitter:description" content="I've recently noticed a small paradox: Many years ago – before CSS grid — we used &amp;lt;table&amp;gt;s to...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/1742918/b4107dad.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>A Guide to Styling Tables</h1>
+			<p>I've recently noticed a small paradox: Many years ago – before CSS grid — we used <code>&lt;table&gt;</code>s to simulate grid layouts. Now that we <em>have</em> grid layouts, we use them to simulate tables! Which is wrong. Tables are for <strong>tabular</strong> data; and it doesn't make sense to present tabular data in a bunch of <code>&lt;div&gt;</code>s. </p>
+
+<p>The reason for this malpractice might be because tables can be <strong>a bit</strong> tricky to style, and that most CSS frameworks use <code>border-collapse: collapse</code> for default table styling. As we'll see in this tutorial, collapsed borders are not always useful for table styling.</p>
+
+<p>Let's look into the elements of a <code>&lt;table&gt;</code>, and then how to structure and style them.</p>
+
+<h2>
+  <a name="elements" href="#elements">
+  </a>
+  Elements
+</h2>
+
+<p>Besides the <code>&lt;table&gt;</code>-element itself, you only need these 3 tags to do a basic table:</p>
+
+<div class="table-wrapper-paragraph"><table>
+<thead>
+<tr>
+<th>Tag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>td</code></td>
+<td>Table Data Cell</td>
+</tr>
+<tr>
+<td><code>th</code></td>
+<td>Table Header Cell</td>
+</tr>
+<tr>
+<td><code>tr</code></td>
+<td>Table Row</td>
+</tr>
+</tbody>
+</table></div>
+
+<p><em>Example:</em><br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;table&gt;</span>
+  <span class="nt">&lt;tr&gt;&lt;th&gt;</span>Header<span class="nt">&lt;/th&gt;&lt;/tr&gt;</span>
+  <span class="nt">&lt;tr&gt;&lt;td&gt;</span>Content<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="nt">&lt;/table&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>However, to structure the table better, we can encapsulate the rows in:</p>
+
+<div class="table-wrapper-paragraph"><table>
+<thead>
+<tr>
+<th>Tag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>thead</code></td>
+<td>Table Header</td>
+</tr>
+<tr>
+<td><code>tbody</code></td>
+<td>Table Body</td>
+</tr>
+<tr>
+<td><code>tfoot</code></td>
+<td>Table Footer</td>
+</tr>
+</tbody>
+</table></div>
+
+<p>Finally, we can add a <code>&lt;caption&gt;</code> to the table, and define columns in <code>&lt;col&gt;</code>-tags within a <code>&lt;colgroup&gt;</code>.</p>
+
+<p><em>Example:</em><br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;table&gt;</span>
+  <span class="nt">&lt;caption&gt;</span>Super Heroes<span class="nt">&lt;/caption&gt;</span>
+  <span class="nt">&lt;colgroup&gt;&lt;col&gt;&lt;col&gt;&lt;col&gt;&lt;col&gt;&lt;/colgroup&gt;</span>
+  <span class="nt">&lt;thead&gt;</span>
+    <span class="nt">&lt;tr&gt;&lt;th&gt;</span>First Name<span class="nt">&lt;/th&gt;&lt;th&gt;</span>Last Name<span class="nt">&lt;/th&gt;&lt;th&gt;</span>Known As<span class="nt">&lt;/th&gt;&lt;th&gt;</span>Place<span class="nt">&lt;/th&gt;&lt;/tr&gt;</span>
+  <span class="nt">&lt;/thead&gt;</span>
+  <span class="nt">&lt;tbody&gt;</span>
+    <span class="nt">&lt;tr&gt;&lt;td&gt;</span>Bruce<span class="nt">&lt;/td&gt;&lt;td&gt;</span>Wayne<span class="nt">&lt;/td&gt;&lt;td&gt;</span>Batman<span class="nt">&lt;/td&gt;&lt;td&gt;</span>Gotham City<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
+    <span class="nt">&lt;tr&gt;&lt;td&gt;</span>Clark<span class="nt">&lt;/td&gt;&lt;td&gt;</span>Kent<span class="nt">&lt;/td&gt;&lt;td&gt;</span>Superman<span class="nt">&lt;/td&gt;&lt;td&gt;</span>Metropolis<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
+    <span class="nt">&lt;tr&gt;&lt;td&gt;</span>Tony<span class="nt">&lt;/td&gt;&lt;td&gt;</span>Stark<span class="nt">&lt;/td&gt;&lt;td&gt;</span>Iron Man<span class="nt">&lt;/td&gt;&lt;td&gt;</span>Malibu<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
+    <span class="nt">&lt;tr&gt;&lt;td&gt;</span>Peter<span class="nt">&lt;/td&gt;&lt;td&gt;</span>Parker<span class="nt">&lt;/td&gt;&lt;td&gt;</span>Spider-Man<span class="nt">&lt;/td&gt;&lt;td&gt;</span>New York City<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
+    <span class="nt">&lt;tr&gt;&lt;td&gt;</span>Matt<span class="nt">&lt;/td&gt;&lt;td&gt;</span>Murdock<span class="nt">&lt;/td&gt;&lt;td&gt;</span>Daredevil<span class="nt">&lt;/td&gt;&lt;td&gt;</span>New York City<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
+  <span class="nt">&lt;/tbody&gt;</span>
+<span class="nt">&lt;/table&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Without any styles, your browser will render this:</p>
+
+<p><a href="assets/1742918/1d94ade2.jpg" class="article-body-image-wrapper"><img src="assets/1742918/1d94ade2.jpg" alt="Basic Tables Browser Styles" loading="lazy" width="720" height="346"></a></p>
+
+<p>The default user-agent-styles are:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">table</span> <span class="p">{</span>
+  <span class="nl">border-collapse</span><span class="p">:</span> <span class="nb">separate</span><span class="p">;</span>
+  <span class="nl">text-indent</span><span class="p">:</span> <span class="n">initial</span><span class="p">;</span>
+  <span class="nl">border-spacing</span><span class="p">:</span> <span class="m">2px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Now, if we add a super-simple rule:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nd">:is</span><span class="o">(</span><span class="nt">td</span><span class="o">,</span><span class="nt">th</span><span class="o">)</span> <span class="p">{</span>
+  <span class="nl">border-style</span><span class="p">:</span> <span class="nb">solid</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>We get:</p>
+
+<p><a href="assets/1742918/dee6debc.jpg" class="article-body-image-wrapper"><img src="assets/1742918/dee6debc.jpg" alt="Basic Table with solid border" loading="lazy" width="740" height="374"></a></p>
+
+<p>Notice the separate borders. It doesn't look too nice ... </p>
+
+<p>So, just to understand the popularity of collapsed borders (as well as a better font!), if we simply add:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">table</span> <span class="p">{</span>
+  <span class="nl">border-collapse</span><span class="p">:</span> <span class="nb">collapse</span><span class="p">;</span>
+  <span class="nl">font-family</span><span class="p">:</span> <span class="n">system-ui</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>... we get:</p>
+
+<p><a href="assets/1742918/882564a5.jpg" class="article-body-image-wrapper"><img src="assets/1742918/882564a5.jpg" alt="border-collapse set to collapse" loading="lazy" width="774" height="344"></a></p>
+
+<p>If we then add <code>padding: .5ch 1ch</code> to our <code>:is(td,th)</code>-selector and <code>margin-block: 1rlh</code> to <code>&lt;caption&gt;</code>, we get:</p>
+
+<p><a href="assets/1742918/5faa182b.jpg" class="article-body-image-wrapper"><img src="assets/1742918/5faa182b.jpg" alt="Basic Table Styles" loading="lazy" width="800" height="403"></a></p>
+
+<p>To recap, <strong>all</strong> we need to get the above styling, is this:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">table</span> <span class="p">{</span>
+  <span class="nl">border-collapse</span><span class="p">:</span> <span class="nb">collapse</span><span class="p">;</span>
+  <span class="nl">font-family</span><span class="p">:</span> <span class="n">system-ui</span><span class="p">;</span>
+  <span class="err">&amp;</span> <span class="err">caption</span> <span class="err">{</span> <span class="py">margin-block</span><span class="p">:</span> <span class="m">1</span><span class="n">rlh</span><span class="p">;</span> <span class="p">}</span>
+  <span class="o">&amp;</span><span class="nd">:is</span><span class="o">(</span><span class="nt">td</span><span class="o">,</span> <span class="nt">th</span><span class="o">)</span> <span class="p">{</span>
+    <span class="nl">border-style</span><span class="p">:</span> <span class="nb">solid</span><span class="p">;</span>
+    <span class="nl">padding</span><span class="p">:</span> <span class="m">.5ch</span> <span class="m">1ch</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="err">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>To place the <code>&lt;caption&gt;</code> <em>below</em> the table instead, use:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">table</span> <span class="p">{</span>
+  <span class="nl">caption-side</span><span class="p">:</span> <span class="nb">bottom</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+
+<hr>
+
+<h2>
+  <a name="zebra-stripes" href="#zebra-stripes">
+  </a>
+  Zebra Stripes
+</h2>
+
+<p>To add odd/even zebra-stripes for <strong>columns</strong>, we can simply style the <code>&lt;col&gt;</code>-tag:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">col</span><span class="nd">:nth-of-type</span><span class="o">(</span><span class="nt">even</span><span class="o">)</span> <span class="p">{</span> <span class="nl">background</span><span class="p">:</span> <span class="m">#F2F2F2</span><span class="p">;</span> <span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p><a href="assets/1742918/bcda95e3.jpg" class="article-body-image-wrapper"><img src="assets/1742918/bcda95e3.jpg" alt="Col Zebra" loading="lazy" width="800" height="414"></a></p>
+
+<p>For rows, it's similar:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">tr</span><span class="nd">:nth-of-type</span><span class="o">(</span><span class="nt">odd</span><span class="o">)</span> <span class="p">{</span> <span class="nl">background</span><span class="p">:</span> <span class="m">#F2F2F2</span><span class="p">;</span> <span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p><a href="assets/1742918/ed09c1ba.jpg" class="article-body-image-wrapper"><img src="assets/1742918/ed09c1ba.jpg" alt="Zebra Rows" loading="lazy" width="800" height="408"></a></p>
+
+
+<hr>
+
+<h2>
+  <a name="rounded-corners" href="#rounded-corners">
+  </a>
+  Rounded corners
+</h2>
+
+<p>Rounded corners are a bit tricky. You can't just add <code>border-radius</code> to a <code>&lt;table&gt;</code>, so we have to target the <strong>first</strong> and <strong>last</strong> cell of the <strong>first</strong> and <strong>last</strong> rows:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">th</span> <span class="p">{</span>
+  <span class="err">&amp;:first-of-type</span> <span class="err">{</span> <span class="py">border-start-start-radius</span><span class="p">:</span> <span class="m">.5em</span> <span class="p">}</span>
+  <span class="o">&amp;</span><span class="nd">:last-of-type</span> <span class="p">{</span> <span class="py">border-start-end-radius</span><span class="p">:</span> <span class="m">.5em</span> <span class="p">}</span>
+<span class="err">}</span>
+<span class="nt">tr</span> <span class="p">{</span>
+  <span class="err">&amp;:last-of-type</span> <span class="err">{</span>
+    <span class="err">&amp;</span> <span class="err">td</span> <span class="err">{</span>
+      <span class="err">&amp;:first-of-type</span> <span class="err">{</span> <span class="py">border-end-start-radius</span><span class="p">:</span> <span class="m">.5em</span> <span class="p">}</span>
+      <span class="o">&amp;</span><span class="nd">:last-of-type</span> <span class="p">{</span> <span class="py">border-end-end-radius</span><span class="p">:</span> <span class="m">.5em</span> <span class="p">}</span>
+    <span class="err">}</span>
+  <span class="err">}</span>
+<span class="err">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>... but still, nothing happens! That's because: </p>
+
+<blockquote>
+<p>If your table has collapsed borders, you <strong>can't</strong> add <code>border-radius</code>.</p>
+</blockquote>
+
+<p>So we'll have to use <strong>separate</strong> borders, and just <em>mimick</em> collapsed borders:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">table</span> <span class="p">{</span>
+  <span class="nl">border-spacing</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nd">:is</span><span class="o">(</span><span class="nt">td</span><span class="o">,</span> <span class="nt">th</span><span class="o">)</span> <span class="p">{</span>
+  <span class="py">border-block-width</span><span class="p">:</span> <span class="m">1px</span> <span class="m">0</span><span class="p">;</span>
+  <span class="py">border-inline-width</span><span class="p">:</span> <span class="m">1px</span> <span class="m">0</span><span class="p">;</span>
+  <span class="err">&amp;:last-of-type</span> <span class="err">{</span> <span class="py">border-inline-end-width</span><span class="p">:</span> <span class="m">1px</span> <span class="p">}</span>
+<span class="err">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>And <strong>now</strong> we have rounded corners:</p>
+
+<p><a href="assets/1742918/a2866995.jpg" class="article-body-image-wrapper"><img src="assets/1742918/a2866995.jpg" alt="Rounded corners" loading="lazy" width="800" height="416"></a></p>
+
+
+<hr>
+
+<h2>
+  <a name="split-columns" href="#split-columns">
+  </a>
+  Split Columns
+</h2>
+
+<p>Let's <em>keep</em> the separate columns, and use the <code>border-spacing</code>-property to add a gap between columns:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">table</span> <span class="p">{</span>
+  <span class="nl">border-spacing</span><span class="p">:</span> <span class="m">2ch</span> <span class="m">0</span><span class="p">;</span>
+  <span class="err">&amp;</span> <span class="err">:is(td,</span> <span class="err">th)</span> <span class="err">{</span>
+    <span class="py">border-inline-width</span><span class="p">:</span> <span class="m">1px</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="err">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p><a href="assets/1742918/acbd017b.jpg" class="article-body-image-wrapper"><img src="assets/1742918/acbd017b.jpg" alt="Split columns" loading="lazy" width="800" height="349"></a></p>
+
+<p>We can even add <code>border-radius</code>:</p>
+
+<p><a href="assets/1742918/63144ae2.jpg" class="article-body-image-wrapper"><img src="assets/1742918/63144ae2.jpg" alt="Border radius" loading="lazy" width="800" height="355"></a></p>
+
+<p>This is still just a <code>&lt;table&gt;</code>, but much more readable if used as a "comparison table".</p>
+
+
+<hr>
+
+<h2>
+  <a name="split-rows" href="#split-rows">
+  </a>
+  Split Rows
+</h2>
+
+<p>For split rows, we just need to update the second part (the y-axis) of the <code>border-spacing</code>-property:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">table</span> <span class="p">{</span>
+  <span class="nl">border-spacing</span><span class="p">:</span> <span class="m">0</span> <span class="m">2ch</span><span class="p">;</span>
+  <span class="err">&amp;</span> <span class="err">:is(td,</span> <span class="err">th)</span> <span class="err">{</span>
+    <span class="py">border-block-width</span><span class="p">:</span> <span class="m">1px</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="err">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p><a href="assets/1742918/edf30f68.jpg" class="article-body-image-wrapper"><img src="assets/1742918/edf30f68.jpg" alt="Split Rows" loading="lazy" width="800" height="571"></a></p>
+
+
+<hr>
+
+<h2>
+  <a name="hover-and-focus" href="#hover-and-focus">
+  </a>
+  Hover and Focus
+</h2>
+
+<p>With large tables, it's important to know exactly <em>where</em> you are. For that we need <code>:hover</code>, and — if you're working with a keyboard-navigable table — <code>:focus-visble</code>-styles.</p>
+
+<p>In this example, hover-styles are applied to both <code>&lt;col&gt;</code>, <code>&lt;tr&gt;</code> and <code>&lt;td&gt;</code>:</p>
+
+<p><a href="assets/1742918/0e114548.jpg" class="article-body-image-wrapper"><img src="assets/1742918/0e114548.jpg" alt="Table Hover Example" loading="lazy" width="800" height="413"></a></p>
+
+<p>Hovering rows and cells is straightforward:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">td</span><span class="nd">:hover</span> <span class="p">{</span>
+  <span class="nl">background</span><span class="p">:</span> <span class="m">#666666</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">tr</span><span class="nd">:hover</span> <span class="p">{</span>
+  <span class="nl">background</span><span class="p">:</span> <span class="m">#E6E6E6</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Hovering a <code>&lt;col&gt;</code> is a bit more complicated. </p>
+
+<p>You can add a rule:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">col</span><span class="nd">:hover</span> <span class="p">{</span>
+  <span class="nl">background</span><span class="p">:</span> <span class="m">#E6E6E6</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>... but it doesn't work. Weirdly, if you select a col-element in Dev Tools and enable <code>:hover</code> for it, it works — but not IRL.</p>
+
+<p>Instead, we need to capture the hovering of cells using <code>:has</code>, and <em>then</em> style the <code>&lt;col&gt;</code>-element:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">table</span> <span class="p">{</span>
+  <span class="err">&amp;:has(:is(td,th):nth-child(1):hover</span> <span class="py">col</span><span class="p">:</span><span class="n">nth-child</span><span class="p">(</span><span class="m">1</span><span class="p">)</span> <span class="err">{</span>
+<span class="n">background</span><span class="p">:</span> <span class="m">#E6E6E6</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>So, what's going on?</p>
+
+<p>Let's break it down:</p>
+
+<p>If our table <strong>has</strong> a <code>&lt;td&gt;</code> <em>or</em> a <code>&lt;th&gt;</code> which is the <code>nth-child(1)</code> and it's currently <em>hovered</em>, <strong>then</strong> select the <code>&lt;col&gt;</code> with the <strong>same</strong> <code>nth-child</code>-selector, and set it's <code>background</code>.</p>
+
+<p>Phew! ... <strong>and</strong> you need to repeat this code for each column: <code>nth-child(2)</code>, <code>nth-child(3)</code> etc.</p>
+
+
+<hr>
+
+<h2>
+  <a name="outlines" href="#outlines">
+  </a>
+  Outlines
+</h2>
+
+<p>To show outlines on hover is also straightforward, and the same for cells and rows. You need to <em>deduct</em> the width from the offset:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nd">:is</span><span class="o">(</span><span class="nt">td</span><span class="o">,</span> <span class="nt">th</span><span class="o">,</span> <span class="nt">tr</span><span class="o">)</span><span class="nd">:hover</span> <span class="p">{</span>
+  <span class="nl">outline</span><span class="p">:</span> <span class="m">2px</span> <span class="nb">solid</span> <span class="m">#666</span><span class="p">;</span>
+  <span class="nl">outline-offset</span><span class="p">:</span> <span class="m">-2px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p><a href="assets/1742918/a402de22.jpg" class="article-body-image-wrapper"><img src="assets/1742918/a402de22.jpg" alt="Table Hover: Outlines" loading="lazy" width="800" height="410"></a></p>
+
+<h3>
+  <a name="column-outlines" href="#column-outlines">
+  </a>
+  Column Outlines
+</h3>
+
+<p>To outline a column is <em>very</em> tricky, but looks nice:</p>
+
+<p><a href="assets/1742918/94fce9bb.jpg" class="article-body-image-wrapper"><img src="assets/1742918/94fce9bb.jpg" alt="Table Hover: Outline Column" loading="lazy" width="800" height="406"></a></p>
+
+<p>If the cells have a <code>border-width</code>of <code>1px</code>, you can set the <code>&lt;col&gt;</code>'s <code>border-width</code> to <code>2px</code> on hover, but then the whole table shifts. </p>
+
+<p>Álvaro Montoro suggested using background-gradients on <code>&lt;col&gt;</code> to simulate a border, which works fine, if the table cells are transparent. </p>
+
+<p>To make it work with <code>border-radius</code> and keeping whatever background the cells might have, I ended up using a pseudo-element per cell:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nd">:is</span><span class="o">(</span><span class="nt">td</span><span class="o">,</span><span class="nt">th</span><span class="o">)</span> <span class="p">{</span>
+  <span class="nl">position</span><span class="p">:</span> <span class="nb">relative</span><span class="p">;</span>
+  <span class="err">&amp;::after</span> <span class="err">{</span>
+    <span class="py">border-inline</span><span class="p">:</span> <span class="m">2px</span> <span class="nb">solid</span> <span class="nb">transparent</span><span class="p">;</span>
+    <span class="nl">border-radius</span><span class="p">:</span> <span class="nb">inherit</span><span class="p">;</span>
+    <span class="nl">content</span><span class="p">:</span> <span class="s2">''</span><span class="p">;</span>
+    <span class="py">inset</span><span class="p">:</span> <span class="m">-2px</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="err">}</span>
+<span class="nt">tr</span><span class="nd">:first-of-type</span> <span class="nt">th</span><span class="nd">::after</span> <span class="p">{</span>
+  <span class="py">border-block-start</span><span class="p">:</span> <span class="m">2px</span> <span class="nb">solid</span> <span class="nb">transparent</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">tr</span><span class="nd">:last-of-type</span> <span class="nt">td</span><span class="nd">::after</span> <span class="p">{</span>
+  <span class="py">border-block-end</span><span class="p">:</span> <span class="m">2px</span> <span class="nb">solid</span> <span class="nb">transparent</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>... and then, similar to what we did with col-hover, targetting all cells with the same "col-index" on hover:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nd">:has</span><span class="o">(</span><span class="nd">:is</span><span class="o">(</span><span class="nt">td</span><span class="o">,</span><span class="nt">th</span><span class="o">)</span><span class="nd">:nth-child</span><span class="o">(</span><span class="err">1</span><span class="o">)</span><span class="nd">:hover</span> <span class="nd">:is</span><span class="o">(</span><span class="nt">td</span><span class="o">,</span><span class="nt">th</span><span class="o">)</span><span class="nd">:nth-child</span><span class="o">(</span><span class="err">1</span><span class="o">)</span> <span class="p">{</span>
+  <span class="nl">border-color</span><span class="p">:</span> <span class="m">#666</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Repeat for all columns.</p>
+
+
+<hr>
+
+<h2>
+  <a name="aligning-text" href="#aligning-text">
+  </a>
+  Aligning text
+</h2>
+
+<p>In an old specification, you could add an <code>align</code>-property to the <code>&lt;col&gt;</code>-element. That doesn't work anymore. </p>
+
+<p>Example: You want to center the text in the second column and right-align the text in the fourth column:</p>
+
+<p><a href="assets/1742918/c7f7e06e.jpg" class="article-body-image-wrapper"><img src="assets/1742918/c7f7e06e.jpg" alt="Table: Align Text" loading="lazy" width="800" height="403"></a></p>
+
+<p>Instead of adding a class to <em>each</em> cell, we can add a data-attribute per column to the table itself:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;table</span> <span class="na">data-c2=</span><span class="s">"center"</span> <span class="na">data-c4=</span><span class="s">"end"</span><span class="nt">&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Then, in CSS:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="o">[</span><span class="nt">data-c2</span><span class="o">~=</span><span class="s1">"center"</span><span class="o">]</span> <span class="nt">tr</span> <span class="o">&gt;</span> <span class="o">*</span><span class="nd">:nth-of-type</span><span class="o">(</span><span class="err">2</span><span class="o">)</span> <span class="p">{</span>
+  <span class="nl">text-align</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="o">[</span><span class="nt">data-c4</span><span class="o">~=</span><span class="s1">"end"</span><span class="o">]</span> <span class="nt">tr</span> <span class="o">&gt;</span> <span class="o">*</span><span class="nd">:nth-of-type</span><span class="o">(</span><span class="err">4</span><span class="o">)</span> <span class="p">{</span>
+  <span class="nl">text-align</span><span class="p">:</span> <span class="n">end</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Repeat for all columns.</p>
+
+
+<hr>
+
+<h2>
+  <a name="conclusion" href="#conclusion">
+  </a>
+  Conclusion
+</h2>
+
+<p>And that concludes the guide to table styling. </p>
+
+<p>I didn't cover <code>colspan</code>, <code>rowspan</code>, <code>scope</code> and <code>span</code>. If you want to dive more into these, I suggest reading the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table" target="_blank" rel="noopener noreferrer">MDN page on tables</a>.</p>
+
+<h2>
+  <a name="demo" href="#demo">
+  </a>
+  Demo
+</h2>
+
+<p>I've made a single CodePen with a bunch of demos here:</p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/RwdVxJM?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+
+<hr>
+
+<h2>
+  <a name="update" href="#update">
+  </a>
+  Update
+</h2>
+
+<p>In the comments, RioBrewster wrote:</p>
+
+<blockquote>
+<p>You don't need:<br>
+<code>&lt;colgroup&gt;&lt;col&gt;&lt;col&gt;&lt;col&gt;&lt;col&gt;&lt;/colgroup&gt;</code></p>
+
+<p>You do need: <code>&lt;th scope="col"&gt;</code> for each of the column headers.</p>
+</blockquote>
+
+<p>Let me answer that with an example. Say you want to highlight the last column. Using <code>&lt;col&gt;</code>, you simply add a class:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;col</span> <span class="na">class=</span><span class="s">"highlight"</span><span class="nt">&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>In CSS:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight plaintext"><code>.highlight { background-color: HighLight; }
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>That returns:</p>
+
+<p><a href="assets/1742918/2f5ad8cb.jpg" class="article-body-image-wrapper"><img src="assets/1742918/2f5ad8cb.jpg" alt="Highlight" loading="lazy" width="459" height="237"></a></p>
+
+<p>On the other hand, if you're using:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"col"</span> <span class="na">class=</span><span class="s">"highlight"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/th&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>You get:</p>
+
+<p><a href="assets/1742918/8799c296.jpg" class="article-body-image-wrapper"><img src="assets/1742918/8799c296.jpg" alt="Highlight with scope" loading="lazy" width="453" height="235"></a></p>
+
+<p>So that clearly doesn't work. We must add something more. </p>
+
+<p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td" target="_blank" rel="noopener noreferrer">MDN's example</a>. They add <code>&lt;td scope="row"&gt;</code> to all the first cells of each row to "highlight the column". </p>
+
+<p>That way, or using a bunch of <code>nth-</code>-selectors to highlight a column, is much more work than simply using the <code>&lt;col&gt;</code>-tag.</p>
+
+<p>So, IMO, it's not "either or", but rather "either <em>and</em>".</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

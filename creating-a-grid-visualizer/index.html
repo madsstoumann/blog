@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Creating a Grid Visualizer — Mads Stoumann</title>
+	<meta name="description" content="If you're working with a grid-system, chances are, you're using some kind of grid visualizer – maybe...">
+	<link rel="canonical" href="https://blog.stoumann.dk/creating-a-grid-visualizer">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Creating a Grid Visualizer">
+	<meta property="og:description" content="If you're working with a grid-system, chances are, you're using some kind of grid visualizer – maybe...">
+	<meta property="og:url" content="https://blog.stoumann.dk/creating-a-grid-visualizer">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/1132179/8035b369.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Creating a Grid Visualizer">
+	<meta name="twitter:description" content="If you're working with a grid-system, chances are, you're using some kind of grid visualizer – maybe...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/1132179/8035b369.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Creating a Grid Visualizer</h1>
+			<p>If you're working with a grid-system, chances are, you're using some kind of grid visualizer – maybe in Figma, or in Dev Tools.</p>
+
+<p>I'm currently working on a project where I need a customizable grid-visualizer. Thankfully it's pretty simple – using a bit of math and CSS!</p>
+
+
+<hr>
+
+<p>The markup for this demo is very basic. We have a grid, and a single piece of content:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"grid"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>In CSS, we need two custom properties to control the amount of columns and the column-gap:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nd">:where</span><span class="o">(</span><span class="nt">html</span><span class="o">)</span> <span class="p">{</span>
+  <span class="py">--columns</span><span class="p">:</span> <span class="m">6</span><span class="p">;</span>
+  <span class="py">--column-gap</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>For the <code>.grid</code>-class, we need to set up a basic grid, using the two custom properties, we just configured:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nc">.grid</span> <span class="p">{</span>
+  <span class="nl">column-gap</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--column-gap</span><span class="p">);</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">grid</span><span class="p">;</span>
+  <span class="py">grid-template-columns</span><span class="p">:</span> <span class="nb">repeat</span><span class="p">(</span><span class="n">var</span><span class="p">(</span><span class="n">--columns</span><span class="p">,</span> <span class="n">auto-fit</span><span class="p">),</span> <span class="m">1</span><span class="n">fr</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>We'll add the colors for the columns and gaps as two new properties:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">--_col-bgc</span><span class="o">:</span> <span class="nt">hsl</span><span class="o">(</span><span class="err">200</span><span class="o">,</span> <span class="err">50</span><span class="o">%,</span> <span class="err">75</span><span class="o">%,</span> <span class="o">.</span><span class="err">5</span><span class="o">);</span>
+<span class="nt">--_gap-bgc</span><span class="o">:</span> <span class="nt">hsl</span><span class="o">(</span><span class="err">200</span><span class="o">,</span> <span class="err">50</span><span class="o">%,</span> <span class="err">45</span><span class="o">%,</span> <span class="o">.</span><span class="err">5</span><span class="o">);</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+
+<hr>
+
+<p>And now for a bit of math! The width of a column is:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight plaintext"><code>100% / number of columns
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>From that value, we need to deduct the gap-width. There will always be one gap less than the number of columns, so:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight plaintext"><code>((number of columns - 1) * gap-width) / number of columns
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Simplified, this is:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight plaintext"><code>(100% - (number of columns - 1) * gap-width)) / number of columns
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>In CSS, we add this logic to a custom property:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">--_w</span><span class="o">:</span> <span class="nt">calc</span><span class="o">(</span> <span class="o">(</span><span class="err">100</span><span class="o">%</span> <span class="nt">-</span> <span class="o">(((</span><span class="nt">var</span><span class="o">(</span><span class="nt">--columns</span><span class="o">)</span> <span class="nt">-</span> <span class="err">1</span><span class="o">)</span> <span class="o">*</span> <span class="nt">var</span><span class="o">(</span><span class="nt">--column-gap</span><span class="o">))))</span> <span class="o">/</span> <span class="nt">var</span><span class="o">(</span><span class="nt">--columns</span><span class="o">)</span> <span class="o">);</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Finally, using our custom properties, we add a <code>repeating-linear-gradient</code>:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">background-image</span><span class="o">:</span> <span class="nt">repeating-linear-gradient</span><span class="o">(</span><span class="nt">to</span> <span class="nt">right</span><span class="o">,</span>
+  <span class="nt">var</span><span class="o">(</span><span class="nt">--_col-bgc</span><span class="o">),</span> <span class="nt">var</span><span class="o">(</span><span class="nt">--_col-bgc</span><span class="o">)</span> <span class="nt">var</span><span class="o">(</span><span class="nt">--_w</span><span class="o">),</span>
+  <span class="nt">var</span><span class="o">(</span><span class="nt">--_gap-bgc</span><span class="o">)</span> <span class="nt">var</span><span class="o">(</span><span class="nt">--_w</span><span class="o">),</span> <span class="nt">var</span><span class="o">(</span><span class="nt">--_gap-bgc</span><span class="o">)</span> <span class="nt">calc</span><span class="o">(</span><span class="nt">var</span><span class="o">(</span><span class="nt">--_w</span><span class="o">)</span> <span class="o">+</span> <span class="nt">var</span><span class="o">(</span><span class="nt">--column-gap</span><span class="o">)</span> <span class="o">)</span> <span class="o">);</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>With our default settings, this renders a nice 6-column grid with gaps:</p>
+
+<p><a href="assets/1132179/08b053c0.jpg" class="article-body-image-wrapper"><img src="assets/1132179/08b053c0.jpg" alt="6-col-grid" loading="lazy" width="800" height="385"></a></p>
+
+
+<hr>
+
+<p>For the <code>.content</code>, we add a small chunk of css:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nc">.content</span> <span class="p">{</span>
+  <span class="nl">background-image</span><span class="p">:</span> <span class="n">linear-gradient</span><span class="p">(</span><span class="m">45deg</span><span class="p">,</span> <span class="no">black</span><span class="p">,</span> <span class="nb">transparent</span><span class="p">);</span>
+  <span class="nl">grid-column</span><span class="p">:</span> <span class="n">span</span> <span class="n">var</span><span class="p">(</span><span class="n">--column-span</span><span class="p">,</span> <span class="m">3</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>With the default <code>--column-span: 3</code>, this gives us:</p>
+
+<p><a href="assets/1132179/98591a1c.jpg" class="article-body-image-wrapper"><img src="assets/1132179/98591a1c.jpg" alt="Content with colspan" loading="lazy" width="800" height="385"></a></p>
+
+<p>Let's compare this with Dev Tools' grid visualizer, which we add by clicking the small <code>grid</code>-button next to the markup:</p>
+
+<p><a href="assets/1132179/f46ee351.jpg" class="article-body-image-wrapper"><img src="assets/1132179/f46ee351.jpg" alt="Enable Dev Tools Grid" loading="lazy" width="216" height="49"></a></p>
+
+<p>This renders:</p>
+
+<p><a href="assets/1132179/f7952b74.jpg" class="article-body-image-wrapper"><img src="assets/1132179/f7952b74.jpg" alt="Grid with Visualizer" loading="lazy" width="800" height="393"></a></p>
+
+<p>Cool – This seems to be working!</p>
+
+
+<hr>
+
+<h2>
+  <a name="adding-an-editor" href="#adding-an-editor">
+  </a>
+  Adding an editor
+</h2>
+
+<p>Finally, let's add a small editor, so we can easily play around with the columns-, gap- and colspan-properties:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;fieldset&gt;</span>
+    <span class="nt">&lt;legend&gt;</span>Grid Visualizer<span class="nt">&lt;/legend&gt;</span>
+    <span class="nt">&lt;label&gt;</span>Columns
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"range"</span> <span class="na">name=</span><span class="s">"columns"</span> <span class="na">value=</span><span class="s">"6"</span> <span class="na">min=</span><span class="s">"1"</span> <span class="na">max=</span><span class="s">"12"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;label&gt;</span>Gap
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"range"</span> <span class="na">name=</span><span class="s">"column-gap"</span> <span class="na">value=</span><span class="s">"20"</span> <span class="na">min=</span><span class="s">"0"</span> <span class="na">max=</span><span class="s">"100"</span> <span class="na">data-unit=</span><span class="s">"px"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;label&gt;</span>Column-span
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"range"</span> <span class="na">name=</span><span class="s">"column-span"</span> <span class="na">value=</span><span class="s">"3"</span> <span class="na">min=</span><span class="s">"1"</span> <span class="na">max=</span><span class="s">"12"</span> <span class="na">data-scope=</span><span class="s">".content"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/label&gt;</span>
+  <span class="nt">&lt;/fieldset&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>To update the custom properties dynamically, we need a small JavaScript:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="nx">app</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">input</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nf">setCustomProperty</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">));</span>
+<span class="kd">function</span> <span class="nf">setCustomProperty</span><span class="p">(</span><span class="nx">input</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">scope</span> <span class="o">=</span> <span class="nx">input</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">scope</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">node</span> <span class="o">=</span> <span class="o">!</span><span class="nx">scope</span> <span class="p">?</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span> <span class="p">:</span> <span class="nx">scope</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">self</span><span class="dl">'</span> <span class="p">?</span> <span class="nx">input</span> <span class="p">:</span> <span class="nx">scope</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">parent</span><span class="dl">'</span> <span class="p">?</span> <span class="nx">input</span><span class="p">.</span><span class="nx">parentNode</span> <span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nf">querySelector</span><span class="p">(</span><span class="nx">scope</span><span class="p">);</span>
+  <span class="nx">node</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nf">setProperty</span><span class="p">(</span><span class="dl">'</span><span class="s1">--</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">input</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">input</span><span class="p">.</span><span class="nx">value</span> <span class="o">+</span> <span class="p">(</span><span class="nx">input</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">unit</span> <span class="o">||</span> <span class="dl">''</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+
+<hr>
+
+<h2>
+  <a name="codepen-demo" href="#codepen-demo">
+  </a>
+  Codepen demo
+</h2>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/QWmjmzy?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+
+<hr>
+
+<p>Happy coding!</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

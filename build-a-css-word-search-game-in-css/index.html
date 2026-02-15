@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Build A CSS Word Search Game In ... CSS! — Mads Stoumann</title>
+	<meta name="description" content="I've heard it so many times: CSS is not a programming language — or — why do it in CSS, when you can...">
+	<link rel="canonical" href="https://blog.stoumann.dk/build-a-css-word-search-game-in-css">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Build A CSS Word Search Game In ... CSS!">
+	<meta property="og:description" content="I've heard it so many times: CSS is not a programming language — or — why do it in CSS, when you can...">
+	<meta property="og:url" content="https://blog.stoumann.dk/build-a-css-word-search-game-in-css">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/1897009/952ba79d.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Build A CSS Word Search Game In ... CSS!">
+	<meta name="twitter:description" content="I've heard it so many times: CSS is not a programming language — or — why do it in CSS, when you can...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/1897009/952ba79d.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Build A CSS Word Search Game In ... CSS!</h1>
+			<p>I've heard it <strong>so</strong> many times: CSS is not a programming language — or — why do it in CSS, when you can do it in JavaScript?</p>
+
+<p>Why, indeed? Because I <strong>love</strong> CSS, and love a fun challenge!</p>
+
+<p>In this tutorial, we'll be building a CSS Word Search Game in CSS:</p>
+
+<p><a href="assets/1897009/72760d2f.jpg" class="article-body-image-wrapper"><img src="assets/1897009/72760d2f.jpg" alt="CSS Word Search" loading="lazy" width="800" height="800"></a></p>
+
+<p>In an <a href="https://dev.to/madsstoumann/getting-creative-with-css-grid-mco">earlier article</a>, I looked into creative ways you can utilize CSS grid. </p>
+
+<p>The approach for the word game is similar: A 12x12 grid using <code>grid-area</code> for the words. </p>
+
+<p>Let's dive in.</p>
+
+
+<hr>
+
+<h2>
+  <a name="markup" href="#markup">
+  </a>
+  Markup
+</h2>
+
+<p>For each word, we create a <code>&lt;fieldset&gt;</code>:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;fieldset</span> <span class="na">name=</span><span class="s">"w7"</span> <span class="na">class=</span><span class="s">"horizontal"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">value=</span><span class="s">"G"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">value=</span><span class="s">"A"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">value=</span><span class="s">"P"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/fieldset&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p><code>name</code> is a unique identifier for the word, and for <code>class</code> we can use either <code>horizontal</code> or <code>vertical</code>.</p>
+
+
+<hr>
+
+<h2>
+  <a name="css" href="#css">
+  </a>
+  CSS
+</h2>
+
+<p>First, we need a wrapper with the 12x12 grid:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nc">.word-search</span> <span class="p">{</span>
+  <span class="py">aspect-ratio</span><span class="p">:</span> <span class="m">1</span> <span class="p">/</span> <span class="m">1</span><span class="p">;</span>
+  <span class="py">container-type</span><span class="p">:</span> <span class="n">inline-size</span><span class="p">;</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">grid</span><span class="p">;</span>
+  <span class="nl">font-family</span><span class="p">:</span> <span class="n">system-ui</span><span class="p">,</span> <span class="nb">sans-serif</span><span class="p">;</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="m">3.5</span><span class="n">cqi</span><span class="p">;</span>
+  <span class="py">grid-template-columns</span><span class="p">:</span> <span class="nb">repeat</span><span class="p">(</span><span class="m">12</span><span class="p">,</span> <span class="m">1</span><span class="n">fr</span><span class="p">);</span>
+  <span class="py">grid-template-rows</span><span class="p">:</span> <span class="nb">repeat</span><span class="p">(</span><span class="m">12</span><span class="p">,</span> <span class="m">1</span><span class="n">fr</span><span class="p">);</span>
+  <span class="nl">padding</span><span class="p">:</span> <span class="m">1px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Then, we style the <code>&lt;input type="checkbox"&gt;</code>-tags:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">input</span> <span class="p">{</span>
+  <span class="nl">all</span><span class="p">:</span> <span class="n">unset</span><span class="p">;</span>
+  <span class="py">aspect-ratio</span><span class="p">:</span> <span class="m">1</span> <span class="p">/</span> <span class="m">1</span><span class="p">;</span>
+  <span class="nl">background</span><span class="p">:</span> <span class="m">#FFF</span><span class="p">;</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">grid</span><span class="p">;</span>
+  <span class="py">place-content</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+  <span class="py">user-select</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="n">calc</span><span class="p">((</span><span class="m">100</span><span class="n">cqi</span> <span class="p">/</span> <span class="m">12</span><span class="p">)</span> <span class="n">-</span> <span class="m">1px</span><span class="p">);</span>
+  <span class="err">&amp;:checked</span> <span class="err">{</span>
+    <span class="nl">background</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--bg</span><span class="p">,</span> <span class="m">#FF0</span><span class="p">);</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--c</span><span class="p">,</span> <span class="m">#000</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="o">&amp;</span><span class="nd">::after</span> <span class="p">{</span>
+    <span class="nl">content</span><span class="p">:</span> <span class="n">attr</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="err">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>First, we <strong>unset</strong> all the defaults, then set the width of each to a 12th of the total width minus the gap. </p>
+
+<p>A pseudo-element with the <code>value</code> of the input is placed <code>::after</code>.</p>
+
+
+<hr>
+
+<p>Now, let's add the CSS for the word we created in the markup earlier – including the "logic" of the game:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="o">[</span><span class="nt">name</span><span class="o">=</span><span class="nt">w7</span><span class="o">]</span> <span class="p">{</span>
+  <span class="py">grid-area</span><span class="p">:</span> <span class="m">2</span><span class="p">/</span> <span class="m">10</span> <span class="p">/</span> <span class="m">2</span> <span class="p">/</span> <span class="m">13</span><span class="p">;</span>
+  <span class="err">&amp;:has(:checked</span> <span class="err">+</span> <span class="err">:checked</span> <span class="err">+</span> <span class="err">:checked)</span> <span class="err">{</span>
+    <span class="py">--bg</span><span class="p">:</span> <span class="m">#FF69B4</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="err">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>So, what's going on?</p>
+
+<p>The <code>grid-area</code>-declaration places the word in the <strong>second row</strong>, the <strong>tenth column</strong>, ends at the same row and at the <strong>13th column</strong>, as the word is <strong>3 characters</strong>, so <code>10 + 3 = 13</code>.</p>
+
+<p>Next, we check if all the <code>&lt;input&gt;</code>s in the fieldset are <code>:checked</code>. Because it's a 3-letter word, we need to check for <code>:checked</code> 3 times. </p>
+
+<p>Can you guess how many <code>:checked</code> are required for 4-letter words?! 😂</p>
+
+<p>Let's click on those 3 letters — the final 3 in the second row. When you click on a single letter, the background color turns yellow, but when all 3 have been clicked/checked, we get:</p>
+
+<p><a href="assets/1897009/8e3172ab.jpg" class="article-body-image-wrapper"><img src="assets/1897009/8e3172ab.jpg" alt="gap" loading="lazy" width="800" height="267"></a></p>
+
+<p>And that's it — now find 25 words more (or just click all the letters!). When you've found all the words, you'll have 3 slots left, with the letters A, B and C.</p>
+
+
+<hr>
+
+<h2>
+  <a name="demo" href="#demo">
+  </a>
+  Demo
+</h2>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/jOozRXo?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

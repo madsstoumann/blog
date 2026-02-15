@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Build a CSS Transition Tool for your editors — Mads Stoumann</title>
+	<meta name="description" content="I love building small tools to help editors and marketeers create more engaging content.  Typically,...">
+	<link rel="canonical" href="https://blog.stoumann.dk/build-a-css-transition-tool-for-your-editors">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Build a CSS Transition Tool for your editors">
+	<meta property="og:description" content="I love building small tools to help editors and marketeers create more engaging content.  Typically,...">
+	<meta property="og:url" content="https://blog.stoumann.dk/build-a-css-transition-tool-for-your-editors">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/1190247/448fa35e.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Build a CSS Transition Tool for your editors">
+	<meta name="twitter:description" content="I love building small tools to help editors and marketeers create more engaging content.  Typically,...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/1190247/448fa35e.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Build a CSS Transition Tool for your editors</h1>
+			<p>I love building small tools to help editors and marketeers create more engaging content.</p>
+
+<p>Typically, these tools are super-simple. Often, it's just updating a few <em>CSS Custom Properties</em>, a list of <code>class</code>-names, <code>data</code>-attributes or similar.</p>
+
+<p>I recently build a <em>CSS Transition Tool</em>, so editors can fine-tune how an element, or group of elements, enters the screen when scrolling.</p>
+
+<p>A typical example of this is <em>fade up:</em></p>
+
+<p><a href="assets/1190247/eba41072.jpg" class="article-body-image-wrapper"><img src="assets/1190247/eba41072.jpg" alt="Fade up" loading="lazy" width="760" height="355"></a></p>
+
+<p>The tool also allows editors to fine-control the transition of each element in the group:</p>
+
+<p><a href="assets/1190247/b7c7492c.jpg" class="article-body-image-wrapper"><img src="assets/1190247/b7c7492c.jpg" alt="Zoom in/out" loading="lazy" width="768" height="304" data-animated="true"></a></p>
+
+<p>If you want to build a similar tool, read on.</p>
+
+
+<hr>
+
+<h2>
+  <a name="creating-the-css" href="#creating-the-css">
+  </a>
+  Creating the CSS
+</h2>
+
+<p>First things first. The tool needs a lot of CSS-classes, that'll control the individual <code>transform</code>-properties. To run the transitions (on scroll, using intersection observer), we'll just add a <code>trs</code>-class to the outermost (parent) element.</p>
+
+<p>We'll be using easings from <a href="https://open-props.style/" target="_blank" rel="noopener noreferrer">Open Props</a>, so let's start, by importing those:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="k">@import</span> <span class="s2">'https://unpkg.com/open-props@1.4.14/src/props.easing.css'</span><span class="p">;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Next, we need some variables:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nd">:where</span><span class="o">([</span><span class="nt">class</span><span class="o">*=</span><span class="s1">"trs-"</span><span class="o">])</span> <span class="p">{</span>
+  <span class="py">--dg</span><span class="p">:</span> <span class="m">100deg</span><span class="p">;</span>
+  <span class="py">--tx</span><span class="p">:</span> <span class="m">55px</span><span class="p">;</span>
+  <span class="py">--ty</span><span class="p">:</span> <span class="m">110px</span><span class="p">;</span>
+  <span class="py">--zi</span><span class="p">:</span> <span class="m">0.6</span><span class="p">;</span>
+  <span class="py">--zo</span><span class="p">:</span> <span class="m">1.2</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p><code>--dg</code> is for transitions with <code>degrees</code>, <code>--tx</code> is <code>x</code>-offset, <code>--ty</code> is <code>y</code>-offset, and <code>zi</code> and <code>zo</code>is used for <code>zoom</code>-transitions.</p>
+
+<p>For the transition-classes, we'll use all of these properties, example "fade-down":<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nc">.trs-fdd</span> <span class="p">{</span> <span class="nl">opacity</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span> <span class="nl">transform</span><span class="p">:</span> <span class="n">translate3d</span><span class="p">(</span><span class="m">0px</span><span class="p">,</span> <span class="n">calc</span><span class="p">(</span><span class="m">-1</span> <span class="err">*</span> <span class="n">var</span><span class="p">(</span><span class="n">--ty</span><span class="p">)),</span> <span class="m">0</span><span class="p">);</span> <span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>... or "flip-down":<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nc">.trs-fld</span> <span class="p">{</span> <span class="nl">backface-visibility</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span> <span class="nl">transform</span><span class="p">:</span> <span class="n">perspective</span><span class="p">(</span><span class="m">2500px</span><span class="p">)</span> <span class="n">rotateX</span><span class="p">(</span><span class="n">var</span><span class="p">(</span><span class="n">--dg</span><span class="p">));</span> <span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>For delays, durations and easings, we'll add a bunch of micro-classes:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nc">.trsde-25</span> <span class="p">{</span> <span class="py">--delay</span><span class="p">:</span> <span class="m">25ms</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.trsde-50</span> <span class="p">{</span> <span class="py">--delay</span><span class="p">:</span> <span class="m">50ms</span><span class="p">;</span> <span class="p">}</span>
+<span class="c">/* .etc */</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+
+<hr>
+
+<p>When one of the transition-classes has the <code>trs</code>-class, we'll <em>run a transition:</em><br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nd">:is</span><span class="o">([</span><span class="nt">class</span><span class="o">*=</span><span class="s1">"trs-"</span><span class="o">]</span><span class="nc">.trs</span><span class="o">)</span> <span class="p">{</span>
+  <span class="nl">opacity</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span>
+  <span class="nl">transform</span><span class="p">:</span> <span class="n">translateZ</span><span class="p">(</span><span class="m">0</span><span class="p">)</span> <span class="n">scale</span><span class="p">(</span><span class="m">1</span><span class="p">);</span>
+  <span class="nl">transition</span><span class="p">:</span> <span class="n">all</span> <span class="n">var</span><span class="p">(</span><span class="n">--duration</span><span class="p">,</span> <span class="m">400ms</span><span class="p">)</span> <span class="n">var</span><span class="p">(</span><span class="n">--delay</span><span class="p">,</span> <span class="m">0ms</span><span class="p">)</span> <span class="n">var</span><span class="p">(</span><span class="n">--easing</span><span class="p">,</span> <span class="n">var</span><span class="p">(</span><span class="n">--ease-1</span><span class="p">,</span> <span class="n">ease</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>For any child-element <em>within</em> a <code>trs</code>-class, we'll use:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nd">:is</span><span class="o">(</span><span class="nc">.trs</span> <span class="o">[</span><span class="nt">class</span><span class="o">*=</span><span class="s1">"trs-"</span><span class="o">])</span> <span class="p">{</span>
+  <span class="nl">opacity</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span>
+  <span class="nl">transform</span><span class="p">:</span> <span class="n">translateZ</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
+  <span class="nl">transition-timing-function</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--easing</span><span class="p">,</span> <span class="n">ease-in-out</span><span class="p">);</span>
+  <span class="nl">transition-delay</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--delay</span><span class="p">,</span> <span class="m">0ms</span><span class="p">);</span>
+  <span class="nl">transition-duration</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--duration</span><span class="p">,</span> <span class="m">400ms</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<blockquote>
+<p>You can see all the necessary styles in the demo at the end of this tutorial. </p>
+</blockquote>
+
+
+<hr>
+
+<h2>
+  <a name="html" href="#html">
+  </a>
+  HTML
+</h2>
+
+<p>Now for some simple markup for previewing the transitions:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"demo"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"demo1"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"image1.jpg"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"demo2"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"image2.jpg"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"demo3"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"image3.jpg"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>For all the properties we want the editors to play around with, we'll add a <code>&lt;select&gt;</code>, with the CSS <code>class</code>-names as <code>&lt;option value&gt;</code>. </p>
+
+<p>Example:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;select&gt;</span>
+  <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"trsde-0"</span> <span class="na">selected</span><span class="nt">&gt;</span>0ms<span class="nt">&lt;/option&gt;</span>
+  <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"trsde-25"</span><span class="nt">&gt;</span>25ms<span class="nt">&lt;/option&gt;</span>
+  <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"trsde-50"</span><span class="nt">&gt;</span>50ms<span class="nt">&lt;/option&gt;</span>
+  ...
+<span class="nt">&lt;/select&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>We'll group the <code>&lt;select&gt;</code>-elements in <code>&lt;fieldset&gt;</code>s, one for each child-element in the preview-markup:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;fieldset</span> <span class="na">name=</span><span class="s">"demo"</span><span class="nt">&gt;</span> ...
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Notice the <code>name="demo"</code>-part. We'll use that in JavaScript, so all the controls within this fieldset will target the element in the preview-markup with <code>id="demo"</code>.</p>
+
+<p>Finally, wrap all the editor-markup within a <code>&lt;form id="app"&gt;</code>.</p>
+
+
+<hr>
+
+<h2>
+  <a name="javascript" href="#javascript">
+  </a>
+  JavaScript
+</h2>
+
+<p>Since we have a <code>&lt;form&gt;</code>, we just need a single <code>input</code>-event:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="nx">app</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">input</span><span class="dl">'</span><span class="p">,</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">node</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">group</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nf">closest</span><span class="p">(</span><span class="dl">'</span><span class="s1">fieldset</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="nx">group</span><span class="p">.</span><span class="nx">name</span><span class="p">).</span><span class="nx">className</span> <span class="o">=</span> <span class="p">[...</span><span class="nx">group</span><span class="p">.</span><span class="nx">elements</span><span class="p">].</span><span class="nf">map</span><span class="p">(</span><span class="nx">input</span> <span class="o">=&gt;</span> <span class="nx">input</span><span class="p">.</span><span class="nx">value</span><span class="p">).</span><span class="nf">join</span><span class="p">(</span><span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">).</span><span class="nf">replace</span><span class="p">(</span><span class="sr">/  +/g</span><span class="p">,</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">);</span>
+  <span class="nf">playIt</span><span class="p">();</span>
+<span class="p">})</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>All there's left to add, is the code for <code>playIt</code>, a simple method that removes the <code>trs</code>-class, and adds it again after a timeout:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">playIt</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="nx">demo</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nf">remove</span><span class="p">(</span><span class="dl">'</span><span class="s1">trs</span><span class="dl">'</span><span class="p">);</span> <span class="nf">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="nx">demo</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">trs</span><span class="dl">'</span><span class="p">);</span> <span class="p">},</span> <span class="mi">400</span><span class="p">);</span> <span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>To help our editors re-trigger the animation, let's add a <code>&lt;button id="play"&gt;</code>, that'll also run <code>playIt()</code><br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="nx">play</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nf">playIt</span><span class="p">());</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>And that's it. Very little code, but a great help for editors and marketeers!</p>
+
+
+<hr>
+
+<h2>
+  <a name="demo" href="#demo">
+  </a>
+  Demo
+</h2>
+
+<p>Here's the demo. I recommend you click on "Edit on Codepen", and then choose "Full Screen View":</p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/zYjxZqB?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+<p>As soon as you change something in the editor, click on the "See code". </p>
+
+<p><em>Example:</em></p>
+
+<p><a href="assets/1190247/d8fcc3e0.jpg" class="article-body-image-wrapper"><img src="assets/1190247/d8fcc3e0.jpg" alt="Code snippet" loading="lazy" width="800" height="218"></a></p>
+
+<p>Here, you can see, that some of the classes we created in the beginning of this tutorial, has been added to the main wrapper.</p>
+
+<p>Now, change the transitions of one or more of the child-elements, and see the code update.</p>
+
+
+<hr>
+
+<p>Feel free to implement the editor in a CMS — or have the editors copy the code-snippet, if you want to implement the transitions manually.</p>
+
+<p>Most of the transitions are inspired by <a href="https://michalsnik.github.io/aos/" target="_blank" rel="noopener noreferrer">AOS</a>.</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

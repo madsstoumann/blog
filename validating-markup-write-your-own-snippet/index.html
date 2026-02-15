@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Validating Markup: Write Your Own Snippet — Mads Stoumann</title>
+	<meta name="description" content="I always validate my markup. Why? There are several reasons, the main ones being:   If the markup is...">
+	<link rel="canonical" href="https://blog.stoumann.dk/validating-markup-write-your-own-snippet">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Validating Markup: Write Your Own Snippet">
+	<meta property="og:description" content="I always validate my markup. Why? There are several reasons, the main ones being:   If the markup is...">
+	<meta property="og:url" content="https://blog.stoumann.dk/validating-markup-write-your-own-snippet">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/858401/2c74aeee.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Validating Markup: Write Your Own Snippet">
+	<meta name="twitter:description" content="I always validate my markup. Why? There are several reasons, the main ones being:   If the markup is...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/858401/2c74aeee.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Validating Markup: Write Your Own Snippet</h1>
+			<p>I always validate my markup. Why? There are several reasons, the main ones being:</p>
+
+<ul>
+<li><p>If the markup is invalid, the browser will have to spend more time guessing and interpreting what the markup <em>should most likely be like</em>. This will take longer to process, and thus = slower rendering.</p></li>
+<li><p>Screen-readers can/will fail for the same reasons.</p></li>
+<li><p>Search-engines will index your site faster, if the crawler does not have to interpret invalid markup.</p></li>
+</ul>
+
+
+<hr>
+
+<p>To validate your markup, just go to <a href="https://validator.w3.org/" target="_blank" rel="noopener noreferrer">https://validator.w3.org/</a> and paste a url, upload a file, or input HTML directly.</p>
+
+<p>While this works, it's <strong>not ideal for local development.</strong> That's why, I've been using <a href="https://www.validity.org.uk/" target="_blank" rel="noopener noreferrer">Validity</a> for a number of years to check my markup for errors. </p>
+
+<p>Unfortunately, it's recently been <strong>removed from the Chrome Web Store</strong> ☹️</p>
+
+<p>Luckily, W3 has a <a href="https://validator.w3.org/docs/api.html" target="_blank" rel="noopener noreferrer">Validation API</a> we can use instead. </p>
+
+<p>Let's look into how we can create our own validation-snippet!</p>
+
+
+<hr>
+
+<h2>
+  <a name="creating-a-snippet" href="#creating-a-snippet">
+  </a>
+  Creating a snippet
+</h2>
+
+<p>In <em>Chrome Dev Tools</em>, go to “Sources &gt; Snippets” and click on “+ New snippet”.</p>
+
+<p>Paste the following code:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="k">async</span> <span class="kd">function</span> <span class="nf">valid</span><span class="p">(</span><span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://validator.nu/?out=json</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">mode</span><span class="p">:</span> <span class="dl">'</span><span class="s1">cors</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">cache</span><span class="p">:</span> <span class="dl">'</span><span class="s1">no-cache</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">credentials</span><span class="p">:</span> <span class="dl">'</span><span class="s1">same-origin</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">headers</span><span class="p">:</span> <span class="p">{</span> <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">text/html;charset=UTF-8</span><span class="dl">'</span> <span class="p">},</span>
+    <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">referrerPolicy</span><span class="p">:</span> <span class="dl">'</span><span class="s1">no-referrer</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">body</span><span class="p">:</span> <span class="k">new</span> <span class="nc">XMLSerializer</span><span class="p">().</span><span class="nf">serializeToString</span><span class="p">(</span><span class="nb">document</span><span class="p">)</span>
+  <span class="p">});</span>
+  <span class="k">return</span> <span class="nx">response</span><span class="p">.</span><span class="nf">json</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="nf">valid</span><span class="p">()</span>
+  <span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="nx">data</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">clear</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+  <span class="p">})</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Save the snippet, rename it to “valid”:</p>
+
+<p><a href="assets/858401/13d86406.jpg" class="article-body-image-wrapper"><img src="assets/858401/13d86406.jpg" alt="Snippet" loading="lazy" width="800" height="513"></a></p>
+
+<p>This snippet will <code>POST</code> the markup of the current page to W3's validator, and return <code>json</code> with validation-information. </p>
+
+<p>To run the snippet, press <code>⌘/CTRL+ENTER</code> after the last line of code.</p>
+
+<p>Does it run? Good! In the future, to run the snippet, just press <code>⌘+O</code> (MAC) or <code>CTRL+O</code> (PC) – then type <code>!valid</code>.</p>
+
+
+<hr>
+
+<h2>
+  <a name="formatting-the-output" href="#formatting-the-output">
+  </a>
+  Formatting the output
+</h2>
+
+<p>Now, by using all the wonderful methods of <code>console</code>, let's format the output. </p>
+
+<p>Replace <code>console.log(data)</code> with:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">messages</span><span class="p">.</span><span class="nf">filter</span><span class="p">(</span><span class="nx">msg</span> <span class="o">=&gt;</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">warning</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">messages</span><span class="p">.</span><span class="nf">filter</span><span class="p">(</span><span class="nx">msg</span> <span class="o">=&gt;</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">info</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="nx">msg</span><span class="p">?.</span><span class="nx">subType</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">warning</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="k">if </span><span class="p">(</span><span class="nx">warning</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">group</span><span class="p">(</span><span class="s2">`%c</span><span class="p">${</span><span class="nx">warning</span><span class="p">.</span><span class="nx">length</span><span class="p">}</span><span class="s2"> validation warnings`</span><span class="p">,</span> <span class="dl">"</span><span class="s2">background-color:#FFFBE5;padding:1px 4px</span><span class="dl">"</span><span class="p">);</span>
+  <span class="nx">warning</span><span class="p">.</span><span class="nf">forEach</span><span class="p">(</span><span class="nx">msg</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">groupCollapsed</span><span class="p">(</span><span class="s2">`%c</span><span class="p">${</span><span class="nx">msg</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2"> (line: </span><span class="p">${</span><span class="nx">msg</span><span class="p">.</span><span class="nx">lastLine</span><span class="p">}</span><span class="s2">)`</span><span class="p">,</span> <span class="dl">"</span><span class="s2">background-color:#FFFBE5</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">table</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">groupEnd</span><span class="p">();</span>
+  <span class="p">})</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">groupEnd</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="k">if </span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">group</span><span class="p">(</span><span class="s2">`%c</span><span class="p">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">length</span><span class="p">}</span><span class="s2"> validation errors`</span><span class="p">,</span> <span class="dl">"</span><span class="s2">background-color:#D93025;color:#FFF;padding:1px 4px</span><span class="dl">"</span><span class="p">);</span>
+  <span class="nx">error</span><span class="p">.</span><span class="nf">forEach</span><span class="p">(</span><span class="nx">msg</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">groupCollapsed</span><span class="p">(</span><span class="s2">`%c</span><span class="p">${</span><span class="nx">msg</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="s2"> (line: </span><span class="p">${</span><span class="nx">msg</span><span class="p">.</span><span class="nx">lastLine</span><span class="p">}</span><span class="s2">)`</span><span class="p">,</span> <span class="dl">"</span><span class="s2">color:#D93025</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">table</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">groupEnd</span><span class="p">();</span>
+  <span class="p">})</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">groupEnd</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Save the snippet (⌘/CTRL+S), and check it out:</p>
+
+<p><a href="assets/858401/49bf60a1.jpg" class="article-body-image-wrapper"><img src="assets/858401/49bf60a1.jpg" alt="Console" loading="lazy" width="800" height="652"></a></p>
+
+<p>We can then expand each warning- or error-line:</p>
+
+<p><a href="assets/858401/3553398f.jpg" class="article-body-image-wrapper"><img src="assets/858401/3553398f.jpg" alt="Expanded error" loading="lazy" width="782" height="662"></a></p>
+
+<p>The latter is using <code>console.table()</code>, but could also be <code>console.dir</code> – or whatever way you want to present the error.</p>
+
+
+<hr>
+
+<h2>
+  <a name="conclusion" href="#conclusion">
+  </a>
+  Conclusion
+</h2>
+
+<p>I now have a fast way to validate local markup again! If you're using the snippet on external sites or with sites that have a “Content Security Policy”, you <em>might</em> run into issues and have to update the snippet.</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

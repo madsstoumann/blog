@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Fetch with AbortController — Mads Stoumann</title>
+	<meta name="description" content="This is a submission for DEV Challenge v24.03.20, One Byte Explainer: Browser API or Feature.       ...">
+	<link rel="canonical" href="https://blog.stoumann.dk/fetch-with-abortcontroller">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Fetch with AbortController">
+	<meta property="og:description" content="This is a submission for DEV Challenge v24.03.20, One Byte Explainer: Browser API or Feature.       ...">
+	<meta property="og:url" content="https://blog.stoumann.dk/fetch-with-abortcontroller">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/1798170/9c584f2a.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Fetch with AbortController">
+	<meta name="twitter:description" content="This is a submission for DEV Challenge v24.03.20, One Byte Explainer: Browser API or Feature.       ...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/1798170/9c584f2a.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Fetch with AbortController</h1>
+			<p><em>This is a submission for DEV Challenge v24.03.20, One Byte Explainer: Browser API or Feature.</em></p>
+
+<h2>
+  <a name="explainer" href="#explainer">
+  </a>
+  Explainer
+</h2>
+
+
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="k">async</span> <span class="kd">function</span> <span class="nf">go</span><span class="p">(</span><span class="nx">u</span><span class="p">,</span><span class="nx">t</span><span class="p">,</span><span class="nx">o</span><span class="p">,</span><span class="nx">s</span><span class="o">=</span><span class="kc">null</span><span class="p">){</span><span class="k">try</span><span class="p">{</span><span class="kd">const</span> <span class="nx">r</span><span class="o">=</span><span class="k">await</span> <span class="nf">fetch</span><span class="p">(</span><span class="nx">u</span><span class="p">,</span>
+<span class="p">{...</span><span class="nx">o</span><span class="p">,</span><span class="na">signal</span><span class="p">:</span><span class="nx">s</span><span class="p">});</span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">r</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span><span class="k">throw</span> <span class="k">new</span> <span class="nc">Error</span><span class="p">(</span><span class="s2">`HTTP
+error:</span><span class="p">${</span><span class="nx">r</span><span class="p">.</span><span class="nx">status</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span><span class="k">return</span> <span class="nx">t</span><span class="o">===</span><span class="dl">'</span><span class="s1">json</span><span class="dl">'</span><span class="p">?</span><span class="k">await</span> <span class="nx">r</span><span class="p">.</span><span class="nf">json</span><span class="p">():</span>
+<span class="p">(</span><span class="nx">t</span><span class="o">===</span><span class="dl">'</span><span class="s1">text</span><span class="dl">'</span><span class="p">?</span><span class="k">await</span> <span class="nx">r</span><span class="p">.</span><span class="nf">text</span><span class="p">():</span><span class="nx">r</span><span class="p">);}</span><span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span><span class="k">throw</span> 
+<span class="nx">e</span><span class="p">.</span><span class="nx">name</span><span class="o">===</span><span class="dl">'</span><span class="s1">AbortError</span><span class="dl">'</span><span class="p">?</span><span class="k">new</span> <span class="nc">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Timeout</span><span class="dl">'</span><span class="p">):</span><span class="nx">e</span><span class="p">;}}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<h2>
+  <a name="additional-context" href="#additional-context">
+  </a>
+  Additional Context
+</h2>
+
+<p><strong>Explain <code>fetch()</code> with return type and <code>AbortController</code> in 256 bytes.</strong></p>
+
+<p>The above is <strong>252 bytes</strong> — the explaination will be longer 😂</p>
+
+<p>The method has 4 parameters:</p>
+
+<ul>
+<li>u (URL)</li>
+<li>t (return type: 'json', 'text' — or leave blank to get the <code>response</code>)</li>
+<li>o (<a href="https://developer.mozilla.org/en-US/docs/Web/API/fetch" target="_blank" rel="noopener noreferrer">options</a>)</li>
+<li>s (AbortController.signal)</li>
+</ul>
+
+
+<hr>
+
+<h2>
+  <a name="examples" href="#examples">
+  </a>
+  Examples
+</h2>
+
+<p>Basic <code>fetch</code>, return <code>response</code><br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">go</span><span class="p">(</span>
+  <span class="dl">'</span><span class="s1">https://jsonplaceholder.typicode.com/posts/</span><span class="dl">'</span>
+<span class="p">);</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Basic <code>fetch</code>, return <code>response</code> as <code>json</code>:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">go</span><span class="p">(</span>
+  <span class="dl">'</span><span class="s1">https://jsonplaceholder.typicode.com/posts/</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">json</span><span class="dl">'</span>
+<span class="p">);</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Use it with an <code>AbortController</code>, to cancel the <code>fetch()</code> under certain conditions (timeout being the most common):<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">controller</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AbortController</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">signal</span> <span class="o">=</span> <span class="nx">controller</span><span class="p">.</span><span class="nx">signal</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">go</span><span class="p">(</span>
+  <span class="dl">'</span><span class="s1">https://jsonplaceholder.typicode.com/posts/</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">json</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">{},</span>
+  <span class="nx">signal</span>
+<span class="p">);</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Then, to abort the <code>fetch()</code>, use <code>controller.abort()</code>. </p>
+
+<p>In this example, after 5 seconds:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="nf">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">controller</span><span class="p">.</span><span class="nf">abort</span><span class="p">(),</span> <span class="mi">5000</span><span class="p">);</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p><a href="https://www.pexels.com/da-dk/foto/morgengry-himmel-solnedgang-romantisk-5677459/" target="_blank" rel="noopener noreferrer">Photo by Dapo Abideen</a></p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

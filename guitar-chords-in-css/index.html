@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Guitar Chords in CSS — Mads Stoumann</title>
+	<meta name="description" content="In my previous article, I looked into the new, improved attr() method in CSS. I was over the moon...">
+	<link rel="canonical" href="https://blog.stoumann.dk/guitar-chords-in-css">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Guitar Chords in CSS">
+	<meta property="og:description" content="In my previous article, I looked into the new, improved attr() method in CSS. I was over the moon...">
+	<meta property="og:url" content="https://blog.stoumann.dk/guitar-chords-in-css">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/2465237/f5ef5541.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Guitar Chords in CSS">
+	<meta name="twitter:description" content="In my previous article, I looked into the new, improved attr() method in CSS. I was over the moon...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/2465237/f5ef5541.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Guitar Chords in CSS</h1>
+			<p>In my previous article, I looked into the new, improved <code>attr()</code> method in CSS. I was <a href="https://dev.to/madsstoumann/phases-of-the-moon-in-css-2lbo">over the moon</a> (pun intended). This time, I’ll continue looking into the <code>attr()</code> method, showing how we can make easily readable components — at least for guitarists — like this:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;fret-board</span> <span class="na">frets=</span><span class="s">"4"</span> <span class="na">strings=</span><span class="s">"6"</span> <span class="na">chord=</span><span class="s">"C Major"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;string-note</span> <span class="na">string=</span><span class="s">"6"</span> <span class="na">mute</span><span class="nt">&gt;&lt;/string-note&gt;</span>
+  <span class="nt">&lt;string-note</span> <span class="na">string=</span><span class="s">"5"</span> <span class="na">fret=</span><span class="s">"3"</span> <span class="na">finger=</span><span class="s">"3"</span><span class="nt">&gt;&lt;/string-note&gt;</span>
+  <span class="nt">&lt;string-note</span> <span class="na">string=</span><span class="s">"4"</span> <span class="na">fret=</span><span class="s">"2"</span> <span class="na">finger=</span><span class="s">"2"</span><span class="nt">&gt;&lt;/string-note&gt;</span>
+  <span class="nt">&lt;string-note</span> <span class="na">string=</span><span class="s">"3"</span> <span class="na">open</span><span class="nt">&gt;&lt;/string-note&gt;</span>
+  <span class="nt">&lt;string-note</span> <span class="na">string=</span><span class="s">"2"</span> <span class="na">fret=</span><span class="s">"1"</span> <span class="na">finger=</span><span class="s">"1"</span><span class="nt">&gt;&lt;/string-note&gt;</span>
+  <span class="nt">&lt;string-note</span> <span class="na">string=</span><span class="s">"1"</span> <span class="na">open</span><span class="nt">&gt;&lt;/string-note&gt;</span>
+<span class="nt">&lt;/fret-board&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>... become this — with <strong>no JavaScript at all</strong>:</p>
+
+<p><a href="assets/2465237/26425c81.jpg" class="article-body-image-wrapper"><img src="assets/2465237/26425c81.jpg" alt="fret-board component showing a C Major chord" loading="lazy" width="454" height="444"></a></p>
+
+<p>Let’s get started!</p>
+
+<h3>
+  <a name="basic-grid" href="#basic-grid">
+  </a>
+  Basic grid
+</h3>
+
+<p>First, we need a basic grid. How many cells and rows depend on the <code>frets</code> and <code>strings</code> attributes we defined in the HTML — so let’s grab those as <code>&lt;number&gt;</code> and set two custom properties:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">--_frets</span><span class="o">:</span> <span class="nt">attr</span><span class="o">(</span><span class="nt">frets</span> <span class="nt">type</span><span class="o">(&lt;</span><span class="nt">number</span><span class="o">&gt;),</span> <span class="err">4</span><span class="o">);</span>
+<span class="nt">--_strings</span><span class="o">:</span> <span class="nt">attr</span><span class="o">(</span><span class="nt">strings</span> <span class="nt">type</span><span class="o">(&lt;</span><span class="nt">number</span><span class="o">&gt;),</span> <span class="err">6</span><span class="o">);</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>In CSS, we’ll <em>double</em> the number of strings, so we can place notes <strong>on</strong> the strings — one grid-unit to the left of the string itself. We also want top and bottom rows for chord-name and open/mute indicators, so our grid looks like this:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">fret-board</span> <span class="p">{</span>
+  <span class="py">grid-template-columns</span><span class="p">:</span> <span class="nb">repeat</span><span class="p">(</span><span class="n">calc</span><span class="p">(</span><span class="n">var</span><span class="p">(</span><span class="n">--_strings</span><span class="p">)</span> <span class="err">*</span> <span class="m">2</span><span class="p">),</span> <span class="m">1</span><span class="n">fr</span><span class="p">);</span>
+  <span class="py">grid-template-rows</span><span class="p">:</span>
+    <span class="n">var</span><span class="p">(</span><span class="n">--fret-board-top-row-h</span><span class="p">,</span> <span class="m">12%</span><span class="p">)</span>
+    <span class="nb">repeat</span><span class="p">(</span><span class="n">calc</span><span class="p">(</span><span class="n">var</span><span class="p">(</span><span class="n">--_frets</span><span class="p">)),</span> <span class="m">1</span><span class="n">fr</span><span class="p">)</span>
+    <span class="n">var</span><span class="p">(</span><span class="n">--fret-board-bottom-row-h</span><span class="p">,</span> <span class="m">15%</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>We now have:</p>
+
+<p><a href="assets/2465237/ac68fce4.jpg" class="article-body-image-wrapper"><img src="assets/2465237/ac68fce4.jpg" alt="Basic grid" loading="lazy" width="441" height="441"></a></p>
+
+<h3>
+  <a name="frets-and-strings" href="#frets-and-strings">
+  </a>
+  Frets and strings
+</h3>
+
+<p>The frets and strings are added to a pseudo-element as two linear gradients:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">fret-board</span> <span class="p">{</span>
+  <span class="py">--fret-board-fret-c</span><span class="p">:</span> <span class="n">light-dark</span><span class="p">(</span><span class="m">#000</span><span class="p">,</span> <span class="m">#FFF</span><span class="p">);</span>
+  <span class="py">--fret-board-fret-w</span><span class="p">:</span> <span class="n">clamp</span><span class="p">(</span><span class="m">0.0625rem</span><span class="p">,</span> <span class="m">0.03125rem</span> <span class="err">+</span> <span class="m">0.5</span><span class="n">cqi</span><span class="p">,</span> <span class="m">0.5rem</span><span class="p">);</span>
+  <span class="py">--fret-board-string-c</span><span class="p">:</span> <span class="n">light-dark</span><span class="p">(</span><span class="m">#0008</span><span class="p">,</span> <span class="m">#FFF8</span><span class="p">);</span>
+  <span class="py">--fret-board-string-w</span><span class="p">:</span> <span class="n">clamp</span><span class="p">(</span><span class="m">0.0625rem</span><span class="p">,</span> <span class="m">0.03125rem</span> <span class="err">+</span> <span class="m">0.5</span><span class="n">cqi</span><span class="p">,</span> <span class="m">0.125rem</span><span class="p">);</span>
+
+  <span class="nl">background-image</span><span class="p">:</span>
+    <span class="c">/* Vertical strings */</span>
+    <span class="n">linear-gradient</span><span class="p">(</span>
+      <span class="m">90deg</span><span class="p">,</span> 
+      <span class="n">var</span><span class="p">(</span><span class="n">--fret-board-string-c</span><span class="p">)</span> <span class="n">var</span><span class="p">(</span><span class="n">--fret-board-string-w</span><span class="p">),</span> 
+      <span class="nb">transparent</span> <span class="m">0</span> <span class="n">var</span><span class="p">(</span><span class="n">--fret-board-string-w</span><span class="p">)</span>
+    <span class="p">),</span>
+    <span class="c">/* Horizontal frets */</span>
+    <span class="n">linear-gradient</span><span class="p">(</span>
+      <span class="m">180deg</span><span class="p">,</span>  
+      <span class="n">var</span><span class="p">(</span><span class="n">--fret-board-fret-c</span><span class="p">)</span> <span class="n">var</span><span class="p">(</span><span class="n">--fret-board-fret-w</span><span class="p">),</span> 
+      <span class="nb">transparent</span> <span class="m">0</span> <span class="n">var</span><span class="p">(</span><span class="n">--fret-board-fret-w</span><span class="p">)</span>
+    <span class="p">);</span>
+
+  <span class="nl">background-position</span><span class="p">:</span> 
+    <span class="m">0</span> <span class="n">var</span><span class="p">(</span><span class="n">--fret-board-fret-w</span><span class="p">),</span> 
+    <span class="m">0</span> <span class="m">0</span><span class="p">;</span>
+
+  <span class="nl">background-repeat</span><span class="p">:</span> 
+    <span class="nb">repeat-x</span><span class="p">,</span> 
+    <span class="nb">repeat-y</span><span class="p">;</span>
+
+  <span class="nl">background-size</span><span class="p">:</span>
+    <span class="c">/* Width and height for strings */</span>
+    <span class="n">calc</span><span class="p">(</span><span class="m">100%</span> <span class="p">/</span> <span class="p">(</span><span class="n">var</span><span class="p">(</span><span class="n">--_strings</span><span class="p">)</span> <span class="n">-</span> <span class="m">1</span><span class="p">)</span> <span class="n">-</span> <span class="p">(</span><span class="n">var</span><span class="p">(</span><span class="n">--fret-board-string-w</span><span class="p">)</span> <span class="p">/</span> <span class="n">var</span><span class="p">(</span><span class="n">--_strings</span><span class="p">)))</span> 
+      <span class="n">calc</span><span class="p">(</span><span class="m">100%</span> <span class="n">-</span> <span class="p">(</span><span class="m">2</span> <span class="err">*</span> <span class="n">var</span><span class="p">(</span><span class="n">--fret-board-fret-w</span><span class="p">))),</span>
+    <span class="c">/* Width and height for frets */</span>
+    <span class="m">100%</span> 
+      <span class="n">calc</span><span class="p">(</span><span class="m">100%</span> <span class="p">/</span> <span class="n">var</span><span class="p">(</span><span class="n">--_frets</span><span class="p">)</span> <span class="n">-</span> <span class="p">(</span><span class="n">var</span><span class="p">(</span><span class="n">--fret-board-fret-w</span><span class="p">)</span> <span class="p">/</span> <span class="n">var</span><span class="p">(</span><span class="n">--_frets</span><span class="p">)));</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>OK, that was a handful — but we basically created horizontal lines for frets from top to bottom, and vertical lines for the strings running across the board.</p>
+
+<p><a href="assets/2465237/0ab60e3e.jpg" class="article-body-image-wrapper"><img src="assets/2465237/0ab60e3e.jpg" alt="Added frets and strings" loading="lazy" width="442" height="443"></a></p>
+
+<h3>
+  <a name="adding-notes-and-fingers" href="#adding-notes-and-fingers">
+  </a>
+  Adding notes and fingers
+</h3>
+
+<p>Let’s add some notes — but first, let’s grab those attributes:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">--barre</span><span class="o">:</span> <span class="nt">attr</span><span class="o">(</span><span class="nt">barre</span> <span class="nt">type</span><span class="o">(&lt;</span><span class="nt">number</span><span class="o">&gt;),</span> <span class="err">1</span><span class="o">);</span>
+<span class="nt">--fret</span><span class="o">:</span>  <span class="nt">attr</span><span class="o">(</span><span class="nt">fret</span> <span class="nt">type</span><span class="o">(&lt;</span><span class="nt">number</span><span class="o">&gt;),</span> <span class="err">0</span><span class="o">);</span>
+<span class="nt">--string</span><span class="o">:</span>  <span class="nt">attr</span><span class="o">(</span><span class="nt">string</span> <span class="nt">type</span><span class="o">(&lt;</span><span class="nt">number</span><span class="o">&gt;),</span> <span class="err">0</span><span class="o">);</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>We’ll get to <code>--barre</code> soon, but for now, we place the note using this formula:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">string-note</span> <span class="p">{</span>
+  <span class="nl">grid-column</span><span class="p">:</span> <span class="n">calc</span><span class="p">((</span><span class="n">var</span><span class="p">(</span><span class="n">--_strings</span><span class="p">)</span> <span class="err">*</span> <span class="m">2</span><span class="p">)</span> <span class="n">-</span> <span class="p">(</span><span class="n">var</span><span class="p">(</span><span class="n">--string</span><span class="p">)</span> <span class="err">*</span> <span class="m">2</span> <span class="n">-</span> <span class="m">1</span><span class="p">))</span> <span class="p">/</span> <span class="n">span</span> <span class="n">calc</span><span class="p">(</span><span class="n">var</span><span class="p">(</span><span class="n">--barre</span><span class="p">)</span> <span class="err">*</span> <span class="m">2</span><span class="p">);</span>  
+  <span class="nl">grid-row</span><span class="p">:</span> <span class="n">calc</span><span class="p">(</span><span class="n">var</span><span class="p">(</span><span class="n">--fret</span><span class="p">)</span> <span class="err">+</span> <span class="m">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Let’s break this down:</p>
+
+<ol>
+<li>
+<p><strong>Grid Column Positioning:</strong></p>
+
+<ul>
+<li>
+<code>(var(--_strings) * 2)</code> - This starts at the rightmost side of our grid</li>
+<li>
+<code>(var(--string) * 2 - 1)</code> - This calculates how far to move from the right</li>
+<li>For example, with 6 strings:
+
+<ul>
+<li>String 1 (highest) goes at position <code>12 - (1*2-1) = 11</code>
+</li>
+<li>String 6 (lowest) goes at position <code>12 - (6*2-1) = 1</code>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Span Calculation:</strong></p>
+
+<ul>
+<li>
+<code>span calc(var(--barre) * 2)</code> - For regular notes, spans 2 columns</li>
+<li>For barre chords, spans more columns depending on how many strings are covered</li>
+</ul>
+</li>
+<li>
+<p><strong>Grid Row Formula:</strong></p>
+
+<ul>
+<li>
+<code>calc(var(--fret) + 1)</code> - The <code>+1</code> accounts for the header row</li>
+<li>Open strings (fret = 0) go in row 1, first fret in row 2, etc.</li>
+</ul>
+</li>
+</ol>
+
+<p>This gets us:</p>
+
+<p><a href="assets/2465237/28f68fda.jpg" class="article-body-image-wrapper"><img src="assets/2465237/28f68fda.jpg" alt="Notes and fingers" loading="lazy" width="448" height="437"></a></p>
+
+<h4>
+  <a name="displaying-finger-numbers" href="#displaying-finger-numbers">
+  </a>
+  Displaying finger numbers
+</h4>
+
+<p>For good tablature, we need to show which finger to use for each note. We get this from the <code>finger</code> attribute in our HTML and display it using a pseudo-element:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">string-note</span><span class="nd">::after</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--string-note-c</span><span class="p">,</span> <span class="n">light-dark</span><span class="p">(</span><span class="m">#FFF</span><span class="p">,</span> <span class="m">#222</span><span class="p">));</span>
+  <span class="nl">content</span><span class="p">:</span> <span class="n">attr</span><span class="p">(</span><span class="n">finger</span><span class="p">);</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--string-note-fs</span><span class="p">,</span> <span class="m">7</span><span class="n">cqi</span><span class="p">);</span>
+  <span class="nl">font-weight</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--string-note-fw</span><span class="p">,</span> <span class="m">500</span><span class="p">);</span>
+  <span class="py">text-box</span><span class="p">:</span> <span class="n">cap</span> <span class="n">alphabetic</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<blockquote>
+<p><strong>Note:</strong> <code>text-box: cap alphabetic</code> is a modern CSS feature that trims spacing created by <code>line-height</code>. The <code>light-dark()</code> function automatically adjusts text color for light or dark mode.</p>
+</blockquote>
+
+<h4>
+  <a name="muted-and-open-strings" href="#muted-and-open-strings">
+  </a>
+  Muted and open strings
+</h4>
+
+<p>Guitar chords often involve strings that aren’t pressed down but are either played open or muted (not played):<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;string-note</span> <span class="na">string=</span><span class="s">"6"</span> <span class="na">mute</span><span class="nt">&gt;&lt;/string-note&gt;</span>    <span class="c">&lt;!-- Muted string --&gt;</span>
+<span class="nt">&lt;string-note</span> <span class="na">string=</span><span class="s">"3"</span> <span class="na">open</span><span class="nt">&gt;&lt;/string-note&gt;</span>    <span class="c">&lt;!-- Open string --&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>For the visual representation of string states:</p>
+
+<ul>
+<li>For <strong>muted strings</strong>, we create an X symbol using Temani Atif’s <a href="https://css-shape.com/cross/" target="_blank" rel="noopener noreferrer">cross shape</a> with <code>border-image</code> and a 45° rotation</li>
+<li>For <strong>open strings</strong>, we use a CSS mask with a radial gradient to create a hollow circle effect
+</li>
+</ul>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nt">string-note</span><span class="o">[</span><span class="nt">mute</span><span class="o">]</span> <span class="p">{</span>
+  <span class="nl">border-image</span><span class="p">:</span> <span class="n">conic-gradient</span><span class="p">(</span><span class="n">var</span><span class="p">(</span><span class="n">--fret-board-bg</span><span class="p">)</span> <span class="m">0</span> <span class="m">0</span><span class="p">)</span> <span class="m">50%</span><span class="p">/</span><span class="n">calc</span><span class="p">(</span><span class="m">50%</span> <span class="n">-</span> <span class="m">0.25</span><span class="n">cqi</span><span class="p">);</span>
+  <span class="py">rotate</span><span class="p">:</span> <span class="m">45deg</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">string-note</span><span class="o">[</span><span class="nt">open</span><span class="o">]</span> <span class="p">{</span>
+  <span class="nl">border-radius</span><span class="p">:</span> <span class="m">50%</span><span class="p">;</span>
+  <span class="nl">mask</span><span class="p">:</span> <span class="n">radial-gradient</span><span class="p">(</span><span class="nb">circle</span> <span class="n">farthest-side</span> <span class="n">at</span> <span class="nb">center</span><span class="p">,</span> 
+    <span class="nb">transparent</span> <span class="n">calc</span><span class="p">(</span><span class="m">100%</span> <span class="n">-</span> <span class="m">1</span><span class="n">cqi</span><span class="p">),</span> 
+    <span class="m">#000</span> <span class="n">calc</span><span class="p">(</span><span class="m">100%</span> <span class="n">-</span> <span class="m">1</span><span class="n">cqi</span> <span class="err">+</span> <span class="m">1px</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<h3>
+  <a name="barre-chords" href="#barre-chords">
+  </a>
+  Barre Chords
+</h3>
+
+<p>A "barre chord" is one where you hold down multiple strings with one finger. Let’s add the <code>barre</code> attribute in HTML:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;string-note</span> <span class="na">string=</span><span class="s">"6"</span> <span class="na">fret=</span><span class="s">"1"</span> <span class="na">barre=</span><span class="s">"6"</span> <span class="na">finger=</span><span class="s">"1"</span><span class="nt">&gt;&lt;/string-note&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>We already covered the calculations above, but here’s how it looks visually:</p>
+
+<p><a href="assets/2465237/8a01f537.jpg" class="article-body-image-wrapper"><img src="assets/2465237/8a01f537.jpg" alt="Barre Chord" loading="lazy" width="442" height="442"></a></p>
+
+<h3>
+  <a name="fret-numbers" href="#fret-numbers">
+  </a>
+  Fret Numbers
+</h3>
+
+<p>Sometimes, a chord does not start on the first fret, and we need to indicate a fret number. For this, we use an ordered list, <code>&lt;ol&gt;</code>, where we set the <code>value</code> attribute on the first item:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;ol&gt;&lt;li</span> <span class="na">value=</span><span class="s">"7"</span><span class="nt">&gt;&lt;/li&gt;&lt;/ol&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>You can inspect the styles in the final demo, but it looks like this:</p>
+
+<p><a href="assets/2465237/d89a3ae2.jpg" class="article-body-image-wrapper"><img src="assets/2465237/d89a3ae2.jpg" alt="Fret Number" loading="lazy" width="445" height="442"></a></p>
+
+<h2>
+  <a name="other-instruments-with-frets-and-strings" href="#other-instruments-with-frets-and-strings">
+  </a>
+  Other instruments with frets and strings
+</h2>
+
+<p>Now, the great thing about controlling the CSS from a few attributes is how easy we can make it work for <em>other</em> instruments. Here are some examples:</p>
+
+<h3>
+  <a name="ukulele-4-strings" href="#ukulele-4-strings">
+  </a>
+  Ukulele — 4 strings:
+</h3>
+
+<p><a href="assets/2465237/6dcd309a.jpg" class="article-body-image-wrapper"><img src="assets/2465237/6dcd309a.jpg" alt="Ukulele" loading="lazy" width="450" height="444"></a></p>
+
+<h3>
+  <a name="banjo-5-strings" href="#banjo-5-strings">
+  </a>
+  Banjo — 5 strings:
+</h3>
+
+<p><a href="assets/2465237/390b7ef6.jpg" class="article-body-image-wrapper"><img src="assets/2465237/390b7ef6.jpg" alt="Banjo" loading="lazy" width="456" height="443"></a></p>
+
+
+<hr>
+
+<h2>
+  <a name="demo" href="#demo">
+  </a>
+  Demo
+</h2>
+
+<p>Here’s a demo. Please note that it <strong>only works in Chrome</strong> (for now):</p>
+
+<h2>
+  <a name="-codepen-httpscodepeniostoumannpenqeekjyq-" href="#-codepen-httpscodepeniostoumannpenqeekjyq-">
+  </a>
+  <iframe height="600" src="https://codepen.io/stoumann/embed/qEEKJYq?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+
+</h2>
+
+<p>I hope you enjoyed this article as much as I did writing it — now, I’ll grab my guitar and play some of these chords.</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

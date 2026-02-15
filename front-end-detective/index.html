@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Front-End Detective — Mads Stoumann</title>
+	<meta name="description" content="Sometimes stuff breaks. On the web, something that was working perfectly yesterday, might suddenly not work today. “Why?” — might a client ask — “do we have to pay for fixing something we already paid">
+	<link rel="canonical" href="https://blog.stoumann.dk/front-end-detective">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Front-End Detective">
+	<meta property="og:description" content="Sometimes stuff breaks. On the web, something that was working perfectly yesterday, might suddenly not work today. “Why?” — might a client ask — “do we have to pay for fixing something we already paid">
+	<meta property="og:url" content="https://blog.stoumann.dk/front-end-detective">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/generic_cover.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Front-End Detective">
+	<meta name="twitter:description" content="Sometimes stuff breaks. On the web, something that was working perfectly yesterday, might suddenly not work today. “Why?” — might a client ask — “do we have to pay for fixing something we already paid">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/generic_cover.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Front-End Detective</h1>
+			<p>Sometimes stuff breaks. On the web, something that was working perfectly yesterday, might suddenly not work today. “Why?” — might a client ask — “do we have to pay for fixing something we already paid for.”</p>
+<p>I can understand this frustration, and want to illustrate why it is so, by conveying two recent cases, I had to debug and solve.</p>
+<h2>Case number 1</h2>
+<p>A while ago, I created a Pen on Codepen with responsive SVG&#8217;s:</p>
+<div class="embed-codepen"><iframe title="Tactical Elements" id="cp_embed_qbQqZX" src="https://codepen.io/stoumann/embed/preview/qbQqZX?default-tabs=html%2Cresult&amp;height=300&amp;host=https%3A%2F%2Fcodepen.io&amp;slug-hash=qbQqZX" scrolling="no" frameborder="0" height="300" allowtransparency="true" allowfullscreen="true" allowpaymentrequest="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe></div>
+<p>As usual, I tested in all evergreen browsers, and it looked good.<br />
+Then, to my horror, a couple of weeks ago, I opened the Pen in Safari.<br />
+Only <em>one</em> of the SVG&#8217;s were displayed, the rest — vanished!</p>
+<p>It took a while to figure out that Safari 9.0.3+ has a bug rendering SVG&#8217;s if you&#8217;re using a <strong>drop-shadow</strong> filter. It will, hopefully, soon be fixed.</p>
+<p>If you&#8217;re reading this post on Safari 9.0.3+ you&#8217;ll see only one SVG as well.<br />
+If you <em>want</em> to see the rest, click on the SCSS-tab and delete this line:</p>
+<pre class="brush: css; title: ; notranslate" title="">
+@include prefixed(filter, drop-shadow($shadow));
+</pre>
+<h2>Case number 2</h2>
+<p>The second case were much harder to debug. A couple of days before a big presentation, I wanted to double-check all the pages, I was going to demo.<br />
+To my horror, several pages <strong>crashed</strong> Safari.</p>
+<p>Yes.<br />
+Crashed!</p>
+<p>By investigating and comparing, I found out, that all the pages that were crashing, were using a technique known as <em>SVG Sprites</em>:</p>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;svg&gt;&lt;use xlink:href=&quot;svg/social.svg#icon-apple&quot;&gt;&lt;/use&gt;&lt;/svg&gt;
+</pre>
+<p>However, after further debugging, I could conclude that the crashing was a combination of the CSS on the page <strong>and</strong> the SVG sprites.</p>
+<p>Slowly, by trying out all the versions of the stylesheet for the pages I had, I found a two-week old version that didn&#8217;t crash Safari! By comparing this with the current version, commenting potential lines out, I finally ended up with the culprit:</p>
+<pre class="brush: css; title: ; notranslate" title="">
+::-webkit-scrollbar-thumb:window-inactive {
+  background: #fefefe;
+}
+</pre>
+<p>It doesn&#8217;t make any sense at all, does it? How can the styling of a scrollbar crash Safari on pages with SVG &lt;use&gt; &#8211; and not only that, the affected pages don&#8217;t even <em>use</em> the scrollbar.</p>
+<p>But it can — and to prove it, I&#8217;ve created a &#8220;crash page&#8221;, you can try out in Safari on either your Mac, iPhone or iPad (version 9.0.3+).</p>
+<p><a href="http://www.stoumann.dk/examples/safaricrash.html" target="_blank">Crash Safari here!</a></p>
+<p>Here&#8217;s the simple code behind:</p>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot; class=&quot;blocks&quot;&gt;
+&lt;head&gt;
+	&lt;title&gt;Crash Safari&lt;/title&gt;
+	&lt;meta charset=&quot;UTF-8&quot;&gt;
+	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no&quot;&gt;
+	&lt;style&gt;
+	::-webkit-scrollbar-thumb:window-inactive {
+     	background: #fefefe; 
+	}
+	&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;a href=&quot;#apple&quot; itemprop=&quot;url&quot; title=&quot;Apple&quot;&gt;
+		&lt;svg&gt;&lt;use xlink:href=&quot;svg/social.svg#icon-apple&quot;&gt;&lt;/use&gt;&lt;/svg&gt;
+	&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>So — in conclusion — things that worked perfectly yesterday, might not work tomorrow, and that&#8217;s (also) a part of the life of a front-end developer to debug and figure out!</p>
+<p>Happy coding.</p>
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>CMYK, RGB, and Building a Color Visualizer — Mads Stoumann</title>
+	<meta name="description" content="When I was a kid, I published a fanzine about comics. This was long before I had a computer—it was...">
+	<link rel="canonical" href="https://blog.stoumann.dk/from-typewriters-to-pixels-a-journey-with-cmyk-rgb-and-building-a-color-visualizer">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="CMYK, RGB, and Building a Color Visualizer">
+	<meta property="og:description" content="When I was a kid, I published a fanzine about comics. This was long before I had a computer—it was...">
+	<meta property="og:url" content="https://blog.stoumann.dk/from-typewriters-to-pixels-a-journey-with-cmyk-rgb-and-building-a-color-visualizer">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/1999038/1136a511.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="CMYK, RGB, and Building a Color Visualizer">
+	<meta name="twitter:description" content="When I was a kid, I published a fanzine about comics. This was long before I had a computer—it was...">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/1999038/1136a511.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>CMYK, RGB, and Building a Color Visualizer</h1>
+			<p>When I was a kid, I published a fanzine about comics. This was long before I had a computer—it was created using a typewriter, paper, and scissors!</p>
+
+<p>The fanzine was initially in black and white, photocopied at my school. Over time, as it gained more success, I was able to afford offset printing with <strong>color</strong> covers!</p>
+
+<p>However, managing those colors was quite challenging. Each cover had to be printed four times, once for each color: cyan, magenta, yellow, and key (black) — abbreviated as CMYK.</p>
+
+<p>This meant I had to provide four separate sheets, each printed in black ink, but corresponding to a specific color.</p>
+
+<p>Here’s one of the issues I published:</p>
+
+<p><a href="assets/1999038/e4c0139d.jpg" class="article-body-image-wrapper"><img src="assets/1999038/e4c0139d.jpg" alt="Serie-Ekspressen" loading="lazy" width="800" height="1124"></a></p>
+
+<p>All the yellow you see in the image above was hand-painted by me using black ink on the “yellow” sheet. For the skin tones, I used something called “raster dots.” These were sheets you could buy with black dots of varying densities. You would cut out the dots and apply them — in this case, to the “red” sheet.</p>
+
+<p>I worked on a light table — a glass-topped drawing table with built-in lighting — so I could see through the various sheets while aligning them correctly.</p>
+
+<p>It was <em>very</em> time-consuming, but it sparked a lifelong interest in understanding colors — and the <em>huge</em> difference between print- and screen colors!</p>
+
+<p>While CMYK is limited to four colors, it’s still relatively easy to grasp. We’ve all used colored pencils on paper and have an intuitive sense of how colors mix. CMYK is a <strong>subtractive</strong> color model. You start with a white sheet of paper, and as you add more ink, you’re actually subtracting light. Combining all colors moves you toward black. If you don’t apply any ink, the paper stays white because it reflects all light.</p>
+
+<p>When I got my first computer, I had to understand RGB, which is <em>very</em> different from CMYK. RGB is an <strong>additive</strong> color model used for digital screens. Here, you’re mixing light itself — adding more light makes the colors brighter and moves you toward white. Turn off all the RGB lights (<code>R=0</code>, <code>G=0</code>, <code>B=0</code>), and the screen goes black because there’s no light emitted.</p>
+
+<p>As a graphic designer back then, you had to calibrate your screen because the colors you saw on the screen and those you saw in print were often <em>very</em> different!</p>
+
+
+<hr>
+
+<h2>
+  <a name="visualizing-rgb" href="#visualizing-rgb">
+  </a>
+  Visualizing RGB
+</h2>
+
+<p>RGB represents three light sources: red, green, and blue. When a light is <strong>off</strong>, its value is 0; when it’s fully <strong>on</strong>, its value is 255. When these lights overlap, they create different colors.</p>
+
+<p>To better understand how RGB works, let’s build a small tool:</p>
+
+<p><a href="assets/1999038/7771d652.jpg" class="article-body-image-wrapper"><img src="assets/1999038/7771d652.jpg" alt="RGB Tool" loading="lazy" width="800" height="711"></a></p>
+
+
+<hr>
+
+<h3>
+  <a name="html" href="#html">
+  </a>
+  HTML
+</h3>
+
+
+
+<div class="highlight js-code-highlight">
+<pre class="highlight html"><code><span class="nt">&lt;fieldset</span> <span class="na">class=</span><span class="s">"rgb"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;label</span> <span class="na">class=</span><span class="s">"r"</span><span class="nt">&gt;</span>
+    R:<span class="nt">&lt;input</span>
+      <span class="na">type=</span><span class="s">"number"</span>
+      <span class="na">name=</span><span class="s">"r"</span>
+      <span class="na">min=</span><span class="s">"0"</span>
+      <span class="na">max=</span><span class="s">"255"</span>
+      <span class="na">value=</span><span class="s">"255"</span>
+  <span class="nt">/&gt;&lt;/label&gt;</span>
+  <span class="nt">&lt;label</span> <span class="na">class=</span><span class="s">"g"</span><span class="nt">&gt;</span>
+    G:<span class="nt">&lt;input</span>
+      <span class="na">type=</span><span class="s">"number"</span>
+      <span class="na">name=</span><span class="s">"g"</span>
+      <span class="na">min=</span><span class="s">"0"</span>
+      <span class="na">max=</span><span class="s">"255"</span>
+      <span class="na">value=</span><span class="s">"255"</span>
+  <span class="nt">/&gt;&lt;/label&gt;</span>
+  <span class="nt">&lt;label</span> <span class="na">class=</span><span class="s">"b"</span><span class="nt">&gt;</span>
+    B:<span class="nt">&lt;input</span>
+      <span class="na">type=</span><span class="s">"number"</span>
+      <span class="na">name=</span><span class="s">"b"</span>
+      <span class="na">min=</span><span class="s">"0"</span>
+      <span class="na">max=</span><span class="s">"255"</span>
+      <span class="na">value=</span><span class="s">"255"</span>
+  <span class="nt">/&gt;&lt;/label&gt;</span>
+  <span class="nt">&lt;output</span> <span class="na">class=</span><span class="s">"rg"</span><span class="nt">&gt;</span>R+G<span class="nt">&lt;/output&gt;</span>
+  <span class="nt">&lt;output</span> <span class="na">class=</span><span class="s">"rb"</span><span class="nt">&gt;</span>R+B<span class="nt">&lt;/output&gt;</span>
+  <span class="nt">&lt;output</span> <span class="na">class=</span><span class="s">"gb"</span><span class="nt">&gt;</span>G+B<span class="nt">&lt;/output&gt;</span>
+<span class="nt">&lt;/fieldset&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<h3>
+  <a name="styles" href="#styles">
+  </a>
+  Styles
+</h3>
+
+<p>First, let’s create a <code>9x8</code> grid:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nc">.rgb</span> <span class="p">{</span>
+  <span class="nl">all</span><span class="p">:</span> <span class="n">unset</span><span class="p">;</span>
+  <span class="py">aspect-ratio</span><span class="p">:</span> <span class="m">9</span> <span class="p">/</span> <span class="m">8</span><span class="p">;</span>
+  <span class="py">container-type</span><span class="p">:</span> <span class="n">inline-size</span><span class="p">;</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">grid</span><span class="p">;</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="m">1.75</span><span class="n">cqi</span><span class="p">;</span>
+  <span class="py">grid-template-columns</span><span class="p">:</span> <span class="nb">repeat</span><span class="p">(</span><span class="m">9</span><span class="p">,</span> <span class="m">1</span><span class="n">fr</span><span class="p">);</span>
+  <span class="py">grid-template-rows</span><span class="p">:</span> <span class="nb">repeat</span><span class="p">(</span><span class="m">8</span><span class="p">,</span> <span class="m">1</span><span class="n">fr</span><span class="p">);</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>It’s an unusual size, but that's because our <code>R</code>, <code>G</code> and <code>B</code> circles are <code>5x5</code> and <strong>overlap</strong>:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nc">.r</span><span class="o">,</span> <span class="nc">.g</span><span class="o">,</span> <span class="nc">.b</span> <span class="p">{</span>
+  <span class="py">aspect-ratio</span><span class="p">:</span> <span class="m">1</span> <span class="p">/</span> <span class="m">1</span><span class="p">;</span>
+  <span class="nl">border-radius</span><span class="p">:</span> <span class="m">50%</span><span class="p">;</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">grid</span><span class="p">;</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="m">5</span><span class="n">cqi</span><span class="p">;</span>
+  <span class="py">mix-blend-mode</span><span class="p">:</span> <span class="n">difference</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>The CSS for <code>.r</code>, <code>.g</code> and <code>.b</code> is:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight css"><code><span class="nc">.r</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="nb">rgb</span><span class="p">(</span><span class="n">var</span><span class="p">(</span><span class="n">--r</span><span class="p">),</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
+  <span class="py">grid-area</span><span class="p">:</span> <span class="m">1</span> <span class="p">/</span> <span class="m">3</span> <span class="p">/</span> <span class="m">6</span> <span class="p">/</span> <span class="m">8</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.g</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="nb">rgb</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">var</span><span class="p">(</span><span class="n">--g</span><span class="p">),</span> <span class="m">0</span><span class="p">);</span>
+  <span class="py">grid-area</span><span class="p">:</span> <span class="m">4</span> <span class="p">/</span> <span class="m">1</span> <span class="p">/</span> <span class="m">9</span> <span class="p">/</span> <span class="m">6</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.b</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="nb">rgb</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">var</span><span class="p">(</span><span class="n">--b</span><span class="p">));</span>
+  <span class="py">grid-area</span><span class="p">:</span> <span class="m">4</span> <span class="p">/</span> <span class="m">5</span> <span class="p">/</span> <span class="m">9</span> <span class="p">/</span> <span class="m">10</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>I’ve used <code>grid-area</code> a lot lately. It lets you place a grid item at a very specific location:</p>
+
+<p><code>row-start / col-start / row-end / col-end</code></p>
+
+<p>It’s easier to visualize this if you enable Dev Tools’ <strong>grid visualizer</strong>:</p>
+
+<p><a href="assets/1999038/75630cfc.jpg" class="article-body-image-wrapper"><img src="assets/1999038/75630cfc.jpg" alt="RGB witgh grid" loading="lazy" width="800" height="712"></a></p>
+
+<p>Did you notice the three CSS Custom Properties, <code>--r</code>, <code>--g</code> and <code>--b</code>? We’ll update these in a small JS snippet:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">const</span> <span class="nx">rgb</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">.rgb</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">rgb</span><span class="p">.</span><span class="nf">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">input</span><span class="dl">'</span><span class="p">,</span> <span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">N</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nf">setProperty</span><span class="p">(</span><span class="s2">`--</span><span class="p">${</span><span class="nx">N</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span> <span class="nx">N</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+<span class="p">})</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>And that’s basically it. I’ve added some <code>&lt;output&gt;</code>-elements and minor adjustments … but I almost forgot to mention the <strong>single most important line</strong> to make the visualizer work:</p>
+
+<p><code>mix-blend-mode: difference</code></p>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode" target="_blank" rel="noopener noreferrer">Read about it here</a> — it’s great fun to loop through all the modes.</p>
+
+
+<hr>
+
+<h2>
+  <a name="demo" href="#demo">
+  </a>
+  Demo
+</h2>
+
+<p>Here’s a Codepen. Click and edit the numbers below R, G and B, and notice how the page background and the overlapping parts of all three circles change.</p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/mdZgxrm?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Creating SVG Icons from JSON — Mads Stoumann</title>
+	<meta name="description" content="This week, a colleague and I developed a couple of plugins for ContentStack. A theme-picker:    ......">
+	<link rel="canonical" href="https://blog.stoumann.dk/creating-svg-icons-from-json">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Creating SVG Icons from JSON">
+	<meta property="og:description" content="This week, a colleague and I developed a couple of plugins for ContentStack. A theme-picker:    ......">
+	<meta property="og:url" content="https://blog.stoumann.dk/creating-svg-icons-from-json">
+	<meta property="og:image" content="https://blog.stoumann.dk/assets/1135131/5f2bb16a.jpg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Creating SVG Icons from JSON">
+	<meta name="twitter:description" content="This week, a colleague and I developed a couple of plugins for ContentStack. A theme-picker:    ......">
+	<meta name="twitter:image" content="https://blog.stoumann.dk/assets/1135131/5f2bb16a.jpg">
+	<base href="/">
+	<style>
+		body {
+			background: canvas;
+			color: canvastext;
+			color-scheme: light dark;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<dev-to
+		author="madsstoumann"
+		baseurl="./data"
+		theme="classic"
+		itemsperpage="10">
+		<h1 slot="headline">Mads Stoumann's Blog</h1>
+		<p slot="description">Articles about CSS, JavaScript, and web development.</p>
+	</dev-to>
+	<noscript>
+		<article>
+			<h1>Creating SVG Icons from JSON</h1>
+			<p>This week, a colleague and I developed a couple of plugins for ContentStack. A theme-picker:</p>
+
+<p><a href="assets/1135131/35153869.jpg" class="article-body-image-wrapper"><img src="assets/1135131/35153869.jpg" alt="Theme Picker" loading="lazy" width="525" height="63"></a></p>
+
+<p>... as well as a layout-picker:</p>
+
+<p><a href="assets/1135131/7a2d6f8c.jpg" class="article-body-image-wrapper"><img src="assets/1135131/7a2d6f8c.jpg" alt="Layout Picker" loading="lazy" width="731" height="113"></a></p>
+
+<p>Working on the layout-picker, I quickly realized, that I'd need some JavaScript to help me render SVG-icons for all the various layout-options. The ones pictured above are the simple ones – on other projects, the layouts are much more complicated.</p>
+
+<p>The icons consists of <code>&lt;rect&gt;</code> and <code>&lt;text&gt;</code>-elements.</p>
+
+<p>Each <code>&lt;rect&gt;</code> have <code>w</code>idth, <code>h</code>eight, <code>x</code> and <code>y</code>-attributes:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="o">&lt;</span><span class="nx">rect</span> <span class="nx">width</span><span class="o">=</span><span class="dl">"</span><span class="s2">${w}</span><span class="dl">"</span> <span class="nx">height</span><span class="o">=</span><span class="dl">"</span><span class="s2">${h}</span><span class="dl">"</span> <span class="nx">x</span><span class="o">=</span><span class="dl">"</span><span class="s2">${x}</span><span class="dl">"</span> <span class="nx">y</span><span class="o">=</span><span class="dl">"</span><span class="s2">${y}</span><span class="dl">"</span> <span class="o">/&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>If we store the logic for a simple icon with two "columns" in JavaScript, it looks like this:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="nl">text</span><span class="p">:</span> <span class="dl">'</span><span class="s1">50-50</span><span class="dl">'</span><span class="p">,</span>
+  <span class="nx">rects</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="na">w</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="na">h</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="na">x</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span> <span class="mi">0</span>  <span class="p">},</span>
+    <span class="p">{</span> <span class="na">w</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="na">h</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="na">x</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span> <span class="mi">0</span>  <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>In SVG, this equals to:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight xml"><code><span class="nt">&lt;svg</span> <span class="na">viewBox=</span><span class="s">"0 0 100 100"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;rect</span> <span class="na">rx=</span><span class="s">"0"</span> <span class="na">width=</span><span class="s">"50"</span> <span class="na">height=</span><span class="s">"100"</span> <span class="na">x=</span><span class="s">"0"</span> <span class="na">y=</span><span class="s">"0"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;rect</span> <span class="na">rx=</span><span class="s">"0"</span> <span class="na">width=</span><span class="s">"50"</span> <span class="na">height=</span><span class="s">"100"</span> <span class="na">x=</span><span class="s">"50"</span> <span class="na">y=</span><span class="s">"0"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/svg&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>– which looks like this (for clarity, I've added text for the "columns"):</p>
+
+<p><a href="assets/1135131/ebfbf012.jpg" class="article-body-image-wrapper"><img src="assets/1135131/ebfbf012.jpg" alt="SVG Icon with 2 rects" loading="lazy" width="128" height="128"></a></p>
+
+<p>Still not looking great ... we need to control gaps as well.</p>
+
+<p>Let's create a <code>gap</code>-const, and deduct it from <code>w</code> and <code>h</code>:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="o">&lt;</span><span class="nx">rect</span> <span class="nx">width</span><span class="o">=</span><span class="dl">"</span><span class="s2">${w - gap}</span><span class="dl">"</span> <span class="nx">height</span><span class="o">=</span><span class="dl">"</span><span class="s2">${h - gap}</span><span class="dl">"</span> <span class="nx">x</span><span class="o">=</span><span class="dl">"</span><span class="s2">${x}</span><span class="dl">"</span> <span class="nx">y</span><span class="o">=</span><span class="dl">"</span><span class="s2">${y}</span><span class="dl">"</span> <span class="o">/&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>And maybe some <code>border-radius</code>? For a <code>&lt;rect&gt;</code>-element, this is the <code>rx</code>-attribute:</p>
+
+<p><a href="assets/1135131/bca78700.jpg" class="article-body-image-wrapper"><img src="assets/1135131/bca78700.jpg" alt="SVG icon with gap and border-radius" loading="lazy" width="128" height="128"></a></p>
+
+<p>Much better!</p>
+
+<p>Let's add the <code>&lt;text&gt;</code>-elements. These just need the <code>x</code> and <code>y</code>-attributes:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight xml"><code><span class="nt">&lt;text</span> <span class="na">x=</span><span class="s">"${x}"</span> <span class="na">y=</span><span class="s">"${y}"</span><span class="nt">&gt;</span>TEXT<span class="nt">&lt;/text&gt;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>We want to center these, relative to the <code>&lt;rect&gt;</code>:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code>  <span class="kd">const</span> <span class="nx">tX</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">+</span> <span class="p">(</span><span class="nx">w</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">4</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">tY</span> <span class="o">=</span> <span class="nx">y</span> <span class="o">+</span> <span class="p">(</span><span class="nx">h</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>The <code>-4</code> and <code>+2</code> is relative to the font-size, and might need to be adjusted, if you change the font and/or size.</p>
+
+
+<hr>
+
+<p>So ... that's the core of it. An object-representation (either native or converted from JSON) of a layout, rendered with <code>&lt;rect&gt;</code>- and <code>&lt;text&gt;</code>-nodes.</p>
+
+<p>I find the object-representation super-simple to work with:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">text:</span><span class="w"> </span><span class="err">'</span><span class="mi">25-25-25-25</span><span class="err">'</span><span class="p">,</span><span class="w">
+  </span><span class="err">rects:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w"> </span><span class="err">w:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="err">h:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="err">x:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="err">y:</span><span class="w"> </span><span class="mi">25</span><span class="w">  </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w"> </span><span class="err">w:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="err">h:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="err">x:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="err">y:</span><span class="w"> </span><span class="mi">25</span><span class="w">  </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w"> </span><span class="err">w:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="err">h:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="err">x:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="err">y:</span><span class="w"> </span><span class="mi">25</span><span class="w">  </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w"> </span><span class="err">w:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="err">h:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="err">x:</span><span class="w"> </span><span class="mi">75</span><span class="p">,</span><span class="w"> </span><span class="err">y:</span><span class="w"> </span><span class="mi">25</span><span class="w">  </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="err">,</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="err">text:</span><span class="w"> </span><span class="err">'</span><span class="mi">25-25-50</span><span class="err">'</span><span class="p">,</span><span class="w">
+  </span><span class="err">rects:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w"> </span><span class="err">w:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="err">h:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="err">x:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="err">y:</span><span class="w"> </span><span class="mi">25</span><span class="w">  </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w"> </span><span class="err">w:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="err">h:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="err">x:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="err">y:</span><span class="w"> </span><span class="mi">25</span><span class="w">  </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w"> </span><span class="err">w:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="err">h:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="err">x:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="err">y:</span><span class="w"> </span><span class="mi">25</span><span class="w">  </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="err">,</span><span class="w">
+</span><span class="err">/*</span><span class="w"> </span><span class="err">etc</span><span class="w"> </span><span class="err">.*/</span><span class="w">
+</span></code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>Now we just need a function we can call with the array of layout-objects, gap and border-radius:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="kd">function</span> <span class="nf">renderIcons</span><span class="p">(</span><span class="nx">layouts</span><span class="p">,</span> <span class="nx">gap</span><span class="p">,</span> <span class="nx">borderRadius</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">layouts</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="nx">icon</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">`&lt;svg viewBox="0 0 100 100"&gt;</span><span class="p">${</span>
+      <span class="nx">icon</span><span class="p">.</span><span class="nx">rects</span><span class="p">.</span><span class="nf">map</span><span class="p">((</span><span class="nx">rect</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">tX</span> <span class="o">=</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="p">(</span><span class="nx">rect</span><span class="p">.</span><span class="nx">w</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">4</span><span class="p">;</span>
+        <span class="kd">const</span> <span class="nx">tY</span> <span class="o">=</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="p">(</span><span class="nx">rect</span><span class="p">.</span><span class="nx">h</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="k">return</span> <span class="s2">`
+        &lt;rect rx="</span><span class="p">${</span><span class="nx">borderRadius</span><span class="p">}</span><span class="s2">" width="</span><span class="p">${</span><span class="nx">rect</span><span class="p">.</span><span class="nx">w</span> <span class="o">-</span> <span class="nx">gap</span><span class="p">}</span><span class="s2">" height="</span><span class="p">${</span><span class="nx">rect</span><span class="p">.</span><span class="nx">h</span> <span class="o">-</span> <span class="nx">gap</span><span class="p">}</span><span class="s2">" x="</span><span class="p">${</span><span class="nx">rect</span><span class="p">.</span><span class="nx">x</span><span class="p">}</span><span class="s2">" y="</span><span class="p">${</span><span class="nx">rect</span><span class="p">.</span><span class="nx">y</span><span class="p">}</span><span class="s2">"</span><span class="p">${</span><span class="nx">rect</span><span class="p">.</span><span class="kd">class</span> <span class="err">? `</span><span class="nc">class</span><span class="o">=</span><span class="dl">"</span><span class="s2">${rect.class}</span><span class="dl">"</span><span class="s2">`:''} /&gt;
+        &lt;text x="</span><span class="p">${</span><span class="nx">tX</span><span class="p">}</span><span class="s2">" y="</span><span class="p">${</span><span class="nx">tY</span><span class="p">}</span><span class="s2">%"&gt;</span><span class="p">${</span><span class="nx">index</span><span class="o">+</span><span class="mi">1</span><span class="p">}</span><span class="s2">&lt;/text&gt;`</span> <span class="p">}</span><span class="s2">).join('')
+
+    }</span><span class="p">${</span><span class="nx">icon</span><span class="p">.</span><span class="nx">text</span><span class="p">?</span> <span class="s2">`&lt;text x="50%" y="90%" class="text"&gt;</span><span class="p">${</span><span class="nx">icon</span><span class="p">.</span><span class="nx">text</span><span class="p">}</span><span class="s2">&lt;/text&gt;`</span><span class="p">:</span><span class="dl">''</span><span class="p">}</span><span class="s2">
+    &lt;/svg&gt;`</span>
+  <span class="p">}).</span><span class="nf">join</span><span class="p">(</span><span class="dl">''</span><span class="p">)</span>
+<span class="p">}</span><span class="s2">
+</span></code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+<p>To render the icons, simply create a wrapper and call the method:<br>
+</p>
+
+<div class="highlight js-code-highlight">
+<pre class="highlight javascript"><code><span class="nx">wrapper</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nf">renderIcons</span><span class="p">(</span><span class="nx">layouts</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</code></pre>
+<div class="highlight__panel js-actions-panel">
+<div class="highlight__panel-action js-fullscreen-code-action">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-on"><title>Enter fullscreen mode</title>
+    <path d="M16 3h6v6h-2V5h-4V3zM2 3h6v2H4v4H2V3zm18 16v-4h2v6h-6v-2h4zM4 19h4v2H2v-6h2v4z"></path>
+</svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewbox="0 0 24 24" class="highlight-action crayons-icon highlight-action--fullscreen-off"><title>Exit fullscreen mode</title>
+    <path d="M18 7h4v2h-6V3h2v4zM8 9H2V7h4V3h2v6zm10 8v4h-2v-6h6v2h-4zM8 15v6H6v-4H2v-2h6z"></path>
+</svg>
+
+</div>
+</div>
+</div>
+
+
+
+
+<hr>
+
+<h2>
+  <a name="demo" href="#demo">
+  </a>
+  Demo
+</h2>
+
+<p>Here's a Codepen-demo. Scroll down for <code>hue</code>- and <code>saturation</code>-controls, if you want to adjust the colors:</p>
+
+<p><iframe height="600" src="https://codepen.io/stoumann/embed/LYdNxWx?height=600&amp;default-tab=result&amp;embed-version=2" scrolling="no" frameborder="no" allowtransparency="true" loading="lazy" style="width: 100%;">
+</iframe>
+</p>
+
+
+		</article>
+	</noscript>
+	<script type="module">
+		import 'https://browser.style/ui/dev-to/index.js';
+	</script>
+</body>
+</html>
