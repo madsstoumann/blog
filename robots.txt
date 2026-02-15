@@ -16,6 +16,9 @@ Allow: /
 User-agent: unified-search-bot
 Allow: /
 
+User-agent: Cloudflare-AI-Search
+  Allow: /
+
 User-agent: *
 Disallow: /
 
