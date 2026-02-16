@@ -1,0 +1,7 @@
+name = "blog-seo"
+main = "blog-seo.js"
+compatibility_date = "2024-01-01"
+
+[[routes]]
+pattern = "blog.stoumann.dk/*"
+zone_name = "stoumann.dk"

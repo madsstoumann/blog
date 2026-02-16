@@ -2,6 +2,9 @@ const ORIGIN = 'https://blog.stoumann.dk';
 const SLUGS_URL = `${ORIGIN}/data/slugs.json`;
 const SLUGS_CACHE_TTL = 3600;
 
+// Bots allowed in robots.txt — keep in sync
+const ALLOWED_BOTS = /googlebot|bingbot|duckduckbot|yandexbot|baiduspider|unified-search-bot|cloudflare-ai-search/i;
+
 let slugsCache = null;
 let slugsCacheTime = 0;
 
@@ -13,6 +16,12 @@ export default {
 		// Only handle single-segment paths (i.e. /slug, not /assets/... or /data/...)
 		if (path === '/' || path.includes('.') || path.split('/').filter(Boolean).length !== 1) {
 			return fetch(request);
+		}
+
+		// Block disallowed bots early — don't spend Worker time on them
+		const ua = request.headers.get('User-Agent') || '';
+		if (isBot(ua) && !ALLOWED_BOTS.test(ua)) {
+			return new Response('Disallowed by robots.txt', { status: 403 });
 		}
 
 		const slug = path.replace(/^\/|\/$/g, '');
@@ -56,6 +65,10 @@ async function getSlugs() {
 	slugsCache = await res.json();
 	slugsCacheTime = now;
 	return slugsCache;
+}
+
+function isBot(ua) {
+	return /bot|crawl|spider|slurp|archive|scrape/i.test(ua);
 }
 
 function escapeHtml(str) {
